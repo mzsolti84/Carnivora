@@ -3,6 +3,7 @@ package hu.progmatic;
 import org.sql2o.Connection;
 import org.sql2o.Query;
 import org.sql2o.Sql2o;
+
 import java.util.*;
 
 public class Carnivora {
@@ -21,13 +22,13 @@ public class Carnivora {
 
   private void tablaTorleseHaLetezik(Connection connection) {
     Query query = connection.createQuery("""
-            DROP TABLE if exists klad, klad_leiras, faj, faj_leiras;
-            """);
+        DROP TABLE if exists klad, klad_leiras, faj, faj_leiras;
+        """);
     query.executeUpdate();
   }
 
   private void tablaLetrehozasa(Connection connection) {
-     connection.createQuery("""
+    connection.createQuery("""
         create table klad (
           ID int auto_increment primary key,
           szuloKategoriaID int,
@@ -40,8 +41,8 @@ public class Carnivora {
         create table klad_leiras (
           ID int auto_increment primary key,
           nev text not null,
-          latin_nev text not null,
-          leiras longtext not null,
+          latinNev text not null,
+          leiras longtext,
         foreign key (ID) references klad(ID)
         )
         """).executeUpdate();
@@ -67,5 +68,30 @@ public class Carnivora {
         foreign key (ID) references faj(ID)
         )
         """).executeUpdate();
+  }
+
+  public void adatbazisToltKlad(List<KladRecord> lista) {
+    try (Connection connection = adatbazis.open()) {
+      for (KladRecord kladRecord : lista) {
+        connection.createQuery("""
+                insert into klad (szuloKategoriaID, nev) values (:szuloKategoriaID, :nev)
+                """).addParameter("szuloKategoriaID", kladRecord.szuloKategoriaID)
+            .addParameter("nev", kladRecord.nev)
+            .executeUpdate();
+      }
+    }
+  }
+
+  public void adatbazisToltKladLeiras(List<KladLeirasRecord> lista) {
+    try (Connection connection = adatbazis.open()) {
+      for (KladLeirasRecord kladLeirasRecord : lista) {
+        connection.createQuery("""
+                insert into klad_leiras (nev, latinNev, leiras) values (:nev, :latinNev, :leiras)
+                """).addParameter("nev", kladLeirasRecord.nev)
+            .addParameter("latinNev", kladLeirasRecord.latinNev)
+            .addParameter("leiras", kladLeirasRecord.leiras)
+            .executeUpdate();
+      }
+    }
   }
 }
