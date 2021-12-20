@@ -50,7 +50,8 @@ public class Carnivora {
         create table faj (
           ID int auto_increment primary key,
           szuloKategoriaID int,
-          nev text
+          nev text,
+        foreign key (szuloKategoriaID) references klad(ID)
         )
         """).executeUpdate();
 
