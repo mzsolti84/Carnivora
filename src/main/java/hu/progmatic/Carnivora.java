@@ -28,31 +28,22 @@ public class Carnivora {
 
     private void tablaLetrehozasa(Connection connection) {
         connection.createQuery("""
-                create table klad (
-                  ID int auto_increment primary key,
-                  szuloKategoriaID int,
-                  nev text /*not null*/,
-                foreign key (szuloKategoriaID) references klad(ID)
-                )
-                """).executeUpdate();
-
-        connection.createQuery("""
                 create table klad_leiras (
                   ID int auto_increment primary key,
                   nev text not null,
                   latinNev text not null,
-                  leiras longtext /*not null*/,
-                  kladID int, 
-                  foreign key (kladID) references klad(ID)
+                  leiras longtext /*not null*/
                 )
                 """).executeUpdate();
 
         connection.createQuery("""
-                create table faj (
+                create table klad (
                   ID int auto_increment primary key,
-                  szuloKategoriaID int not null,
-                  nev text not null,
-                foreign key (szuloKategoriaID) references klad(ID)
+                  szuloKategoriaID int,
+                  kladLeirasID int,
+                  nev text /*not null*/,
+                  foreign key (szuloKategoriaID) references klad(ID),
+                  foreign key (kladLeirasID) references klad_leiras(ID)
                 )
                 """).executeUpdate();
 
@@ -66,16 +57,25 @@ public class Carnivora {
         connection.createQuery("""
                 create table faj_leiras (
                   ID int auto_increment primary key,
+                  veszelyeztetettID int,
                   nev text not null,
                   latin_nev text not null,
                   leiras longtext not null,
                   specialista boolean not null,
-                  veszelyeztetettID int,
                   fotoURL text,
                   wikiURL text,
-                  fajID int not null,
-                foreign key (fajID) references faj(ID),
                 foreign key (veszelyeztetettID) references veszelyeztetett(ID)
+                )
+                """).executeUpdate();
+
+        connection.createQuery("""
+                create table faj (
+                  ID int auto_increment primary key,
+                  szuloKategoriaID int not null,
+                  fajLeirasID int not null,
+                  nev text not null,
+                foreign key (szuloKategoriaID) references klad(ID),
+                foreign key (fajLeirasID) references faj_leiras(ID)
                 )
                 """).executeUpdate();
     }
