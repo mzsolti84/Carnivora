@@ -22,7 +22,7 @@ public class Carnivora {
 
     private void tablaTorleseHaLetezik(Connection connection) {
         connection.createQuery("""
-                DROP TABLE if exists klad, klad_leiras, faj, faj_leiras;
+                DROP TABLE if exists klad, klad_leiras, faj, faj_leiras, veszelyeztetett;
                 """).executeUpdate();
     }
 
@@ -57,17 +57,25 @@ public class Carnivora {
                 """).executeUpdate();
 
         connection.createQuery("""
+                create table veszelyeztetett (
+                  ID int auto_increment primary key,
+                  besorolas text not null
+                )
+                """).executeUpdate();
+
+        connection.createQuery("""
                 create table faj_leiras (
                   ID int auto_increment primary key,
                   nev text not null,
                   latin_nev text not null,
                   leiras longtext not null,
                   specialista boolean not null,
-                  veszelyeztetett text not null,
+                  veszelyeztetettID int,
                   fotoURL text,
                   wikiURL text,
                   fajID int not null,
-                foreign key (fajID) references faj(ID)
+                foreign key (fajID) references faj(ID),
+                foreign key (veszelyeztetettID) references veszelyeztetett(ID)
                 )
                 """).executeUpdate();
     }
