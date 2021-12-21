@@ -17,6 +17,7 @@ public class Carnivora {
         try (Connection connection = adatbazis.open()) {
             tablaTorleseHaLetezik(connection);
             tablaLetrehozasa(connection);
+            veszelyeztettKategoriakBetoltese(connection);
         }
     }
 
@@ -80,13 +81,29 @@ public class Carnivora {
                 """).executeUpdate();
     }
 
+  private void veszelyeztettKategoriakBetoltese(Connection connection) {
+    connection.createQuery("""
+        insert into veszelyeztetett (besorolas) values
+         ('Kihalt'),
+         ('Vadon kihalt'),
+         ('Fenyegetett'),
+         ('Súlyosan veszélyeztetett'),
+         ('Veszélyeztetett'),
+         ('Sebezhető'),
+         ('Mérsékelten fenyegetett'),
+         ('Nem fenyegetett'),
+         ('Háziasított')
+        """).executeUpdate();
+  }
+
     public void adatbazisToltKlad(List<KladRecord> lista) {
         try (Connection connection = adatbazis.open()) {
             for (KladRecord kladRecord : lista) {
                 connection.createQuery("""
-                                insert into klad (szuloKategoriaID, nev) values (:szuloKategoriaID, :nev)
+                                insert into klad (szuloKategoriaID,  /*kladLeirasID,*/ nev) values (:szuloKategoriaID,  /*:kladLeirasID,*/ :nev)
                                 """)
                         .addParameter("szuloKategoriaID", kladRecord.szuloKategoriaID)
+                        //.addParameter("kladLeirasID", kladRecord.kladLeirasID)
                         .addParameter("nev", kladRecord.nev)
                         .executeUpdate();
             }
