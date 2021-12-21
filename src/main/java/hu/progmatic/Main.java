@@ -11,7 +11,7 @@ public class Main {
   public static void main(String[] args) {
 
     List<KladLeirasRecord> kladLeirasokInput=
-        deSzerializalKladLeiras("C:\\Users\\zsolt\\IdeaProjects\\Carnivora\\src\\main\\java\\hu\\progmatic\\Sheet5.csv");
+        deSzerializalKladLeiras("/Users/robertcsakany/IdeaProjects/Carnivora/src/main/java/hu/progmatic/Sheet5.csv");
     Carnivora carnivora = new Carnivora();
     List<KladRecord> kategoriakInput = kladTolt();
     carnivora.init();

@@ -31,7 +31,7 @@ public class Carnivora {
                 create table klad (
                   ID int auto_increment primary key,
                   szuloKategoriaID int,
-                  nev text,
+                  nev text /*not null*/,
                 foreign key (szuloKategoriaID) references klad(ID)
                 )
                 """).executeUpdate();
@@ -41,16 +41,17 @@ public class Carnivora {
                   ID int auto_increment primary key,
                   nev text not null,
                   latinNev text not null,
-                  leiras longtext,
-                foreign key (ID) references klad(ID)
+                  leiras longtext /*not null*/,
+                  kladID int, 
+                  foreign key (kladID) references klad(ID)
                 )
                 """).executeUpdate();
 
         connection.createQuery("""
                 create table faj (
                   ID int auto_increment primary key,
-                  szuloKategoriaID int,
-                  nev text,
+                  szuloKategoriaID int not null,
+                  nev text not null,
                 foreign key (szuloKategoriaID) references klad(ID)
                 )
                 """).executeUpdate();
@@ -61,10 +62,12 @@ public class Carnivora {
                   nev text not null,
                   latin_nev text not null,
                   leiras longtext not null,
-                  specialista int not null,
-                  fotoURL text not null,
+                  specialista boolean not null,
+                  veszelyeztetett text not null,
+                  fotoURL text,
                   wikiURL text,
-                foreign key (ID) references faj(ID)
+                  fajID int not null,
+                foreign key (fajID) references faj(ID)
                 )
                 """).executeUpdate();
     }
