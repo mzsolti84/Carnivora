@@ -62,4 +62,24 @@ public class Carnivora {
             }
         }
     }
+
+    public void adatbazisToltFaj(List<FajRecord> lista) {
+        try (Connection connection = adatbazis.open()) {
+            for (FajRecord fajRecord : lista) {
+                connection.createQuery("""
+                                INSERT INTO faj (szuloKategoriaID, nev, latinNev, leiras, veszelyeztetett_besorolas, specialista, fotoURL, wikiURL)
+                                VALUES (:szuloKategoriaID, :nev, :latinNev, :leiras, :veszelyeztetett_besorolas, :specialista, :fotoURL, :wikiURL)
+                                """)
+                        .addParameter("szuloKategoriaID", fajRecord.szuloKategoriaID)
+                        .addParameter("nev", fajRecord.nev)
+                        .addParameter("latinNev", fajRecord.latinNev)
+                        .addParameter("leiras", fajRecord.leiras)
+                        .addParameter("veszelyeztetett_besorolas", fajRecord.veszelyeztetettBesorolas)
+                        .addParameter("specialista", fajRecord.specialista)
+                        .addParameter("fotoURL", fajRecord.fotoURL)
+                        .addParameter("wikiURL", fajRecord.wikiURL)
+                        .executeUpdate();
+            }
+        }
+    }
 }
