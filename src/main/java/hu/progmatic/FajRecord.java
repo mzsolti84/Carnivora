@@ -1,6 +1,5 @@
 package hu.progmatic;
 
-import java.util.Locale;
 
 public class FajRecord {
   Integer szuloKategoriaID;
@@ -45,26 +44,17 @@ public class FajRecord {
 
   private static VeszelyeztetettKategoriak kategoriaAtfordit(String line) {
     String value = String.valueOf(line).toUpperCase();
-    switch (value) {
-      case "KIHALT":
-        return VeszelyeztetettKategoriak.KIHALT;
-      case "VADON KIHALT":
-        return VeszelyeztetettKategoriak.VADON_KIHALT;
-      case "FENYEGETETT":
-        return VeszelyeztetettKategoriak.FENYEGETETT;
-      case "SÚLYOSAN VESZÉLYEZTETETT":
-        return VeszelyeztetettKategoriak.SULYOSAN_VESZELYEZTETETT;
-      case "VESZÉLYEZTETETT":
-        return VeszelyeztetettKategoriak.VESZELYEZTETETT;
-      case "SEBEZHETO":
-        return VeszelyeztetettKategoriak.SEBEZHETO;
-      case "MÉRSÉKELTEN FENYEGETETT":
-        return VeszelyeztetettKategoriak.MERSEKELTEN_FENYEGETETT;
-      case "NEM FENYEGETETT":
-        return VeszelyeztetettKategoriak.NEM_FENYEGETETT;
-      default:
-        return VeszelyeztetettKategoriak.HAZIASITOTT;
-    }
+    return switch (value) {
+      case "KIHALT" -> VeszelyeztetettKategoriak.KIHALT;
+      case "VADON KIHALT" -> VeszelyeztetettKategoriak.VADON_KIHALT;
+      case "FENYEGETETT" -> VeszelyeztetettKategoriak.FENYEGETETT;
+      case "SÚLYOSAN VESZÉLYEZTETETT" -> VeszelyeztetettKategoriak.SULYOSAN_VESZELYEZTETETT;
+      case "VESZÉLYEZTETETT" -> VeszelyeztetettKategoriak.VESZELYEZTETETT;
+      case "SEBEZHETO" -> VeszelyeztetettKategoriak.SEBEZHETO;
+      case "MÉRSÉKELTEN FENYEGETETT" -> VeszelyeztetettKategoriak.MERSEKELTEN_FENYEGETETT;
+      case "NEM FENYEGETETT" -> VeszelyeztetettKategoriak.NEM_FENYEGETETT;
+      default -> VeszelyeztetettKategoriak.HAZIASITOTT;
+    };
   }
 
   @Override

@@ -19,8 +19,8 @@ public class Main {
         carnivora.adatbazisToltKlad(deSzerializalKlad(fileKlad.getAbsolutePath()));
         carnivora.adatbazisToltFaj(deSzerializalFaj(fileFaj.getAbsolutePath()));
 
-        kladLeirasokInput.forEach(s -> System.out.println(s));
-        fajLeirasokInput.forEach(s -> System.out.println(s));
+        kladLeirasokInput.forEach(System.out::println);
+        fajLeirasokInput.forEach(System.out::println);
     }
 
     public static List<KladRecord> deSzerializalKlad(String fileName) {

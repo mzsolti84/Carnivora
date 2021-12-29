@@ -13,11 +13,6 @@ public class KladRecord {
     this.leiras = leiras;
   }
 
-  public KladRecord(String nev, Integer szuloKategoriaID) {
-    this.szuloKategoriaID = szuloKategoriaID;
-    this.nev = nev;
-  }
-
   public static KladRecord factory (String line) {
     String[] lineTomb = line.split(",");
     String nev = lineTomb[0];

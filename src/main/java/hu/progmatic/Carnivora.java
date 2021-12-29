@@ -1,7 +1,6 @@
 package hu.progmatic;
 
 import org.sql2o.Connection;
-import org.sql2o.Query;
 import org.sql2o.Sql2o;
 
 import java.util.*;
