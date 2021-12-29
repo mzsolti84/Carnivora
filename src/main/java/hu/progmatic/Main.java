@@ -10,13 +10,16 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         File file = new File("src/main/java/hu/progmatic/Sheet5.csv");
+        File fileFaj = new File("src/main/java/hu/progmatic/SheetFaj.csv");
 
-        List<KladLeirasRecord> kladLeirasokInput = deSzerializalKladLeiras(file.getAbsolutePath());
+        List<KladRecord> kladLeirasokInput = deSzerializalKlad(file.getAbsolutePath());
+        List<FajRecord> fajLeirasokInput = deSzerializalFaj(fileFaj.getAbsolutePath());
         Carnivora carnivora = new Carnivora();
         carnivora.init();
         carnivora.adatbazisToltKlad(kladTolt());
 
         kladLeirasokInput.forEach(s -> System.out.println(s));
+        fajLeirasokInput.forEach(s -> System.out.println(s));
     }
 
     private static List<KladRecord> kladTolt() {
@@ -52,17 +55,31 @@ public class Main {
         );
     }
 
-    public static List<KladLeirasRecord> deSzerializalKladLeiras(String fileName) {
-        List<KladLeirasRecord> kladLeirasok = new ArrayList<>();
+    public static List<KladRecord> deSzerializalKlad(String fileName) {
+        List<KladRecord> kladLeirasok = new ArrayList<>();
         File file = new File(fileName);
         try (Scanner fileScanner = new Scanner(file, StandardCharsets.UTF_8)) {
             fileScanner.nextLine(); //mert az első sor a fejléc
             while (fileScanner.hasNextLine()) {
-                kladLeirasok.add(KladLeirasRecord.factory(fileScanner.nextLine()));
+                kladLeirasok.add(KladRecord.factory(fileScanner.nextLine()));
             }
         } catch (IOException e) {
             throw new RuntimeException("Nem létező fájl név");
         }
         return kladLeirasok;
+    }
+
+    public static List<FajRecord> deSzerializalFaj(String fileName) {
+        List<FajRecord> fajLeirasok = new ArrayList<>();
+        File file = new File(fileName);
+        try (Scanner fileScanner = new Scanner(file, StandardCharsets.UTF_8)) {
+            fileScanner.nextLine(); //mert az első sor a fejléc
+            while (fileScanner.hasNextLine()) {
+                fajLeirasok.add(FajRecord.factory(fileScanner.nextLine()));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Nem létező fájl név");
+        }
+        return fajLeirasok;
     }
 }

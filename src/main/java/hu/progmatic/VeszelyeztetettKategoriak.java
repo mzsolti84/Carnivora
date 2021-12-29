@@ -9,5 +9,5 @@ public enum VeszelyeztetettKategoriak {
     SEBEZHETO,
     MERSEKELTEN_FENYEGETETT,
     NEM_FENYEGETETT,
-    HAZIASITOTT,
+    HAZIASITOTT
     }

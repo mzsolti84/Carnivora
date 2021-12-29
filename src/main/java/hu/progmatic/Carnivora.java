@@ -36,7 +36,7 @@ public class Carnivora {
                       szuloKategoriaID int not null,
                       nev text not null,
                       latinNev text not null,
-                      leiras longtext not null,
+                      leiras longtext,
                       veszelyeztetett_besorolas text not null,
                       specialista boolean not null,
                       fotoURL text,
