@@ -3,6 +3,10 @@ package hu.progmatic;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.*;
 
 public class Carnivora {
@@ -46,9 +50,9 @@ public class Carnivora {
         }
     }
 
-    public void adatbazisToltKlad(List<KladRecord> lista) {
+    public void adatbazisToltKlad() {
         try (Connection connection = adatbazis.open()) {
-            for (KladRecord kladRecord : lista) {
+            for (KladRecord kladRecord : deSzerializalKlad()) {
                 connection.createQuery("""
                                 INSERT INTO klad (szuloKategoriaID, nev, latinNev, leiras)
                                 VALUES (:szuloKategoriaID, :nev, :latinNev, :leiras)
@@ -62,9 +66,9 @@ public class Carnivora {
         }
     }
 
-    public void adatbazisToltFaj(List<FajRecord> lista) {
+    public void adatbazisToltFaj() {
         try (Connection connection = adatbazis.open()) {
-            for (FajRecord fajRecord : lista) {
+            for (FajRecord fajRecord : deSzerializalFaj()) {
                 connection.createQuery("""
                                 INSERT INTO faj (szuloKategoriaID, nev, latinNev, leiras, veszelyeztetett_besorolas, specialista, fotoURL, wikiURL)
                                 VALUES (:szuloKategoriaID, :nev, :latinNev, :leiras, :veszelyeztetett_besorolas, :specialista, :fotoURL, :wikiURL)
@@ -81,4 +85,35 @@ public class Carnivora {
             }
         }
     }
+
+    public static List<KladRecord> deSzerializalKlad() {
+        File fileKlad = new File("src/main/java/hu/progmatic/SheetKlad.csv");
+        List<KladRecord> kladLeirasok = new ArrayList<>();
+
+        try (Scanner fileScanner = new Scanner(Path.of(fileKlad.getAbsolutePath()), StandardCharsets.UTF_8)) {
+            fileScanner.nextLine(); //mert az első sor a fejléc
+            while (fileScanner.hasNextLine()) {
+                kladLeirasok.add(KladRecord.factory(fileScanner.nextLine()));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Nem létező fájl név: " + fileKlad.getName());
+        }
+        return kladLeirasok;
+    }
+
+    public static List<FajRecord> deSzerializalFaj() {
+        File fileFaj = new File("src/main/java/hu/progmatic/SheetFaj.csv");
+        List<FajRecord> fajLeirasok = new ArrayList<>();
+
+        try (Scanner fileScanner = new Scanner(Path.of(fileFaj.getAbsolutePath()), StandardCharsets.UTF_8)) {
+            fileScanner.nextLine(); //mert az első sor a fejléc
+            while (fileScanner.hasNextLine()) {
+                fajLeirasok.add(FajRecord.factory(fileScanner.nextLine()));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Nem létező fájl név: " + fileFaj.getName());
+        }
+        return fajLeirasok;
+    }
+
 }
