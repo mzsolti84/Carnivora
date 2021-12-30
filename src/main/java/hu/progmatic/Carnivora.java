@@ -16,7 +16,7 @@ public class Carnivora {
             "progmatic"
     );
 
-    public void init() {
+    public void initDatabaseTables() {
         try (Connection connection = adatbazis.open()) {
             connection.createQuery("""
                     DROP TABLE if exists klad, faj;
