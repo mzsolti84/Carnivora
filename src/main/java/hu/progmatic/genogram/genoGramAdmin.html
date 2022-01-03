@@ -23,7 +23,11 @@
             myDiagram =
                 $(go.Diagram, "myDiagramDiv", // must be the ID or reference to div
                     {
-                        maxSelectionCount: 0, // users can select only one part at a time
+                        maxSelectionCount: 1, // users can select only one part at a time
+                        "clickCreatingTool.archetypeNodeData": { // allow double-click in background to create a new node
+                            name: "(üres)",
+                            comments: "(üres)"
+                        },
                         "clickCreatingTool.insertPart": function (loc) {  // scroll to the new node
                             var node = go.ClickCreatingTool.prototype.insertPart.call(this, loc);
                             if (node !== null) {
@@ -47,7 +51,7 @@
                                     // alternateAlignment: go.TreeLayout.AlignmentBus,
                                     // alternateNodeSpacing: 20
                                 }),
-                        "undoManager.isEnabled": false // enable undo & redo
+                        "undoManager.isEnabled": true // enable undo & redo
                     });
 
             // when the document is modified, add a "*" to the title and enable the "Save" button
@@ -146,6 +150,38 @@
             // define the Node template
             myDiagram.nodeTemplate =
                 $(go.Node, "Auto",
+                    {doubleClick: nodeDoubleClick},
+                    { // handle dragging a Node onto a Node to (maybe) change the reporting relationship
+                        mouseDragEnter: function (e, node, prev) {
+                            var diagram = node.diagram;
+                            var selnode = diagram.selection.first();
+                            if (!mayWorkFor(selnode, node)) return;
+                            var shape = node.findObject("SHAPE");
+                            if (shape) {
+                                shape._prevFill = shape.fill;  // remember the original brush
+                                shape.fill = "darkred";
+                            }
+                        },
+                        mouseDragLeave: function (e, node, next) {
+                            var shape = node.findObject("SHAPE");
+                            if (shape && shape._prevFill) {
+                                shape.fill = shape._prevFill;  // restore the original brush
+                            }
+                        },
+                        mouseDrop: function (e, node) {
+                            var diagram = node.diagram;
+                            var selnode = diagram.selection.first();  // assume just one Node in selection
+                            if (mayWorkFor(selnode, node)) {
+                                // find any existing link into the selected node
+                                var link = selnode.findTreeParentLink();
+                                if (link !== null) {  // reconnect any existing link
+                                    link.fromNode = node;
+                                } else {  // else create a new link
+                                    diagram.toolManager.linkingTool.insertLink(node, node.port, selnode, selnode.port);
+                                }
+                            }
+                        }
+                    },
                     // for sorting, have the Node.text be the data.name
                     new go.Binding("text", "name"),
                     // bind the Part.layerName to control the Node's layer depending on whether it isSelected
@@ -211,6 +247,63 @@
                         )  // end Table Panel
                     ) // end Horizontal Panel
                 );  // end Node
+
+            // the context menu allows users to make a position vacant,
+            // remove a role and reassign the subtree, or remove a department
+            myDiagram.nodeTemplate.contextMenu =
+                $("ContextMenu",
+                    $("ContextMenuButton",
+                        $(go.TextBlock, "Elem ürítése"),
+                        {
+                            click: function (e, obj) {
+                                var node = obj.part.adornedPart;
+                                if (node !== null) {
+                                    var thisemp = node.data;
+                                    myDiagram.startTransaction("vacate");
+                                    // update the key, name, and comments
+                                    myDiagram.model.setDataProperty(thisemp, "name", "(Üres)");
+                                    myDiagram.model.setDataProperty(thisemp, "comments", "(Üres)");
+                                    myDiagram.commitTransaction("vacate");
+                                }
+                            }
+                        }
+                    ),
+                    $("ContextMenuButton",
+                        $(go.TextBlock, "Elem eltávolítása"),
+                        {
+                            click: function (e, obj) {
+                                // reparent the subtree to this node's boss, then remove the node
+                                var node = obj.part.adornedPart;
+                                if (node !== null) {
+                                    myDiagram.startTransaction("reparent remove");
+                                    var chl = node.findTreeChildrenNodes();
+                                    // iterate through the children and set their parent key to our selected node's parent key
+                                    while (chl.next()) {
+                                        var emp = chl.value;
+                                        myDiagram.model.setParentKeyForNodeData(emp.data, node.findTreeParentNode().data.key);
+                                    }
+                                    // and now remove the selected node itself
+                                    myDiagram.model.removeNodeData(node.data);
+                                    myDiagram.commitTransaction("reparent remove");
+                                }
+                            }
+                        }
+                    ),
+                    $("ContextMenuButton",
+                        $(go.TextBlock, "Elem eltávolítása örökösökkel"),
+                        {
+                            click: function (e, obj) {
+                                // remove the whole subtree, including the node itself
+                                var node = obj.part.adornedPart;
+                                if (node !== null) {
+                                    myDiagram.startTransaction("remove dept");
+                                    myDiagram.removeParts(node.findTreeParts());
+                                    myDiagram.commitTransaction("remove dept");
+                                }
+                            }
+                        }
+                    )
+                );
 
             // define the Link template
             myDiagram.linkTemplate =
