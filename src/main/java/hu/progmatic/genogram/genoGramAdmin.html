@@ -189,9 +189,9 @@
                         return sel ? "Foreground" : "";
                     }).ofObject(),
                     // define the node's outer shape
-                    $(go.Shape, "Rectangle",
+                    $(go.Shape, "RoundedRectangle",
                         {
-                            name: "SHAPE", fill: "#333333", stroke: 'white', strokeWidth: 3.5,
+                            name: "SHAPE", fill: "#333333", stroke: 'white', strokeWidth: 2.5,
                             // set the port properties:
                             portId: "", fromLinkable: true, toLinkable: true, cursor: "pointer"
                         }),
