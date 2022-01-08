@@ -1,7 +1,11 @@
-^(?:\{)(?:\"(?<valueID>\w+)\":\"(?:(?<value>\w+)|(\d+))\",?)+(?:\},?)$
+RegEx:
+^(?:\{)(?:\"(?<valueID>\w+)\":(?:\"(?<valueWord>\w+)\"|(?<valueDigit>\d+)),?)+(?:\},?)$
+
+Test string:
+{"name":"Kutyaalkatúak","comments":"üres","key":1,"parent":2},
 
 www.regexper.com:
-https://regexper.com/#%5E%28%3F%3A%5C%7B%29%28%3F%3A%5C%22%28%5Cw%2B%29%5C%22%3A%5C%22%28%3F%3A%28%5Cw%2B%29%7C%28%5Cd%2B%29%29%5C%22%2C%3F%29%2B%28%3F%3A%5C%7D%2C%3F%29%24
+https://regexper.com/#%5E%28%3F%3A%5C%7B%29%28%3F%3A%5C%22%28%5Cw%2B%29%5C%22%3A%28%3F%3A%5C%22%28%5Cw%2B%29%5C%22%7C%28%5Cd%2B%29%29%2C%3F%29%2B%28%3F%3A%5C%7D%2C%3F%29%24
 
 www.regex101.com:
-https://regex101.com/r/AGKBfB/1
+https://regex101.com/r/A6h1B6/3
