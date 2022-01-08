@@ -111,25 +111,26 @@
             function nodeDoubleClick(e, obj) {
                 var clicked = obj.part;
                 if (clicked !== null) {
-                    var thisemp = clicked.data;
-                    myDiagram.startTransaction("add employee");
-                    var newemp = {
-                        name: "(üres)",
-                        comments: "(üres)",
-                        parent: thisemp.key
-                    };
-                    myDiagram.model.addNodeData(newemp);
-                    myDiagram.commitTransaction("add employee");
+                    window.open("https://hu.wikipedia.org/wiki/Macskaalkat%C3%BAak", 'popup', 'width=800,height=600');
+                    //var thisemp = clicked.data;
+                    //myDiagram.startTransaction("add employee");
+                    //var newemp = {
+                    //    name: "(üres)",
+                    //    comments: "(üres)",
+                    //    parent: thisemp.key
+                    //};
+                    //myDiagram.model.addNodeData(newemp);
+                    //myDiagram.commitTransaction("add employee");
                 }
             }
 
             // this is used to determine feedback during drags
-            function mayWorkFor(node1, node2) {
-                if (!(node1 instanceof go.Node)) return false;  // must be a Node
-                if (node1 === node2) return false;  // cannot work for yourself
-                if (node2.isInTreeOf(node1)) return false;  // cannot work for someone who works for you
-                return true;
-            }
+            //function mayWorkFor(node1, node2) {
+            //    if (!(node1 instanceof go.Node)) return false;  // must be a Node
+            //    if (node1 === node2) return false;  // cannot work for yourself
+            //    if (node2.isInTreeOf(node1)) return false;  // cannot work for someone who works for you
+            //    return true;
+            //}
 
             // This function provides a common style for most of the TextBlocks.
             // Some of these values may be overridden in a particular TextBlock.
@@ -146,6 +147,7 @@
             // define the Node template
             myDiagram.nodeTemplate =
                 $(go.Node, "Auto",
+                    {doubleClick: nodeDoubleClick},
                     // for sorting, have the Node.text be the data.name
                     new go.Binding("text", "name"),
                     // bind the Part.layerName to control the Node's layer depending on whether it isSelected
@@ -180,13 +182,13 @@
                                 {
                                     row: 0, column: 0, columnSpan: 5,
                                     font: "12pt Segoe UI,sans-serif",
-                                    editable: true, isMultiline: false,
+                                    editable: false, isMultiline: false,
                                     minSize: new go.Size(10, 16)
                                 },
                                 new go.Binding("text", "name").makeTwoWay()),
                             $(go.TextBlock, textStyle(),
                                 {row: 1, column: 0},
-                                new go.Binding("text", "title", function (v) {
+                                new go.Binding("text", "link", function (v) {
                                     return "Link: " + v;
                                 })),
                             $(go.TextBlock, textStyle(),
@@ -204,7 +206,7 @@
                                     row: 4, column: 0, columnSpan: 5,
                                     font: "italic 9pt sans-serif",
                                     wrap: go.TextBlock.WrapFit,
-                                    editable: true,  // by default newlines are allowed
+                                    editable: false,  // by default newlines are allowed
                                     minSize: new go.Size(10, 14)
                                 },
                                 new go.Binding("text", "comments").makeTwoWay())
