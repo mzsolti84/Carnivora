@@ -1,13 +1,15 @@
 package hu.progmatic;
 
 public class KladRecord {
-    Integer szuloKategoriaID;
+    Integer Id;
+    Integer szuloKategoriaId;
     String nev;
     String latinNev;
     String leiras;
 
-    public KladRecord(Integer szuloKategoriaID, String nev, String latinNev, String leiras) {
-        this.szuloKategoriaID = szuloKategoriaID;
+    public KladRecord(Integer Id, Integer szuloKategoriaId, String nev, String latinNev, String leiras) {
+        this.Id = Id;
+        this.szuloKategoriaId = szuloKategoriaId;
         this.nev = nev;
         this.latinNev = latinNev;
         this.leiras = leiras;
@@ -19,16 +21,17 @@ public class KladRecord {
         String latinNev = lineTomb[1];
         String leiras = null;
         Integer szuloKategoriaID = null;
+        Integer Id = null;
         if (lineTomb.length == 3) {
             leiras = lineTomb[2];
         }
-        return new KladRecord(szuloKategoriaID, nev, latinNev, leiras);
+        return new KladRecord(Id, szuloKategoriaID, nev, latinNev, leiras);
     }
 
     @Override
     public String toString() {
         return "KladRecord{" +
-                "szuloKategoriaID=" + szuloKategoriaID +
+                "szuloKategoriaID=" + szuloKategoriaId +
                 ", nev='" + nev + '\'' +
                 ", latinNev='" + latinNev + '\'' +
                 ", leiras='" + leiras + '\'' +

@@ -57,7 +57,7 @@ public class Carnivora {
                                 INSERT INTO klad (szuloKategoriaID, nev, latinNev, leiras)
                                 VALUES (:szuloKategoriaID, :nev, :latinNev, :leiras)
                                 """)
-                        .addParameter("szuloKategoriaID", kladRecord.szuloKategoriaID)
+                        .addParameter("szuloKategoriaID", kladRecord.szuloKategoriaId)
                         .addParameter("nev", kladRecord.nev)
                         .addParameter("latinNev", kladRecord.latinNev)
                         .addParameter("leiras", kladRecord.leiras)
