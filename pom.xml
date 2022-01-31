@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>hu.progmatic</groupId>
-	<artifactId>kozos-projekt</artifactId>
+	<artifactId>carnivora-projekt</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>kozos-projekt</name>
-	<description>Közös projekt</description>
+	<name>carnivora-projekt</name>
+	<description>Carnivora projekt</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -85,6 +85,17 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.sql2o</groupId>
+			<artifactId>sql2o</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.9</version>
 		</dependency>
 	</dependencies>
 
