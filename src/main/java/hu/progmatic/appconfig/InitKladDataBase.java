@@ -20,7 +20,7 @@ public class InitKladDataBase implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        if (kladService.findAll().isEmpty()) {
+        /*if (kladService.findAll().isEmpty()) {
            Klad o1 = Klad.builder().nev("Ős-macskaformák alcsaládja").build();
             Klad k1 = Klad.builder().nev("párducformák alcsaládja").szulo(o1).build();
             Klad k2 = Klad.builder().nev("mongúzfélék családja").szulo(k1).build();
@@ -36,6 +36,6 @@ public class InitKladDataBase implements InitializingBean {
                     o1, k1, k2, k3, k4
                 )
             );
-        }
+        }*/
     }
 }

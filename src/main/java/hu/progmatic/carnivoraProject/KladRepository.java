@@ -9,8 +9,8 @@ public interface KladRepository extends JpaRepository<Klad, Integer> {
   @Query(
       """
           select k
-          from Klad as k
-          left join Klad as child on child.szulo = k
+          from KladEntity as k
+          left join KladEntity as child on child.szulo = k
           where child is null
           """
   )
