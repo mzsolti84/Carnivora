@@ -1,0 +1,125 @@
+package hu.progmatic.carnivoraProject;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
+import java.util.List;
+
+@Controller
+public class CarnivoraController {
+
+    // AUTOWIRED-ek  --------------------------------------------------------------------------------
+
+    @Autowired
+    private CarnivoraService carnivoraService;
+    @Autowired
+    private KladService kladService;
+
+    // RETURN to .HTML-ek ---------------------------------------------------------------------------
+
+    private String carnivora() {
+        return "carnivoraProject/carnivora";
+    }
+
+    private String adatlap() {
+        return "carnivoraProject/carnivoraAdatlap";
+    }
+
+    private String kartya() {
+        return "carnivoraProject/talalatiKartyak";
+    }
+
+    // GET MAPPINGEK --------------------------------------------------------------------------------
+
+    @GetMapping("/carnivoraProject/carnivora")
+    public String species() {
+        return carnivora();
+    }
+
+    @GetMapping("/carnivoraProject/carnivora/{id}")
+    public String szerkeszt(@PathVariable Integer id, Model model) {
+        FajRecord formSpecies = carnivoraService.getById(id);
+        model.addAttribute("formSpecies", formSpecies);
+        return carnivora();
+    }
+
+    @GetMapping("/carnivoraProject/carnivora/{id}/adatlap")
+    public String adatlapKiir(@PathVariable Integer id, Model model) {
+        FajRecord formSpecies = carnivoraService.getById(id);
+        model.addAttribute("formSpecies", formSpecies);
+        return adatlap();
+    }
+
+    @GetMapping("/carnivoraProject/{id}/TalálatiKártyák")
+    public String kartyaKiIr(@PathVariable Integer id, Model model) {
+        FajRecord formSpecies = carnivoraService.getById(id);
+        model.addAttribute(formSpecies);
+        return kartya();
+    }
+
+    // POST MAPPINGEK --------------------------------------------------------------------------------
+
+    @PostMapping("/carnivoraProject/carnivora/{id}")
+    public String save(
+            @PathVariable Integer id,
+            @ModelAttribute("formSpecies") @Valid FajRecord formSpecies,
+            BindingResult bindingResult,
+            Model model) {
+        if (!bindingResult.hasErrors()) {
+            formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
+            carnivoraService.save(formSpecies);
+            refreshAllItem(model);
+            clearFormItem(model);
+        }
+        return carnivora();
+    }
+
+    @PostMapping("/carnivoraProject/carnivora/")
+    public String create(
+            @ModelAttribute("formSpecies") @Valid FajRecord formSpecies,
+            BindingResult bindingResult,
+            Model model) {
+        if (!bindingResult.hasErrors()) {
+            formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
+            carnivoraService.create(formSpecies);
+            refreshAllItem(model);
+            clearFormItem(model);
+        }
+        return carnivora();
+    }
+
+    // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
+
+    @ModelAttribute("allSpecies")
+    List<FajRecord> allSpecies() {
+        return carnivoraService.findAll();
+    }
+
+    @ModelAttribute("allKlad")
+    List<ProbaKlad> allKlad() {
+        return kladService.findAllPureNames();
+    }
+
+    @ModelAttribute("formSpecies")
+    public FajRecord formSpecies() {
+        return carnivoraService.empty();
+    }
+
+    // MODEL MÓDOSÍTÓK -------------------------------------------------------------------------------
+
+    private void refreshAllItem(Model model) {
+        model.addAttribute("allSpecies", allSpecies());
+    }
+
+    private void clearFormItem(Model model) {
+        model.addAttribute("formSpecies", formSpecies());
+    }
+
+}
