@@ -1,16 +1,12 @@
 package hu.progmatic.felhasznalo;
 
 
-import hu.progmatic.kozos.etterem.biztonsag.EtteremFelhasznaloTipus;
-
 import java.util.Arrays;
 
 public enum UserType {
   ADMIN(
       Roles.USER_WRITE_ROLE,
-      Roles.USER_READ_ROLE,
-      EtteremFelhasznaloTipus.Jogosultsag.USER_ADD_ITEM_TO_INVENTORY_ROLE,
-      EtteremFelhasznaloTipus.Jogosultsag.USER_DELETE_ROLE
+      Roles.USER_READ_ROLE
   ),
   USER(Roles.USER_READ_ROLE),
   GUEST();
