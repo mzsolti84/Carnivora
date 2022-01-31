@@ -1,12 +1,29 @@
-null,ragadozo,ragadozo vagyok
-ragadozo,macskaalkatuak,A macskakalkatuakra jellemzo ...
-ragadozo,kutyaalkatuak,A kutyaalkatuak meghatarazo ...
-macskaalkatuak,madagaszkári cibetmacskafélék,(Eupleridae) családja – 8 faj
-macskaalkatuak,macskafélék,(Felidae) családja – 39 faj
-macskaalkatuak,mongúzfélék,(Herpestidae) családja – 32 faj
-macskaalkatuak,hiénafélék,(Hyaenidae) családja – 4 faj
-kutyaalkatuak,macskamedvefélék,(Ailuridae) családja – 1 faj
-kutyaalkatuak,kutyafélék,(Canidae) családja – 34 faj
-kutyaalkatuak,bűzösborzfélék,(Mephitidae) családja – 12 faj
-kutyaalkatuak,menyétfélék,(Mustelidae) családja – 55 faj
-menyétfélék,vidraformák,(Lutrinae) alcsaládja – 13 faj
+nev,latin név,szulőKategória,leiras
+állatok világa,Animalia,null,-
+ragadozók rendje,Carnivora,állatok világa,-
+macskaalkatúak alrendje,Feliformia,ragadozók rendje,-
+madagaszkári cibetmacskafélék családja,Eupleridae,macskaalkatúak alrendje,-
+macskafélék családja,Felidae,macskaalkatúak alrendje,-
+macskaformák alcsaládja,Felinae,macskafélék családja,-
+párducformák alcsaládja,Pantherinae,macskafélék családja,-
+kardfogú macskák alcsaládja – kihalt,Machairodontinae,macskafélék családja,-
+mongúzfélék családja,Herpestidae,macskaalkatúak alrendje,-
+hiénafélék családja,Hyaenidae,macskaalkatúak alrendje,-
+cibetmacskafélék családja,Viverridae,macskaalkatúak alrendje,-
+pálmacibetfélék családja,Nandiniidae,macskaalkatúak alrendje,-
+kutyaalkatúak alrendje,Caniformia,ragadozók rendje,-
+macskamedvefélék családja,Ailuridae,kutyaalkatúak alrendje,-
+kutyafélék családja,Canidae,kutyaalkatúak alrendje,-
+bűzösborzfélék családja,Mephitidae,kutyaalkatúak alrendje,-
+menyétfélék családja,Mustelidae,kutyaalkatúak alrendje,-
+vidraformák alcsaládja,Lutrinae,menyétfélék családja,-
+borzformák alcsaládja,Melinae,menyétfélék családja,-
+méhészborzformák alcsaládja,Mellivorinae,menyétfélék családja,-
+amerikai borzformák alcsaládja,Taxidiinae,menyétfélék családja,-
+menyétformák alcsaládja,Mustelinae,menyétfélék családja,-
+mosómedvefélék családja,Procyonidae,kutyaalkatúak alrendje,-
+medvefélék családja,Ursidae,kutyaalkatúak alrendje,-
+úszólábúak öregcsaládja,Pinnipedia,kutyaalkatúak alrendje,-
+rozmárfélék családja,Odobenidae,úszólábúak öregcsaládja,-
+fülesfókafélék családja,Otariidae,úszólábúak öregcsaládja,-
+valódi fókafélék családja,Phocidae,úszólábúak öregcsaládja,-
