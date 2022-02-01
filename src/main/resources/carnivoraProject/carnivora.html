@@ -42,7 +42,7 @@
             <td th:text="${species.szuloNev}">szuloNev</td>
             <td th:text="${species.nev}">nev</td>
             <td th:text="${species.latinNev}">latinNev</td>
-            <td th:text="${species.leiras}">leiras</td>
+            <td th:text="${#strings.abbreviate(species.leiras,100)}">leiras</td>
             <td th:text="${species.veszelyeztetettBesorolas}">veszelyeztetettBesorolas</td>
             <td th:text="${species.turesHatar}">turesHatar</td>
             <td>

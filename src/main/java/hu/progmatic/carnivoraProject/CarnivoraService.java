@@ -19,7 +19,11 @@ public class CarnivoraService implements InitializingBean {
             new FajRecord(null,
                     4,
                     "madagaszkári cibetmacskafélék családja",
-                    "Madagaszkáron él és szereti a makit.",
+                    "Madagaszkár legnagyobb ragadozó állata; a nőstény testhossza 65–70 centiméter, " +
+                            "a hímé 75–80 centiméter, farokhossza 70–90 centiméter, a nőstény testtömege 5–7 kilogramm, " +
+                            "a hímé 6–10 kilogramm. Külsőleg hasonlít a macskákhoz, afféle átmenet a macskák és cibetmacskák között. " +
+                            "Különösen szembeötlővé válik ez a macskaszerűség, ha a fosszát a vele egyező színezetű, megnyúlt alakú, " +
+                            "alacsony tairával (Eira barbara) vetjük össze. A hasonlóság miatt a rendszertani helye is hosszú ideig vitás volt.",
                     "Fossza",
                     "Cryptoprocta ferox",
                     VeszelyeztetettKategoriak.SEBEZHETO,
@@ -29,7 +33,10 @@ public class CarnivoraService implements InitializingBean {
             new FajRecord(null,
                     6,
                     "macskaformák alcsaládja",
-                    "A macskák élvezik a meleget és a napsütést, gyakran alszanak napos helyeken. Magasabb hőmérsékleten érzik jól magukat, mint az emberek, akik számára a 44,5 °C-nál nagyobb bőrfelszíni hőmérséklet már nehezen elviselhető, míg a macskák akkor kezdik kellemetlenül érezni magukat, ha a bőrük 52 °C-ra melegszik.",
+                    """
+                    A macskák élvezik a meleget és a napsütést, gyakran alszanak napos helyeken. Magasabb hőmérsékleten érzik jól magukat, 
+                    mint az emberek, akik számára a 44,5 °C-nál nagyobb bőrfelszíni hőmérséklet már nehezen elviselhető, míg a macskák akkor 
+                    kezdik kellemetlenül érezni magukat, ha a bőrük 52 °C-ra melegszik.""",
                     "Házimacska",
                     "Felis silvestris catus",
                     VeszelyeztetettKategoriak.HAZIASITOTT,
@@ -39,7 +46,7 @@ public class CarnivoraService implements InitializingBean {
             new FajRecord(null,
                     4,
                     "madagaszkári cibetmacskafélék családja",
-                    "Spicces macska",
+                    "Madagaszkáron honos. Kevés megfigyelés van róla. Megeszi a gilisztát, a csigát és a rovarokat is.",
                     "Falanuk",
                     "Eupleres goudotii",
                     VeszelyeztetettKategoriak.FENYEGETETT,
@@ -50,7 +57,14 @@ public class CarnivoraService implements InitializingBean {
             new FajRecord(null,
                     15,
                     "kutyafélék családja",
-                    "Farkas",
+                    """
+                            Holarktikus faj (az ember után) a legnagyobb területen elterjedt emlősök egyike. 
+                            Észak-Amerika és Eurázsia északi területeinek meghatározó csúcsragadozója, de megtalálhatjuk képviselőit 
+                            Közép-Amerikában, Észak-Afrikában és Dél-Ázsiában is. Az egykor összefüggő, hatalmas területen a túlzott vadászat 
+                            következtében ma már csak elszigetelt csoportjai maradtak fenn, így például Észak-Afrika szavanna övezetéből 
+                            az ember teljesen kiszorította. Kihalt Japánban is; az Arab-félszigeten erősen veszélyeztetett, szinte el is tűnt. 
+                            Természetes élőhelyét nehéz meghatározni, hiszen (az ember kivételével) a farkas a különböző biomokhoz leginkább alkalmazkodott emlős: 
+                            a félsivatagtól a tundrán át a trópusi esőerdőig mindenhol képes megélni.""",
                     "Szürke farkas",
                     "Canis lupus",
                     VeszelyeztetettKategoriak.FENYEGETETT,
