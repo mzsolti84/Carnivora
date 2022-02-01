@@ -38,7 +38,7 @@ public class InitKladFromFileFactory {
 
     private void fileRowToEntity(String fileRow) {
         String[] kladProperties = fileRow.split(",");
-        String name = kladProperties[0].equals("null") ? null : kladProperties[1];
+        String name = kladProperties[0].equals("null") ? null : kladProperties[0];
         String latinName = kladProperties[1];
         String parent = kladProperties[2].equals("null") ? null : kladProperties[2];
         String description = kladProperties[3].equals("null") ? null : kladProperties[3];

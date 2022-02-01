@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
-class KladServiceTest {
+class KladokServiceTest {
     @Autowired
     private KladokService service;
 
