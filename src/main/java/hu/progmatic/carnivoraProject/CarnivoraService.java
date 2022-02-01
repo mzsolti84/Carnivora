@@ -60,6 +60,13 @@ public class CarnivoraService implements InitializingBean {
 
     );
 
+    @Override
+    public void afterPropertiesSet() {
+        if (speciesRepository.findAll().isEmpty()) {
+            speciesRepository.saveAll(initSpecies);
+        }
+    }
+
     public List<FajRecord> findAll() {
         return speciesRepository.findAll();
     }
@@ -85,14 +92,15 @@ public class CarnivoraService implements InitializingBean {
         return probaKladRepository.getById(id).getNev();
     }
 
+    public void deleteByIdIfExists(Integer id) {
+        if (speciesRepository.existsById(id)) {
+            FajRecord faj = speciesRepository.getById(id);
+            speciesRepository.delete(faj);
+        }
+    }
+
     public FajRecord empty() {
         return new FajRecord();
     }
 
-    @Override
-    public void afterPropertiesSet() {
-        if (speciesRepository.count() == 0) {
-            speciesRepository.saveAll(initSpecies);
-        }
-    }
 }
