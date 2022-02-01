@@ -4,8 +4,13 @@ import hu.progmatic.iniklad.InitKladFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.google.gson.Gson;
+import org.thymeleaf.expression.Lists;
 
 import javax.transaction.Transactional;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -45,4 +50,19 @@ public class KladService implements InitializingBean {
                 .build();
     }
 
+    public String getJsonFromKladEntityList(List<KladEntity> allKladEntity) {
+        return """
+                { "class": "TreeModel",\\n
+                  "nodeDataArray": [\\n
+                """
+                +
+                String.join(",\\n", allKladEntity.stream()
+                        .map(kladEntity -> new Gson().toJson(kladEntity))
+                        .toList())
+                +
+                """
+                        \\n
+                          ]}     
+                        """;
+    }
 }
