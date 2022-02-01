@@ -72,7 +72,7 @@ public class CarnivoraController {
         if (!bindingResult.hasErrors()) {
             formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
             carnivoraService.save(formSpecies);
-            refreshAllItem(model);
+            refreshAllSpecies(model);
             clearFormItem(model);
         }
         return carnivora();
@@ -86,7 +86,7 @@ public class CarnivoraController {
         if (!bindingResult.hasErrors()) {
             formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
             carnivoraService.create(formSpecies);
-            refreshAllItem(model);
+            refreshAllSpecies(model);
             clearFormItem(model);
         }
         return carnivora();
@@ -95,7 +95,7 @@ public class CarnivoraController {
     @PostMapping("/carnivoraProject/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
         carnivoraService.deleteById(id);
-        refreshAllItem(model);
+        refreshAllSpecies(model);
         return carnivora();
     }
 
@@ -118,7 +118,7 @@ public class CarnivoraController {
 
     // MODEL MÓDOSÍTÓK -------------------------------------------------------------------------------
 
-    private void refreshAllItem(Model model) {
+    private void refreshAllSpecies(Model model) {
         model.addAttribute("allSpecies", allSpecies());
     }
 
