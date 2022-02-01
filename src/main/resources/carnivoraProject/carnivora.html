@@ -236,10 +236,18 @@
 
 <hr>
 
-<a type="button" class="btn btn-primary" th:href="@{/}">Kezdőlap</a>
+<div class="container border border-secondary">
+    <div class="text-center">
+        <form th:action="@{/}" method="get">
+            <button style=" background-color: black" type="submit" class="btn-dark">Vissza</button>
+        </form>
 
-<a type="button" class="btn btn-primary" th:href="@{'/carnivoraProject/kozosos'}">Közös ős kereső</a>
+        <br>
+        <form th:action="@{'/carnivoraproject/kozosos'}" method="get">
+            <button style=" background-color: black" type="submit" class="btn-dark">Közös ős kereső</button>
+        </form>
+    </div>
+</div>
 
-<a type="button" class="btn btn-primary" th:href="@{'/kruppazoltan/carnivora/kzklad'}">Klád gyakorlas</a>
 </body>
 </html>
