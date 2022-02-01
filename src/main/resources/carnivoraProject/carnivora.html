@@ -32,6 +32,7 @@
             <th scope="col">Tűréshatár</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
 
         </tr>
         </thead>
@@ -58,6 +59,15 @@
                     <div class="col">
                         <form th:action="@{'/carnivoraProject/carnivora/{id}'(id=${species.id})}" method="get">
                             <input type="submit" class="btn btn-danger" value="Módosít"/>
+                        </form>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="row">
+                    <div class="col">
+                        <form th:action="@{'/carnivoraProject/carnivora/delete/{id}'(id=${species.id})}" method="post">
+                            <input type="submit" class="btn btn-danger" value="Eltávolít"/>
                         </form>
                     </div>
                 </div>

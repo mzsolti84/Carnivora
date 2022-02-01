@@ -92,6 +92,13 @@ public class CarnivoraController {
         return carnivora();
     }
 
+    @PostMapping("/carnivoraProject/carnivora/delete/{id}")
+    public String delete(@PathVariable Integer id, Model model) {
+        carnivoraService.deleteById(id);
+        refreshAllItem(model);
+        return carnivora();
+    }
+
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("allSpecies")
