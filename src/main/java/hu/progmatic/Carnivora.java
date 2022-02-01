@@ -68,19 +68,19 @@ public class Carnivora {
 
     public void adatbazisToltFaj() {
         try (Connection connection = adatbazis.open()) {
-            for (FajRecord fajRecord : deSzerializalFaj()) {
+            for (FajRecordRegi fajRecordRegi : deSzerializalFaj()) {
                 connection.createQuery("""
                                 INSERT INTO faj (szuloKategoriaID, nev, latinNev, leiras, veszelyeztetett_besorolas, specialista, fotoURL, wikiURL)
                                 VALUES (:szuloKategoriaID, :nev, :latinNev, :leiras, :veszelyeztetett_besorolas, :specialista, :fotoURL, :wikiURL)
                                 """)
-                        .addParameter("szuloKategoriaID", fajRecord.szuloKategoriaID)
-                        .addParameter("nev", fajRecord.nev)
-                        .addParameter("latinNev", fajRecord.latinNev)
-                        .addParameter("leiras", fajRecord.leiras)
-                        .addParameter("veszelyeztetett_besorolas", fajRecord.veszelyeztetettBesorolas)
-                        .addParameter("specialista", fajRecord.specialista)
-                        .addParameter("fotoURL", fajRecord.fotoURL)
-                        .addParameter("wikiURL", fajRecord.wikiURL)
+                        .addParameter("szuloKategoriaID", fajRecordRegi.szuloKategoriaID)
+                        .addParameter("nev", fajRecordRegi.nev)
+                        .addParameter("latinNev", fajRecordRegi.latinNev)
+                        .addParameter("leiras", fajRecordRegi.leiras)
+                        .addParameter("veszelyeztetett_besorolas", fajRecordRegi.veszelyeztetettBesorolas)
+                        .addParameter("specialista", fajRecordRegi.specialista)
+                        .addParameter("fotoURL", fajRecordRegi.fotoURL)
+                        .addParameter("wikiURL", fajRecordRegi.wikiURL)
                         .executeUpdate();
             }
         }
@@ -101,14 +101,14 @@ public class Carnivora {
         return kladLeirasok;
     }
 
-    public static List<FajRecord> deSzerializalFaj() {
+    public static List<FajRecordRegi> deSzerializalFaj() {
         File fileFaj = new File("src/main/java/hu/progmatic/SheetFaj.csv");
-        List<FajRecord> fajLeirasok = new ArrayList<>();
+        List<FajRecordRegi> fajLeirasok = new ArrayList<>();
 
         try (Scanner fileScanner = new Scanner(Path.of(fileFaj.getAbsolutePath()), StandardCharsets.UTF_8)) {
             fileScanner.nextLine(); //mert az első sor a fejléc
             while (fileScanner.hasNextLine()) {
-                fajLeirasok.add(FajRecord.factory(fileScanner.nextLine()));
+                fajLeirasok.add(FajRecordRegi.factory(fileScanner.nextLine()));
             }
         } catch (IOException e) {
             throw new RuntimeException("Nem létező fájl név: " + fileFaj.getName());

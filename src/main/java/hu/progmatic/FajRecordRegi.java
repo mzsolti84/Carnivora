@@ -1,7 +1,7 @@
 package hu.progmatic;
 
 
-public class FajRecord {
+public class FajRecordRegi {
   Integer szuloKategoriaID;
   String nev;
   String latinNev;
@@ -11,9 +11,9 @@ public class FajRecord {
   String fotoURL;
   String wikiURL;
 
-  public FajRecord(Integer szuloKategoriaID, String nev, String latinNev, String leiras,
-                   VeszelyeztetettKategoriak veszelyeztetettBesorolas, boolean specialista,
-                   String fotoURL, String wikiURL) {
+  public FajRecordRegi(Integer szuloKategoriaID, String nev, String latinNev, String leiras,
+                       VeszelyeztetettKategoriak veszelyeztetettBesorolas, boolean specialista,
+                       String fotoURL, String wikiURL) {
     this.szuloKategoriaID = szuloKategoriaID;
     this.nev = nev;
     this.latinNev = latinNev;
@@ -24,7 +24,7 @@ public class FajRecord {
     this.wikiURL = wikiURL;
   }
 
-  public static FajRecord factory(String line) {
+  public static FajRecordRegi factory(String line) {
     String[] lineTomb = line.split(",");
     Integer szuloKategoriaID = Integer.parseInt(lineTomb[0]);
     String nev = lineTomb[1];
@@ -34,7 +34,7 @@ public class FajRecord {
     boolean specialista = specialistaAtfordit(lineTomb[5]);
     String fotoURL = lineTomb[6];
     String wikiURL = lineTomb[7];
-    return new FajRecord(szuloKategoriaID, nev, latinNev, leiras, veszelyeztetettBesorolas,
+    return new FajRecordRegi(szuloKategoriaID, nev, latinNev, leiras, veszelyeztetettBesorolas,
         specialista, fotoURL, wikiURL);
   }
 
