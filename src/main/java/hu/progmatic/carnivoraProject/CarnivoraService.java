@@ -36,7 +36,11 @@ public class CarnivoraService implements InitializingBean {
                     """
                     A macskák élvezik a meleget és a napsütést, gyakran alszanak napos helyeken. Magasabb hőmérsékleten érzik jól magukat, 
                     mint az emberek, akik számára a 44,5 °C-nál nagyobb bőrfelszíni hőmérséklet már nehezen elviselhető, míg a macskák akkor 
-                    kezdik kellemetlenül érezni magukat, ha a bőrük 52 °C-ra melegszik.""",
+                    kezdik kellemetlenül érezni magukat, ha a bőrük 52 °C-ra melegszik. Körülbelül 10 000 évvel ezelőtt kezdett az ember társaságában élni, 
+                    háziasításának első ábrázolása mintegy 4000 éve Egyiptomban történt. Számos kínai rajz bizonyítja, hogy a Távol-Keleten már i. e. 1500 
+                    körül ismerték a macskát, mely az Egyiptommal ősidők óta kapcsolatban álló Indiából kerülhetett oda, ahol vallási ceremóniáknál kapott 
+                    fontos szerepet. Kezdetben a gazdagok státusszimbóluma volt, majd a későbbiekben az értékes selyem kártevőktől való megvédéséhez használták fel. 
+                    Japánban a szent iratok megóvásában nyújtott segítséget.""",
                     "Házimacska",
                     "Felis silvestris catus",
                     VeszelyeztetettKategoriak.HAZIASITOTT,
@@ -58,7 +62,7 @@ public class CarnivoraService implements InitializingBean {
                     15,
                     "kutyafélék családja",
                     """
-                            Holarktikus faj (az ember után) a legnagyobb területen elterjedt emlősök egyike. 
+                            Holasztikus faj (az ember után) a legnagyobb területen elterjedt emlősök egyike. 
                             Észak-Amerika és Eurázsia északi területeinek meghatározó csúcsragadozója, de megtalálhatjuk képviselőit 
                             Közép-Amerikában, Észak-Afrikában és Dél-Ázsiában is. Az egykor összefüggő, hatalmas területen a túlzott vadászat 
                             következtében ma már csak elszigetelt csoportjai maradtak fenn, így például Észak-Afrika szavanna övezetéből 
