@@ -5,12 +5,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
-import org.thymeleaf.expression.Lists;
 
 import javax.transaction.Transactional;
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -62,7 +58,7 @@ public class KladService implements InitializingBean {
                 +
                 """
                         \\n
-                          ]}     
+                        ]}
                         """;
     }
 }
