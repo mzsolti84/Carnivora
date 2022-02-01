@@ -9,6 +9,9 @@ public class ResourceKladCsv {
     public static String getWholePath(String resourceName) throws URISyntaxException {
         //assertNotNull(resource);
         URL resource = ResourceKladCsv.class.getClassLoader().getResource(String.format("carnivora/%s", resourceName));
+        if (resource == null){
+            throw new KladURISyntaxException("URL resource is null");
+        }
         return Paths.get(resource.toURI()).toFile().getAbsolutePath();
         //return Paths.get("src", "main", "resources").toFile().getAbsolutePath() + String.format("/carnivora/%s", resourceName);
     }
