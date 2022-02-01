@@ -45,7 +45,7 @@ public class CarnivoraService implements InitializingBean {
                     "Felis silvestris catus",
                     VeszelyeztetettKategoriak.HAZIASITOTT,
                     Tureshatar.SPECIALISTA,
-                    "https://upload.wikimedia.org/wikipedia/commons/e/e7/Jammlich_crop.jpg",
+                    "https://drive.google.com/file/d/1ZJzdB4u7qMzE5T69N5VkIWbVI2dkupvl/view",
                     "https://hu.wikipedia.org/wiki/Macska"),
             new FajRecord(null,
                     4,
@@ -106,6 +106,10 @@ public class CarnivoraService implements InitializingBean {
         return speciesRepository.getById(id);
     }
 
+    public FajRecord getByLatinNev(String latinNev) {
+        return speciesRepository.getByLatinNev(latinNev);
+    }
+
     public String getSzuloNevBySzuloId(Integer id) {
         return probaKladRepository.getById(id).getNev();
     }
@@ -121,4 +125,8 @@ public class CarnivoraService implements InitializingBean {
         return new FajRecord();
     }
 
+    public FajRecord findById(Integer id) {
+        return speciesRepository.findById(id)
+                .orElseThrow();
+    }
 }

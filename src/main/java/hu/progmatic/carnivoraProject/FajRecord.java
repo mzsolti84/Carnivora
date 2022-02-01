@@ -10,13 +10,14 @@ import javax.validation.constraints.NotEmpty;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class FajRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     Integer szuloId;
     String szuloNev;
-    @Lob
+    @Column(length = 20000)
     @NotEmpty
     String leiras;
     @NotEmpty
