@@ -17,7 +17,7 @@ public class CarnivoraController {
     @Autowired
     private CarnivoraService carnivoraService;
     @Autowired
-    private KladService kladService;
+    private KladokService kladService;
 
     // RETURN to .HTML-ek ---------------------------------------------------------------------------
 

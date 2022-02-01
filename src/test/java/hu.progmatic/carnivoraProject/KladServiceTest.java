@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Transactional
 class KladServiceTest {
     @Autowired
-    private KladService service;
+    private KladokService service;
 
     @Test
     @DisplayName("Elem létrehozása, és visszaolvasása")

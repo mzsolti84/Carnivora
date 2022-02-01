@@ -1,20 +1,18 @@
 package hu.progmatic.appconfig;
 
-import hu.progmatic.carnivoraProject.Klad;
-import hu.progmatic.carnivoraProject.KladService;
+import hu.progmatic.carnivoraProject.KladokService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Component
 @Transactional
 public class InitKladDataBase implements InitializingBean {
 
-    private final KladService kladService;
+    private final KladokService kladService;
 
-    public InitKladDataBase(KladService kladService) {
+    public InitKladDataBase(KladokService kladService) {
         this.kladService = kladService;
     }
 

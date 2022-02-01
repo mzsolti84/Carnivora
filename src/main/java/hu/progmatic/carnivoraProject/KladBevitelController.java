@@ -15,7 +15,7 @@ import java.util.List;
 public class KladBevitelController {
 
     @Autowired
-    private KladService kladService;
+    private KladokService kladService;
 
     @GetMapping("/carnivoraProject/kladbevitel")
     public String kladStarter(Model model) {

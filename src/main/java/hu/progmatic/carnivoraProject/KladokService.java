@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 
-public class KladService implements InitializingBean {
+public class KladokService implements InitializingBean {
     @Autowired
     private KladRepository repository;
     @Autowired
