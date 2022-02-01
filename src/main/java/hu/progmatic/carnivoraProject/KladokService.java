@@ -10,7 +10,7 @@ import java.util.List;
 
 public class KladokService implements InitializingBean {
     @Autowired
-    private KladRepository repository;
+    private KladokRepository repository;
     @Autowired
     private ProbaKladRepository probaKladRepository;
 

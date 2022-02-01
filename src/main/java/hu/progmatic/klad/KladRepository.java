@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface KladRepository extends JpaRepository<KladEntity, Integer> {
-    KladEntity findByNevEquals(String nev);
+    KladEntity findByNameEquals(String name);
     @Query(
             """
                 select k
