@@ -66,7 +66,6 @@ class CarnivoraServiceTest {
     }
 
     @Test
-    //@Disabled
     @DisplayName("Az latinNev mező egyedi")
     void createUnique() {
         String latinNev = "Tyukusz Tyukusz";
