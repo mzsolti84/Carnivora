@@ -124,7 +124,7 @@ class CarnivoraServiceTest {
     }
 
     @Test
-    @DisplayName("Elem frissítlése")
+    @DisplayName("Elem frissítése")
     void update() {
         FajRecord data = service.getById(fajData.getId());
         data.setNev("Új név");
