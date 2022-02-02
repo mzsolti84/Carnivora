@@ -23,6 +23,7 @@ public class FajRecord {
     @NotEmpty
     String nev;
     @NotEmpty
+    @Column(unique = true)
     String latinNev;
     @Enumerated(EnumType.STRING)
     VeszelyeztetettKategoriak veszelyeztetettBesorolas;
