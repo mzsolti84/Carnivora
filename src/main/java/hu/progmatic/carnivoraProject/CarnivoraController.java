@@ -1,5 +1,7 @@
 package hu.progmatic.carnivoraProject;
 
+import hu.progmatic.klad.KladService;
+import hu.progmatic.klad.ParentKladDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +18,12 @@ public class CarnivoraController {
 
     @Autowired
     private CarnivoraService carnivoraService;
+
+    /*@Autowired
+    private KladokService kladService;*/
+
     @Autowired
-    private KladokService kladService;
+    private KladService kladService;
 
     // RETURN to .HTML-ek ---------------------------------------------------------------------------
 
@@ -107,8 +113,8 @@ public class CarnivoraController {
     }
 
     @ModelAttribute("allKlad")
-    List<ProbaKlad> allKlad() {
-        return kladService.findAllPureNames();
+    List<ParentKladDto> allKlad() {
+        return kladService.findAllParentKlad();
     }
 
     @ModelAttribute("formSpecies")

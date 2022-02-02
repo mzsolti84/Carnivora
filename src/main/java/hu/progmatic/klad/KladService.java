@@ -1,5 +1,6 @@
 package hu.progmatic.klad;
 
+import hu.progmatic.carnivoraProject.ProbaKlad;
 import hu.progmatic.iniklad.InitKladFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,18 @@ public class KladService implements InitializingBean {
                         \\n
                         ]}
                         """;
+    }
+
+    public List<ParentKladDto> findAllParentKlad() {
+        return kladRepository.findAllWithNoChild().stream()
+                .map(this::kladToParentKladDto)
+                .toList();
+    }
+
+    private ParentKladDto kladToParentKladDto(KladEntity klad) {
+        return ParentKladDto.builder()
+                .id(klad.getId())
+                .name(klad.getName())
+                .build();
     }
 }

@@ -178,7 +178,7 @@
                                 <label class="form-label">Ősosztály</label>
                                 <select class="form-select bg-dark text-white" th:field="*{szuloId}">
                                     <option th:selected="${klad.id == formSpecies.szuloId}"
-                                            th:each="klad : ${allKlad}" th:text="${klad.nev}" th:value="${klad.id}"
+                                            th:each="klad : ${allKlad}" th:text="${klad.name}" th:value="${klad.id}"
                                             th:classappend="${#fields.hasErrors('szuloNev')} ? 'is-invalid' : 'is-valid'">
                                     </option>
                                 </select>
