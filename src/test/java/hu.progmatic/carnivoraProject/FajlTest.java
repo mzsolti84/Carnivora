@@ -4,7 +4,6 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.File;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class FajlTest {
     @DisplayName("FajRecord betöltés")
     @BeforeEach
     void setUp() throws URISyntaxException {
-        file = TesztFileTeljesNev.getTeljesNev("TesztCsv/AdatbazisTeszt.csv");
+        file = TesztFileTeljesNev.getTeljesNev("TesztCsv/Adatbazis struktura-Fajok.csv");
     }
 
     @Test
@@ -37,10 +36,22 @@ public class FajlTest {
 
 
     @Test
+    @DisplayName("Listába betölt teszt")
     void darabSzam() {
         List<FajRecord> ujFaj = service.databasefactory(file);
         assertEquals(20, ujFaj.size());
     }
 
-
+    @Test
+    @DisplayName("Helyes információ ellenőrizve")
+    void latinNevTest(){
+        List<FajRecord> ujFaj = service.databasefactory(file);
+        assertEquals(15,ujFaj.get(3).szuloId);
+        assertEquals("Canis lupus",ujFaj.get(3).latinNev);
+        assertEquals("Szürke farkas",ujFaj.get(3).nev);
+        assertEquals(Tureshatar.GENERALISTA,ujFaj.get(3).turesHatar);
+        assertEquals("Felis silvestris catus",ujFaj.get(4).latinNev);
+        assertEquals("Prionodon pardicolor",ujFaj.get(5).latinNev);
+        assertEquals("Tigrispetymegformák",ujFaj.get(5).nev);
+    }
 }

@@ -133,8 +133,8 @@ public class CarnivoraService implements InitializingBean {
                 .orElseThrow();
     }
 
-    public List<FajRecord> databasefactory(String filename) {
-        File file = new File(filename);
+    public List<FajRecord> databasefactory(String filePath) {
+        File file = new File(filePath);
         List<FajRecord> ujFaj = new LinkedList<>();
         try {
             Scanner scanner = new Scanner(file);
@@ -154,11 +154,11 @@ public class CarnivoraService implements InitializingBean {
         Integer id = null;
         Integer szuloId = Integer.parseInt(fajinfo[1]);
         String szuloNev = fajinfo[2];
-        String leiras = fajinfo[3];
-        String nev = fajinfo[4];
-        String latinNev = fajinfo[5];
+        String nev = fajinfo[3];
+        String latinNev = fajinfo[4];
+        String leiras = fajinfo[5];
         VeszelyeztetettKategoriak kategoriak = kategoriaSwitch(fajinfo[6]);
-        Tureshatar tureshatar = Tureshatar.valueOf(fajinfo[7]);
+        Tureshatar tureshatar = turesSwitch(fajinfo[7]);
         String fotoUrl = fajinfo[8];
         String wikiUrl = fajinfo[9];
         FajRecord ujfaj = new FajRecord(id, szuloId, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
@@ -177,6 +177,15 @@ public class CarnivoraService implements InitializingBean {
             case "MÉRSÉKELTEN FENYEGETETT" -> VeszelyeztetettKategoriak.MERSEKELTEN_FENYEGETETT;
             case "NEM FENYEGETETT" -> VeszelyeztetettKategoriak.NEM_FENYEGETETT;
             default -> VeszelyeztetettKategoriak.HAZIASITOTT;
+        };
+    }
+
+    private static Tureshatar turesSwitch(String line){
+        String tures = String.valueOf(line).toUpperCase();
+        return switch (tures){
+            case "SPECIALISTA" -> Tureshatar.SPECIALISTA;
+            case "GENERALISTA" -> Tureshatar.GENERALISTA;
+            default -> Tureshatar.GENERALISTA;
         };
     }
 }
