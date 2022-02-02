@@ -16,6 +16,8 @@ import java.util.Scanner;
 public class CarnivoraService implements InitializingBean {
     @Autowired
     private SpeciesRepository speciesRepository;
+    @Autowired
+    private ProbaKladRepository probaKladRepository;
 
     private final List<FajRecord> initSpecies = List.of(
             new FajRecord(null,
