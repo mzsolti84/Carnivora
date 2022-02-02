@@ -49,7 +49,7 @@ public class CarnivoraService implements InitializingBean {
                     "Felis silvestris catus",
                     VeszelyeztetettKategoriak.HAZIASITOTT,
                     Tureshatar.SPECIALISTA,
-                    "https://static01.nyt.com/images/2021/09/14/science/07CAT-STRIPES/07CAT-STRIPES-superJumbo.jpg",
+                    "https://drive.google.com/file/d/1ZJzdB4u7qMzE5T69N5VkIWbVI2dkupvl/view",
                     "https://hu.wikipedia.org/wiki/Macska"),
             new FajRecord(null,
                     4,
@@ -119,10 +119,9 @@ public class CarnivoraService implements InitializingBean {
     }
 
     public void deleteByIdIfExists(Integer id) {
-      if (speciesRepository.existsById(id)) {
-            speciesRepository.deleteById(id);
-           // FajRecord faj = speciesRepository.getById(id);
-            //speciesRepository.delete(faj);
+        if (speciesRepository.existsById(id)) {
+            FajRecord faj = speciesRepository.getById(id);
+            speciesRepository.delete(faj);
         }
     }
 
