@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 @Service
 @Transactional
@@ -34,13 +38,13 @@ public class CarnivoraService implements InitializingBean {
                     6,
                     "macskaformák alcsaládja",
                     """
-                    A macskák élvezik a meleget és a napsütést, gyakran alszanak napos helyeken. Magasabb hőmérsékleten érzik jól magukat, 
-                    mint az emberek, akik számára a 44,5 °C-nál nagyobb bőrfelszíni hőmérséklet már nehezen elviselhető, míg a macskák akkor 
-                    kezdik kellemetlenül érezni magukat, ha a bőrük 52 °C-ra melegszik. Körülbelül 10 000 évvel ezelőtt kezdett az ember társaságában élni, 
-                    háziasításának első ábrázolása mintegy 4000 éve Egyiptomban történt. Számos kínai rajz bizonyítja, hogy a Távol-Keleten már i. e. 1500 
-                    körül ismerték a macskát, mely az Egyiptommal ősidők óta kapcsolatban álló Indiából kerülhetett oda, ahol vallási ceremóniáknál kapott 
-                    fontos szerepet. Kezdetben a gazdagok státusszimbóluma volt, majd a későbbiekben az értékes selyem kártevőktől való megvédéséhez használták fel. 
-                    Japánban a szent iratok megóvásában nyújtott segítséget.""",
+                            A macskák élvezik a meleget és a napsütést, gyakran alszanak napos helyeken. Magasabb hőmérsékleten érzik jól magukat, 
+                            mint az emberek, akik számára a 44,5 °C-nál nagyobb bőrfelszíni hőmérséklet már nehezen elviselhető, míg a macskák akkor 
+                            kezdik kellemetlenül érezni magukat, ha a bőrük 52 °C-ra melegszik. Körülbelül 10 000 évvel ezelőtt kezdett az ember társaságában élni, 
+                            háziasításának első ábrázolása mintegy 4000 éve Egyiptomban történt. Számos kínai rajz bizonyítja, hogy a Távol-Keleten már i. e. 1500 
+                            körül ismerték a macskát, mely az Egyiptommal ősidők óta kapcsolatban álló Indiából kerülhetett oda, ahol vallási ceremóniáknál kapott 
+                            fontos szerepet. Kezdetben a gazdagok státusszimbóluma volt, majd a későbbiekben az értékes selyem kártevőktől való megvédéséhez használták fel. 
+                            Japánban a szent iratok megóvásában nyújtott segítséget.""",
                     "Házimacska",
                     "Felis silvestris catus",
                     VeszelyeztetettKategoriak.HAZIASITOTT,
@@ -129,5 +133,36 @@ public class CarnivoraService implements InitializingBean {
     public FajRecord findById(Integer id) {
         return speciesRepository.findById(id)
                 .orElseThrow();
+    }
+
+    public List<FajRecord> databasefactory(String filename) {
+        File file = new File(filename);
+        List<FajRecord> ujFaj = new LinkedList<>();
+        try {
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                String faj = scanner.nextLine();
+                ujFaj.add(getFajRecord(faj));
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Nincs meg a file");
+        }
+        return ujFaj;
+    }
+
+    private static FajRecord getFajRecord(String faj) {
+        String[] fajinfo = faj.split("tabulator");
+        Integer id = null;
+        Integer szuloId = Integer.valueOf(fajinfo[1]);
+        String szuloNev = fajinfo[2];
+        String leiras = fajinfo[3];
+        String nev = fajinfo[4];
+        String latinNev = fajinfo[5];
+        VeszelyeztetettKategoriak kategoriak = VeszelyeztetettKategoriak.valueOf(fajinfo[6]);
+        Tureshatar tureshatar = Tureshatar.valueOf(fajinfo[7]);
+        String fotoUrl = fajinfo[8];
+        String wikiUrl = fajinfo[9];
+        FajRecord ujfaj = new FajRecord(id, szuloId, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
+        return ujfaj;
     }
 }
