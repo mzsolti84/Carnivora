@@ -120,8 +120,7 @@ public class CarnivoraService implements InitializingBean {
 
     public void deleteByIdIfExists(Integer id) {
         if (speciesRepository.existsById(id)) {
-            FajRecord faj = speciesRepository.getById(id);
-            speciesRepository.delete(faj);
+            speciesRepository.deleteById(id);
         }
     }
 

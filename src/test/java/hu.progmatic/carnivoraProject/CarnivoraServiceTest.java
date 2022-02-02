@@ -23,10 +23,10 @@ class CarnivoraServiceTest {
         //fajData.setLatinNev("Canis lupus sp.");
     }
 
-    @AfterEach
-    void tearDown() {
-        service.deleteByIdIfExists(fajData.getId());
-    }
+    //@AfterEach
+    //void tearDown() {
+    //    service.deleteByIdIfExists(fajData.getId());
+    //}
 
     @Test
     @DisplayName("Elem létrehozása")
