@@ -139,6 +139,7 @@ public class CarnivoraService implements InitializingBean {
         List<FajRecord> ujFaj = new LinkedList<>();
         try {
             Scanner scanner = new Scanner(file);
+            scanner.nextLine();
             while (scanner.hasNextLine()) {
                 String faj = scanner.nextLine();
                 ujFaj.add(getFajRecord(faj));
@@ -157,11 +158,26 @@ public class CarnivoraService implements InitializingBean {
         String leiras = fajinfo[3];
         String nev = fajinfo[4];
         String latinNev = fajinfo[5];
-        VeszelyeztetettKategoriak kategoriak = VeszelyeztetettKategoriak.valueOf(fajinfo[6]);
+        VeszelyeztetettKategoriak kategoriak = kategoriaSwitch(fajinfo[6]);
         Tureshatar tureshatar = Tureshatar.valueOf(fajinfo[7]);
         String fotoUrl = fajinfo[8];
         String wikiUrl = fajinfo[9];
         FajRecord ujfaj = new FajRecord(id, szuloId, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
         return ujfaj;
+    }
+
+    private static VeszelyeztetettKategoriak kategoriaSwitch(String line) {
+        String value = String.valueOf(line).toUpperCase();
+        return switch (value) {
+            case "KIHALT" -> VeszelyeztetettKategoriak.KIHALT;
+            case "VADON KIHALT" -> VeszelyeztetettKategoriak.VADON_KIHALT;
+            case "FENYEGETETT" -> VeszelyeztetettKategoriak.FENYEGETETT;
+            case "SÚLYOSAN VESZÉLYEZTETETT" -> VeszelyeztetettKategoriak.SULYOSAN_VESZELYEZTETETT;
+            case "VESZÉLYEZTETETT" -> VeszelyeztetettKategoriak.VESZELYEZTETETT;
+            case "SEBEZHETO" -> VeszelyeztetettKategoriak.SEBEZHETO;
+            case "MÉRSÉKELTEN FENYEGETETT" -> VeszelyeztetettKategoriak.MERSEKELTEN_FENYEGETETT;
+            case "NEM FENYEGETETT" -> VeszelyeztetettKategoriak.NEM_FENYEGETETT;
+            default -> VeszelyeztetettKategoriak.HAZIASITOTT;
+        };
     }
 }

@@ -1,6 +1,8 @@
 package hu.progmatic.carnivoraProject;
 
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -9,9 +11,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@SpringBootTest
 public class FajlTest {
-    CarnivoraService service;
-    String file;
+
+    @Autowired
+    private CarnivoraService service;
+    private String file;
 
     @DisplayName("FajRecord betöltés")
     @BeforeEach

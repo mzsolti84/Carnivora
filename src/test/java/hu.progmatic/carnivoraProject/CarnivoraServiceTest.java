@@ -20,7 +20,7 @@ class CarnivoraServiceTest {
     @BeforeEach
     void setUp() {
         fajData = service.getByLatinNev("Canis lupus");
-        fajData.setLatinNev("Canis lupus sp.");
+        //fajData.setLatinNev("Canis lupus sp.");
     }
 
     @AfterEach
@@ -66,7 +66,7 @@ class CarnivoraServiceTest {
     }
 
     @Test
-    @Disabled
+    //@Disabled
     @DisplayName("Az latinNev mező egyedi")
     void createUnique() {
         String latinNev = "Tyukusz Tyukusz";
@@ -103,7 +103,7 @@ class CarnivoraServiceTest {
         FajRecord read = service.findById(fajData.getId());
         assertNotNull(read.getId());
         assertEquals("Szürke farkas", read.getNev());
-        assertEquals("Canis lupus sp.", read.getLatinNev());
+        assertEquals("Canis lupus", read.getLatinNev());
         assertEquals(Tureshatar.GENERALISTA, read.turesHatar);
     }
 
@@ -121,5 +121,14 @@ class CarnivoraServiceTest {
             exception = e;
         }
         assertNotNull(exception);
+    }
+
+    @Test
+    @DisplayName("Elem frissítlése")
+    void update() {
+        FajRecord data = service.getById(fajData.getId());
+        data.setNev("Új név");
+        FajRecord read = service.findById(data.getId());
+        assertEquals("Új név", read.getNev());
     }
 }
