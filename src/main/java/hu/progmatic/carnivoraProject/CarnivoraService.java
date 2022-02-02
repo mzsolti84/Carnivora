@@ -16,8 +16,6 @@ import java.util.Scanner;
 public class CarnivoraService implements InitializingBean {
     @Autowired
     private SpeciesRepository speciesRepository;
-    @Autowired
-    private ProbaKladRepository probaKladRepository;
 
     private final List<FajRecord> initSpecies = List.of(
             new FajRecord(null,
@@ -120,8 +118,7 @@ public class CarnivoraService implements InitializingBean {
 
     public void deleteByIdIfExists(Integer id) {
         if (speciesRepository.existsById(id)) {
-            FajRecord faj = speciesRepository.getById(id);
-            speciesRepository.delete(faj);
+            speciesRepository.deleteById(id);
         }
     }
 
