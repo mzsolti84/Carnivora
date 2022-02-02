@@ -25,4 +25,6 @@ class KladServiceTest {
                         "cibetmacskafélék családja",
                         "pálmacibetfélék családja");
     }
+
+
 }
