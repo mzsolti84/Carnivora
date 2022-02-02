@@ -78,6 +78,4 @@ class CarnivoraServiceTest {
         assertNotNull(exception);
     }
 
-    @Test
-    @DisplayName("FajRecord betöltés")
 }
