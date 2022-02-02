@@ -150,9 +150,9 @@ public class CarnivoraService implements InitializingBean {
     }
 
     private static FajRecord getFajRecord(String faj) {
-        String[] fajinfo = faj.split("tabulator");
+        String[] fajinfo = faj.split(";");
         Integer id = null;
-        Integer szuloId = Integer.valueOf(fajinfo[1]);
+        Integer szuloId = Integer.parseInt(fajinfo[1]);
         String szuloNev = fajinfo[2];
         String leiras = fajinfo[3];
         String nev = fajinfo[4];
