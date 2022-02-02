@@ -29,10 +29,10 @@ public class KladService implements InitializingBean {
     public KladWithChildrenDto getKladDtoByName(String name) {
         KladEntity entity = kladRepository.findByNameEquals(name);
 
-        return buildDto(entity);
+        return buildKladWithChildrenDto(entity);
     }
 
-    private KladWithChildrenDto buildDto(KladEntity entity) {
+    private KladWithChildrenDto buildKladWithChildrenDto(KladEntity entity) {
         return KladWithChildrenDto.builder()
                 .name(entity.getName())
                 .latinName(entity.getLatinName())
@@ -40,10 +40,15 @@ public class KladService implements InitializingBean {
                 .parent(entity.getParent().getName())
                 .children(
                         entity.getChildren().stream()
-                                .map(this::buildDto)
+                                .map(this::buildKladWithChildrenDto)
                                 .toList()
                 )
                 .build();
+    }
+
+    public List<KladWithChildrenDto> findAllWithNoChild() {
+        List<KladEntity> noChildrens = kladRepository.findAllWithNoChild();
+        return noChildrens.stream().map(this::buildKladWithChildrenDto).toList();
     }
 
     public String getJsonFromKladEntityList(List<KladEntity> allKladEntity) {

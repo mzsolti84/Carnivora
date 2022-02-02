@@ -1,4 +1,4 @@
-package hu.progmatic.carnivoraProject;
+package hu.progmatic.klad;
 
 import java.net.URISyntaxException;
 import java.net.URL;
