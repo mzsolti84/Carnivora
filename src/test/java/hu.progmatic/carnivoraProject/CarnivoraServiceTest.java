@@ -15,19 +15,6 @@ class CarnivoraServiceTest {
     @Autowired
     CarnivoraService service;
 
-    private FajRecord fajData;
-
-    @BeforeEach
-    void setUp() {
-        fajData = service.getByLatinNev("Canis lupus");
-        //fajData.setLatinNev("Canis lupus sp.");
-    }
-
-    //@AfterEach
-    //void tearDown() {
-    //    service.deleteByIdIfExists(fajData.getId());
-    //}
-
     @Test
     @DisplayName("Elem létrehozása")
     void create() {
@@ -97,38 +84,63 @@ class CarnivoraServiceTest {
                 .contains("Unique index or primary key violation");
     }
 
-    @Test
-    @DisplayName("Elem lekérdezése id alapján")
-    void getId() {
-        FajRecord read = service.findById(fajData.getId());
-        assertNotNull(read.getId());
-        assertEquals("Szürke farkas", read.getNev());
-        assertEquals("Canis lupus", read.getLatinNev());
-        assertEquals(Tureshatar.GENERALISTA, read.turesHatar);
-    }
+    @Nested
+    @DisplayName("Teszt elemekkel")
+    class TesztElemmelTest {
 
-    @Test
-    @DisplayName("Elem törlése")
-    void delete() {
-        FajRecord read = service.findById(fajData.getId());
-        assertNotNull(read.getId());
-        service.deleteByIdIfExists(fajData.getId());
-        Exception exception = null;
-        try {
-            FajRecord readAfterDelete = service.findById(fajData.getId());
-            assertNotNull(readAfterDelete.getLatinNev());
-        } catch (Exception e) {
-            exception = e;
+        private FajRecord fajData;
+
+        @BeforeEach
+        void setUp() {
+            FajRecord fajDataInit = FajRecord.builder()
+                    .id(null)
+                    .nev("Szürke farkas")
+                    .latinNev("Canis lupus sp.")
+                    .turesHatar(Tureshatar.GENERALISTA)
+                    .leiras("Ordas Farkas")
+                    .build();
+
+            fajData = service.save(fajDataInit);
         }
-        assertNotNull(exception);
-    }
 
-    @Test
-    @DisplayName("Elem frissítése")
-    void update() {
-        FajRecord data = service.getById(fajData.getId());
-        data.setNev("Új név");
-        FajRecord read = service.findById(data.getId());
-        assertEquals("Új név", read.getNev());
+        @AfterEach
+        void tearDown() {
+            service.deleteByIdIfExists(fajData.getId());
+        }
+
+        @Test
+        @DisplayName("Elem lekérdezése id alapján")
+        void getId() {
+            FajRecord read = service.findById(fajData.getId());
+            assertNotNull(read.getId());
+            assertEquals("Szürke farkas", read.getNev());
+            assertEquals("Canis lupus sp.", read.getLatinNev());
+            assertEquals(Tureshatar.GENERALISTA, read.turesHatar);
+        }
+
+        @Test
+        @DisplayName("Elem törlése")
+        void delete() {
+            FajRecord read = service.findById(fajData.getId());
+            assertNotNull(read.getId());
+            service.deleteByIdIfExists(fajData.getId());
+            Exception exception = null;
+            try {
+                FajRecord readAfterDelete = service.findById(fajData.getId());
+                assertNotNull(readAfterDelete.getLatinNev());
+            } catch (Exception e) {
+                exception = e;
+            }
+            assertNotNull(exception);
+        }
+
+        @Test
+        @DisplayName("Elem frissítése")
+        void update() {
+            FajRecord data = service.getById(fajData.getId());
+            data.setNev("Új név");
+            FajRecord read = service.findById(data.getId());
+            assertEquals("Új név", read.getNev());
+        }
     }
 }
