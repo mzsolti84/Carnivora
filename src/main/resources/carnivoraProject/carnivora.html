@@ -11,6 +11,30 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Fajok</title>
+<style>
+    table {
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+    }
+
+    tbody {
+        height: 350px;
+        overflow-y: scroll;
+        display:block;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+    }
+
+    tr {
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+    }
+</style>
 </head>
 <body style="background-color:Black;">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -20,11 +44,11 @@
 <br>
 
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
-    <table class="table table-dark table-striped">
+    <table class="table table-dark table-striped table-responsive">
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Szülőkategória</th>
+            <th scope="col">Klád</th>
             <th scope="col">Név</th>
             <th scope="col">Latin név</th>
             <th scope="col">Leírás</th>
@@ -42,8 +66,8 @@
             <td th:text="${species.szuloNev}">szuloNev</td>
             <td th:text="${species.nev}">nev</td>
             <td th:text="${species.latinNev}">latinNev</td>
-            <td th:text="${#strings.abbreviate(species.leiras,100)}">leiras</td>
-            <td th:text="${species.veszelyeztetettBesorolas}">veszelyeztetettBesorolas</td>
+            <td th:text="${#strings.abbreviate(species.leiras,80)}">leiras</td>
+            <td th:text="${#strings.abbreviate(species.veszelyeztetettBesorolas,12)}">veszelyeztetettBesorolas</td>
             <td th:text="${species.turesHatar}">turesHatar</td>
             <td>
                 <div class="row">

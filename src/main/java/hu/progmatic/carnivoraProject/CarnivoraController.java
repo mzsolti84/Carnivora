@@ -72,6 +72,11 @@ public class CarnivoraController {
         return "carnivoraProject/kozosos";
     }
 
+    @RequestMapping("/carnivoraProject/kezdolap")
+    public String kezdolap() {
+        return "carnivoraProject/kezdolap";
+    }
+
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     @PostMapping("/carnivoraProject/carnivora/{id}")
