@@ -1,5 +1,6 @@
 package hu.progmatic.carnivoraProject;
 
+import hu.progmatic.carnivoraProject.user.TesztFileTeljesNev;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -83,9 +85,12 @@ public class CarnivoraService implements InitializingBean {
     );
 
     @Override
-    public void afterPropertiesSet() {
+    public void afterPropertiesSet() throws URISyntaxException {
         if (speciesRepository.findAll().isEmpty()) {
-            speciesRepository.saveAll(initSpecies);
+            //speciesRepository.saveAll(initSpecies);
+            String file = TesztFileTeljesNev.getTeljesNev("TesztCsv/Adatbazis struktura-Fajok.csv");
+           List<FajRecord> ujFaj = databasefactory(file);
+            speciesRepository.saveAll(ujFaj);
         }
     }
 

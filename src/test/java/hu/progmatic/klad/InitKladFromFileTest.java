@@ -1,4 +1,4 @@
-package hu.progmatic.carnivoraProject;
+package hu.progmatic.klad;
 
 import hu.progmatic.iniklad.InitKladFromFileFactory;
 import hu.progmatic.iniklad.KladURISyntaxException;

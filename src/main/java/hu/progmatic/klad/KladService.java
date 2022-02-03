@@ -1,5 +1,6 @@
 package hu.progmatic.klad;
 
+import hu.progmatic.carnivoraProject.ProbaKlad;
 import hu.progmatic.iniklad.InitKladFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,10 @@ public class KladService implements InitializingBean {
     public KladWithChildrenDto getKladDtoByName(String name) {
         KladEntity entity = kladRepository.findByNameEquals(name);
 
-        return buildDto(entity);
+        return buildKladWithChildrenDto(entity);
     }
 
-    private KladWithChildrenDto buildDto(KladEntity entity) {
+    private KladWithChildrenDto buildKladWithChildrenDto(KladEntity entity) {
         return KladWithChildrenDto.builder()
                 .name(entity.getName())
                 .latinName(entity.getLatinName())
@@ -40,10 +41,15 @@ public class KladService implements InitializingBean {
                 .parent(entity.getParent().getName())
                 .children(
                         entity.getChildren().stream()
-                                .map(this::buildDto)
+                                .map(this::buildKladWithChildrenDto)
                                 .toList()
                 )
                 .build();
+    }
+
+    public List<KladWithChildrenDto> findAllWithNoChild() {
+        List<KladEntity> noChildrens = kladRepository.findAllWithNoChild();
+        return noChildrens.stream().map(this::buildKladWithChildrenDto).toList();
     }
 
     public String getJsonFromKladEntityList(List<KladEntity> allKladEntity) {
@@ -60,5 +66,18 @@ public class KladService implements InitializingBean {
                         \\n
                         ]}
                         """;
+    }
+
+    public List<ParentKladDto> findAllParentKlad() {
+        return kladRepository.findAllWithNoChild().stream()
+                .map(this::kladToParentKladDto)
+                .toList();
+    }
+
+    private ParentKladDto kladToParentKladDto(KladEntity klad) {
+        return ParentKladDto.builder()
+                .id(klad.getId())
+                .name(klad.getName())
+                .build();
     }
 }
