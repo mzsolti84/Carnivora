@@ -93,7 +93,7 @@
                     <form th:action="@{'/carnivoraProject/carnivora/{id}'(id=${formSpecies.id})}"
                           method="post" th:object="${formSpecies}">
                         <fieldset>
-                            <legend class="container-fluid text-center d-none d-sm-block">ÚJ FAJ FELVÉTELE
+                            <legend class="container-fluid text-center d-none d-sm-block">ÚJ FAJ FELVÉTELE/MÓDOSÍTÁS
                             </legend>
                             <div class="container-fluid">
                                 <label class="form-label">ID</label>
@@ -176,9 +176,9 @@
                             <br>
                             <div class="container-fluid">
                                 <label class="form-label">Ősosztály</label>
-                                <select class="form-select bg-dark text-white" th:field="*{szuloId}">
-                                    <option th:selected="${klad.id == formSpecies.szuloId}"
-                                            th:each="klad : ${allKlad}" th:text="${klad.name}" th:value="${klad.id}"
+                                <select class="form-select bg-dark text-white" th:field="*{szuloNev}">
+                                    <option th:selected="${klad.name == formSpecies.szuloNev}"
+                                            th:each="klad : ${allKlad}" th:text="${klad.name}" th:value="${klad.name}"
                                             th:classappend="${#fields.hasErrors('szuloNev')} ? 'is-invalid' : 'is-valid'">
                                     </option>
                                 </select>

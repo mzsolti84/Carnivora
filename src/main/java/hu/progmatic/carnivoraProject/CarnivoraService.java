@@ -123,6 +123,7 @@ public class CarnivoraService implements InitializingBean {
         return probaKladRepository.getById(id).getNev();
     }
 
+
     public void deleteByIdIfExists(Integer id) {
         if (speciesRepository.existsById(id)) {
             speciesRepository.deleteById(id);
