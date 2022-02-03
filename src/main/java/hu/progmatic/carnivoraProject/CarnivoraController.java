@@ -67,6 +67,11 @@ public class CarnivoraController {
         return kartya();
     }
 
+    @RequestMapping("/carnivoraProject/kozosos")
+    public String kozosOS() {
+        return "carnivoraProject/kozosos";
+    }
+
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     @PostMapping("/carnivoraProject/carnivora/{id}")
