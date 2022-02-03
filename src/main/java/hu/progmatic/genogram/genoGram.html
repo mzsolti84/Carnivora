@@ -23,7 +23,7 @@
             myDiagram =
                 $(go.Diagram, "myDiagramDiv", // must be the ID or reference to div
                     {
-                        maxSelectionCount: 0, // users can select only one part at a time
+                        maxSelectionCount: 1, // users can select only one part at a time
                         "clickCreatingTool.insertPart": function (loc) {  // scroll to the new node
                             var node = go.ClickCreatingTool.prototype.insertPart.call(this, loc);
                             if (node !== null) {
@@ -61,6 +61,13 @@
                     if (idx >= 0) document.title = document.title.substr(0, idx);
                 }
             });
+
+            myDiagram.addDiagramListener("ObjectDoubleClicked", (e) => {
+                const key = e.diagram.selection.first().key
+                console.log(key)
+                window.open(`https://localhost/${key}`, "_self");
+
+            })
 
             // manage boss info manually when a node or link is deleted from the diagram
             myDiagram.addDiagramListener("SelectionDeleting", function (e) {
@@ -109,9 +116,10 @@
 
             // when a node is double-clicked, add a child to it
             function nodeDoubleClick(e, obj) {
+                console.log(e);
+                console.log(obj);
                 var clicked = obj.part;
                 if (clicked !== null) {
-                    window.open("https://hu.wikipedia.org/wiki/Macskaalkat%C3%BAak", 'popup', 'width=800,height=600');
 
                     // Ezzel lehet kivenni az objektum adatait
                     // window.alert(JSON.stringify(obj.ob));
@@ -152,7 +160,7 @@
             // define the Node template
             myDiagram.nodeTemplate =
                 $(go.Node, "Auto",
-                    {doubleClick: nodeDoubleClick},
+                    // {doubleClick: nodeDoubleClick},
                     // for sorting, have the Node.text be the data.name
                     new go.Binding("text", "name"),
                     // bind the Part.layerName to control the Node's layer depending on whether it isSelected

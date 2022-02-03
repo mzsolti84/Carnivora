@@ -81,7 +81,7 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
+            //formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
             carnivoraService.save(formSpecies);
             refreshAllSpecies(model);
             clearFormItem(model);
@@ -95,7 +95,7 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
+            //formSpecies.setSzuloNev(formSpecies.getSzuloNev());
             carnivoraService.create(formSpecies);
             refreshAllSpecies(model);
             clearFormItem(model);
