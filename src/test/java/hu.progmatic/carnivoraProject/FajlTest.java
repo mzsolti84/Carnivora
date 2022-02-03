@@ -1,6 +1,6 @@
 package hu.progmatic.carnivoraProject;
 
-import hu.progmatic.klad.TesztFileTeljesNev;
+import hu.progmatic.carnivoraProject.user.TesztFileTeljesNev;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
