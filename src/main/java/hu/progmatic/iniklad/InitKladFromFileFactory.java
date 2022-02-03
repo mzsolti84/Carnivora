@@ -1,43 +1,48 @@
 package hu.progmatic.iniklad;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
 import hu.progmatic.klad.KladEntity;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class InitKladFromFileFactory {
 
-    private String fileWholeName;
-    private List<KladEntity> klads;
+    private final List<KladEntity> klads;
 
-    public InitKladFromFileFactory(String fileWholeName) {
+    public InitKladFromFileFactory(String fileName) {
+        String fileWholeName;
         try {
-            this.fileWholeName = ResourceKladCsv.getWholePath(fileWholeName);
+            fileWholeName = ResourceKladCsv.getWholePath(fileName);
         } catch (URISyntaxException e) {
             throw new KladURISyntaxException(e.getMessage());
         }
         this.klads = new ArrayList<>();
-        File file = new File(this.fileWholeName);
-        try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8)) {
-            scanner.nextLine();
-            while (scanner.hasNext()) {
-                fileRowToEntity(scanner.nextLine());
+        //File file = new File(this.fileWholeName);
+        try (CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(fileWholeName), StandardCharsets.UTF_8))) {
+            //CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(this.fileWholeName), StandardCharsets.UTF_8));
+            csv.readNext();
+            String[] line;
+            while ((line = csv.readNext()) != null) {
+                fileRowToEntity(line);
             }
         } catch (IOException e) {
-            throw new KladFileException("File not exist");
+            throw new KladFileException("File not exist!");
+        } catch (CsvValidationException e) {
+            throw new KladFileException("File is not standard!");
         }
 
 
     }
 
 
-    private void fileRowToEntity(String fileRow) {
-        String[] kladProperties = fileRow.split(",");
+    private void fileRowToEntity(String[] kladProperties) {
+        //String[] kladProperties = fileRow.split(",");
         String name = kladProperties[0].equals("null") ? null : kladProperties[0];
         String latinName = kladProperties[1];
         String parent = kladProperties[2].equals("null") ? null : kladProperties[2];
