@@ -129,7 +129,7 @@ public class CarnivoraController {
 
     @ModelAttribute("formSpecies")
     public FajRecord formSpecies() {
-        return carnivoraService.empty();
+        return new FajRecord();
     }
 
     // MODEL MÓDOSÍTÓK -------------------------------------------------------------------------------

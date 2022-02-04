@@ -5,7 +5,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
@@ -14,20 +13,10 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-@Transactional
 public class CarnivoraService implements InitializingBean {
 
     @Autowired
     private SpeciesRepository speciesRepository;
-
-    @Override
-    public void afterPropertiesSet() throws URISyntaxException {
-        if (speciesRepository.findAll().isEmpty()) {
-            String file = GetWholePathOfResource.getWholePath("faj.csv");
-           List<FajRecord> ujFaj = databasefactory(file);
-            speciesRepository.saveAll(ujFaj);
-        }
-    }
 
     public List<FajRecord> findAll() {
         return speciesRepository.findAll();
@@ -56,16 +45,12 @@ public class CarnivoraService implements InitializingBean {
         }
     }
 
-    public FajRecord empty() {
-        return new FajRecord();
-    }
-
     public FajRecord findById(Integer id) {
         return speciesRepository.findById(id)
                 .orElseThrow();
     }
 
-    public List<FajRecord> databasefactory(String filePath) {
+    public List<FajRecord> databaseFactory(String filePath) {
         File file = new File(filePath);
         List<FajRecord> ujFaj = new LinkedList<>();
         try {
@@ -112,12 +97,22 @@ public class CarnivoraService implements InitializingBean {
         };
     }
 
-    private static Tureshatar turesSwitch(String line){
+    private static Tureshatar turesSwitch(String line) {
         String tures = String.valueOf(line).toUpperCase();
-        return switch (tures){
+        return switch (tures) {
             case "SPECIALISTA" -> Tureshatar.SPECIALISTA;
             case "GENERALISTA" -> Tureshatar.GENERALISTA;
             default -> Tureshatar.GENERALISTA;
         };
     }
+
+    @Override
+    public void afterPropertiesSet() throws URISyntaxException {
+        if (speciesRepository.findAll().isEmpty()) {
+            String file = GetWholePathOfResource.getWholePath("faj.csv");
+            List<FajRecord> ujFaj = databaseFactory(file);
+            speciesRepository.saveAll(ujFaj);
+        }
+    }
+
 }

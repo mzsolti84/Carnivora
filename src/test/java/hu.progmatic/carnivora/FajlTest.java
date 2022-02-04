@@ -28,7 +28,7 @@ public class FajlTest {
     void throwExceptionOnInvalidName() {
         RuntimeException exception = null;
         try {
-            service.databasefactory("Nem Létező fájl");
+            service.databaseFactory("Nem Létező fájl");
         } catch (RuntimeException e) {
             exception = e;
         }
@@ -39,14 +39,14 @@ public class FajlTest {
     @Test
     @DisplayName("Listába betölt teszt")
     void darabSzam() {
-        List<FajRecord> ujFaj = service.databasefactory(file);
+        List<FajRecord> ujFaj = service.databaseFactory(file);
         assertEquals(20, ujFaj.size());
     }
 
     @Test
     @DisplayName("Helyes információ ellenőrizve")
     void factoryTest() {
-        List<FajRecord> ujFaj = service.databasefactory(file);
+        List<FajRecord> ujFaj = service.databaseFactory(file);
         assertEquals(15, ujFaj.get(3).szuloId);
         assertEquals("Canis lupus", ujFaj.get(3).latinNev);
         assertEquals("Szürke farkas", ujFaj.get(3).nev);
