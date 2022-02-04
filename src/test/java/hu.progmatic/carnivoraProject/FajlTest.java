@@ -21,7 +21,7 @@ public class FajlTest {
     @DisplayName("FajRecord betöltés")
     @BeforeEach
     void setUp() throws URISyntaxException {
-        file = TesztFileTeljesNev.getTeljesNev("TesztCsv/Adatbazis struktura-Fajok.csv");
+        file = TesztFileTeljesNev.getTeljesNev("AdatbazisFajlok/Adatbazis struktura-Fajok.csv");
     }
 
     @Test
@@ -45,7 +45,7 @@ public class FajlTest {
 
     @Test
     @DisplayName("Helyes információ ellenőrizve")
-    void latinNevTest(){
+    void factoryTest(){
         List<FajRecord> ujFaj = service.databasefactory(file);
         assertEquals(15,ujFaj.get(3).szuloId);
         assertEquals("Canis lupus",ujFaj.get(3).latinNev);
@@ -53,6 +53,6 @@ public class FajlTest {
         assertEquals(Tureshatar.GENERALISTA,ujFaj.get(3).turesHatar);
         assertEquals("Felis silvestris catus",ujFaj.get(4).latinNev);
         assertEquals("Prionodon pardicolor",ujFaj.get(5).latinNev);
-        assertEquals("Tigrispetymegformák",ujFaj.get(5).nev);
+        assertEquals("Foltos tigrispetymeg",ujFaj.get(5).nev);
     }
 }

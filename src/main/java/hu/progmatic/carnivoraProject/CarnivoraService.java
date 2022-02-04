@@ -88,7 +88,7 @@ public class CarnivoraService implements InitializingBean {
     public void afterPropertiesSet() throws URISyntaxException {
         if (speciesRepository.findAll().isEmpty()) {
             //speciesRepository.saveAll(initSpecies);
-            String file = TesztFileTeljesNev.getTeljesNev("TesztCsv/Adatbazis struktura-Fajok.csv");
+            String file = TesztFileTeljesNev.getTeljesNev("AdatbazisFajlok/Adatbazis struktura-Fajok.csv");
            List<FajRecord> ujFaj = databasefactory(file);
             speciesRepository.saveAll(ujFaj);
         }
