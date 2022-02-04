@@ -21,7 +21,7 @@ public class CarnivoraService implements InitializingBean {
     @Autowired
     private ProbaKladRepository probaKladRepository;
 
-    private final List<FajRecord> initSpecies = List.of(
+   /* private final List<FajRecord> initSpecies = List.of(
             new FajRecord(null,
                     4,
                     "madagaszkári cibetmacskafélék családja",
@@ -82,13 +82,13 @@ public class CarnivoraService implements InitializingBean {
                     "https://upload.wikimedia.org/wikipedia/commons/5/5f/Kolm%C3%A5rden_Wolf.jpg",
                     "https://hu.wikipedia.org/wiki/Sz%C3%BCrke_farkas")
 
-    );
+    ); */
 
     @Override
     public void afterPropertiesSet() throws URISyntaxException {
         if (speciesRepository.findAll().isEmpty()) {
             //speciesRepository.saveAll(initSpecies);
-            String file = TesztFileTeljesNev.getTeljesNev("AdatbazisFajlok/Adatbazis struktura-Fajok.csv");
+            String file = TesztFileTeljesNev.getTeljesNev("AdatbazisFajlok/Adatbazis struktura - Fajszabvany.csv");
            List<FajRecord> ujFaj = databasefactory(file);
             speciesRepository.saveAll(ujFaj);
         }
@@ -156,17 +156,17 @@ public class CarnivoraService implements InitializingBean {
     }
 
     private static FajRecord getFajRecord(String faj) {
-        String[] fajinfo = faj.split(";");
+        String[] fajinfo = faj.split(",");
         Integer id = null;
-        Integer szuloId = Integer.parseInt(fajinfo[1]);
-        String szuloNev = fajinfo[2];
-        String nev = fajinfo[3];
-        String latinNev = fajinfo[4];
-        String leiras = fajinfo[5];
-        VeszelyeztetettKategoriak kategoriak = kategoriaSwitch(fajinfo[6]);
-        Tureshatar tureshatar = turesSwitch(fajinfo[7]);
-        String fotoUrl = fajinfo[8];
-        String wikiUrl = fajinfo[9];
+        Integer szuloId = Integer.parseInt(fajinfo[0]);
+        String szuloNev = fajinfo[1];
+        String nev = fajinfo[2];
+        String latinNev = fajinfo[3];
+        String leiras = fajinfo[4];
+        VeszelyeztetettKategoriak kategoriak = kategoriaSwitch(fajinfo[5]);
+        Tureshatar tureshatar = turesSwitch(fajinfo[6]);
+        String fotoUrl = fajinfo[7];
+        String wikiUrl = fajinfo[8];
         FajRecord ujfaj = new FajRecord(id, szuloId, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
         return ujfaj;
     }
