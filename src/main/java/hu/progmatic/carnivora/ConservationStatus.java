@@ -1,6 +1,6 @@
 package hu.progmatic.carnivora;
 
-public enum VeszelyeztetettKategoriak {
+public enum ConservationStatus {
     KIHALT,
     VADON_KIHALT,
     FENYEGETETT,

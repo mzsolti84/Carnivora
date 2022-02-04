@@ -5,8 +5,8 @@ import hu.progmatic.klad.ParentKladDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,25 +17,22 @@ public class CarnivoraController {
     // AUTOWIRED-ek  --------------------------------------------------------------------------------
 
     @Autowired
-    private CarnivoraService carnivoraService;
-
-    /*@Autowired
-    private KladokService kladService;*/
+    private SpeciesService speciesService;
 
     @Autowired
     private KladService kladService;
 
     // RETURN to .HTML-ek ---------------------------------------------------------------------------
 
-    private String carnivora() {
+    private String goToCarnivora() {
         return "carnivora/carnivora";
     }
 
-    private String adatlap() {
+    private String goToDataSheet() {
         return "carnivora/carnivoraAdatlap";
     }
 
-    private String kartya() {
+    private String goToSearchResultCards() {
         return "carnivora/talalatiKartyak";
     }
 
@@ -43,37 +40,37 @@ public class CarnivoraController {
 
     @RequestMapping("/")
     public String species() {
-        return carnivora();
+        return goToCarnivora();
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}")
-    public String szerkeszt(@PathVariable Integer id, Model model) {
-        FajRecord formSpecies = carnivoraService.getById(id);
+    public String editSpecies(@PathVariable Integer id, Model model) {
+        Species formSpecies = speciesService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
-        return carnivora();
+        return goToCarnivora();
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}/adatlap")
-    public String adatlapKiir(@PathVariable Integer id, Model model) {
-        FajRecord formSpecies = carnivoraService.getById(id);
+    public String getFormSpeciesForDataSheet(@PathVariable Integer id, Model model) {
+        Species formSpecies = speciesService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
-        return adatlap();
+        return "carnivora/carnivoraAdatlap";
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}/TalalatiKartyak")
-    public String kartyaKiIr(@PathVariable Integer id, Model model) {
-        FajRecord formSpecies = carnivoraService.getById(id);
+    public String getFormSpeciesForSearchResultCards(@PathVariable Integer id, Model model) {
+        Species formSpecies = speciesService.getById(id);
         model.addAttribute(formSpecies);
-        return kartya();
+        return goToSearchResultCards();
     }
 
     @RequestMapping("/carnivoraProject/kozosos")
-    public String kozosOS() {
+    public String goToCommonAncestor() {
         return "carnivoraProject/kozosos";
     }
 
     @RequestMapping("/carnivoraProject/kezdolap")
-    public String kezdolap() {
+    public String goToIndexPage() {
         return "carnivoraProject/kezdolap";
     }
 
@@ -82,54 +79,54 @@ public class CarnivoraController {
     @PostMapping("/carnivoraProject/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
-            @ModelAttribute("formSpecies") @Valid FajRecord formSpecies,
+            @ModelAttribute("formSpecies") @Valid Species formSpecies,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
             //formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
-            carnivoraService.save(formSpecies);
+            speciesService.save(formSpecies);
             refreshAllSpecies(model);
             clearFormItem(model);
         }
-        return carnivora();
+        return goToCarnivora();
     }
 
     @PostMapping("/carnivoraProject/carnivora/")
     public String create(
-            @ModelAttribute("formSpecies") @Valid FajRecord formSpecies,
+            @ModelAttribute("formSpecies") @Valid Species formSpecies,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
             //formSpecies.setSzuloNev(formSpecies.getSzuloNev());
-            carnivoraService.create(formSpecies);
+            speciesService.create(formSpecies);
             refreshAllSpecies(model);
             clearFormItem(model);
         }
-        return carnivora();
+        return goToCarnivora();
     }
 
     @PostMapping("/carnivoraProject/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
-        carnivoraService.deleteById(id);
+        speciesService.deleteById(id);
         refreshAllSpecies(model);
-        return carnivora();
+        return goToCarnivora();
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("allSpecies")
-    List<FajRecord> allSpecies() {
-        return carnivoraService.findAll();
+    List<Species> allSpecies() {
+        return speciesService.findAll();
     }
 
-    @ModelAttribute("allKlad")
-    List<ParentKladDto> allKlad() {
+    @ModelAttribute("allClads")
+    List<ParentKladDto> allClads() {
         return kladService.findAllParentKlad();
     }
 
     @ModelAttribute("formSpecies")
-    public FajRecord formSpecies() {
-        return carnivoraService.empty();
+    public Species formSpecies() {
+        return new Species();
     }
 
     // MODEL MÓDOSÍTÓK -------------------------------------------------------------------------------

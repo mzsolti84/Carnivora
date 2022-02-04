@@ -1,6 +1,6 @@
 package hu.progmatic.carnivora;
 
-public enum Tureshatar {
+public enum Endurance {
     GENERALISTA,
     SPECIALISTA
 }

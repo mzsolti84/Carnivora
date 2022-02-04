@@ -11,24 +11,24 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class FajRecord {
+public class Species {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
-    Integer szuloId;
-    String szuloNev;
+    private Integer id;
+    private Integer ancestorId;
+    private String ancestorName;
     @Column(length = 20000)
     @NotEmpty
-    String leiras;
+    private String description;
     @NotEmpty
-    String nev;
+    private String name;
     @NotEmpty
     @Column(unique = true)
-    String latinNev;
+    private String nameLatin;
     @Enumerated(EnumType.STRING)
-    VeszelyeztetettKategoriak veszelyeztetettBesorolas;
+    private ConservationStatus conservationStatus;
     @Enumerated(EnumType.STRING)
-    Tureshatar turesHatar;
-    String fotoURL;
-    String wikiURL;
+    private Endurance environmentalEndurance;
+    private String photURL;
+    private String wikiURL;
 }
