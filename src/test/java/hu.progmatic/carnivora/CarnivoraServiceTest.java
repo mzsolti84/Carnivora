@@ -1,4 +1,4 @@
-package hu.progmatic.carnivoraProject;
+package hu.progmatic.carnivora;
 
 import hu.progmatic.carnivora.CarnivoraService;
 import org.junit.jupiter.api.*;
