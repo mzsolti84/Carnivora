@@ -1,6 +1,6 @@
 package hu.progmatic.carnivora;
 
-import hu.progmatic.carnivora.user.TesztFileTeljesNev;
+import hu.progmatic.databaseinit.GetWholePathOfResource;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,7 +21,7 @@ public class FajlTest {
     @DisplayName("FajRecord betöltés")
     @BeforeEach
     void setUp() throws URISyntaxException {
-        file = TesztFileTeljesNev.getTeljesNev("databaseinit/faj.csv");
+        file = GetWholePathOfResource.getWholePath("faj.csv");
     }
 
     @Test

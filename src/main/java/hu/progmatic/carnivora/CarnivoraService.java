@@ -1,6 +1,6 @@
 package hu.progmatic.carnivora;
 
-import hu.progmatic.carnivora.user.TesztFileTeljesNev;
+import hu.progmatic.databaseinit.GetWholePathOfResource;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class CarnivoraService implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws URISyntaxException {
         if (speciesRepository.findAll().isEmpty()) {
-            String file = TesztFileTeljesNev.getTeljesNev("databaseinit/faj.csv");
+            String file = GetWholePathOfResource.getWholePath("faj.csv");
            List<FajRecord> ujFaj = databasefactory(file);
             speciesRepository.saveAll(ujFaj);
         }
