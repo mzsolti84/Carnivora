@@ -1,6 +1,6 @@
 package hu.progmatic.carnivora;
 
-import hu.progmatic.carnivoraProject.user.TesztFileTeljesNev;
+import hu.progmatic.carnivora.user.TesztFileTeljesNev;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
