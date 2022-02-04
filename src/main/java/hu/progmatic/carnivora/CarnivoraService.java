@@ -50,15 +50,6 @@ public class CarnivoraService implements InitializingBean {
         return speciesRepository.getById(id);
     }
 
-    public FajRecord getByLatinNev(String latinNev) {
-        return speciesRepository.getByLatinNev(latinNev);
-    }
-
-    public String getSzuloNevBySzuloId(Integer id) {
-        return probaKladRepository.getById(id).getNev();
-    }
-
-
     public void deleteByIdIfExists(Integer id) {
         if (speciesRepository.existsById(id)) {
             speciesRepository.deleteById(id);
