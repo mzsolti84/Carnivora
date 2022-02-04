@@ -1,0 +1,42 @@
+@startmindmap
++ Központi felület
+++ Veszélyeztett faj nyitvántartó
+++ Ragadozó kereső
++++ Fajkereső
+++++ macskaalkatúak (Feliformia) alrendje
++++++ madagaszkári cibetmacskafélék (Eupleridae) családja – 8 faj
++++++ macskafélék (Felidae) családja – 39 faj
+++++++_ macskaformák (Felinae) alcsaládja – 30 faj
+++++++_ párducformák (Pantherinae) alcsaládja – 8 faj
+++++++_ kardfogú macskák (Machairodontinae) alcsaládja – kihalt
++++++ mongúzfélék (Herpestidae) családja – 32 faj
++++++ hiénafélék (Hyaenidae) családja – 4 faj
++++++ cibetmacskafélék (Viverridae) családja – 35 faj
++++++ pálmacibetfélék (Nandiniidae) családja – 1 faj
+++++ kutyaalkatúak (Caniformia) alrendje
++++++ macskamedvefélék (Ailuridae) családja – 1 faj
++++++ kutyafélék (Canidae) családja – 34 faj
++++++ bűzösborzfélék (Mephitidae) családja – 12 faj
++++++ menyétfélék (Mustelidae) családja – 55 faj
+++++++_ vidraformák (Lutrinae) alcsaládja – 13 faj
+++++++_ borzformák (Melinae) alcsaládja – 8 faj
+++++++_ méhészborzformák (Mellivorinae) alcsaládja – 1 faj
+++++++_ amerikai borzformák (Taxidiinae) alcsaládja – 1 faj
+++++++_ menyétformák (Mustelinae) alcsaládja – 42 faj
++++++ mosómedvefélék (Procyonidae) családja – 18 faj
++++++ medvefélék (Ursidae) családja – 8 faj
++++++ úszólábúak (Pinnipedia) öregcsaládja – 34 faj
+++++++_ rozmárfélék (Odobenidae) családja – 1 faj
+++++++_ fülesfókafélék (Otariidae) családja – 14 faj
+++++++_ valódi fókafélék (Phocidae) családja – 19 faj
++++ Legközelebbi közös ős kereső
++++ Kladeogramm megjelenítő
+++ Kibontható evulúciós fa
+++ Generalista vs. Specialista
+++ ?? Fajtérkép
+++ Ragadozó "Chatbot"
+++ Admin Hub
++++ Faj adatbázis kezelő
++++ Veszélyezetett fajok karbantartása
++++ Rokonsági ág szerkesző
+@endmindmap

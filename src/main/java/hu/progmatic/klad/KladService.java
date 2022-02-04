@@ -1,7 +1,6 @@
 package hu.progmatic.klad;
 
-import hu.progmatic.carnivoraProject.ProbaKlad;
-import hu.progmatic.iniklad.InitKladFromFileFactory;
+import hu.progmatic.databaseinit.InitKladFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
