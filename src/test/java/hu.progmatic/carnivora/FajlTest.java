@@ -21,7 +21,7 @@ public class FajlTest {
     @DisplayName("FajRecord betöltés")
     @BeforeEach
     void setUp() throws URISyntaxException {
-        file = TesztFileTeljesNev.getTeljesNev("databaseinit/Adatbazis struktura - Fajszabvany.csv");
+        file = TesztFileTeljesNev.getTeljesNev("databaseinit/faj.csv");
     }
 
     @Test
