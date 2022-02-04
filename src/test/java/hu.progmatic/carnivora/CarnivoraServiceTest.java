@@ -1,6 +1,5 @@
 package hu.progmatic.carnivora;
 
-import hu.progmatic.carnivora.CarnivoraService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,14 +18,14 @@ class CarnivoraServiceTest {
     @Test
     @DisplayName("Elem létrehozása")
     void create() {
-        FajRecord data = FajRecord.builder()
+        Faj data = Faj.builder()
                 .id(null)
                 .nev("Tyúk")
                 .latinNev("Tyukusz Udvarikusz")
                 .leiras("Tyúúúúk")
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
-        FajRecord saved = service.save(data);
+        Faj saved = service.save(data);
         assertNotNull(saved.getId());
     }
 
@@ -42,14 +41,14 @@ class CarnivoraServiceTest {
                 "345678901234567890123456789012345678901234567890123456789012345678" +
                 "901234567890123456789012345678901234567890123456789012345678901234" +
                 "567890123456789012345678901234567890123456789012345678901234567890";
-        FajRecord data = FajRecord.builder()
+        Faj data = Faj.builder()
                 .id(null)
                 .nev("Tyúk")
                 .latinNev("Tyukusz sp. Magyarikusz")
                 .leiras(hosszuLeiras)
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
-        FajRecord saved = service.save(data);
+        Faj saved = service.save(data);
         assertEquals(hosszuLeiras, saved.getLeiras());
     }
 
@@ -57,7 +56,7 @@ class CarnivoraServiceTest {
     @DisplayName("Az latinNev mező egyedi")
     void createUnique() {
         String latinNev = "Tyukusz Tyukusz";
-        FajRecord data = FajRecord.builder()
+        Faj data = Faj.builder()
                 .id(null)
                 .nev("Tyúk")
                 .latinNev(latinNev)
@@ -65,7 +64,7 @@ class CarnivoraServiceTest {
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
         service.save(data);
-        FajRecord data2 = FajRecord.builder()
+        Faj data2 = Faj.builder()
                 .id(null)
                 .nev("Tyúk")
                 .latinNev(latinNev)
@@ -88,11 +87,11 @@ class CarnivoraServiceTest {
     @DisplayName("Teszt elemekkel")
     class TesztElemmelTest {
 
-        private FajRecord fajData;
+        private Faj fajData;
 
         @BeforeEach
         void setUp() {
-            FajRecord fajDataInit = FajRecord.builder()
+            Faj fajDataInit = Faj.builder()
                     .id(null)
                     .nev("Szürke farkas")
                     .latinNev("Canis lupus sp.")
@@ -111,22 +110,22 @@ class CarnivoraServiceTest {
         @Test
         @DisplayName("Elem lekérdezése id alapján")
         void getId() {
-            FajRecord read = service.findById(fajData.getId());
+            Faj read = service.findById(fajData.getId());
             assertNotNull(read.getId());
             assertEquals("Szürke farkas", read.getNev());
             assertEquals("Canis lupus sp.", read.getLatinNev());
-            assertEquals(Tureshatar.GENERALISTA, read.turesHatar);
+            assertEquals(Tureshatar.GENERALISTA, read.getTuresHatar());
         }
 
         @Test
         @DisplayName("Elem törlése")
         void delete() {
-            FajRecord read = service.findById(fajData.getId());
+            Faj read = service.findById(fajData.getId());
             assertNotNull(read.getId());
             service.deleteByIdIfExists(fajData.getId());
             Exception exception = null;
             try {
-                FajRecord readAfterDelete = service.findById(fajData.getId());
+                Faj readAfterDelete = service.findById(fajData.getId());
                 assertNotNull(readAfterDelete.getLatinNev());
             } catch (Exception e) {
                 exception = e;
@@ -137,9 +136,9 @@ class CarnivoraServiceTest {
         @Test
         @DisplayName("Elem frissítése")
         void update() {
-            FajRecord data = service.getById(fajData.getId());
+            Faj data = service.getById(fajData.getId());
             data.setNev("Új név");
-            FajRecord read = service.findById(data.getId());
+            Faj read = service.findById(data.getId());
             assertEquals("Új név", read.getNev());
         }
     }

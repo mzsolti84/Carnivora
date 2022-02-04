@@ -39,20 +39,20 @@ public class FajlTest {
     @Test
     @DisplayName("Listába betölt teszt")
     void darabSzam() {
-        List<FajRecord> ujFaj = service.databaseFactory(file);
+        List<Faj> ujFaj = service.databaseFactory(file);
         assertEquals(20, ujFaj.size());
     }
 
     @Test
     @DisplayName("Helyes információ ellenőrizve")
     void factoryTest() {
-        List<FajRecord> ujFaj = service.databaseFactory(file);
-        assertEquals(15, ujFaj.get(3).szuloId);
-        assertEquals("Canis lupus", ujFaj.get(3).latinNev);
-        assertEquals("Szürke farkas", ujFaj.get(3).nev);
-        assertEquals(Tureshatar.GENERALISTA, ujFaj.get(3).turesHatar);
-        assertEquals("Felis silvestris catus", ujFaj.get(4).latinNev);
-        assertEquals("Prionodon pardicolor", ujFaj.get(5).latinNev);
-        assertEquals("Foltos tigrispetymeg", ujFaj.get(5).nev);
+        List<Faj> ujFaj = service.databaseFactory(file);
+        assertEquals(15, ujFaj.get(3).getSzuloId());
+        assertEquals("Canis lupus", ujFaj.get(3).getLatinNev());
+        assertEquals("Szürke farkas", ujFaj.get(3).getNev());
+        assertEquals(Tureshatar.GENERALISTA, ujFaj.get(3).getTuresHatar());
+        assertEquals("Felis silvestris catus", ujFaj.get(4).getLatinNev());
+        assertEquals("Prionodon pardicolor", ujFaj.get(5).getLatinNev());
+        assertEquals("Foltos tigrispetymeg", ujFaj.get(5).getNev());
     }
 }

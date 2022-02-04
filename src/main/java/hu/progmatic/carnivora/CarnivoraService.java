@@ -16,43 +16,43 @@ import java.util.Scanner;
 public class CarnivoraService implements InitializingBean {
 
     @Autowired
-    private SpeciesRepository speciesRepository;
+    private FajRepository fajRepository;
 
-    public List<FajRecord> findAll() {
-        return speciesRepository.findAll();
+    public List<Faj> findAll() {
+        return fajRepository.findAll();
     }
 
-    public FajRecord create(FajRecord faj) {
+    public Faj create(Faj faj) {
         faj.setId(null);
-        return speciesRepository.save(faj);
+        return fajRepository.save(faj);
     }
 
-    public FajRecord save(FajRecord faj) {
-        return speciesRepository.saveAndFlush(faj);
+    public Faj save(Faj faj) {
+        return fajRepository.saveAndFlush(faj);
     }
 
     public void deleteById(Integer id) {
-        speciesRepository.deleteById(id);
+        fajRepository.deleteById(id);
     }
 
-    public FajRecord getById(Integer id) {
-        return speciesRepository.getById(id);
+    public Faj getById(Integer id) {
+        return fajRepository.getById(id);
     }
 
     public void deleteByIdIfExists(Integer id) {
-        if (speciesRepository.existsById(id)) {
-            speciesRepository.deleteById(id);
+        if (fajRepository.existsById(id)) {
+            fajRepository.deleteById(id);
         }
     }
 
-    public FajRecord findById(Integer id) {
-        return speciesRepository.findById(id)
+    public Faj findById(Integer id) {
+        return fajRepository.findById(id)
                 .orElseThrow();
     }
 
-    public List<FajRecord> databaseFactory(String filePath) {
+    public List<Faj> databaseFactory(String filePath) {
         File file = new File(filePath);
-        List<FajRecord> ujFaj = new LinkedList<>();
+        List<Faj> ujFaj = new LinkedList<>();
         try {
             Scanner scanner = new Scanner(file);
             scanner.nextLine();
@@ -66,7 +66,7 @@ public class CarnivoraService implements InitializingBean {
         return ujFaj;
     }
 
-    private static FajRecord getFajRecord(String faj) {
+    private static Faj getFajRecord(String faj) {
         String[] fajinfo = faj.split(",");
         Integer id = null;
         Integer szuloId = Integer.parseInt(fajinfo[0]);
@@ -78,7 +78,7 @@ public class CarnivoraService implements InitializingBean {
         Tureshatar tureshatar = turesSwitch(fajinfo[6]);
         String fotoUrl = fajinfo[7];
         String wikiUrl = fajinfo[8];
-        FajRecord ujfaj = new FajRecord(id, szuloId, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
+        Faj ujfaj = new Faj(id, szuloId, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
         return ujfaj;
     }
 
@@ -108,10 +108,10 @@ public class CarnivoraService implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws URISyntaxException {
-        if (speciesRepository.findAll().isEmpty()) {
+        if (fajRepository.findAll().isEmpty()) {
             String file = GetWholePathOfResource.getWholePath("faj.csv");
-            List<FajRecord> ujFaj = databaseFactory(file);
-            speciesRepository.saveAll(ujFaj);
+            List<Faj> ujFaj = databaseFactory(file);
+            fajRepository.saveAll(ujFaj);
         }
     }
 

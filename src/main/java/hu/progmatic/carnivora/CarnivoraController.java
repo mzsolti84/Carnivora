@@ -48,21 +48,21 @@ public class CarnivoraController {
 
     @GetMapping("/carnivoraProject/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
-        FajRecord formSpecies = carnivoraService.getById(id);
+        Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
         return carnivora();
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
-        FajRecord formSpecies = carnivoraService.getById(id);
+        Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
         return adatlap();
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
-        FajRecord formSpecies = carnivoraService.getById(id);
+        Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute(formSpecies);
         return kartya();
     }
@@ -82,7 +82,7 @@ public class CarnivoraController {
     @PostMapping("/carnivoraProject/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
-            @ModelAttribute("formSpecies") @Valid FajRecord formSpecies,
+            @ModelAttribute("formSpecies") @Valid Faj formSpecies,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
@@ -96,7 +96,7 @@ public class CarnivoraController {
 
     @PostMapping("/carnivoraProject/carnivora/")
     public String create(
-            @ModelAttribute("formSpecies") @Valid FajRecord formSpecies,
+            @ModelAttribute("formSpecies") @Valid Faj formSpecies,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
@@ -118,7 +118,7 @@ public class CarnivoraController {
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("allSpecies")
-    List<FajRecord> allSpecies() {
+    List<Faj> allSpecies() {
         return carnivoraService.findAll();
     }
 
@@ -128,8 +128,8 @@ public class CarnivoraController {
     }
 
     @ModelAttribute("formSpecies")
-    public FajRecord formSpecies() {
-        return new FajRecord();
+    public Faj formSpecies() {
+        return new Faj();
     }
 
     // MODEL MÓDOSÍTÓK -------------------------------------------------------------------------------
