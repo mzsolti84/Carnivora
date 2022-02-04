@@ -1,28 +1,32 @@
 package hu.progmatic.carnivora;
 
+import hu.progmatic.carnivora.CarnivoraService;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class SpeciesServiceTest {
+@Transactional
+class CarnivoraServiceTest {
     @Autowired
-    SpeciesService speciesService;
+    CarnivoraService service;
 
     @Test
     @DisplayName("Elem létrehozása")
     void create() {
-        Species data = Species.builder()
+        FajRecord data = FajRecord.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin("Tyukusz Udvarikusz")
-                .description("Tyúúúúk")
-                .conservationStatus(ConservationStatus.HAZIASITOTT)
+                .nev("Tyúk")
+                .latinNev("Tyukusz Udvarikusz")
+                .leiras("Tyúúúúk")
+                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
-        Species saved = speciesService.save(data);
+        FajRecord saved = service.save(data);
         assertNotNull(saved.getId());
     }
 
@@ -38,40 +42,40 @@ class SpeciesServiceTest {
                 "345678901234567890123456789012345678901234567890123456789012345678" +
                 "901234567890123456789012345678901234567890123456789012345678901234" +
                 "567890123456789012345678901234567890123456789012345678901234567890";
-        Species data = Species.builder()
+        FajRecord data = FajRecord.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin("Tyukusz sp. Magyarikusz")
-                .description(hosszuLeiras)
-                .conservationStatus(ConservationStatus.HAZIASITOTT)
+                .nev("Tyúk")
+                .latinNev("Tyukusz sp. Magyarikusz")
+                .leiras(hosszuLeiras)
+                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
-        Species saved = speciesService.save(data);
-        assertEquals(hosszuLeiras, saved.getDescription());
+        FajRecord saved = service.save(data);
+        assertEquals(hosszuLeiras, saved.getLeiras());
     }
 
     @Test
     @DisplayName("Az latinNev mező egyedi")
     void createUnique() {
         String latinNev = "Tyukusz Tyukusz";
-        Species data = Species.builder()
+        FajRecord data = FajRecord.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin(latinNev)
-                .description("Tyúúúúk")
-                .conservationStatus(ConservationStatus.HAZIASITOTT)
+                .nev("Tyúk")
+                .latinNev(latinNev)
+                .leiras("Tyúúúúk")
+                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
-        speciesService.save(data);
-        Species data2 = Species.builder()
+        service.save(data);
+        FajRecord data2 = FajRecord.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin(latinNev)
-                .description("Tyúúúúk")
-                .conservationStatus(ConservationStatus.HAZIASITOTT)
+                .nev("Tyúk")
+                .latinNev(latinNev)
+                .leiras("Tyúúúúk")
+                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
 
         Exception exception = null;
         try {
-            speciesService.save(data2);
+            service.save(data2);
         } catch (Exception e) {
             exception = e;
         }
@@ -84,46 +88,46 @@ class SpeciesServiceTest {
     @DisplayName("Teszt elemekkel")
     class TesztElemmelTest {
 
-        private Species speciesData;
+        private FajRecord fajData;
 
         @BeforeEach
         void setUp() {
-            Species speciesDataInit = Species.builder()
+            FajRecord fajDataInit = FajRecord.builder()
                     .id(null)
-                    .name("Szürke farkas")
-                    .nameLatin("Canis lupus sp.")
-                    .environmentalEndurance(Endurance.GENERALISTA)
-                    .description("Ordas Farkas")
+                    .nev("Szürke farkas")
+                    .latinNev("Canis lupus sp.")
+                    .turesHatar(Tureshatar.GENERALISTA)
+                    .leiras("Ordas Farkas")
                     .build();
 
-            speciesData = speciesService.save(speciesDataInit);
+            fajData = service.save(fajDataInit);
         }
 
         @AfterEach
         void tearDown() {
-            speciesService.deleteByIdIfExists(speciesData.getId());
+            service.deleteByIdIfExists(fajData.getId());
         }
 
         @Test
         @DisplayName("Elem lekérdezése id alapján")
         void getId() {
-            Species read = speciesService.findById(speciesData.getId());
+            FajRecord read = service.findById(fajData.getId());
             assertNotNull(read.getId());
-            assertEquals("Szürke farkas", read.getName());
-            assertEquals("Canis lupus sp.", read.getNameLatin());
-            assertEquals(Endurance.GENERALISTA, read.getEnvironmentalEndurance());
+            assertEquals("Szürke farkas", read.getNev());
+            assertEquals("Canis lupus sp.", read.getLatinNev());
+            assertEquals(Tureshatar.GENERALISTA, read.turesHatar);
         }
 
         @Test
         @DisplayName("Elem törlése")
         void delete() {
-            Species read = speciesService.findById(speciesData.getId());
+            FajRecord read = service.findById(fajData.getId());
             assertNotNull(read.getId());
-            speciesService.deleteByIdIfExists(speciesData.getId());
+            service.deleteByIdIfExists(fajData.getId());
             Exception exception = null;
             try {
-                Species readAfterDelete = speciesService.findById(speciesData.getId());
-                assertNotNull(readAfterDelete.getNameLatin());
+                FajRecord readAfterDelete = service.findById(fajData.getId());
+                assertNotNull(readAfterDelete.getLatinNev());
             } catch (Exception e) {
                 exception = e;
             }
@@ -131,10 +135,12 @@ class SpeciesServiceTest {
         }
 
         @Test
-        @Disabled // EZT A TESZTET DTO-VAL KELL ÁTÍRNI, MERT ÍGY NEM TUD MŰKÖDNI
         @DisplayName("Elem frissítése")
         void update() {
-            assertEquals("Új név", speciesService.getById(speciesData.getId()).getName());
+            FajRecord data = service.getById(fajData.getId());
+            data.setNev("Új név");
+            FajRecord read = service.findById(data.getId());
+            assertEquals("Új név", read.getNev());
         }
     }
 }

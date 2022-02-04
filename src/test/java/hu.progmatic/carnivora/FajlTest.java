@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class FajlTest {
 
     @Autowired
-    private SpeciesService service;
+    private CarnivoraService service;
     private String file;
 
     @DisplayName("FajRecord betöltés")
@@ -39,20 +39,20 @@ public class FajlTest {
     @Test
     @DisplayName("Listába betölt teszt")
     void darabSzam() {
-        List<Species> ujFaj = service.databasefactory(file);
+        List<FajRecord> ujFaj = service.databasefactory(file);
         assertEquals(20, ujFaj.size());
     }
 
     @Test
     @DisplayName("Helyes információ ellenőrizve")
     void factoryTest() {
-        List<Species> ujFaj = service.databasefactory(file);
-        assertEquals(15, ujFaj.get(3).getAncestorId());
-        assertEquals("Canis lupus", ujFaj.get(3).getNameLatin());
-        assertEquals("Szürke farkas", ujFaj.get(3).getName());
-        assertEquals(Endurance.GENERALISTA, ujFaj.get(3).getEnvironmentalEndurance());
-        assertEquals("Felis silvestris catus", ujFaj.get(4).getName());
-        assertEquals("Prionodon pardicolor", ujFaj.get(5).getNameLatin());
-        assertEquals("Foltos tigrispetymeg", ujFaj.get(5).getName());
+        List<FajRecord> ujFaj = service.databasefactory(file);
+        assertEquals(15, ujFaj.get(3).szuloId);
+        assertEquals("Canis lupus", ujFaj.get(3).latinNev);
+        assertEquals("Szürke farkas", ujFaj.get(3).nev);
+        assertEquals(Tureshatar.GENERALISTA, ujFaj.get(3).turesHatar);
+        assertEquals("Felis silvestris catus", ujFaj.get(4).latinNev);
+        assertEquals("Prionodon pardicolor", ujFaj.get(5).latinNev);
+        assertEquals("Foltos tigrispetymeg", ujFaj.get(5).nev);
     }
 }

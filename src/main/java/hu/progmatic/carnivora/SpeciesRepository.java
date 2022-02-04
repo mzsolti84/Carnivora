@@ -2,6 +2,6 @@ package hu.progmatic.carnivora;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface SpeciesRepository extends JpaRepository<Species, Integer> {
-    Species getByNameLatin(String nameLatin);
+public interface SpeciesRepository extends JpaRepository<FajRecord, Integer> {
+    FajRecord getByLatinNev(String latinNev);
 }
