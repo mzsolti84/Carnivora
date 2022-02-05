@@ -1,8 +1,7 @@
 package hu.progmatic.klad;
 
-import hu.progmatic.iniklad.InitKladFromFileFactory;
-import hu.progmatic.iniklad.KladURISyntaxException;
-import hu.progmatic.klad.KladEntity;
+import hu.progmatic.databaseinit.InitKladFromFileFactory;
+import hu.progmatic.databaseinit.KladURISyntaxException;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,9 +14,9 @@ public class InitKladFromFileTest {
     @Test
     void fileException() {
         String exception = null;
-        try{
+        try {
             new InitKladFromFileFactory("error.csv");
-        }catch (KladURISyntaxException e){
+        } catch (KladURISyntaxException e) {
             exception = e.getMessage();
         }
         assertNotNull(exception);
@@ -29,7 +28,7 @@ public class InitKladFromFileTest {
         List<KladEntity> klads = initKlad.getKlads();
 
         KladEntity givenKlad = klads.stream()
-                .filter(klad->klad.getName().equals("macskaalkatúak alrendje"))
+                .filter(klad -> klad.getName().equals("macskaalkatúak alrendje"))
                 .findFirst().orElseThrow();
 
         assertThat(givenKlad.getChildren())
@@ -42,7 +41,6 @@ public class InitKladFromFileTest {
                         "pálmacibetfélék családja");
 
 
-
     }
 
     @Test
@@ -51,7 +49,7 @@ public class InitKladFromFileTest {
         List<KladEntity> klads = initKlad.getKlads();
 
         KladEntity givenKlad = klads.stream()
-                .filter(klad->klad.getName().equals("kutyaalkatúak alrendje"))
+                .filter(klad -> klad.getName().equals("kutyaalkatúak alrendje"))
                 .findFirst().orElseThrow();
 
         assertThat(givenKlad.getChildren())
