@@ -20,7 +20,7 @@ public class Species {
 
     @Column(length = 20000)
     @NotEmpty
-    private String descreption;
+    private String description;
     private String name;
     @NotEmpty
     @Column(unique = true)

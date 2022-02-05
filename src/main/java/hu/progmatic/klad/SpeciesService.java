@@ -17,4 +17,15 @@ public class SpeciesService {
     public void saveAll(List<Species> species){
         speciesRepository.saveAll(species);
     }
+
+    public SpeciesTestDto speciesToSpeciesTestDto(String name){
+        Species species = speciesRepository.getByName(name);
+        return SpeciesTestDto.builder()
+                .name(species.getName())
+                .parentName(species.getClad().getName())
+                .description(species.getDescription())
+                .turesHatar(species.getTuresHatar())
+                .veszelyeztetettBesorolas(species.getVeszelyeztetettBesorolas())
+                .build();
+    }
 }

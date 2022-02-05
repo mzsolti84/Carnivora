@@ -58,7 +58,7 @@ public class InitSpeciesFromFileFactory {
                 .clad(parent)
                 .name(name)
                 .nameLatin(nameLatin)
-                .descreption(description)
+                .description(description)
                 .veszelyeztetettBesorolas(kategoriaSwitch(veszelyeztetett))
                 .turesHatar(turesSwitch(tureshatar))
                 .fotoURL(fotoURL)
