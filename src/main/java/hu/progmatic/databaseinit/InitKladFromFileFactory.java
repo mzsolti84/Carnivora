@@ -20,21 +20,19 @@ public class InitKladFromFileFactory {
         try {
             fileWholeName = GetWholePathOfResource.getWholePath(fileName);
         } catch (URISyntaxException e) {
-            throw new KladURISyntaxException(e.getMessage());
+            throw new CsvURISyntaxException(e.getMessage());
         }
         this.klads = new ArrayList<>();
-        //File file = new File(this.fileWholeName);
         try (CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(fileWholeName), StandardCharsets.UTF_8))) {
-            //CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(this.fileWholeName), StandardCharsets.UTF_8));
             csv.readNext();
             String[] line;
             while ((line = csv.readNext()) != null) {
                 fileRowToEntity(line);
             }
         } catch (IOException e) {
-            throw new KladFileException("File not exist!");
+            throw new SpeciesFileException("File not exist!");
         } catch (CsvValidationException e) {
-            throw new KladFileException("File is not standard!");
+            throw new SpeciesFileException("File is not standard!");
         }
 
 

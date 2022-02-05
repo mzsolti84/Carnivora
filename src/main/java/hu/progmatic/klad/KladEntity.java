@@ -32,5 +32,7 @@ public class KladEntity {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private List<KladEntity> children = new ArrayList<>();
 
-
+    @Builder.Default
+    @OneToMany(mappedBy = "clad", cascade = CascadeType.ALL)
+    private List<Species> speciesList = new ArrayList<>();
 }

@@ -1,7 +1,8 @@
-package hu.progmatic.klad;
+package hu.progmatic.databaseinit;
 
 import hu.progmatic.databaseinit.InitKladFromFileFactory;
-import hu.progmatic.databaseinit.KladURISyntaxException;
+import hu.progmatic.databaseinit.CsvURISyntaxException;
+import hu.progmatic.klad.KladEntity;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class InitKladFromFileTest {
         String exception = null;
         try {
             new InitKladFromFileFactory("error.csv");
-        } catch (KladURISyntaxException e) {
+        } catch (CsvURISyntaxException e) {
             exception = e.getMessage();
         }
         assertNotNull(exception);

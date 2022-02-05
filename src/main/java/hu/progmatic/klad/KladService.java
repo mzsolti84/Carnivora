@@ -1,6 +1,7 @@
 package hu.progmatic.klad;
 
 import hu.progmatic.databaseinit.InitKladFromFileFactory;
+import hu.progmatic.databaseinit.InitSpeciesFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,23 @@ public class KladService implements InitializingBean {
     @Autowired
     private KladRepository kladRepository;
 
+    @Autowired
+    private SpeciesRepository speciesRepository;
+
+    @Autowired
+    private SpeciesService speciesService;
+
+
     @Override
     public void afterPropertiesSet() {
         if (kladRepository.count() == 0) {
-            List<KladEntity> klads = new InitKladFromFileFactory(
+            /*List<KladEntity> klads = new InitKladFromFileFactory(
                     "klad.csv")
                     .getKlads();
-            kladRepository.saveAll(klads);
+            kladRepository.saveAll(klads);*/
+            InitSpeciesFromFileFactory init = new InitSpeciesFromFileFactory("klad.csv", "faj.csv");
+            kladRepository.saveAll(init.getKlads());
+            speciesService.saveAll(init.getSpecies());
         }
     }
 
