@@ -19,9 +19,6 @@ public class CarnivoraController {
     @Autowired
     private CarnivoraService carnivoraService;
 
-    /*@Autowired
-    private KladokService kladService;*/
-
     @Autowired
     private KladService kladService;
 
@@ -43,28 +40,28 @@ public class CarnivoraController {
 
     @RequestMapping("/")
     public String species() {
-        return carnivora();
+        return "carnivora/carnivora";
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
-        return carnivora();
+        return "carnivora/carnivora";
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
         Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
-        return adatlap();
+        return "carnivora/carnivoraAdatlap";
     }
 
     @GetMapping("/carnivoraProject/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
         Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute(formSpecies);
-        return kartya();
+        return "carnivora/talalatiKartyak";
     }
 
     @RequestMapping("/carnivoraProject/kozosos")
@@ -86,12 +83,11 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            //formSpecies.setSzuloNev(carnivoraService.getSzuloNevBySzuloId(formSpecies.getSzuloId()));
             carnivoraService.save(formSpecies);
-            refreshAllSpecies(model);
-            clearFormItem(model);
+            model.addAttribute("allSpecies", carnivoraService.findAll());
+            model.addAttribute("formSpecies", new Faj());
         }
-        return carnivora();
+        return "carnivora/carnivora";
     }
 
     @PostMapping("/carnivoraProject/carnivora/")
@@ -100,19 +96,18 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            //formSpecies.setSzuloNev(formSpecies.getSzuloNev());
             carnivoraService.create(formSpecies);
-            refreshAllSpecies(model);
-            clearFormItem(model);
+            model.addAttribute("allSpecies", carnivoraService.findAll());
+            model.addAttribute("formSpecies", new Faj());
         }
-        return carnivora();
+        return "carnivora/carnivora";
     }
 
     @PostMapping("/carnivoraProject/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
         carnivoraService.deleteById(id);
-        refreshAllSpecies(model);
-        return carnivora();
+        model.addAttribute("allSpecies", carnivoraService.findAll());
+        return "carnivora/carnivora";
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------

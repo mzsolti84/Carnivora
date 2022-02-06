@@ -69,16 +69,16 @@ public class CarnivoraService implements InitializingBean {
     private static Faj getFajRecord(String faj) {
         String[] fajinfo = faj.split(",");
         Integer id = null;
-        Integer szuloId = Integer.parseInt(fajinfo[0]);
-        String szuloNev = fajinfo[1];
-        String nev = fajinfo[2];
-        String latinNev = fajinfo[3];
-        String leiras = fajinfo[4];
-        VeszelyeztetettKategoriak kategoriak = kategoriaSwitch(fajinfo[5]);
-        Tureshatar tureshatar = turesSwitch(fajinfo[6]);
-        String fotoUrl = fajinfo[7];
-        String wikiUrl = fajinfo[8];
-        Faj ujfaj = new Faj(id, szuloId, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
+        //Integer szuloId = Integer.parseInt(fajinfo[0]);
+        String szuloNev = fajinfo[0];
+        String nev = fajinfo[1];
+        String latinNev = fajinfo[2];
+        String leiras = fajinfo[3];
+        VeszelyeztetettKategoriak kategoriak = kategoriaSwitch(fajinfo[4]);
+        Tureshatar tureshatar = turesSwitch(fajinfo[5]);
+        String fotoUrl = fajinfo[6];
+        String wikiUrl = fajinfo[7];
+        Faj ujfaj = new Faj(id, null, szuloNev, leiras, nev, latinNev, kategoriak, tureshatar, fotoUrl, wikiUrl);
         return ujfaj;
     }
 
