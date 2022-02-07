@@ -43,40 +43,40 @@ public class CarnivoraController {
         return "carnivora/carnivora";
     }
 
-    @GetMapping("/carnivoraProject/carnivora/{id}")
+    @GetMapping("/carnivora/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
         return "carnivora/carnivora";
     }
 
-    @GetMapping("/carnivoraProject/carnivora/{id}/adatlap")
+    @GetMapping("/carnivora/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
         Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
         return "carnivora/carnivoraAdatlap";
     }
 
-    @GetMapping("/carnivoraProject/carnivora/{id}/TalalatiKartyak")
+    @GetMapping("/carnivora/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
         Faj formSpecies = carnivoraService.getById(id);
         model.addAttribute(formSpecies);
         return "carnivora/talalatiKartyak";
     }
 
-    @RequestMapping("/carnivoraProject/kozosos")
+    @RequestMapping("/carnivora/kozosos")
     public String kozosOS() {
-        return "carnivoraProject/kozosos";
+        return "carnivora/kozosos";
     }
 
-    @RequestMapping("/carnivoraProject/kezdolap")
+    @RequestMapping("/carnivora/kezdolap")
     public String kezdolap() {
-        return "carnivoraProject/kezdolap";
+        return "carnivora/kezdolap";
     }
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
-    @PostMapping("/carnivoraProject/carnivora/{id}")
+    @PostMapping("/carnivora/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
             @ModelAttribute("formSpecies") @Valid Faj formSpecies,
@@ -90,7 +90,7 @@ public class CarnivoraController {
         return "carnivora/carnivora";
     }
 
-    @PostMapping("/carnivoraProject/carnivora/")
+    @PostMapping("/carnivora/carnivora/")
     public String create(
             @ModelAttribute("formSpecies") @Valid Faj formSpecies,
             BindingResult bindingResult,
@@ -103,7 +103,7 @@ public class CarnivoraController {
         return "carnivora/carnivora";
     }
 
-    @PostMapping("/carnivoraProject/carnivora/delete/{id}")
+    @PostMapping("/carnivora/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
         carnivoraService.deleteById(id);
         model.addAttribute("allSpecies", carnivoraService.findAll());
