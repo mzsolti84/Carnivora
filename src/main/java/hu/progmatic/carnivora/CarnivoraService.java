@@ -1,6 +1,7 @@
 package hu.progmatic.carnivora;
 
 import hu.progmatic.databaseinit.GetWholePathOfResource;
+import hu.progmatic.databaseinit.InitSpeciesFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,37 +17,37 @@ import java.util.Scanner;
 public class CarnivoraService implements InitializingBean {
 
     @Autowired
-    private FajRepository fajRepository;
+    private SpeciesRepository speciesRepositoryC;
 
-    public List<Faj> findAll() {
-        return fajRepository.findAll();
+    public List<Species> findAll() {
+        return speciesRepositoryC.findAll();
     }
 
-    public Faj create(Faj faj) {
+    public Species create(Species faj) {
         faj.setId(null);
-        return fajRepository.save(faj);
+        return speciesRepositoryC.save(faj);
     }
 
-    public Faj save(Faj faj) {
-        return fajRepository.saveAndFlush(faj);
+    public Species save(Species faj) {
+        return speciesRepositoryC.saveAndFlush(faj);
     }
 
     public void deleteById(Integer id) {
-        fajRepository.deleteById(id);
+        speciesRepositoryC.deleteById(id);
     }
 
-    public Faj getById(Integer id) {
-        return fajRepository.getById(id);
+    public Species getById(Integer id) {
+        return speciesRepositoryC.getById(id);
     }
 
     public void deleteByIdIfExists(Integer id) {
-        if (fajRepository.existsById(id)) {
-            fajRepository.deleteById(id);
+        if (speciesRepositoryC.existsById(id)) {
+            speciesRepositoryC.deleteById(id);
         }
     }
 
-    public Faj findById(Integer id) {
-        return fajRepository.findById(id)
+    public Species findById(Integer id) {
+        return speciesRepositoryC.findById(id)
                 .orElseThrow();
     }
 
@@ -108,10 +109,10 @@ public class CarnivoraService implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws URISyntaxException {
-        if (fajRepository.findAll().isEmpty()) {
-            String file = GetWholePathOfResource.getWholePath("faj.csv");
-            List<Faj> ujFaj = databaseFactory(file);
-            fajRepository.saveAll(ujFaj);
+        if (speciesRepositoryC.findAll().isEmpty()) {
+            InitSpeciesFromFileFactory init = new InitSpeciesFromFileFactory("klad.csv", "faj.csv");
+            List<Species> ujFaj = init.getSpecies();
+            speciesRepositoryC.saveAll(ujFaj);
         }
     }
 

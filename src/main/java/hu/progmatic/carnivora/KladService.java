@@ -1,6 +1,5 @@
-package hu.progmatic.klad;
+package hu.progmatic.carnivora;
 
-import hu.progmatic.databaseinit.InitKladFromFileFactory;
 import hu.progmatic.databaseinit.InitSpeciesFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;

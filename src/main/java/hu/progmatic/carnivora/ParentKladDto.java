@@ -1,4 +1,4 @@
-package hu.progmatic.klad;
+package hu.progmatic.carnivora;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,5 +1,7 @@
-package hu.progmatic.klad;
+package hu.progmatic.kladEsFaj;
 
+import hu.progmatic.carnivora.SpeciesService;
+import hu.progmatic.carnivora.SpeciesTestDto;
 import hu.progmatic.carnivora.Tureshatar;
 import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
 

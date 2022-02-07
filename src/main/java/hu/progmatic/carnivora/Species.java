@@ -1,7 +1,5 @@
-package hu.progmatic.klad;
+package hu.progmatic.carnivora;
 
-import hu.progmatic.carnivora.Tureshatar;
-import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
 import lombok.*;
 
 import javax.persistence.*;

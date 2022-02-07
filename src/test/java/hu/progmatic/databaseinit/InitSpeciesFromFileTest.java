@@ -2,7 +2,7 @@ package hu.progmatic.databaseinit;
 
 import hu.progmatic.carnivora.Tureshatar;
 import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
-import hu.progmatic.klad.Species;
+import hu.progmatic.carnivora.Species;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

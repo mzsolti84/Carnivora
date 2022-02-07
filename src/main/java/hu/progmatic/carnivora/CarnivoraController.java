@@ -1,7 +1,5 @@
 package hu.progmatic.carnivora;
 
-import hu.progmatic.klad.KladService;
-import hu.progmatic.klad.ParentKladDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,21 +43,21 @@ public class CarnivoraController {
 
     @GetMapping("/carnivora/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
-        Faj formSpecies = carnivoraService.getById(id);
+        Species formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
         return "carnivora/carnivora";
     }
 
     @GetMapping("/carnivora/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
-        Faj formSpecies = carnivoraService.getById(id);
+        Species formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
         return "carnivora/carnivoraAdatlap";
     }
 
     @GetMapping("/carnivora/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
-        Faj formSpecies = carnivoraService.getById(id);
+        Species formSpecies = carnivoraService.getById(id);
         model.addAttribute(formSpecies);
         return "carnivora/talalatiKartyak";
     }
@@ -79,20 +77,20 @@ public class CarnivoraController {
     @PostMapping("/carnivora/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
-            @ModelAttribute("formSpecies") @Valid Faj formSpecies,
+            @ModelAttribute("formSpecies") @Valid Species formSpecies,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
             carnivoraService.save(formSpecies);
             model.addAttribute("allSpecies", carnivoraService.findAll());
-            model.addAttribute("formSpecies", new Faj());
+            model.addAttribute("formSpecies", new Species());
         }
         return "carnivora/carnivora";
     }
 
     @PostMapping("/carnivora/carnivora/")
     public String create(
-            @ModelAttribute("formSpecies") @Valid Faj formSpecies,
+            @ModelAttribute("formSpecies") @Valid Species formSpecies,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
@@ -113,7 +111,7 @@ public class CarnivoraController {
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("allSpecies")
-    List<Faj> allSpecies() {
+    List<Species> allSpecies() {
         return carnivoraService.findAll();
     }
 

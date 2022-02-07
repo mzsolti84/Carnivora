@@ -4,8 +4,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import hu.progmatic.carnivora.Tureshatar;
 import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
-import hu.progmatic.klad.KladEntity;
-import hu.progmatic.klad.Species;
+import hu.progmatic.carnivora.KladEntity;
+import hu.progmatic.carnivora.Species;
 
 import java.io.FileInputStream;
 import java.io.IOException;

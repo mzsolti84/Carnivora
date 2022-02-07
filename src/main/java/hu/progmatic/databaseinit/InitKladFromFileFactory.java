@@ -2,7 +2,7 @@ package hu.progmatic.databaseinit;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import hu.progmatic.klad.KladEntity;
+import hu.progmatic.carnivora.KladEntity;
 
 import java.io.*;
 import java.net.URISyntaxException;

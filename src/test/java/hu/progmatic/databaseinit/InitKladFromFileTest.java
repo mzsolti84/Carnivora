@@ -1,8 +1,6 @@
 package hu.progmatic.databaseinit;
 
-import hu.progmatic.databaseinit.InitKladFromFileFactory;
-import hu.progmatic.databaseinit.CsvURISyntaxException;
-import hu.progmatic.klad.KladEntity;
+import hu.progmatic.carnivora.KladEntity;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

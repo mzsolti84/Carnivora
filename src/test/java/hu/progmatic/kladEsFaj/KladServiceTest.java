@@ -1,5 +1,7 @@
-package hu.progmatic.klad;
+package hu.progmatic.kladEsFaj;
 
+import hu.progmatic.carnivora.KladService;
+import hu.progmatic.carnivora.KladWithChildrenDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

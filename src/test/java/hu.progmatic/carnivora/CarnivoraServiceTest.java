@@ -18,14 +18,14 @@ class CarnivoraServiceTest {
     @Test
     @DisplayName("Elem létrehozása")
     void create() {
-        Faj data = Faj.builder()
+        Species data = Species.builder()
                 .id(null)
-                .nev("Tyúk")
-                .latinNev("Tyukusz Udvarikusz")
-                .leiras("Tyúúúúk")
+                .name("Tyúk")
+                .nameLatin("Tyukusz Udvarikusz")
+                .description("Tyúúúúk")
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
-        Faj saved = service.save(data);
+        Species saved = service.save(data);
         assertNotNull(saved.getId());
     }
 
@@ -41,34 +41,34 @@ class CarnivoraServiceTest {
                 "345678901234567890123456789012345678901234567890123456789012345678" +
                 "901234567890123456789012345678901234567890123456789012345678901234" +
                 "567890123456789012345678901234567890123456789012345678901234567890";
-        Faj data = Faj.builder()
+        Species data = Species.builder()
                 .id(null)
-                .nev("Tyúk")
-                .latinNev("Tyukusz sp. Magyarikusz")
-                .leiras(hosszuLeiras)
+                .name("Tyúk")
+                .nameLatin("Tyukusz sp. Magyarikusz")
+                .description(hosszuLeiras)
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
-        Faj saved = service.save(data);
-        assertEquals(hosszuLeiras, saved.getLeiras());
+        Species saved = service.save(data);
+        assertEquals(hosszuLeiras, saved.getDescription());
     }
 
     @Test
     @DisplayName("Az latinNev mező egyedi")
     void createUnique() {
         String latinNev = "Tyukusz Tyukusz";
-        Faj data = Faj.builder()
+        Species data = Species.builder()
                 .id(null)
-                .nev("Tyúk")
-                .latinNev(latinNev)
-                .leiras("Tyúúúúk")
+                .name("Tyúk")
+                .nameLatin(latinNev)
+                .description("Tyúúúúk")
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
         service.save(data);
-        Faj data2 = Faj.builder()
+        Species data2 = Species.builder()
                 .id(null)
-                .nev("Tyúk")
-                .latinNev(latinNev)
-                .leiras("Tyúúúúk")
+                .name("Tyúk")
+                .nameLatin(latinNev)
+                .description("Tyúúúúk")
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
 
@@ -87,46 +87,46 @@ class CarnivoraServiceTest {
     @DisplayName("Teszt elemekkel")
     class TesztElemmelTest {
 
-        private Faj fajData;
+        private Species SpeciesData;
 
         @BeforeEach
         void setUp() {
-            Faj fajDataInit = Faj.builder()
+            Species SpeciesDataInit = Species.builder()
                     .id(null)
-                    .nev("Szürke farkas")
-                    .latinNev("Canis lupus sp.")
+                    .name("Szürke farkas")
+                    .nameLatin("Canis lupus sp.")
                     .turesHatar(Tureshatar.GENERALISTA)
-                    .leiras("Ordas Farkas")
+                    .description("Ordas Farkas")
                     .build();
 
-            fajData = service.save(fajDataInit);
+            SpeciesData = service.save(SpeciesDataInit);
         }
 
         @AfterEach
         void tearDown() {
-            service.deleteByIdIfExists(fajData.getId());
+            service.deleteByIdIfExists(SpeciesData.getId());
         }
 
         @Test
         @DisplayName("Elem lekérdezése id alapján")
         void getId() {
-            Faj read = service.findById(fajData.getId());
+            Species read = service.findById(SpeciesData.getId());
             assertNotNull(read.getId());
-            assertEquals("Szürke farkas", read.getNev());
-            assertEquals("Canis lupus sp.", read.getLatinNev());
+            assertEquals("Szürke farkas", read.getName());
+            assertEquals("Canis lupus sp.", read.getNameLatin());
             assertEquals(Tureshatar.GENERALISTA, read.getTuresHatar());
         }
 
         @Test
         @DisplayName("Elem törlése")
         void delete() {
-            Faj read = service.findById(fajData.getId());
+            Species read = service.findById(SpeciesData.getId());
             assertNotNull(read.getId());
-            service.deleteByIdIfExists(fajData.getId());
+            service.deleteByIdIfExists(SpeciesData.getId());
             Exception exception = null;
             try {
-                Faj readAfterDelete = service.findById(fajData.getId());
-                assertNotNull(readAfterDelete.getLatinNev());
+                Species readAfterDelete = service.findById(SpeciesData.getId());
+                assertNotNull(readAfterDelete.getNameLatin());
             } catch (Exception e) {
                 exception = e;
             }
@@ -136,10 +136,10 @@ class CarnivoraServiceTest {
         @Test
         @DisplayName("Elem frissítése")
         void update() {
-            Faj data = service.getById(fajData.getId());
-            data.setNev("Új név");
-            Faj read = service.findById(data.getId());
-            assertEquals("Új név", read.getNev());
+            Species data = service.getById(SpeciesData.getId());
+            data.setName("Új név");
+            Species read = service.findById(data.getId());
+            assertEquals("Új név", read.getName());
         }
     }
 }
