@@ -24,7 +24,7 @@
 
 <div class="container mt-5">
     <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
-          th:action="@{'/carnivoraProject/kozosos/a'}"
+          th:action="@{'/carnivora/kozosos/a'}"
           method="get" th:object="${kozosOs}">
         <div class="col">
             <label for="inputSpecies1">Egyik faj</label>
@@ -60,10 +60,10 @@
     </form>
 </div>
 <div class="text-center mt-2">
-    <a type="button" class="btn btn-primary text-center" th:href="@{'/carnivoraProject/carnivora'}">Kezdőlap</a>
+    <a type="button" class="btn btn-primary text-center" th:href="@{'/carnivora/carnivora'}">Kezdőlap</a>
 </div>
 
-<dev th:if="${formBevitelUtan}">
+<div th:if="${formBevitelUtan}">
     <div class="container-fluid" style="background-color: black; color: lightgrey;">
         <table class="table table-dark table-striped">
             <thead>
@@ -92,7 +92,7 @@
                 <td>
                     <div class="row">
                         <div class="col">
-                            <form th:action="@{'/carnivoraProject/carnivora/{id}/adatlap'(id=${species.id})}"
+                            <form th:action="@{'/carnivora/carnivora/{id}/adatlap'(id=${species.id})}"
                                   method="get">
                                 <input type="submit" class="btn btn-success" value="Betölt"/>
                             </form>
@@ -105,7 +105,7 @@
     </div>
 
 
-</dev>
+</div>
 
 
 </body>
