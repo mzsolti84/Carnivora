@@ -19,7 +19,7 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <br><br>
-<h3 th:text="${species.nev}" style="text-align: center; text-transform: uppercase">
+<h3 th:text="${species.name}" style="text-align: center; text-transform: uppercase">
     species.szuloNev.placeholder
 </h3>
 
@@ -50,62 +50,62 @@
                    th:text="${species.id}"></p>
             </td>
         </tr>
-        <tr>
-            <td>
-                <p>Rendszertani besorolás (család/alcsalád):</p>
-                <p style="font-size:130%;"
-                   th:text="${species.szuloNev}"></p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Magyar név:</p>
-                <p style="font-size:130%;"
-                   th:text="${species.nev}"></p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Latin név:</p>
-                <p style="font-size:130%;"
-                   th:text="${species.latinNev}"></p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Leírás:</p>
-                <p style="font-size:130%; text-align: justify"
-                   th:text="${species.leiras}"></p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Besorolás:</p>
-                <p th:text="${species.veszelyeztetettBesorolas}"
-                   style="font-size:130%;"></p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Tűréshatár (életmód):</p>
-                <p th:text="${species.turesHatar}"
-                   style="font-size:130%;"></p>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <!-- <tr>
+             <td>
+                 <p>Rendszertani besorolás (család/alcsalád):</p>
+                 <p style="font-size:130%;"
+                    th:text="${}"></p>
+             </td>
+         </tr> -->
+         <tr>
+             <td>
+                 <p>Magyar név:</p>
+                 <p style="font-size:130%;"
+                    th:text="${species.name}"></p>
+             </td>
+         </tr>
+         <tr>
+             <td>
+                 <p>Latin név:</p>
+                 <p style="font-size:130%;"
+                    th:text="${species.nameLatin}"></p>
+             </td>
+         </tr>
+         <tr>
+             <td>
+                 <p>Leírás:</p>
+                 <p style="font-size:130%; text-align: justify"
+                    th:text="${species.description}"></p>
+             </td>
+         </tr>
+         <tr>
+             <td>
+                 <p>Besorolás:</p>
+                 <p th:text="${species.veszelyeztetettBesorolas}"
+                    style="font-size:130%;"></p>
+             </td>
+         </tr>
+         <tr>
+             <td>
+                 <p>Tűréshatár (életmód):</p>
+                 <p th:text="${species.turesHatar}"
+                    style="font-size:130%;"></p>
+             </td>
+         </tr>
+         </tbody>
+     </table>
 
-</div>
-<br>
-<!--
-<div class="container">
-    <div class="text-center">
-        <form th:action="@{'/carnivoraProject/carnivora/{id}/TalalatiKartyak'}" method="get">
-            <button style=" background-color: black" type="submit" class="btn-dark">Kártya</Dark></button>
-        </form>
-    </div>
-</div>
-<br>  -->
+ </div>
+ <br>
+ <!--
+ <div class="container">
+     <div class="text-center">
+         <form th:action="@{'/carnivoraProject/carnivora/{id}/TalalatiKartyak'}" method="get">
+             <button style=" background-color: black" type="submit" class="btn-dark">Kártya</Dark></button>
+         </form>
+     </div>
+ </div>
+ <br>  -->
 <div class="container">
     <div class="text-center">
         <form th:action="@{/}" method="get">
