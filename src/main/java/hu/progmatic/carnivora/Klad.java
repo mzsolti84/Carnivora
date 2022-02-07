@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class KladEntity {
+public class Klad {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,11 +26,11 @@ public class KladEntity {
     private String description;
 
     @ManyToOne
-    private KladEntity parent;
+    private Klad parent;
 
     @Builder.Default
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-    private List<KladEntity> children = new ArrayList<>();
+    private List<Klad> children = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "clad", cascade = CascadeType.ALL)

@@ -34,5 +34,5 @@ public class Species {
     private String wikiURL;
 
     @ManyToOne
-    KladEntity clad;
+    Klad clad;
 }

@@ -4,7 +4,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import hu.progmatic.carnivora.Tureshatar;
 import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
-import hu.progmatic.carnivora.KladEntity;
+import hu.progmatic.carnivora.Klad;
 import hu.progmatic.carnivora.Species;
 
 import java.io.FileInputStream;
@@ -19,7 +19,7 @@ public class InitSpeciesFromFileFactory {
 
     private final List<Species> species;
 
-    private final List<KladEntity> klads;
+    private final List<Klad> klads;
 
     public InitSpeciesFromFileFactory(String kladFileName, String speciesFileName) {
         this.klads = new InitKladFromFileFactory(kladFileName).getKlads();
@@ -53,7 +53,7 @@ public class InitSpeciesFromFileFactory {
         String fotoURL = speciesProperties[6].equals("null") ? null : speciesProperties[6];
         String wikiURL = speciesProperties[7].equals("null") ? null : speciesProperties[7];
 
-        KladEntity parent = klads.stream().filter(klad -> klad.getName().equals(parentName)).findAny().orElseThrow();
+        Klad parent = klads.stream().filter(klad -> klad.getName().equals(parentName)).findAny().orElseThrow();
         Species givenSpecies = Species.builder()
                 .clad(parent)
                 .name(name)
@@ -97,7 +97,7 @@ public class InitSpeciesFromFileFactory {
         return species;
     }
 
-    public List<KladEntity> getKlads() {
+    public List<Klad> getKlads() {
         return klads;
     }
 }

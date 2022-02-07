@@ -2,7 +2,7 @@ package hu.progmatic.databaseinit;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import hu.progmatic.carnivora.KladEntity;
+import hu.progmatic.carnivora.Klad;
 
 import java.io.*;
 import java.net.URISyntaxException;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class InitKladFromFileFactory {
 
-    private final List<KladEntity> klads;
+    private final List<Klad> klads;
 
     public InitKladFromFileFactory(String fileName) {
         String fileWholeName;
@@ -46,7 +46,7 @@ public class InitKladFromFileFactory {
         String parent = kladProperties[2].equals("null") ? null : kladProperties[2];
         String description = kladProperties[3].equals("null") ? null : kladProperties[3];
         if (parent == null) {
-            klads.add(KladEntity.builder()
+            klads.add(Klad.builder()
                     .name(name)
                     .latinName(latinName)
                     .description(description)
@@ -54,8 +54,8 @@ public class InitKladFromFileFactory {
                     .build());
 
         } else {
-            KladEntity parentObject = klads.stream().filter(klad -> klad.getName().equals(parent)).findFirst().orElseThrow();
-            KladEntity givenKlad = KladEntity.builder()
+            Klad parentObject = klads.stream().filter(klad -> klad.getName().equals(parent)).findFirst().orElseThrow();
+            Klad givenKlad = Klad.builder()
                     .name(name)
                     .latinName(latinName)
                     .description(description)
@@ -67,7 +67,7 @@ public class InitKladFromFileFactory {
 
     }
 
-    public List<KladEntity> getKlads() {
+    public List<Klad> getKlads() {
         return klads;
     }
 }

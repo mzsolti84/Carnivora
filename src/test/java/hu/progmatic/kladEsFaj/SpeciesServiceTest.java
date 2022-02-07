@@ -41,7 +41,7 @@ class SpeciesServiceTest {
         SpeciesTestDto speciesTest = speciesService.speciesToSpeciesTestDto("Fossza");
         assertEquals("madagaszkári cibetmacskafélék családja", speciesTest.getParentName());
 
-        speciesTest = speciesTest = speciesService.speciesToSpeciesTestDto("Kinkaju");
+        speciesTest = speciesService.speciesToSpeciesTestDto("Kinkaju");
         assertEquals("mosómedvefélék családja", speciesTest.getParentName());
     }
 

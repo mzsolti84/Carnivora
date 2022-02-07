@@ -1,6 +1,6 @@
 package hu.progmatic.databaseinit;
 
-import hu.progmatic.carnivora.KladEntity;
+import hu.progmatic.carnivora.Klad;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -24,14 +24,14 @@ public class InitKladFromFileTest {
     @Test
     void iniFileAlrendMacskaTest() {
         InitKladFromFileFactory initKlad = new InitKladFromFileFactory("klad.csv");
-        List<KladEntity> klads = initKlad.getKlads();
+        List<Klad> klads = initKlad.getKlads();
 
-        KladEntity givenKlad = klads.stream()
+        Klad givenKlad = klads.stream()
                 .filter(klad -> klad.getName().equals("macskaalkatúak alrendje"))
                 .findFirst().orElseThrow();
 
         assertThat(givenKlad.getChildren())
-                .extracting(KladEntity::getName)
+                .extracting(Klad::getName)
                 .containsExactlyInAnyOrder("madagaszkári cibetmacskafélék családja",
                         "macskafélék családja",
                         "mongúzfélék családja",
@@ -45,14 +45,14 @@ public class InitKladFromFileTest {
     @Test
     void iniFileAlrendKutyaTest() {
         InitKladFromFileFactory initKlad = new InitKladFromFileFactory("klad.csv");
-        List<KladEntity> klads = initKlad.getKlads();
+        List<Klad> klads = initKlad.getKlads();
 
-        KladEntity givenKlad = klads.stream()
+        Klad givenKlad = klads.stream()
                 .filter(klad -> klad.getName().equals("kutyaalkatúak alrendje"))
                 .findFirst().orElseThrow();
 
         assertThat(givenKlad.getChildren())
-                .extracting(KladEntity::getName)
+                .extracting(Klad::getName)
                 .containsExactlyInAnyOrder("macskamedvefélék családja",
                         "kutyafélék családja",
                         "bűzösborzfélék családja",

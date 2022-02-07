@@ -37,12 +37,12 @@ public class KladService implements InitializingBean {
     }
 
     public KladWithChildrenDto getKladDtoByName(String name) {
-        KladEntity entity = kladRepository.findByNameEquals(name);
+        Klad entity = kladRepository.findByNameEquals(name);
 
         return buildKladWithChildrenDto(entity);
     }
 
-    private KladWithChildrenDto buildKladWithChildrenDto(KladEntity entity) {
+    private KladWithChildrenDto buildKladWithChildrenDto(Klad entity) {
         return KladWithChildrenDto.builder()
                 .name(entity.getName())
                 .latinName(entity.getLatinName())
@@ -57,17 +57,17 @@ public class KladService implements InitializingBean {
     }
 
     public List<KladWithChildrenDto> findAllWithNoChild() {
-        List<KladEntity> noChildrens = kladRepository.findAllWithNoChild();
+        List<Klad> noChildrens = kladRepository.findAllWithNoChild();
         return noChildrens.stream().map(this::buildKladWithChildrenDto).toList();
     }
 
-    public String getJsonFromKladEntityList(List<KladEntity> allKladEntity) {
+    public String getJsonFromKladEntityList(List<Klad> allKlad) {
         return """
                 { "class": "TreeModel",\\n
                   "nodeDataArray": [\\n
                 """
                 +
-                String.join(",\\n", allKladEntity.stream()
+                String.join(",\\n", allKlad.stream()
                         .map(kladEntity -> new Gson().toJson(kladEntity))
                         .toList())
                 +
@@ -83,7 +83,7 @@ public class KladService implements InitializingBean {
                 .toList();
     }
 
-    private ParentKladDto kladToParentKladDto(KladEntity klad) {
+    private ParentKladDto kladToParentKladDto(Klad klad) {
         return ParentKladDto.builder()
                 .id(klad.getId())
                 .name(klad.getName())
