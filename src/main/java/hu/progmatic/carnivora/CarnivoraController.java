@@ -38,7 +38,7 @@ public class CarnivoraController {
 
     @GetMapping("/")
     public String species() {
-        return "carnivora";
+        return "kezdolap";
     }
 
     @GetMapping("/carnivora/{id}")
@@ -67,9 +67,9 @@ public class CarnivoraController {
         return "kozosos";
     }
 
-    @RequestMapping("/kezdolap")
-    public String kezdolap() {
-        return "kezdolap";
+    @RequestMapping("/carnivora")
+    public String fajAdatbazis() {
+        return "carnivora";
     }
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
