@@ -36,8 +36,8 @@ public class CarnivoraController {
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
-    @GetMapping("/")
-    public String species() {
+    @RequestMapping ("/")
+    public String belepes() {
         return "kezdolap";
     }
 
