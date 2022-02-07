@@ -53,19 +53,19 @@ public class InitSpeciesFromFileFactory {
         String fotoURL = speciesProperties[6].equals("null") ? null : speciesProperties[6];
         String wikiURL = speciesProperties[7].equals("null") ? null : speciesProperties[7];
 
-        Klad parent = klads.stream().filter(klad -> klad.getName().equals(parentName)).findAny().orElseThrow();
+        Klad parent = klads.stream().filter(klad -> klad.getNev().equals(parentName)).findAny().orElseThrow();
         Species givenSpecies = Species.builder()
-                .clad(parent)
-                .name(name)
-                .nameLatin(nameLatin)
-                .description(description)
+                .klad(parent)
+                .nev(name)
+                .latinNev(nameLatin)
+                .leiras(description)
                 .veszelyeztetettBesorolas(kategoriaSwitch(veszelyeztetett))
                 .turesHatar(turesSwitch(tureshatar))
                 .fotoURL(fotoURL)
                 .wikiURL(wikiURL)
                 .build();
         species.add(givenSpecies);
-        parent.getSpeciesList().add(givenSpecies);
+        parent.getFajLista().add(givenSpecies);
     }
 
     public static VeszelyeztetettKategoriak kategoriaSwitch(String line) {

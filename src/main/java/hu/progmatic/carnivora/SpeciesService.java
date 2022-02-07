@@ -18,12 +18,12 @@ public class SpeciesService {
         speciesRepository.saveAll(species);
     }
 
-    public SpeciesTestDto speciesToSpeciesTestDto(String name){
-        Species species = speciesRepository.getByName(name);
+    public SpeciesTestDto speciesToSpeciesTestDto(String nev){
+        Species species = speciesRepository.getByNev(nev);
         return SpeciesTestDto.builder()
-                .name(species.getName())
-                .parentName(species.getClad().getName())
-                .description(species.getDescription())
+                .name(species.getNev())
+                .parentName(species.getKlad().getNev())
+                .description(species.getLeiras())
                 .turesHatar(species.getTuresHatar())
                 .veszelyeztetettBesorolas(species.getVeszelyeztetettBesorolas())
                 .build();

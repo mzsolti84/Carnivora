@@ -96,7 +96,7 @@ public class CarnivoraController {
         if (!bindingResult.hasErrors()) {
             carnivoraService.create(formSpecies);
             model.addAttribute("allSpecies", carnivoraService.findAll());
-            model.addAttribute("formSpecies", new Faj());
+            model.addAttribute("formSpecies", new Species());
         }
         return "carnivora";
     }
@@ -121,8 +121,8 @@ public class CarnivoraController {
     }
 
     @ModelAttribute("formSpecies")
-    public Faj formSpecies() {
-        return new Faj();
+    public Species formSpecies() {
+        return new Species();
     }
 
     // MODEL MÓDOSÍTÓK -------------------------------------------------------------------------------

@@ -20,9 +20,9 @@ class CarnivoraServiceTest {
     void create() {
         Species data = Species.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin("Tyukusz Udvarikusz")
-                .description("Tyúúúúk")
+                .nev("Tyúk")
+                .latinNev("Tyukusz Udvarikusz")
+                .leiras("Tyúúúúk")
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
         Species saved = service.save(data);
@@ -43,13 +43,13 @@ class CarnivoraServiceTest {
                 "567890123456789012345678901234567890123456789012345678901234567890";
         Species data = Species.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin("Tyukusz sp. Magyarikusz")
-                .description(hosszuLeiras)
+                .nev("Tyúk")
+                .latinNev("Tyukusz sp. Magyarikusz")
+                .leiras(hosszuLeiras)
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
         Species saved = service.save(data);
-        assertEquals(hosszuLeiras, saved.getDescription());
+        assertEquals(hosszuLeiras, saved.getLeiras());
     }
 
     @Test
@@ -58,17 +58,17 @@ class CarnivoraServiceTest {
         String latinNev = "Tyukusz Tyukusz";
         Species data = Species.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin(latinNev)
-                .description("Tyúúúúk")
+                .nev("Tyúk")
+                .latinNev(latinNev)
+                .leiras("Tyúúúúk")
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
         service.save(data);
         Species data2 = Species.builder()
                 .id(null)
-                .name("Tyúk")
-                .nameLatin(latinNev)
-                .description("Tyúúúúk")
+                .nev("Tyúk")
+                .latinNev(latinNev)
+                .leiras("Tyúúúúk")
                 .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
                 .build();
 
@@ -93,10 +93,10 @@ class CarnivoraServiceTest {
         void setUp() {
             Species SpeciesDataInit = Species.builder()
                     .id(null)
-                    .name("Szürke farkas")
-                    .nameLatin("Canis lupus sp.")
+                    .nev("Szürke farkas")
+                    .latinNev("Canis lupus sp.")
                     .turesHatar(Tureshatar.GENERALISTA)
-                    .description("Ordas Farkas")
+                    .leiras("Ordas Farkas")
                     .build();
 
             SpeciesData = service.save(SpeciesDataInit);
@@ -112,8 +112,8 @@ class CarnivoraServiceTest {
         void getId() {
             Species read = service.findById(SpeciesData.getId());
             assertNotNull(read.getId());
-            assertEquals("Szürke farkas", read.getName());
-            assertEquals("Canis lupus sp.", read.getNameLatin());
+            assertEquals("Szürke farkas", read.getNev());
+            assertEquals("Canis lupus sp.", read.getLatinNev());
             assertEquals(Tureshatar.GENERALISTA, read.getTuresHatar());
         }
 
@@ -126,7 +126,7 @@ class CarnivoraServiceTest {
             Exception exception = null;
             try {
                 Species readAfterDelete = service.findById(SpeciesData.getId());
-                assertNotNull(readAfterDelete.getNameLatin());
+                assertNotNull(readAfterDelete.getLatinNev());
             } catch (Exception e) {
                 exception = e;
             }
@@ -137,9 +137,9 @@ class CarnivoraServiceTest {
         @DisplayName("Elem frissítése")
         void update() {
             Species data = service.getById(SpeciesData.getId());
-            data.setName("Új név");
+            data.setNev("Új név");
             Species read = service.findById(data.getId());
-            assertEquals("Új név", read.getName());
+            assertEquals("Új név", read.getNev());
         }
     }
 }

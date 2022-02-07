@@ -16,13 +16,13 @@ public class Species {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(length = 20000)
+    @Lob
     @NotEmpty
-    private String description;
-    private String name;
+    private String leiras;
+    private String nev;
     @NotEmpty
     @Column(unique = true)
-    private String nameLatin;
+    private String latinNev;
 
     @Enumerated(EnumType.STRING)
     private VeszelyeztetettKategoriak veszelyeztetettBesorolas;
@@ -34,5 +34,5 @@ public class Species {
     private String wikiURL;
 
     @ManyToOne
-    Klad clad;
+    Klad klad;
 }

@@ -18,12 +18,12 @@ public class Klad {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name;
+    private String nev;
 
     @Column(unique = true)
-    private String latinName;
+    private String latinNev;
 
-    private String description;
+    private String leiras;
 
     @ManyToOne
     private Klad parent;
@@ -33,6 +33,6 @@ public class Klad {
     private List<Klad> children = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "clad", cascade = CascadeType.ALL)
-    private List<Species> speciesList = new ArrayList<>();
+    @OneToMany(mappedBy = "klad", cascade = CascadeType.ALL)
+    private List<Species> fajLista = new ArrayList<>();
 }

@@ -47,18 +47,18 @@ public class InitKladFromFileFactory {
         String description = kladProperties[3].equals("null") ? null : kladProperties[3];
         if (parent == null) {
             klads.add(Klad.builder()
-                    .name(name)
-                    .latinName(latinName)
-                    .description(description)
+                    .nev(name)
+                    .latinNev(latinName)
+                    .leiras(description)
                     .parent(null)
                     .build());
 
         } else {
-            Klad parentObject = klads.stream().filter(klad -> klad.getName().equals(parent)).findFirst().orElseThrow();
+            Klad parentObject = klads.stream().filter(klad -> klad.getNev().equals(parent)).findFirst().orElseThrow();
             Klad givenKlad = Klad.builder()
-                    .name(name)
-                    .latinName(latinName)
-                    .description(description)
+                    .nev(name)
+                    .latinNev(latinName)
+                    .leiras(description)
                     .parent(parentObject)
                     .build();
             parentObject.getChildren().add(givenKlad);

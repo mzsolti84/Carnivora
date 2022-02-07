@@ -1,17 +1,10 @@
 package hu.progmatic.carnivora;
 
-import hu.progmatic.databaseinit.GetWholePathOfResource;
-import hu.progmatic.databaseinit.InitSpeciesFromFileFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
+
 
 @Service
 public class CarnivoraService {
@@ -51,6 +44,7 @@ public class CarnivoraService {
                 .orElseThrow();
     }
 
+    /*
     public List<Faj> databaseFactory(String filePath) {
         File file = new File(filePath);
         List<Faj> ujFaj = new LinkedList<>();
@@ -106,6 +100,8 @@ public class CarnivoraService {
             default -> Tureshatar.GENERALISTA;
         };
     }
+    */
+
 
 
 }

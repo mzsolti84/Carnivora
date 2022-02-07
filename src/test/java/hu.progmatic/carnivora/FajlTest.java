@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 public class FajlTest {
-
+/*
     @Autowired
     private CarnivoraService service;
     private String file;
@@ -25,6 +25,7 @@ public class FajlTest {
     }
 
     @Test
+    @Disabled
     void throwExceptionOnInvalidName() {
         RuntimeException exception = null;
         try {
@@ -37,6 +38,7 @@ public class FajlTest {
 
 
     @Test
+    @Disabled
     @DisplayName("Listába betölt teszt")
     void darabSzam() {
         List<Faj> ujFaj = service.databaseFactory(file);
@@ -44,6 +46,7 @@ public class FajlTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Helyes információ ellenőrizve")
     void factoryTest() {
         List<Faj> ujFaj = service.databaseFactory(file);
@@ -55,4 +58,6 @@ public class FajlTest {
         assertEquals("Prionodon pardicolor", ujFaj.get(5).getLatinNev());
         assertEquals("Foltos tigrispetymeg", ujFaj.get(5).getNev());
     }
+
+ */
 }
