@@ -63,16 +63,16 @@
         <tbody style="font-size: 10pt">
         <tr th:each="species : ${allSpecies}">
             <th scope="row" th:text="${species.id}">id</th>
-            <td th:text="${species.szuloNev}">szuloNev</td>
-            <td th:text="${species.nev}">nev</td>
-            <td th:text="${species.latinNev}">latinNev</td>
-            <td th:text="${#strings.abbreviate(species.leiras,80)}">leiras</td>
+            <!-- <td th:text="${species.szuloNev}">szuloNev</td> -->
+            <td th:text="${species.name}">nev</td>
+            <td th:text="${species.nameLatin}">latinNev</td>
+            <td th:text="${#strings.abbreviate(species.description,80)}">leiras</td>
             <td th:text="${#strings.abbreviate(species.veszelyeztetettBesorolas,12)}">veszelyeztetettBesorolas</td>
             <td th:text="${species.turesHatar}">turesHatar</td>
             <td>
                 <div class="row">
                     <div class="col">
-                        <form th:action="@{'/carnivoraProject/carnivora/{id}/adatlap'(id=${species.id})}" method="get">
+                        <form th:action="@{'/carnivora/{id}/adatlap'(id=${species.id})}" method="get">
                             <input type="submit" class="btn btn-success" value="Adatlap"/>
                         </form>
                     </div>
@@ -81,7 +81,7 @@
             <td>
                 <div class="row">
                     <div class="col">
-                        <form th:action="@{'/carnivoraProject/carnivora/{id}'(id=${species.id})}" method="get">
+                        <form th:action="@{'/carnivora/{id}'(id=${species.id})}" method="get">
                             <input type="submit" class="btn btn-danger" value="Módosít"/>
                         </form>
                     </div>
@@ -90,7 +90,7 @@
             <td>
                 <div class="row">
                     <div class="col">
-                        <form th:action="@{'/carnivoraProject/carnivora/delete/{id}'(id=${species.id})}" method="post">
+                        <form th:action="@{'/carnivora/delete/{id}'(id=${species.id})}" method="post">
                             <input type="submit" class="btn btn-danger" value="Eltávolít"/>
                         </form>
                     </div>
@@ -114,7 +114,7 @@
                  class="card-img-top" alt="...">
             <div class="card-body">
                 <div class="container-fluid">
-                    <form th:action="@{'/carnivoraProject/carnivora/{id}'(id=${formSpecies.id})}"
+                    <form th:action="@{'/carnivora/{id}'(id=${formSpecies.id})}"
                           method="post" th:object="${formSpecies}">
                         <fieldset>
                             <legend class="container-fluid text-center d-none d-sm-block">ÚJ FAJ FELVÉTELE/MÓDOSÍTÁS
@@ -277,7 +277,7 @@
         </form>
 
         <br>
-        <form th:action="@{'/carnivoraProject/kozosos'}" method="get">
+        <form th:action="@{'/kozosos'}" method="get">
             <button style=" background-color: black" type="submit" class="btn-dark">Közös ős kereső</button>
         </form>
     </div>

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 @Service
-public class CarnivoraService implements InitializingBean {
+public class CarnivoraService {
 
     @Autowired
     private SpeciesRepository speciesRepositoryC;
@@ -107,13 +107,5 @@ public class CarnivoraService implements InitializingBean {
         };
     }
 
-    @Override
-    public void afterPropertiesSet() throws URISyntaxException {
-        if (speciesRepositoryC.findAll().isEmpty()) {
-            InitSpeciesFromFileFactory init = new InitSpeciesFromFileFactory("klad.csv", "faj.csv");
-            List<Species> ujFaj = init.getSpecies();
-            speciesRepositoryC.saveAll(ujFaj);
-        }
-    }
 
 }

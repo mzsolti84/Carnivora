@@ -23,58 +23,58 @@ public class CarnivoraController {
     // RETURN to .HTML-ek ---------------------------------------------------------------------------
 
     private String carnivora() {
-        return "carnivora/carnivora";
+        return "carnivora";
     }
 
     private String adatlap() {
-        return "carnivora/carnivoraAdatlap";
+        return "carnivoraAdatlap";
     }
 
     private String kartya() {
-        return "carnivora/talalatiKartyak";
+        return "talalatiKartyak";
     }
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String species() {
-        return "carnivora/carnivora";
+        return "carnivora";
     }
 
-    @GetMapping("/carnivora/carnivora/{id}")
+    @GetMapping("/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         Species formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
-        return "carnivora/carnivora";
+        return "carnivora";
     }
 
-    @GetMapping("/carnivora/carnivora/{id}/adatlap")
+    @GetMapping("/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
         Species formSpecies = carnivoraService.getById(id);
         model.addAttribute("formSpecies", formSpecies);
-        return "carnivora/carnivoraAdatlap";
+        return "carnivoraAdatlap";
     }
 
-    @GetMapping("/carnivora/carnivora/{id}/TalalatiKartyak")
+    @GetMapping("/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
         Species formSpecies = carnivoraService.getById(id);
         model.addAttribute(formSpecies);
-        return "carnivora/talalatiKartyak";
+        return "talalatiKartyak";
     }
 
-    @RequestMapping("/carnivora/kozosos")
+    @RequestMapping("/kozosos")
     public String kozosOS() {
-        return "carnivora/kozosos";
+        return "kozosos";
     }
 
-    @RequestMapping("/carnivora/kezdolap")
+    @RequestMapping("/kezdolap")
     public String kezdolap() {
-        return "carnivora/kezdolap";
+        return "kezdolap";
     }
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
-    @PostMapping("/carnivora/carnivora/{id}")
+    @PostMapping("/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
             @ModelAttribute("formSpecies") @Valid Species formSpecies,
@@ -85,10 +85,10 @@ public class CarnivoraController {
             model.addAttribute("allSpecies", carnivoraService.findAll());
             model.addAttribute("formSpecies", new Species());
         }
-        return "carnivora/carnivora";
+        return "carnivora";
     }
 
-    @PostMapping("/carnivora/carnivora/")
+    @PostMapping("/carnivora/")
     public String create(
             @ModelAttribute("formSpecies") @Valid Species formSpecies,
             BindingResult bindingResult,
@@ -98,14 +98,14 @@ public class CarnivoraController {
             model.addAttribute("allSpecies", carnivoraService.findAll());
             model.addAttribute("formSpecies", new Faj());
         }
-        return "carnivora/carnivora";
+        return "carnivora";
     }
 
-    @PostMapping("/carnivora/carnivora/delete/{id}")
+    @PostMapping("/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
         carnivoraService.deleteById(id);
         model.addAttribute("allSpecies", carnivoraService.findAll());
-        return "carnivora/carnivora";
+        return "carnivora";
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------

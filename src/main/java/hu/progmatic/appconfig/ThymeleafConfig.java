@@ -20,7 +20,7 @@ public class ThymeleafConfig implements WebMvcConfigurer {
   @Bean
   public ClassLoaderTemplateResolver templateResolver() {
     ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-    //templateResolver.setPrefix("templates/");
+    templateResolver.setPrefix("templates/");
     templateResolver.setSuffix(".html");
     templateResolver.setTemplateMode(TemplateMode.HTML);
     templateResolver.setCharacterEncoding("UTF-8");
