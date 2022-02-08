@@ -70,7 +70,7 @@ class LoginFormTest {
               MockMvcRequestBuilders.get("/")
           )
           .andExpect(MockMvcResultMatchers.status().isOk())
-          .andExpect(MockMvcResultMatchers.content().string(containsString("tesztfelhasznalonev")));
+          .andExpect(MockMvcResultMatchers.content().string(containsString("Carnivora Project")));
     }
   }
 
