@@ -61,18 +61,18 @@
         </tr>
         </thead>
         <tbody style="font-size: 10pt">
-        <tr th:each="fajok : ${allSpecies}">
-            <th scope="row" th:text="${fajok.id}">id</th>
-            <!-- <td th:text="${fajok.szuloNev}">szuloNev</td> -->
-            <td th:text="${fajok.nev}">nev</td>
-            <td th:text="${fajok.latinNev}">latinNev</td>
-            <td th:text="${#strings.abbreviate(fajok.leiras,80)}">leiras</td>
-            <td th:text="${#strings.abbreviate(fajok.getStatusz,12)}">veszelyeztetettBesorolas</td>
-            <td th:text="${fajok.turesHatar}">turesHatar</td>
+        <tr th:each="faj : ${allSpecies}">
+            <th scope="row" th:text="${faj.id}">id</th>
+            <!-- <td th:text="${faj.szuloNev}">szuloNev</td> -->
+            <td th:text="${faj.nev}">nev</td>
+            <td th:text="${faj.latinNev}">latinNev</td>
+            <td th:text="${#strings.abbreviate(faj.leiras,80)}">leiras</td>
+            <td th:text="${#strings.abbreviate(faj.getStatusz,12)}">veszelyeztetettBesorolas</td>
+            <td th:text="${faj.turesHatar}">turesHatar</td>
             <td>
                 <div class="row">
                     <div class="col">
-                        <form th:action="@{'/carnivora/{id}/adatlap'(id=${fajok.id})}" method="get">
+                        <form th:action="@{'/carnivora/{id}/adatlap'(id=${faj.id})}" method="get">
                             <input type="submit" class="btn btn-success" value="Adatlap"/>
                         </form>
                     </div>
@@ -81,7 +81,7 @@
             <td>
                 <div class="row">
                     <div class="col">
-                        <form th:action="@{'/carnivora/{id}'(id=${fajok.id})}" method="get">
+                        <form th:action="@{'/carnivora/{id}'(id=${faj.id})}" method="get">
                             <input type="submit" class="btn btn-danger" value="Módosít"/>
                         </form>
                     </div>
@@ -90,7 +90,7 @@
             <td>
                 <div class="row">
                     <div class="col">
-                        <form th:action="@{'/carnivora/delete/{id}'(id=${fajok.id})}" method="post">
+                        <form th:action="@{'/carnivora/delete/{id}'(id=${faj.id})}" method="post">
                             <input type="submit" class="btn btn-danger" value="Eltávolít"/>
                         </form>
                     </div>
@@ -130,12 +130,12 @@
                             </div>
                             <br>
                             <!-- <div class="container-fluid">
-                                <label class="form-label">Szülőkategória ID</label>
+                                <label class="form-label">Szülő ID</label>
                                 <input type="text"
                                        readonly
                                        class="form-control bg-dark text-white"
-                                       placeholder="SzülőkategóriaId"
-                                       th:field="*{szuloKategoriaID}"
+                                       placeholder="SzülőId"
+                                       th:field="*{szuloId}"
                                 />
                             </div>
                             <br>-->
