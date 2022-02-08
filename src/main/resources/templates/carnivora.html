@@ -117,8 +117,8 @@
                  class="card-img-top" alt="...">
             <div class="card-body">
                 <div class="container-fluid">
-                    <form th:action="@{'/carnivora/{id}'(id=${formFaj.id})}"
-                          method="post" th:object="${formFaj}">
+                    <form th:action="@{'/carnivora/{id}'(id=${formFajDto.id})}"
+                          method="post" th:object="${formFajDto}">
                         <fieldset>
                             <legend class="container-fluid text-center d-none d-sm-block">ÚJ FAJ FELVÉTELE/MÓDOSÍTÁS
                             </legend>
@@ -140,7 +140,7 @@
                                        readonly
                                        class="form-control bg-dark text-white"
                                        placeholder="Ős Id"
-                                       th:field="*{klad.id}"
+                                       th:field="*{szuloId}"
                                 />
                             </div>
 
@@ -213,16 +213,16 @@
 
                             <div class="container-fluid">
                                 <label class="form-label">Ősosztály</label>
-                                <select class="form-select bg-dark text-white" th:field="*{klad.nev}">
+                                <select class="form-select bg-dark text-white" th:field="*{szuloNev}">
                                     <option th:each="klad : ${allKlad}"
-                                            th:selected="${klad.nev == formFaj.klad.nev}"
+                                            th:selected="${klad.nev == formFajDto.szuloNev}"
                                             th:text="${klad.nev}" th:value="${klad.nev}"
                                             th:classappend="${#fields.hasErrors('szuloNev')} ? 'is-invalid' : 'is-valid'">
                                     </option>
                                 </select>
                                 <div class="invalid-feedback"
                                      th:if="${#fields.hasErrors('szuloNev')}"
-                                     th:errors="*{klad.nev}">
+                                     th:errors="*{szuloNev}">
                                     Hibaüzenet
                                 </div>
                             </div>
@@ -233,7 +233,7 @@
                                 <label class="form-label">Természetvédelmi státusz</label>
                                 <select class="form-select bg-dark text-white"
                                         th:field="*{statusz}"
-                                        th:classappend="${#fields.hasErrors('veszelyeztetettBesorolas')} ? 'is-invalid' : 'is-valid'">
+                                        th:classappend="${#fields.hasErrors('statusz')} ? 'is-invalid' : 'is-valid'">
                                     <option th:value="'KIHALT'" th:text="'Kihalt'"></option>
                                     <option th:value="'VADON_KIHALT'" th:text="'Vadon kihalt'"></option>
                                     <option th:value="'FENYEGETETT'" th:text="'Fenyegetett'"></option>
@@ -247,7 +247,7 @@
                                     <option th:value="'HAZIASITOTT'" th:text="'Háziasított'"></option>
                                 </select>
                                 <div class="invalid-feedback"
-                                     th:if="${#fields.hasErrors('veszelyeztetettBesorolas')}"
+                                     th:if="${#fields.hasErrors('statusz')}"
                                      th:errors="*{statusz}">
                                     Hibaüzenet
                                 </div>

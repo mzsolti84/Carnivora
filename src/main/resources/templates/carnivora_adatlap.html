@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
 
     <title class="text-white border-white"
-           th:object="${formFaj}"
+           th:object="${formFajDto}"
            th:text="*{nev}">formFaj.nev
     </title>
     <!-- Bootstrap CSS -->
@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-<body th:object="${formFaj}" class="text-white border-white" style="background-color:black">
+<body th:object="${formFajDto}" class="text-white border-white" style="background-color:black">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -50,13 +50,13 @@
                 <p style="font-size:130%;" th:text="*{id}">formFaj.id</p>
             </td>
         </tr>
-        <!-- <tr>
+        <tr>
              <td>
                  <p>Rendszertani besorolás (család/alcsalád):</p>
                  <p style="font-size:130%;"
-                    th:text="${}"></p>
+                    th:text="*{SzuloNev}"></p>
              </td>
-         </tr> -->
+         </tr>
         <tr>
             <td>
                 <p>Magyar név:</p>
@@ -103,7 +103,7 @@
 <br>  -->
 <div class="container">
     <div class="text-center">
-        <form th:action="@{/}" method="get">
+        <form th:action="@{/carnivora}" method="get">
             <button style=" background-color: black" type="submit" class="btn-dark">Vissza</button>
         </form>
     </div>

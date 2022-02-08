@@ -29,24 +29,32 @@ public class CarnivoraController {
         return "kezdolap";
     }
 
-    @GetMapping("/carnivora/{id}")
+    /*@GetMapping("/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         Faj formFaj = carnivoraService.getById(id);
         model.addAttribute("formFaj", formFaj);
         return "carnivora";
+    }*/
+
+    @GetMapping("/carnivora/{id}")
+    public String szerkeszt(@PathVariable Integer id, Model model) {
+        FajDto formFajDto = fajService.getById(id);
+        model.addAttribute("formFajDto", formFajDto);
+        return "carnivora";
     }
+
 
     @GetMapping("/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
-        Faj formFaj = carnivoraService.getById(id);
-        model.addAttribute("formFaj", formFaj);
+        FajDto formFajDto = fajService.getById(id);
+        model.addAttribute("formFajDto", formFajDto);
         return "carnivora_adatlap";
     }
 
     @GetMapping("/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
-        Faj formFaj = carnivoraService.getById(id);
-        model.addAttribute(formFaj);
+        FajDto formFajDto = fajService.getById(id);
+        model.addAttribute("formFajDto", formFajDto);
         return "talalati_kartyak";
     }
 
@@ -67,7 +75,7 @@ public class CarnivoraController {
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
-    @PostMapping("/carnivora/{id}")
+    /*@PostMapping("/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
             @ModelAttribute("formFaj") @Valid Faj formFaj,
@@ -79,17 +87,32 @@ public class CarnivoraController {
             model.addAttribute("formFaj", formFaj());
         }
         return "carnivora";
-    }
+    }*/
 
-    @PostMapping("/carnivora/")
-    public String create(
-            @ModelAttribute("formFaj") @Valid Faj formFaj,
+    @PostMapping("/carnivora/{id}")
+    public String save(
+            @PathVariable Integer id,
+            @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            carnivoraService.create(formFaj);
-            model.addAttribute("allFaj", allFaj());
-            model.addAttribute("formFaj", formFaj());
+            fajService.save(formFajDto);
+            model.addAttribute("allFajDto", allFajDto());
+            model.addAttribute("formFajDto", formFajDto());
+        }
+        return "carnivora";
+    }
+
+
+    @PostMapping("/carnivora/")
+    public String create(
+            @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
+            BindingResult bindingResult,
+            Model model) {
+        if (!bindingResult.hasErrors()) {
+            fajService.create(formFajDto);
+            model.addAttribute("allFajDto", allFajDto());
+            model.addAttribute("formFajDto", formFajDto());
         }
         return "carnivora";
     }
@@ -110,6 +133,9 @@ public class CarnivoraController {
 
     @ModelAttribute("allFajDto")
     List<FajDto> allFajDto() {
+        for (FajDto lista : fajService.getAllFajDto()) {
+            if (lista.getSzuloNev() != null) System.out.println(lista.getSzuloNev());
+        }
         return fajService.getAllFajDto();
     }
 
@@ -121,6 +147,11 @@ public class CarnivoraController {
     @ModelAttribute("formFaj")
     public Faj formFaj() {
         return new Faj();
+    }
+
+    @ModelAttribute("formFajDto")
+    public FajDto formFajDto() {
+        return new FajDto();
     }
 
 }

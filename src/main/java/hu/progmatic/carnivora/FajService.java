@@ -13,6 +13,9 @@ public class FajService {
     @Autowired
     private FajRepository fajRepository;
 
+    @Autowired
+    private KladRepository kladRepository;
+
     public void saveAll(List<Faj> fajok) {
         fajRepository.saveAll(fajok);
     }
@@ -37,5 +40,56 @@ public class FajService {
                 .szuloNev(faj.getKlad().getNev())
                 .szuloId(faj.getKlad().getId())
                 .build();
+    }
+
+    public FajDto buildFajDtoByFajId(Integer id) {
+        Faj faj = fajRepository.getById(id);
+        return FajDto.builder()
+                .id(faj.getId())
+                .leiras(faj.getLeiras())
+                .nev(faj.getNev())
+                .latinNev(faj.getLatinNev())
+                .statusz(faj.getStatusz())
+                .turesHatar(faj.getTuresHatar())
+                .fotoURL(faj.getFotoURL())
+                .wikiURL(faj.getWikiURL())
+                .szuloNev(faj.getKlad().getNev())
+                .szuloId(faj.getKlad().getId())
+                .build();
+    }
+
+    private Klad getKladFromFajDto(FajDto fajDto) {
+        return kladRepository.getByNev(fajDto.getSzuloNev());
+    }
+
+    public Faj buildFajFromFajDto(FajDto fajDto) {
+        return Faj.builder()
+                .id(fajDto.getId())
+                .nev(fajDto.getNev())
+                .leiras(fajDto.getLeiras())
+                .latinNev(fajDto.getLatinNev())
+                .statusz(fajDto.getStatusz())
+                .turesHatar(fajDto.getTuresHatar())
+                .fotoURL(fajDto.getFotoURL())
+                .wikiURL(fajDto.getWikiURL())
+                .klad(getKladFromFajDto(fajDto))
+                .build();
+    }
+
+    public FajDto getById(Integer id) {
+        return buildFajDtoByFajId(id);
+    }
+
+    public Faj save(FajDto fajDto) {
+        return fajRepository.saveAndFlush(
+                buildFajFromFajDto(fajDto)
+        );
+    }
+
+    public Faj create(FajDto fajDto) {
+        Faj faj = buildFajFromFajDto(fajDto);
+        faj.setId(null);
+        //if (faj.klad == null) faj.klad = kladRepository.getByNev("kardfogú macskák alcsaládja – kihalt");
+        return fajRepository.save(faj);
     }
 }
