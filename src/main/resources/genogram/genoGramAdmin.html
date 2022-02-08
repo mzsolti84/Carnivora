@@ -142,9 +142,9 @@
             }
 
             // This converter is used by the Picture.
-            function findHeadShot(key) {
-                if (key < 0 || key > 16) return "images/HSnopic.png"; // There are only 16 images on the server
-                return "images/HS" + key + ".png"
+            function findHeadShot(name) {
+                console.log(name);
+                return "images/" + name + ".jpg"
             }
 
             // define the Node template
@@ -202,7 +202,7 @@
                                 desiredSize: new go.Size(70, 70),
                                 margin: 1.5,
                             },
-                            new go.Binding("source", "key", findHeadShot)),
+                            new go.Binding("source", "name", findHeadShot)),
                         // define the panel where the text will appear
                         $(go.Panel, "Table",
                             {
