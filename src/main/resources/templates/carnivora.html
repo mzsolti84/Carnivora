@@ -52,7 +52,7 @@
             <th scope="col">Név</th>
             <th scope="col">Latin név</th>
             <th scope="col">Leírás</th>
-            <th scope="col">Veszelyeztetett besorolás</th>
+            <th scope="col">Term.védelmi státusz</th>
             <th scope="col">Tűréshatár</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -215,7 +215,7 @@
                             </div>
                             <br>
                             <div class="container-fluid">
-                                <label class="form-label">Veszélyeztett kategória</label>
+                                <label class="form-label">Természetvédelmi státusz</label>
                                 <select class="form-select bg-dark text-white"
                                         th:field="*{veszelyeztetettBesorolas}"
                                         th:classappend="${#fields.hasErrors('veszelyeztetettBesorolas')} ? 'is-invalid' : 'is-valid'">

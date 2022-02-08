@@ -58,6 +58,11 @@ public class CarnivoraController {
         return "carnivora";
     }
 
+    @RequestMapping("/about")
+    public String about() {
+        return "about";
+    }
+
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     @PostMapping("/carnivora/{id}")
