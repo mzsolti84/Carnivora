@@ -16,12 +16,7 @@ public class InitKladFromFileFactory {
     private final List<Klad> klads;
 
     public InitKladFromFileFactory(String fileName) {
-        String fileWholeName;
-        try {
-            fileWholeName = GetWholePathOfResource.getWholePath(fileName);
-        } catch (URISyntaxException e) {
-            throw new CsvURISyntaxException(e.getMessage());
-        }
+        String fileWholeName = GetWholePathOfResource.getWholePath(fileName);
         this.klads = new ArrayList<>();
         try (CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(fileWholeName), StandardCharsets.UTF_8))) {
             csv.readNext();
@@ -30,9 +25,9 @@ public class InitKladFromFileFactory {
                 fileRowToEntity(line);
             }
         } catch (IOException e) {
-            throw new SpeciesFileException("File not exist!");
+            throw new KladFileException("File not exist!");
         } catch (CsvValidationException e) {
-            throw new SpeciesFileException("File is not standard!");
+            throw new KladFileException("File is not standard!");
         }
 
 

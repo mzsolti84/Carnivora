@@ -56,13 +56,8 @@ public class CarnivoraService {
 
         public Map<String, Object> jsonToMap() {
             // create variable loc that store location of the Sample.json file
-            String loc;
             Map<String, Object> aboutData = new HashMap<>();
-            try {
-                loc = GetWholePathOfResource.getWholePath("about.json");
-            } catch (URISyntaxException e) {
-                throw new CsvURISyntaxException(e.getMessage());
-            }
+            String loc = GetWholePathOfResource.getWholePath("about.json");
             String result;
             try {
                 // read byte data from the Sample.json file and convert it into String
