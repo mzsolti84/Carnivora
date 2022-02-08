@@ -10,22 +10,32 @@ import java.util.List;
 @Transactional
 public class FajService {
 
-
     @Autowired
     private FajRepository fajRepository;
 
-    public void saveAll(List<Faj> fajok){
+    public void saveAll(List<Faj> fajok) {
         fajRepository.saveAll(fajok);
     }
 
-    public FajTestDto FajToFajTestDto(String nev){
+    public List<FajDto> getAllFajDto() {
+        return fajRepository.findAll().stream()
+                .map(faj -> buildFajDtoByFajNev(faj.getNev()))
+                .toList();
+    }
+
+    public FajDto buildFajDtoByFajNev(String nev) {
         Faj faj = fajRepository.getByNev(nev);
-        return FajTestDto.builder()
-                .nev(faj.getNev())
-                .szuloNev(faj.getKlad().getNev())
+        return FajDto.builder()
+                .id(faj.getId())
                 .leiras(faj.getLeiras())
+                .nev(faj.getNev())
+                .latinNev(faj.getLatinNev())
+                .statusz(faj.getStatusz())
                 .turesHatar(faj.getTuresHatar())
-                .veszelyeztetettBesorolas(faj.getStatusz())
+                .fotoURL(faj.getFotoURL())
+                .wikiURL(faj.getWikiURL())
+                .szuloNev(faj.getKlad().getNev())
+                .szuloId(faj.getKlad().getId())
                 .build();
     }
 }

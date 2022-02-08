@@ -17,7 +17,8 @@ public class CarnivoraController {
 
     @Autowired
     private CarnivoraService carnivoraService;
-
+    @Autowired
+    private FajService fajService;
     @Autowired
     private KladService kladService;
 
@@ -74,8 +75,8 @@ public class CarnivoraController {
             Model model) {
         if (!bindingResult.hasErrors()) {
             carnivoraService.save(formFaj);
-            model.addAttribute("allSpecies", carnivoraService.findAll());
-            model.addAttribute("formFaj", new Faj());
+            model.addAttribute("allFaj", allFaj());
+            model.addAttribute("formFaj", formFaj());
         }
         return "carnivora";
     }
@@ -87,8 +88,8 @@ public class CarnivoraController {
             Model model) {
         if (!bindingResult.hasErrors()) {
             carnivoraService.create(formFaj);
-            model.addAttribute("allSpecies", carnivoraService.findAll());
-            model.addAttribute("formFaj", new Faj());
+            model.addAttribute("allFaj", allFaj());
+            model.addAttribute("formFaj", formFaj());
         }
         return "carnivora";
     }
@@ -96,15 +97,20 @@ public class CarnivoraController {
     @PostMapping("/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
         carnivoraService.deleteById(id);
-        model.addAttribute("allSpecies", carnivoraService.findAll());
+        model.addAttribute("allFaj", allFaj());
         return "carnivora";
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
-    @ModelAttribute("allSpecies")
-    List<Faj> allSpecies() {
+    @ModelAttribute("allFaj")
+    List<Faj> allFaj() {
         return carnivoraService.findAll();
+    }
+
+    @ModelAttribute("allFajDto")
+    List<FajDto> allFajDto() {
+        return fajService.getAllFajDto();
     }
 
     @ModelAttribute("allKlad")
@@ -113,7 +119,7 @@ public class CarnivoraController {
     }
 
     @ModelAttribute("formFaj")
-    public Faj formSpecies() {
+    public Faj formFaj() {
         return new Faj();
     }
 
