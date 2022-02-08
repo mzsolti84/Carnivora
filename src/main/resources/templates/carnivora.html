@@ -67,7 +67,7 @@
             <td th:text="${fajok.nev}">nev</td>
             <td th:text="${fajok.latinNev}">latinNev</td>
             <td th:text="${#strings.abbreviate(fajok.leiras,80)}">leiras</td>
-            <td th:text="${#strings.abbreviate(fajok.veszelyeztetettBesorolas,12)}">veszelyeztetettBesorolas</td>
+            <td th:text="${#strings.abbreviate(fajok.getStatusz,12)}">veszelyeztetettBesorolas</td>
             <td th:text="${fajok.turesHatar}">turesHatar</td>
             <td>
                 <div class="row">
@@ -217,7 +217,7 @@
                             <div class="container-fluid">
                                 <label class="form-label">Természetvédelmi státusz</label>
                                 <select class="form-select bg-dark text-white"
-                                        th:field="*{veszelyeztetettBesorolas}"
+                                        th:field="*{getStatusz}"
                                         th:classappend="${#fields.hasErrors('veszelyeztetettBesorolas')} ? 'is-invalid' : 'is-valid'">
 
                                     <option th:value="'KIHALT'" th:text="'Kihalt'"></option>
@@ -234,7 +234,7 @@
                                 </select>
                                 <div class="invalid-feedback"
                                      th:if="${#fields.hasErrors('veszelyeztetettBesorolas')}"
-                                     th:errors="*{veszelyeztetettBesorolas}">
+                                     th:errors="*{getStatusz}">
                                     Hibaüzenet
                                 </div>
                             </div>

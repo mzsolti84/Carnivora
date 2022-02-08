@@ -4,7 +4,7 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import hu.progmatic.carnivora.Faj;
 import hu.progmatic.carnivora.Tureshatar;
-import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
+import hu.progmatic.carnivora.TermeszetvedelmiStatusz;
 import hu.progmatic.carnivora.Klad;
 
 import java.io.FileInputStream;
@@ -59,7 +59,7 @@ public class InitSpeciesFromFileFactory {
                 .nev(name)
                 .latinNev(nameLatin)
                 .leiras(description)
-                .veszelyeztetettBesorolas(kategoriaSwitch(veszelyeztetett))
+                .statusz(kategoriaSwitch(veszelyeztetett))
                 .turesHatar(turesSwitch(tureshatar))
                 .fotoURL(fotoURL)
                 .wikiURL(wikiURL)
@@ -68,18 +68,18 @@ public class InitSpeciesFromFileFactory {
         parent.getFajLista().add(givenFaj);
     }
 
-    public static VeszelyeztetettKategoriak kategoriaSwitch(String line) {
+    public static TermeszetvedelmiStatusz kategoriaSwitch(String line) {
         String value = String.valueOf(line).toUpperCase();
         return switch (value) {
-            case "KIHALT" -> VeszelyeztetettKategoriak.KIHALT;
-            case "VADON KIHALT" -> VeszelyeztetettKategoriak.VADON_KIHALT;
-            case "FENYEGETETT" -> VeszelyeztetettKategoriak.FENYEGETETT;
-            case "SÚLYOSAN VESZÉLYEZTETETT" -> VeszelyeztetettKategoriak.SULYOSAN_VESZELYEZTETETT;
-            case "VESZÉLYEZTETETT" -> VeszelyeztetettKategoriak.VESZELYEZTETETT;
-            case "SEBEZHETO" -> VeszelyeztetettKategoriak.SEBEZHETO;
-            case "MÉRSÉKELTEN FENYEGETETT" -> VeszelyeztetettKategoriak.MERSEKELTEN_FENYEGETETT;
-            case "NEM FENYEGETETT" -> VeszelyeztetettKategoriak.NEM_FENYEGETETT;
-            default -> VeszelyeztetettKategoriak.HAZIASITOTT;
+            case "KIHALT" -> TermeszetvedelmiStatusz.KIHALT;
+            case "VADON KIHALT" -> TermeszetvedelmiStatusz.VADON_KIHALT;
+            case "FENYEGETETT" -> TermeszetvedelmiStatusz.FENYEGETETT;
+            case "SÚLYOSAN VESZÉLYEZTETETT" -> TermeszetvedelmiStatusz.SULYOSAN_VESZELYEZTETETT;
+            case "VESZÉLYEZTETETT" -> TermeszetvedelmiStatusz.VESZELYEZTETETT;
+            case "SEBEZHETO" -> TermeszetvedelmiStatusz.SEBEZHETO;
+            case "MÉRSÉKELTEN FENYEGETETT" -> TermeszetvedelmiStatusz.MERSEKELTEN_FENYEGETETT;
+            case "NEM FENYEGETETT" -> TermeszetvedelmiStatusz.NEM_FENYEGETETT;
+            default -> TermeszetvedelmiStatusz.HAZIASITOTT;
         };
     }
 

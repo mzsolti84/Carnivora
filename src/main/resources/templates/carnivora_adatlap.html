@@ -80,8 +80,8 @@
          </tr>
          <tr>
              <td>
-                 <p>Természetvédelmi státusz:</p>
-                 <p th:text="${formFaj.veszelyeztetettBesorolas}"
+                 <p>Besorolás:</p>
+                 <p th:text="${formFaj.getStatusz}"
                     style="font-size:130%;"></p>
              </td>
          </tr>
@@ -108,7 +108,7 @@
  <br>  -->
 <div class="container">
     <div class="text-center">
-        <form th:action="@{/carnivora}" method="get">
+        <form th:action="@{/}" method="get">
             <button style=" background-color: black" type="submit" class="btn-dark">Vissza</button>
         </form>
     </div>
