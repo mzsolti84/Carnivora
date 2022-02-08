@@ -1,5 +1,9 @@
-package hu.progmatic.carnivora;
+package hu.progmatic.service;
 
+import hu.progmatic.carnivora.CarnivoraService;
+import hu.progmatic.carnivora.Faj;
+import hu.progmatic.carnivora.Tureshatar;
+import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

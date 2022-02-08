@@ -1,4 +1,4 @@
-package hu.progmatic.kladEsFaj;
+package hu.progmatic.service;
 
 import hu.progmatic.carnivora.KladService;
 import hu.progmatic.carnivora.KladWithChildrenDto;

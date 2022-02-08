@@ -1,4 +1,4 @@
-package hu.progmatic.kladEsFaj;
+package hu.progmatic.service;
 
 import hu.progmatic.carnivora.FajService;
 import hu.progmatic.carnivora.FajTestDto;

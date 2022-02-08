@@ -17,10 +17,10 @@
             crossorigin="anonymous"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            var myDropdownBtn = document.getElementById("dropdownMenuLinkReg");
+            let myDropdownBtn = document.getElementById("dropdownMenuLinkReg");
 
             // Create a dropdown instance
-            var myDropdownReg = new bootstrap.Dropdown(document.getElementById("dropdownMenuLinkReg"));
+            let myDropdownReg = new bootstrap.Dropdown(document.getElementById("dropdownMenuLinkReg"));
 
             myDropdownBtn.addEventListener("click", function () {
                 myDropdownReg.toggle();
