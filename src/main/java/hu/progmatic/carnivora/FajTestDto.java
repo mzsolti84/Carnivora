@@ -1,21 +1,20 @@
 package hu.progmatic.carnivora;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class FajDto {
-    private Integer id;
-    private Integer szuloId;
+public class FajTestDto {
+
+    private String nev;
     private String szuloNev;
     private String leiras;
-    private String nev;
-    private String latinNev;
     private VeszelyeztetettKategoriak veszelyeztetettBesorolas;
     private Tureshatar turesHatar;
-    private String fotoURL;
-    private String wikiURL;
-
-
 }

@@ -14,10 +14,10 @@ import java.util.List;
 @Data
 public class KladWithChildrenDto implements Serializable {
     private Integer id;
-    private String name;
-    private String latinName;
-    private String description;
-    private String parent;
-    private List<KladWithChildrenDto> children;
+    private String nev;
+    private String latinNev;
+    private String leiras;
+    private String szulo;
+    private List<KladWithChildrenDto> leszarmazott;
 
 }

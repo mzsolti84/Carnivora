@@ -10,37 +10,37 @@ import java.util.List;
 public class CarnivoraService {
 
     @Autowired
-    private SpeciesRepository speciesRepositoryC;
+    private FajRepository fajRepositoryC;
 
-    public List<Species> findAll() {
-        return speciesRepositoryC.findAll();
+    public List<Faj> findAll() {
+        return fajRepositoryC.findAll();
     }
 
-    public Species create(Species faj) {
+    public Faj create(Faj faj) {
         faj.setId(null);
-        return speciesRepositoryC.save(faj);
+        return fajRepositoryC.save(faj);
     }
 
-    public Species save(Species faj) {
-        return speciesRepositoryC.saveAndFlush(faj);
+    public Faj save(Faj faj) {
+        return fajRepositoryC.saveAndFlush(faj);
     }
 
     public void deleteById(Integer id) {
-        speciesRepositoryC.deleteById(id);
+        fajRepositoryC.deleteById(id);
     }
 
-    public Species getById(Integer id) {
-        return speciesRepositoryC.getById(id);
+    public Faj getById(Integer id) {
+        return fajRepositoryC.getById(id);
     }
 
     public void deleteByIdIfExists(Integer id) {
-        if (speciesRepositoryC.existsById(id)) {
-            speciesRepositoryC.deleteById(id);
+        if (fajRepositoryC.existsById(id)) {
+            fajRepositoryC.deleteById(id);
         }
     }
 
-    public Species findById(Integer id) {
-        return speciesRepositoryC.findById(id)
+    public Faj findById(Integer id) {
+        return fajRepositoryC.findById(id)
                 .orElseThrow();
     }
 

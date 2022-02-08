@@ -26,13 +26,13 @@ public class Klad {
     private String leiras;
 
     @ManyToOne
-    private Klad parent;
+    private Klad szulo;
 
     @Builder.Default
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-    private List<Klad> children = new ArrayList<>();
+    @OneToMany(mappedBy = "szulo", cascade = CascadeType.ALL)
+    private List<Klad> leszarmazottak = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "klad", cascade = CascadeType.ALL)
-    private List<Species> fajLista = new ArrayList<>();
+    private List<Faj> fajLista = new ArrayList<>();
 }

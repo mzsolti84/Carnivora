@@ -30,7 +30,7 @@ public class InitKladFromFileTest {
                 .filter(klad -> klad.getNev().equals("macskaalkatúak alrendje"))
                 .findFirst().orElseThrow();
 
-        assertThat(givenKlad.getChildren())
+        assertThat(givenKlad.getLeszarmazottak())
                 .extracting(Klad::getNev)
                 .containsExactlyInAnyOrder("madagaszkári cibetmacskafélék családja",
                         "macskafélék családja",
@@ -51,7 +51,7 @@ public class InitKladFromFileTest {
                 .filter(klad -> klad.getNev().equals("kutyaalkatúak alrendje"))
                 .findFirst().orElseThrow();
 
-        assertThat(givenKlad.getChildren())
+        assertThat(givenKlad.getLeszarmazottak())
                 .extracting(Klad::getNev)
                 .containsExactlyInAnyOrder("macskamedvefélék családja",
                         "kutyafélék családja",

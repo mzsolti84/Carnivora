@@ -43,22 +43,22 @@ public class CarnivoraController {
 
     @GetMapping("/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
-        Species formSpecies = carnivoraService.getById(id);
-        model.addAttribute("formSpecies", formSpecies);
+        Faj formFaj = carnivoraService.getById(id);
+        model.addAttribute("formSpecies", formFaj);
         return "carnivora";
     }
 
     @GetMapping("/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
-        Species formSpecies = carnivoraService.getById(id);
-        model.addAttribute("formSpecies", formSpecies);
+        Faj formFaj = carnivoraService.getById(id);
+        model.addAttribute("formSpecies", formFaj);
         return "carnivoraAdatlap";
     }
 
     @GetMapping("/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
-        Species formSpecies = carnivoraService.getById(id);
-        model.addAttribute(formSpecies);
+        Faj formFaj = carnivoraService.getById(id);
+        model.addAttribute(formFaj);
         return "talalatiKartyak";
     }
 
@@ -77,26 +77,26 @@ public class CarnivoraController {
     @PostMapping("/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
-            @ModelAttribute("formSpecies") @Valid Species formSpecies,
+            @ModelAttribute("formSpecies") @Valid Faj formFaj,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            carnivoraService.save(formSpecies);
+            carnivoraService.save(formFaj);
             model.addAttribute("allSpecies", carnivoraService.findAll());
-            model.addAttribute("formSpecies", new Species());
+            model.addAttribute("formSpecies", new Faj());
         }
         return "carnivora";
     }
 
     @PostMapping("/carnivora/")
     public String create(
-            @ModelAttribute("formSpecies") @Valid Species formSpecies,
+            @ModelAttribute("formSpecies") @Valid Faj formFaj,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            carnivoraService.create(formSpecies);
+            carnivoraService.create(formFaj);
             model.addAttribute("allSpecies", carnivoraService.findAll());
-            model.addAttribute("formSpecies", new Species());
+            model.addAttribute("formSpecies", new Faj());
         }
         return "carnivora";
     }
@@ -111,18 +111,18 @@ public class CarnivoraController {
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("allSpecies")
-    List<Species> allSpecies() {
+    List<Faj> allSpecies() {
         return carnivoraService.findAll();
     }
 
     @ModelAttribute("allKlad")
-    List<ParentKladDto> allKlad() {
+    List<SzuloKladDto> allKlad() {
         return kladService.findAllParentKlad();
     }
 
     @ModelAttribute("formSpecies")
-    public Species formSpecies() {
-        return new Species();
+    public Faj formSpecies() {
+        return new Faj();
     }
 
     // MODEL MÓDOSÍTÓK -------------------------------------------------------------------------------

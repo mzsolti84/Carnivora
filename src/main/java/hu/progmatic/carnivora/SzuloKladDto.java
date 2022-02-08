@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class ParentKladDto {
+public class SzuloKladDto {
 
     private Integer id;
-    private String name;
+    private String nev;
 
 }

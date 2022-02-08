@@ -2,10 +2,10 @@ package hu.progmatic.databaseinit;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import hu.progmatic.carnivora.Faj;
 import hu.progmatic.carnivora.Tureshatar;
 import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
 import hu.progmatic.carnivora.Klad;
-import hu.progmatic.carnivora.Species;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class InitSpeciesFromFileFactory {
 
-    private final List<Species> species;
+    private final List<Faj> fajok;
 
     private final List<Klad> klads;
 
@@ -29,7 +29,7 @@ public class InitSpeciesFromFileFactory {
         } catch (URISyntaxException e) {
             throw new CsvURISyntaxException(e.getMessage());
         }
-        this.species = new ArrayList<>();
+        this.fajok = new ArrayList<>();
         try (CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(fileWholeName), StandardCharsets.UTF_8))) {
             csv.readNext();
             String[] line;
@@ -54,7 +54,7 @@ public class InitSpeciesFromFileFactory {
         String wikiURL = speciesProperties[7].equals("null") ? null : speciesProperties[7];
 
         Klad parent = klads.stream().filter(klad -> klad.getNev().equals(parentName)).findAny().orElseThrow();
-        Species givenSpecies = Species.builder()
+        Faj givenFaj = Faj.builder()
                 .klad(parent)
                 .nev(name)
                 .latinNev(nameLatin)
@@ -64,8 +64,8 @@ public class InitSpeciesFromFileFactory {
                 .fotoURL(fotoURL)
                 .wikiURL(wikiURL)
                 .build();
-        species.add(givenSpecies);
-        parent.getFajLista().add(givenSpecies);
+        fajok.add(givenFaj);
+        parent.getFajLista().add(givenFaj);
     }
 
     public static VeszelyeztetettKategoriak kategoriaSwitch(String line) {
@@ -93,8 +93,8 @@ public class InitSpeciesFromFileFactory {
     }
 
 
-    public List<Species> getSpecies() {
-        return species;
+    public List<Faj> getSpecies() {
+        return fajok;
     }
 
     public List<Klad> getKlads() {

@@ -17,22 +17,15 @@ public class KladService implements InitializingBean {
     private KladRepository kladRepository;
 
     @Autowired
-    private SpeciesRepository speciesRepository;
-
-    @Autowired
-    private SpeciesService speciesService;
+    private FajService fajService;
 
 
     @Override
     public void afterPropertiesSet() {
         if (kladRepository.count() == 0) {
-            /*List<KladEntity> klads = new InitKladFromFileFactory(
-                    "klad.csv")
-                    .getKlads();
-            kladRepository.saveAll(klads);*/
             InitSpeciesFromFileFactory init = new InitSpeciesFromFileFactory("klad.csv", "faj.csv");
             kladRepository.saveAll(init.getKlads());
-            speciesService.saveAll(init.getSpecies());
+            fajService.saveAll(init.getSpecies());
         }
     }
 
@@ -44,12 +37,12 @@ public class KladService implements InitializingBean {
 
     private KladWithChildrenDto buildKladWithChildrenDto(Klad entity) {
         return KladWithChildrenDto.builder()
-                .name(entity.getNev())
-                .latinName(entity.getLatinNev())
-                .description(entity.getLeiras())
-                .parent(entity.getParent().getNev())
-                .children(
-                        entity.getChildren().stream()
+                .nev(entity.getNev())
+                .latinNev(entity.getLatinNev())
+                .leiras(entity.getLeiras())
+                .szulo(entity.getSzulo().getNev())
+                .leszarmazott(
+                        entity.getLeszarmazottak().stream()
                                 .map(this::buildKladWithChildrenDto)
                                 .toList()
                 )
@@ -77,16 +70,16 @@ public class KladService implements InitializingBean {
                         """;
     }
 
-    public List<ParentKladDto> findAllParentKlad() {
+    public List<SzuloKladDto> findAllParentKlad() {
         return kladRepository.findAllWithNoChild().stream()
                 .map(this::kladToParentKladDto)
                 .toList();
     }
 
-    private ParentKladDto kladToParentKladDto(Klad klad) {
-        return ParentKladDto.builder()
+    private SzuloKladDto kladToParentKladDto(Klad klad) {
+        return SzuloKladDto.builder()
                 .id(klad.getId())
-                .name(klad.getNev())
+                .nev(klad.getNev())
                 .build();
     }
 }

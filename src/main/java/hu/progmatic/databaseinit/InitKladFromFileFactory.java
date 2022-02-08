@@ -40,7 +40,6 @@ public class InitKladFromFileFactory {
 
 
     private void fileRowToEntity(String[] kladProperties) {
-        //String[] kladProperties = fileRow.split(",");
         String name = kladProperties[0].equals("null") ? null : kladProperties[0];
         String latinName = kladProperties[1];
         String parent = kladProperties[2].equals("null") ? null : kladProperties[2];
@@ -50,7 +49,7 @@ public class InitKladFromFileFactory {
                     .nev(name)
                     .latinNev(latinName)
                     .leiras(description)
-                    .parent(null)
+                    .szulo(null)
                     .build());
 
         } else {
@@ -59,9 +58,9 @@ public class InitKladFromFileFactory {
                     .nev(name)
                     .latinNev(latinName)
                     .leiras(description)
-                    .parent(parentObject)
+                    .szulo(parentObject)
                     .build();
-            parentObject.getChildren().add(givenKlad);
+            parentObject.getLeszarmazottak().add(givenKlad);
             klads.add(givenKlad);
         }
 

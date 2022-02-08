@@ -20,8 +20,8 @@ class KladServiceTest {
     void iniTeszt() {
         KladWithChildrenDto motherKlad = service.getKladDtoByName("macskaalkatúak alrendje");
 
-        assertThat(motherKlad.getChildren())
-                .extracting(KladWithChildrenDto::getName)
+        assertThat(motherKlad.getLeszarmazott())
+                .extracting(KladWithChildrenDto::getNev)
                 .containsExactlyInAnyOrder("madagaszkári cibetmacskafélék családja",
                         "macskafélék családja",
                         "mongúzfélék családja",
@@ -34,7 +34,7 @@ class KladServiceTest {
     @Test
     void noChildTest() {
         List<KladWithChildrenDto> dtoNoCildList = service.findAllWithNoChild();
-        assertThat(dtoNoCildList).extracting(KladWithChildrenDto::getName).containsExactlyInAnyOrder(
+        assertThat(dtoNoCildList).extracting(KladWithChildrenDto::getNev).containsExactlyInAnyOrder(
                 "madagaszkári cibetmacskafélék családja",
                 "macskaformák alcsaládja",
                 "párducformák alcsaládja",

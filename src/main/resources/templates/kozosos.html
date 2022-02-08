@@ -29,7 +29,7 @@
         <div class="col">
             <label for="inputSpecies1">Egyik faj</label>
             <select class="form-select " style="width:auto;" th:field="*{species1}">
-                <option th:each="species : ${allSpecies}" th:text="${species.nev}" th:value="${species.id}">
+                <option th:each="fajok : ${allSpecies}" th:text="${fajok.nev}" th:value="${fajok.id}">
 
                 </option>
             </select>
@@ -37,8 +37,8 @@
         <div class="col">
             <label for="inputSpecies2">Másik faj</label>
             <select class="form-select" style="width:auto;" th:field="*{species2}">
-                <option th:each="species : ${allSpecies}" th:text="${species.nev}" th:value="${species.id}"
-                        th:disabled="${species.nev == 'Falanuk'}"></option>
+                <option th:each="fajok : ${allSpecies}" th:text="${fajok.nev}" th:value="${fajok.id}"
+                        th:disabled="${fajok.nev == 'Falanuk'}"></option>
             </select>
         </div>
         <div class="col">
@@ -81,18 +81,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="species : ${megtalaltOs}">
-                <th scope="row" th:text="${species.id}">1</th>
-                <td th:text="${species.szuloKategoriaID}">1</td>
-                <td th:text="${species.nev}">Név</td>
-                <td th:text="${species.latinNev}">LatinNév</td>
-                <td th:text="${species.leiras}">100</td>
-                <td th:text="${species.veszelyeztetettBesorolas}">100</td>
-                <td th:text="${species.isSpecialista}">100</td>
+            <tr th:each="fajok : ${megtalaltOs}">
+                <th scope="row" th:text="${fajok.id}">1</th>
+                <td th:text="${fajok.szuloKategoriaID}">1</td>
+                <td th:text="${fajok.nev}">Név</td>
+                <td th:text="${fajok.latinNev}">LatinNév</td>
+                <td th:text="${fajok.leiras}">100</td>
+                <td th:text="${fajok.veszelyeztetettBesorolas}">100</td>
+                <td th:text="${fajok.isSpecialista}">100</td>
                 <td>
                     <div class="row">
                         <div class="col">
-                            <form th:action="@{'/carnivora/carnivora/{id}/adatlap'(id=${species.id})}"
+                            <form th:action="@{'/carnivora/carnivora/{id}/adatlap'(id=${fajok.id})}"
                                   method="get">
                                 <input type="submit" class="btn btn-success" value="Betölt"/>
                             </form>
