@@ -201,8 +201,9 @@
                             <div class="container-fluid">
                                 <label class="form-label">Ősosztály</label>
                                 <select class="form-select bg-dark text-white" th:field="*{szuloNev}">
-                                    <option th:selected="${klad.getNev == formFaj.szuloNev}"
-                                            th:each="klad : ${allKlad}" th:text="${klad.getNev}" th:value="${klad.getNev}"
+                                    <option th:each="klad : ${allKlad}"
+                                            th:selected="${klad.getNev == formFaj.szuloNev}"
+                                            th:text="${klad.getNev}" th:value="${klad.getNev}"
                                             th:classappend="${#fields.hasErrors('szuloNev')} ? 'is-invalid' : 'is-valid'">
                                     </option>
                                 </select>

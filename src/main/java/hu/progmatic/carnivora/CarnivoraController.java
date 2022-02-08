@@ -38,7 +38,7 @@ public class CarnivoraController {
     public String adatlapKiir(@PathVariable Integer id, Model model) {
         Faj formFaj = carnivoraService.getById(id);
         model.addAttribute("formFaj", formFaj);
-        return "carnivoraAdatlap";
+        return "carnivoraadatlap";
     }
 
     @GetMapping("/carnivora/{id}/TalalatiKartyak")
