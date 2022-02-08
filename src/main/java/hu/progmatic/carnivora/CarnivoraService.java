@@ -54,7 +54,7 @@ public class CarnivoraService {
                 .orElseThrow();
     }
 
-        public static Map<String, Object> jsonToMap() {
+        public Map<String, Object> jsonToMap() {
             // create variable loc that store location of the Sample.json file
             String loc;
             Map<String, Object> aboutData = new HashMap<>();
