@@ -38,19 +38,19 @@ public class CarnivoraController {
     public String adatlapKiir(@PathVariable Integer id, Model model) {
         Faj formFaj = carnivoraService.getById(id);
         model.addAttribute("formFaj", formFaj);
-        return "carnivoraadatlap";
+        return "carnivora_adatlap";
     }
 
     @GetMapping("/carnivora/{id}/TalalatiKartyak")
     public String kartyaKiIr(@PathVariable Integer id, Model model) {
         Faj formFaj = carnivoraService.getById(id);
         model.addAttribute(formFaj);
-        return "talalatiKartyak";
+        return "talalati_kartyak";
     }
 
     @RequestMapping("/kozosos")
     public String kozosOS() {
-        return "kozosos";
+        return "kozos_os";
     }
 
     @RequestMapping("/carnivora")
