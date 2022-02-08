@@ -25,7 +25,7 @@ public class Faj {
     private String latinNev;
 
     @Enumerated(EnumType.STRING)
-    private VeszelyeztetettKategoriak veszelyeztetettBesorolas;
+    private TermeszetvedelmiStatusz statusz;
 
     @Enumerated(EnumType.STRING)
     private Tureshatar turesHatar;

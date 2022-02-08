@@ -3,7 +3,7 @@ package hu.progmatic.service;
 import hu.progmatic.carnivora.CarnivoraService;
 import hu.progmatic.carnivora.Faj;
 import hu.progmatic.carnivora.Tureshatar;
-import hu.progmatic.carnivora.VeszelyeztetettKategoriak;
+import hu.progmatic.carnivora.TermeszetvedelmiStatusz;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +27,7 @@ class CarnivoraServiceTest {
                 .nev("Tyúk")
                 .latinNev("Tyukusz Udvarikusz")
                 .leiras("Tyúúúúk")
-                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
+                .statusz(TermeszetvedelmiStatusz.HAZIASITOTT)
                 .build();
         Faj saved = service.save(data);
         assertNotNull(saved.getId());
@@ -50,7 +50,7 @@ class CarnivoraServiceTest {
                 .nev("Tyúk")
                 .latinNev("Tyukusz sp. Magyarikusz")
                 .leiras(hosszuLeiras)
-                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
+                .statusz(TermeszetvedelmiStatusz.HAZIASITOTT)
                 .build();
         Faj saved = service.save(data);
         assertEquals(hosszuLeiras, saved.getLeiras());
@@ -65,7 +65,7 @@ class CarnivoraServiceTest {
                 .nev("Tyúk")
                 .latinNev(latinNev)
                 .leiras("Tyúúúúk")
-                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
+                .statusz(TermeszetvedelmiStatusz.HAZIASITOTT)
                 .build();
         service.save(data);
         Faj data2 = Faj.builder()
@@ -73,7 +73,7 @@ class CarnivoraServiceTest {
                 .nev("Tyúk")
                 .latinNev(latinNev)
                 .leiras("Tyúúúúk")
-                .veszelyeztetettBesorolas(VeszelyeztetettKategoriak.HAZIASITOTT)
+                .statusz(TermeszetvedelmiStatusz.HAZIASITOTT)
                 .build();
 
         Exception exception = null;

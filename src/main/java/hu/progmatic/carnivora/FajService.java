@@ -25,7 +25,7 @@ public class FajService {
                 .szuloNev(faj.getKlad().getNev())
                 .leiras(faj.getLeiras())
                 .turesHatar(faj.getTuresHatar())
-                .veszelyeztetettBesorolas(faj.getVeszelyeztetettBesorolas())
+                .veszelyeztetettBesorolas(faj.getStatusz())
                 .build();
     }
 }

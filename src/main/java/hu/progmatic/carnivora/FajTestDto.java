@@ -15,6 +15,6 @@ public class FajTestDto {
     private String nev;
     private String szuloNev;
     private String leiras;
-    private VeszelyeztetettKategoriak veszelyeztetettBesorolas;
+    private TermeszetvedelmiStatusz veszelyeztetettBesorolas;
     private Tureshatar turesHatar;
 }
