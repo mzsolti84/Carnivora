@@ -68,7 +68,7 @@ public class CarnivoraController {
 
     @RequestMapping("/genogramadmin")
     public String genogram() {
-        return "genogramadmin";
+        return "genogram_admin";
     }
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
