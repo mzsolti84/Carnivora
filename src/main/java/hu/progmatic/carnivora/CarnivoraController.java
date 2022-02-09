@@ -112,8 +112,8 @@ public class CarnivoraController {
 
     @PostMapping("/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
-        carnivoraService.deleteById(id);
-        model.addAttribute("allFaj", allFaj());
+        fajService.deleteById(id);
+        model.addAttribute("allFajDto", allFajDto());
         return "carnivora";
     }
 

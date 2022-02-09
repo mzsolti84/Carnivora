@@ -92,4 +92,9 @@ public class FajService {
         //if (faj.klad == null) faj.klad = kladRepository.getByNev("kardfogú macskák alcsaládja – kihalt");
         return fajRepository.save(faj);
     }
+
+    public void deleteById(Integer id) {
+        fajRepository.deleteById(id);
+    }
+
 }
