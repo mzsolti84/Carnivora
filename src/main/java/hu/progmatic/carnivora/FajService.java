@@ -59,7 +59,7 @@ public class FajService {
     }
 
     private Klad getKladFromFajDto(FajDto fajDto) {
-        return kladRepository.getByNev(fajDto.getSzuloNev());
+        return kladRepository.getById(fajDto.getSzuloId());
     }
 
     public Faj buildFajFromFajDto(FajDto fajDto) {

@@ -51,13 +51,6 @@ public class CarnivoraController {
         return "carnivora_adatlap";
     }
 
-    @GetMapping("/carnivora/{id}/TalalatiKartyak")
-    public String kartyaKiIr(@PathVariable Integer id, Model model) {
-        FajDto formFajDto = fajService.getById(id);
-        model.addAttribute("formFajDto", formFajDto);
-        return "talalati_kartyak";
-    }
-
     @RequestMapping("/kozosos")
     public String kozosOS() {
         return "kozos_os";
@@ -134,14 +127,9 @@ public class CarnivoraController {
     @ModelAttribute("allFajDto")
     List<FajDto> allFajDto() {
         for (FajDto lista : fajService.getAllFajDto()) {
-            if (lista.getSzuloNev() != null) System.out.println(lista.getSzuloNev());
+            if (lista.getSzuloNev() != null) System.out.println(lista.getSzuloNev() + " " + lista.getSzuloId());
         }
         return fajService.getAllFajDto();
-    }
-
-    @ModelAttribute("allKlad")
-    List<SzuloKladDto> allKlad() {
-        return kladService.findAllParentKlad();
     }
 
     @ModelAttribute("formFaj")
@@ -152,6 +140,11 @@ public class CarnivoraController {
     @ModelAttribute("formFajDto")
     public FajDto formFajDto() {
         return new FajDto();
+    }
+
+    @ModelAttribute("allKlad")
+    List<SzuloKladDto> allKlad() {
+        return kladService.findAllParentKlad();
     }
 
 }

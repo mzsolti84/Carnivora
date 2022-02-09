@@ -137,7 +137,7 @@
                             <div class="container-fluid">
                                 <label class="form-label">Ős Id</label>
                                 <input type="text"
-                                       readonly
+                                       disabled
                                        class="form-control bg-dark text-white"
                                        placeholder="Ős Id"
                                        th:field="*{szuloId}"
@@ -212,17 +212,17 @@
                             <br>
 
                             <div class="container-fluid">
-                                <label class="form-label">Ősosztály</label>
-                                <select class="form-select bg-dark text-white" th:field="*{szuloNev}">
+                                <label class="form-label">Klád</label>
+                                <select class="form-select bg-dark text-white" th:field="*{szuloId}">
                                     <option th:each="klad : ${allKlad}"
-                                            th:selected="${klad.nev == formFajDto.szuloNev}"
-                                            th:text="${klad.nev}" th:value="${klad.nev}"
-                                            th:classappend="${#fields.hasErrors('szuloNev')} ? 'is-invalid' : 'is-valid'">
+                                            th:selected="${klad.id == formFajDto.szuloId}"
+                                            th:text="${klad.nev}" th:value="${klad.id}"
+                                            th:classappend="${#fields.hasErrors('szuloId')} ? 'is-invalid' : 'is-valid'">
                                     </option>
                                 </select>
                                 <div class="invalid-feedback"
-                                     th:if="${#fields.hasErrors('szuloNev')}"
-                                     th:errors="*{szuloNev}">
+                                     th:if="${#fields.hasErrors('szuloId')}"
+                                     th:errors="*{szuloId}">
                                     Hibaüzenet
                                 </div>
                             </div>
