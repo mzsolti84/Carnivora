@@ -38,7 +38,7 @@ public class CarnivoraController {
 
     @GetMapping("/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
-        FajDto formFajDto = fajService.getById(id);
+        FajDto formFajDto = fajService.getFajDtoByFajId(id);
         model.addAttribute("formFajDto", formFajDto);
         return "carnivora";
     }
@@ -46,7 +46,7 @@ public class CarnivoraController {
 
     @GetMapping("/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
-        FajDto formFajDto = fajService.getById(id);
+        FajDto formFajDto = fajService.getFajDtoByFajId(id);
         model.addAttribute("formFajDto", formFajDto);
         return "carnivora_adatlap";
     }
