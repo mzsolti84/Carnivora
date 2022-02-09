@@ -22,7 +22,7 @@ public class FajService {
 
     public List<FajDto> getAllFajDto() {
         return fajRepository.findAll().stream()
-                .map(faj -> buildFajDtoByFajNev(faj.getNev()))
+                .map(faj -> buildFajDtoByFajId(faj.getId()))
                 .toList();
     }
 
