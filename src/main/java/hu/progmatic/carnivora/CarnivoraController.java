@@ -119,19 +119,9 @@ public class CarnivoraController {
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
-    @ModelAttribute("allFaj")
-    List<Faj> allFaj() {
-        return carnivoraService.findAll();
-    }
-
     @ModelAttribute("allFajDto")
     List<FajDto> allFajDto() {
         return fajService.getAllFajDto();
-    }
-
-    @ModelAttribute("formFaj")
-    public Faj formFaj() {
-        return new Faj();
     }
 
     @ModelAttribute("formFajDto")
