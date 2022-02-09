@@ -61,5 +61,6 @@ public class ThymeleafConfig implements WebMvcConfigurer {
   public void addResourceHandlers(final ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/images/**").addResourceLocations("classpath:/images/");
     registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/");
+    registry.addResourceHandler("/genogram/**").addResourceLocations("classpath:/genogram/");
   }
 }
