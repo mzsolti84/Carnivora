@@ -22,7 +22,7 @@ public class FajService {
 
     public List<FajDto> getAllFajDto() {
         return fajRepository.findAll().stream()
-                .map(faj -> buildFajDtoByFajNev(faj.getNev()))
+                .map(faj -> buildFajDtoByFajId(faj.getId()))
                 .toList();
     }
 
@@ -76,20 +76,22 @@ public class FajService {
                 .build();
     }
 
-    public FajDto getById(Integer id) {
+    public FajDto getFajDtoByFajId(Integer id) {
         return buildFajDtoByFajId(id);
     }
 
     public Faj save(FajDto fajDto) {
-        return fajRepository.saveAndFlush(
-                buildFajFromFajDto(fajDto)
-        );
+        return fajRepository.saveAndFlush(buildFajFromFajDto(fajDto));
     }
 
     public Faj create(FajDto fajDto) {
         Faj faj = buildFajFromFajDto(fajDto);
         faj.setId(null);
-        //if (faj.klad == null) faj.klad = kladRepository.getByNev("kardfogú macskák alcsaládja – kihalt");
         return fajRepository.save(faj);
     }
+
+    public void deleteById(Integer id) {
+        fajRepository.deleteById(id);
+    }
+
 }

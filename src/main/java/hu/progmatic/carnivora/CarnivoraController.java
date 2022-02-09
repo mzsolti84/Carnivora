@@ -24,7 +24,7 @@ public class CarnivoraController {
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
-    @RequestMapping ("/")
+    @RequestMapping("/")
     public String belepes() {
         return "kezdolap";
     }
@@ -38,7 +38,7 @@ public class CarnivoraController {
 
     @GetMapping("/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
-        FajDto formFajDto = fajService.getById(id);
+        FajDto formFajDto = fajService.getFajDtoByFajId(id);
         model.addAttribute("formFajDto", formFajDto);
         return "carnivora";
     }
@@ -46,7 +46,7 @@ public class CarnivoraController {
 
     @GetMapping("/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
-        FajDto formFajDto = fajService.getById(id);
+        FajDto formFajDto = fajService.getFajDtoByFajId(id);
         model.addAttribute("formFajDto", formFajDto);
         return "carnivora_adatlap";
     }
@@ -117,29 +117,16 @@ public class CarnivoraController {
 
     @PostMapping("/carnivora/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
-        carnivoraService.deleteById(id);
-        model.addAttribute("allFaj", allFaj());
+        fajService.deleteById(id);
+        model.addAttribute("allFajDto", allFajDto());
         return "carnivora";
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
-    @ModelAttribute("allFaj")
-    List<Faj> allFaj() {
-        return carnivoraService.findAll();
-    }
-
     @ModelAttribute("allFajDto")
     List<FajDto> allFajDto() {
-        for (FajDto lista : fajService.getAllFajDto()) {
-            if (lista.getSzuloNev() != null) System.out.println(lista.getSzuloNev() + " " + lista.getSzuloId());
-        }
         return fajService.getAllFajDto();
-    }
-
-    @ModelAttribute("formFaj")
-    public Faj formFaj() {
-        return new Faj();
     }
 
     @ModelAttribute("formFajDto")
