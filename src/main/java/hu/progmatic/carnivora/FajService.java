@@ -85,7 +85,6 @@ public class FajService {
 
     public Faj create(FajDto fajDto) {
         Faj faj = buildFajFromFajDto(fajDto);
-        faj.setId(null);
         return fajRepository.save(faj);
     }
 
