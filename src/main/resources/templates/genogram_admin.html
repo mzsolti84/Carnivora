@@ -43,13 +43,13 @@
                                     treeStyle: go.TreeLayout.StyleAlternating,
                                     arrangement: go.TreeLayout.ArrangementHorizontal,
                                     // properties for most of the tree:
-                                    angle: 0,
-                                    layerSpacing: 50
+                                    angle: 270,
+                                    layerSpacing: 50,
                                     // properties for the "last parents":
-                                    // alternateAngle: 0,
-                                    // alternateLayerSpacing: 50,
-                                    // alternateAlignment: go.TreeLayout.AlignmentBus,
-                                    // alternateNodeSpacing: 20
+                                    alternateAngle: 270,
+                                    alternateLayerSpacing: 50,
+                                    alternateAlignment: go.TreeLayout.AlignmentBus,
+                                    alternateNodeSpacing: 20
                                 }),
                         "undoManager.isEnabled": true // enable undo & redo
                     });
@@ -358,8 +358,7 @@
     </script>
 
     <div id="sample">
-        <div id="myDiagramDiv" style="background-color: #34343C; border: solid 1px black; height: 570px;"></div>
-        <p>
+        <div id="myDiagramDiv" style="background-color: #34343C; border: solid 1.5px black; border-radius: 10px; height: 745px;"></div>        <p>
             <button id="zoomToFit">Teljes gráf megjelenítése</button>
             <button id="centerRoot">Fókusz az első ősön</button>
         </p>
