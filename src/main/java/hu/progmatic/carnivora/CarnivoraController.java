@@ -16,8 +16,6 @@ public class CarnivoraController {
     // AUTOWIRED-ek  --------------------------------------------------------------------------------
 
     @Autowired
-    private CarnivoraService carnivoraService;
-    @Autowired
     private FajService fajService;
     @Autowired
     private KladService kladService;
@@ -29,20 +27,12 @@ public class CarnivoraController {
         return "kezdolap";
     }
 
-    /*@GetMapping("/carnivora/{id}")
-    public String szerkeszt(@PathVariable Integer id, Model model) {
-        Faj formFaj = carnivoraService.getById(id);
-        model.addAttribute("formFaj", formFaj);
-        return "carnivora";
-    }*/
-
     @GetMapping("/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         FajDto formFajDto = fajService.getFajDtoByFajId(id);
         model.addAttribute("formFajDto", formFajDto);
         return "carnivora";
     }
-
 
     @GetMapping("/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
@@ -71,22 +61,6 @@ public class CarnivoraController {
         return "genogram_admin";
     }
 
-    // POST MAPPINGEK --------------------------------------------------------------------------------
-
-    /*@PostMapping("/carnivora/{id}")
-    public String save(
-            @PathVariable Integer id,
-            @ModelAttribute("formFaj") @Valid Faj formFaj,
-            BindingResult bindingResult,
-            Model model) {
-        if (!bindingResult.hasErrors()) {
-            carnivoraService.save(formFaj);
-            model.addAttribute("allFaj", allFaj());
-            model.addAttribute("formFaj", formFaj());
-        }
-        return "carnivora";
-    }*/
-
     @PostMapping("/carnivora/{id}")
     public String save(
             @PathVariable Integer id,
@@ -100,7 +74,6 @@ public class CarnivoraController {
         }
         return "carnivora";
     }
-
 
     @PostMapping("/carnivora/")
     public String create(

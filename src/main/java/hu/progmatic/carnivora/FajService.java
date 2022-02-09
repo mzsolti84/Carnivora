@@ -64,7 +64,6 @@ public class FajService {
 
     public Faj buildFajFromFajDto(FajDto fajDto) {
         return Faj.builder()
-                .id(fajDto.getId())
                 .nev(fajDto.getNev())
                 .leiras(fajDto.getLeiras())
                 .latinNev(fajDto.getLatinNev())
@@ -90,8 +89,21 @@ public class FajService {
         return fajRepository.save(faj);
     }
 
+    public boolean existsById(Integer id) {
+        return fajRepository.existsById(id);
+    }
+
     public void deleteById(Integer id) {
         fajRepository.deleteById(id);
     }
 
+    public void deleteFajByIdIfExists(Integer id) {
+        if (existsById(id)) {
+            deleteById(id);
+        }
+    }
+
+    public Faj getById(Integer id) {
+        return fajRepository.getById(id);
+    }
 }
