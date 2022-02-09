@@ -24,7 +24,7 @@ public class CarnivoraController {
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
-    @RequestMapping ("/")
+    @RequestMapping("/")
     public String belepes() {
         return "kezdolap";
     }
@@ -126,9 +126,6 @@ public class CarnivoraController {
 
     @ModelAttribute("allFajDto")
     List<FajDto> allFajDto() {
-        for (FajDto lista : fajService.getAllFajDto()) {
-            if (lista.getSzuloNev() != null) System.out.println(lista.getSzuloNev() + " " + lista.getSzuloId());
-        }
         return fajService.getAllFajDto();
     }
 
