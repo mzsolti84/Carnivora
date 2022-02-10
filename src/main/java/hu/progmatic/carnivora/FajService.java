@@ -90,11 +90,24 @@ public class FajService {
         return fajRepository.save(faj);
     }
 
+    public boolean existsById(Integer id) {
+        return fajRepository.existsById(id);
+    }
+
     public void deleteById(Integer id) {
         fajRepository.deleteById(id);
     }
 
-    public FajDto getById(Integer id) {
+    public FajDto getFajDtoById(Integer id) {
         return buildFajDtoByFajId(id);
+    }
+    public void deleteFajByIdIfExists(Integer id) {
+        if (existsById(id)) {
+            deleteById(id);
+        }
+    }
+
+    public Faj getById(Integer id) {
+        return fajRepository.getById(id);
     }
 }
