@@ -1,2 +1,2 @@
-# Carnivora saját projektek
+# Carnivora saját projekt
 Projektünk célja egy <strong>leszármazotti függőségeket tartalmazó adatstruktúra modell </strong>bemutatása, a <strong>ragadozók</strong> kladisztikus osztályozási módszerének példáján keresztül. Az adatstruktúra kezelést és megértését <strong>interaktív genogrammal (kladisztikus genetikai családfa)</strong>, illetve további adminisztrációs felületekkel és funkciókkal szemléltetjük.
