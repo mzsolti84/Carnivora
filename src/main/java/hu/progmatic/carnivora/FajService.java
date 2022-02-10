@@ -98,9 +98,6 @@ public class FajService {
         fajRepository.deleteById(id);
     }
 
-    public FajDto getFajDtoById(Integer id) {
-        return buildFajDtoByFajId(id);
-    }
     public void deleteFajByIdIfExists(Integer id) {
         if (existsById(id)) {
             deleteById(id);
