@@ -29,12 +29,6 @@ public class CarnivoraController {
         return "kezdolap";
     }
 
-    /*@GetMapping("/carnivora/{id}")
-    public String szerkeszt(@PathVariable Integer id, Model model) {
-        Faj formFaj = carnivoraService.getById(id);
-        model.addAttribute("formFaj", formFaj);
-        return "carnivora";
-    }*/
 
     @GetMapping("/carnivora/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
@@ -78,22 +72,9 @@ public class CarnivoraController {
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
-    /*@PostMapping("/carnivora/{id}")
-    public String save(
-            @PathVariable Integer id,
-            @ModelAttribute("formFaj") @Valid Faj formFaj,
-            BindingResult bindingResult,
-            Model model) {
-        if (!bindingResult.hasErrors()) {
-            carnivoraService.save(formFaj);
-            model.addAttribute("allFaj", allFaj());
-            model.addAttribute("formFaj", formFaj());
-        }
-        return "carnivora";
-    }*/
 
     @PostMapping("/carnivora/{id}")
-    public String save(
+    public String update(
             @PathVariable Integer id,
             @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
             BindingResult bindingResult,
