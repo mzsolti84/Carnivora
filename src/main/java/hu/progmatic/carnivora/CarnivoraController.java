@@ -16,8 +16,6 @@ public class CarnivoraController {
     // AUTOWIRED-ek  --------------------------------------------------------------------------------
 
     @Autowired
-    private CarnivoraService carnivoraService;
-    @Autowired
     private FajService fajService;
     @Autowired
     private KladService kladService;
