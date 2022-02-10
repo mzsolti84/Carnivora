@@ -94,4 +94,7 @@ public class FajService {
         fajRepository.deleteById(id);
     }
 
+    public FajDto getById(Integer id) {
+        return buildFajDtoByFajId(id);
+    }
 }

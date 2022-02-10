@@ -18,12 +18,15 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let myDropdownBtn = document.getElementById("dropdownMenuLinkReg");
-
+            let myDropdownBtnAdm = document.getElementById("dropdownMenuLinkAdm");
             // Create a dropdown instance
             let myDropdownReg = new bootstrap.Dropdown(document.getElementById("dropdownMenuLinkReg"));
-
+            let myDropdownAdm = new bootstrap.Dropdown(document.getElementById("dropdownMenuLinkAdm"));
             myDropdownBtn.addEventListener("click", function () {
                 myDropdownReg.toggle();
+            });
+            myDropdownBtnAdm.addEventListener("click", function () {
+                myDropdownAdm.toggle();
             });
 
         });
@@ -57,7 +60,7 @@
 
     <div class="row">
         <div class="col-md-12 text-right"
-             style="opacity: 0.5">
+             style="opacity: 0.6">
 
             <div class="btn-group dropend">
                 <a class="btn btn-lg btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownMenuLinkReg"
@@ -94,7 +97,7 @@
     <div class="row">
         <div class="col-md-12 text-right"
              style="opacity: 0.75">
-            <a href="/genogramadmin" role="button" class="btn btn-lg btn-outline-light">Klád genogram</a>
+            <a href="/genogram" role="button" class="btn btn-lg btn-outline-light">Klád genogram</a>
         </div>
     </div>
     <br>
@@ -109,10 +112,16 @@
     <br>
     <br>
 
-    <div class="row">
-        <div class="col-md-12 text-right"
-             style="opacity: 0.75">
-            <a href="/carnivora" role="button" class="btn btn-lg btn-outline-warning">Adminisztrációs felület</a>
+    <div class="btn-group dropend"
+    style="opacity: 0.6">
+        <a class="btn btn-lg btn-outline-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLinkAdm"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Adminisztrációs felület
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkAdm">
+            <a class="dropdown-item btn-outline-info" href="index">Felhasználók</a>
+            <a class="dropdown-item btn-outline-info" href="#">Faj adatbázis</a>
+            <a class="dropdown-item btn-outline-info" href="/genogramadmin">Genogram</a>
         </div>
     </div>
 

@@ -71,6 +71,11 @@ public class CarnivoraController {
         return "genogram_admin";
     }
 
+    @RequestMapping("/genogram")
+    public String genogram_noAdmin() {
+        return "geno_gram";
+    }
+
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     /*@PostMapping("/carnivora/{id}")
@@ -94,6 +99,7 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
+            //FajDto fajDto = fajService.getById(id);
             fajService.save(formFajDto);
             model.addAttribute("allFajDto", allFajDto());
             model.addAttribute("formFajDto", formFajDto());
