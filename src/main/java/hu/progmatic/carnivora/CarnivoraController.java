@@ -71,7 +71,7 @@ public class CarnivoraController {
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
 
-    @PostMapping("/carnivora/{id}")
+    @PostMapping("/faj_adatszerk/{id}")
     public String update(
             @PathVariable Integer id,
             @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
@@ -111,6 +111,11 @@ public class CarnivoraController {
 
     @ModelAttribute("allFajDto")
     List<FajDto> allFajDto() {
+        return fajService.getAllFajDto();
+    }
+
+    @ModelAttribute("allFajDtoSearch")
+    List<FajDto> allFajDtoSearch() {
         return fajService.getAllFajDto();
     }
 

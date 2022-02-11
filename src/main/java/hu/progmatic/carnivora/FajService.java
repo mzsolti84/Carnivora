@@ -28,6 +28,10 @@ public class FajService {
 
     public FajDto buildFajDtoByFajNev(String nev) {
         Faj faj = fajRepository.getByNev(nev);
+        return DtoBuilderFromFaj(faj);
+    }
+
+    private FajDto DtoBuilderFromFaj(Faj faj) {
         return FajDto.builder()
                 .id(faj.getId())
                 .leiras(faj.getLeiras())
@@ -44,18 +48,7 @@ public class FajService {
 
     public FajDto buildFajDtoByFajId(Integer id) {
         Faj faj = fajRepository.getById(id);
-        return FajDto.builder()
-                .id(faj.getId())
-                .leiras(faj.getLeiras())
-                .nev(faj.getNev())
-                .latinNev(faj.getLatinNev())
-                .statusz(faj.getStatusz())
-                .turesHatar(faj.getTuresHatar())
-                .fotoURL(faj.getFotoURL())
-                .wikiURL(faj.getWikiURL())
-                .szuloNev(faj.getKlad().getNev())
-                .szuloId(faj.getKlad().getId())
-                .build();
+        return DtoBuilderFromFaj(faj);
     }
 
     private Klad getKladFromFajDto(FajDto fajDto) {
