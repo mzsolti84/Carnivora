@@ -1,6 +1,11 @@
 package hu.progmatic.carnivora;
 
+import hu.progmatic.carnivora.page.Paged;
+import hu.progmatic.carnivora.page.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -69,6 +74,8 @@ public class FajService {
                 .build();
     }
 
+
+
     public FajDto getFajDtoByFajId(Integer id) {
         return buildFajDtoByFajId(id);
     }
@@ -100,4 +107,11 @@ public class FajService {
     public Faj getById(Integer id) {
         return fajRepository.getById(id);
     }
+
+    public Paged<FajDto> getPage(int pageNumber, int size) {
+        PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<FajDto> postPage = fajRepository.findAll(request).map(Faj -> DtoBuilderFromFaj(Faj));
+        return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
+    }
+
 }

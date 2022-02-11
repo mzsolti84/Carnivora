@@ -1,6 +1,8 @@
 package hu.progmatic.carnivora;
 
+import hu.progmatic.carnivora.page.Paged;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -78,6 +80,19 @@ public class CarnivoraController {
         return "faj_adatszerk";
     }
 
+    @GetMapping("/faj_adatlista/pageNumber={id}")
+    public String posts(@PathVariable(value = "id") int pageNumber,
+                        @RequestParam(value = "size", required = false, defaultValue = "5") int size, Model model) {
+        model.addAttribute("fajLap", fajService.getPage(pageNumber, size));
+        return "faj_adatlista";
+    }
+
+    @GetMapping("/faj_adatlista")
+    public String postStart(@RequestParam(value = "pageNumber", required = false, defaultValue = "1") int pageNumber,
+                        @RequestParam(value = "size", required = false, defaultValue = "5") int size, Model model) {
+        model.addAttribute("fajLap", fajService.getPage(pageNumber, size));
+        return "faj_adatlista";
+    }
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
 
@@ -117,6 +132,8 @@ public class CarnivoraController {
         return "carnivora";
     }
 
+
+
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("allFajDto")
@@ -138,5 +155,6 @@ public class CarnivoraController {
     List<SzuloKladDto> allKlad() {
         return kladService.findAllParentKlad();
     }
+
 
 }
