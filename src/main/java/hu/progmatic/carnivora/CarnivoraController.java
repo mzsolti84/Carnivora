@@ -43,6 +43,13 @@ public class CarnivoraController {
         return "carnivora_adatlap";
     }
 
+    @GetMapping("/carnivora/{nevReszlet}")
+    public String kereses(@PathVariable String nevReszlet, Model model) {
+        List<FajDto> formFajDtoLista = fajService.getFajDtoByFajNevReszlet(nevReszlet);
+        model.addAttribute("AllFajDto", formFajDtoLista);
+        return "carnivora";
+    }
+
     @RequestMapping("/kozosos")
     public String kozosOS() {
         return "kozos_os";

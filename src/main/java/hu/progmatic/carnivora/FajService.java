@@ -100,4 +100,13 @@ public class FajService {
     public Faj getById(Integer id) {
         return fajRepository.getById(id);
     }
+
+    public List<FajDto> getFajDtoByFajNevReszlet(String nevReszlet) {
+        return fajRepository
+                .findAll()
+                .stream()
+                .filter(faj -> faj.getNev().contains(nevReszlet))
+                .map(faj -> buildFajDtoByFajId(faj.getId()))
+                .toList();
+    }
 }
