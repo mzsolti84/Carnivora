@@ -28,11 +28,11 @@ public class CarnivoraController {
     }
 
 
-    @GetMapping("/carnivora/{id}")
+    @GetMapping("/faj_adatszerk/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         FajDto formFajDto = fajService.getFajDtoByFajId(id);
         model.addAttribute("formFajDto", formFajDto);
-        return "carnivora";
+        return "faj_adatszerk";
     }
 
 
@@ -68,6 +68,16 @@ public class CarnivoraController {
         return "geno_gram";
     }
 
+    @RequestMapping("/faj_adatlista")
+    public String faj_adatlista() {
+        return "faj_adatlista";
+    }
+
+    @RequestMapping("/faj_adatszerk")
+    public String faj_adatszerk() {
+        return "faj_adatszerk";
+    }
+
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
 
@@ -83,7 +93,7 @@ public class CarnivoraController {
             model.addAttribute("allFajDto", allFajDto());
             model.addAttribute("formFajDto", formFajDto());
         }
-        return "carnivora";
+        return "faj_adatlista";
     }
 
 
