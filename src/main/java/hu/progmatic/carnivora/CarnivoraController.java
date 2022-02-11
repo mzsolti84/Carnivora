@@ -19,8 +19,6 @@ public class CarnivoraController {
     private FajService fajService;
     @Autowired
     private KladService kladService;
-    @Autowired
-    private KladForJsonService kladForJsonService;
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
@@ -74,7 +72,7 @@ public class CarnivoraController {
 
     @RequestMapping("/genogram")
     public String genogram_noAdmin() {
-        return "genogram";
+        return "geno_gram";
     }
 
     @RequestMapping("/faj_adatlista")
@@ -148,8 +146,4 @@ public class CarnivoraController {
         return kladService.findAllParentKlad();
     }
 
-    @ModelAttribute("jsonForGenogram")
-    String getJsonForGenogram() {
-        return kladForJsonService.getJsonForGenogram();
-    }
 }
