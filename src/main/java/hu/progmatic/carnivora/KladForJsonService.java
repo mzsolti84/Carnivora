@@ -17,13 +17,15 @@ public class KladForJsonService {
     @Autowired
     KladRepository kladRepository;
 
+    private class JsonSourceForGsonDto {
+        String classLenneDeNemLehetAz = "TreeModel";
+        List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
+    }
+
     public String getJsonForGenogram() {
         Gson gson = new Gson();
 
-        return "{ \"class\": \"TreeModel\",\n" +
-                "\"nodeDataArray\": " +
-                gson.toJson(getAllKladForJsonDto()) +
-                "}";
+        return gson.toJson(new JsonSourceForGsonDto()).replace("classLenneDeNemLehetAz", "class");
     }
 
     private List<KladForJsonDto> getAllKladForJsonDto() {
