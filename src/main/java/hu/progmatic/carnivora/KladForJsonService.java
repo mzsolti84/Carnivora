@@ -17,13 +17,17 @@ public class KladForJsonService {
     @Autowired
     KladRepository kladRepository;
 
+    // BACKEND -> JSON -> GENOGRAM irányba dolgozó metódusok, osztályok ------------------------------------------------
+
+    private class JsonSourceForGsonDto {
+        String classLenneDeNemLehetAz = "TreeModel";
+        List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
+    }
+
     public String getJsonForGenogram() {
         Gson gson = new Gson();
 
-        return "{ \"class\": \"TreeModel\",\n" +
-                "\"nodeDataArray\": " +
-                gson.toJson(getAllKladForJsonDto()) +
-                "}";
+        return gson.toJson(new JsonSourceForGsonDto()).replace("classLenneDeNemLehetAz", "class");
     }
 
     private List<KladForJsonDto> getAllKladForJsonDto() {
@@ -78,4 +82,8 @@ public class KladForJsonService {
     private String capitalizeFirstLetter(String input) {
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
+
+    // GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok ------------------------------------------------
+
+
 }
