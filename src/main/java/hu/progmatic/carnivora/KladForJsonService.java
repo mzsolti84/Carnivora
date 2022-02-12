@@ -17,6 +17,8 @@ public class KladForJsonService {
     @Autowired
     KladRepository kladRepository;
 
+    // BACKEND -> JSON -> GENOGRAM irányba dolgozó metódusok, osztályok ------------------------------------------------
+
     private class JsonSourceForGsonDto {
         String classLenneDeNemLehetAz = "TreeModel";
         List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
@@ -80,4 +82,8 @@ public class KladForJsonService {
     private String capitalizeFirstLetter(String input) {
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
+
+    // GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok ------------------------------------------------
+
+
 }
