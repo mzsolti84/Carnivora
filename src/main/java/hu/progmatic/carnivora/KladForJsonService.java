@@ -17,18 +17,24 @@ public class KladForJsonService {
     @Autowired
     KladRepository kladRepository;
 
-    // BACKEND -> JSON -> GENOGRAM irányba dolgozó metódusok, osztályok ------------------------------------------------
+    /// BACKEND -> JSON -> GENOGRAM irány ------------------------------------------------------------------------------
+
+    // INNER CLASS -----------------------------------------------------------------------------------------------------
 
     private class JsonSourceForGsonDto {
         String classLenneDeNemLehetAz = "TreeModel";
         List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
     }
 
+    // PUBLIC MAIN METÓDUS ----------------------------------------------------------------------------------------------------
+
     public String getJsonForGenogram() {
         Gson gson = new Gson();
 
         return gson.toJson(new JsonSourceForGsonDto()).replace("classLenneDeNemLehetAz", "class");
     }
+
+    // CLASS PRIVATE SEGÉDMETÓDUSOK
 
     private List<KladForJsonDto> getAllKladForJsonDto() {
         return getAllKlad().stream()
@@ -83,7 +89,7 @@ public class KladForJsonService {
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 
-    // GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok ------------------------------------------------
+    /// GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok ------------------------------------------------
 
 
 }
