@@ -3,13 +3,9 @@ package hu.progmatic.carnivora;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Node;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Transactional
@@ -21,7 +17,7 @@ public class KladForJsonService {
 
     // INNER CLASS -----------------------------------------------------------------------------------------------------
 
-    private class JsonSourceForGsonDto {
+    private class SourceDataForGsonDto {
         String classLenneDeNemLehetAz = "TreeModel";
         List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
     }
@@ -31,7 +27,7 @@ public class KladForJsonService {
     public String getJsonForGenogram() {
         Gson gson = new Gson();
 
-        return gson.toJson(new JsonSourceForGsonDto()).replace("classLenneDeNemLehetAz", "class");
+        return gson.toJson(new SourceDataForGsonDto()).replace("classLenneDeNemLehetAz", "class");
     }
 
     // CLASS PRIVATE SEGÉDMETÓDUSOK
