@@ -11,12 +11,17 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Fajok</title>
-
+   <script>
+       $(document).ready(function () {
+    $('#paginCarnivora').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+    });
+   </script>
 </head>
 
 <body style="background-color:Black;">
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
-    <table id="fajlapoz" class="table table-dark table-striped table-responsive">
+    <table id="paginCarnivora" class="table table-dark table-striped table-responsive">
         <thead>
         <tr>
             <th scope="col">Id</th>
@@ -65,32 +70,5 @@
         </tr>
         </tbody>
     </table>
-
-    <nav aria-label="Page navigation" class="paging">
-        <ul class="pagination" th:if="${fajLap.page.totalPages > 1}">
-            <li class="page-item" th:classappend="${!fajLap.paging.isPrevEnabled()? 'disabled' : ''}">
-                <a class="page-link" th:href="@{'/faj_adatlista/pageNumber=' + ${fajLap.paging.pageNumber - 1}}"
-                   tabindex="-1">Previous</a>
-            </li>
-            <th:block th:each="item : ${fajLap.paging.getItems()}">
-                <li class="page-item" th:classappend="${item.index == fajLap.paging.pageNumber? 'active' : ''}"
-                    th:if="${item.pageItemType.name() == 'PAGE'}">
-                    <a class="page-link" th:href="@{'/faj_adatlista/pageNumber=' + ${item.index}}"
-                       th:text="${item.index}"></a>
-                </li>
-                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
-                    <a class="page-link" href="#">...</a>
-                </li>
-            </th:block>
-            <li class="page-item" th:classappend="${!fajLap.paging.isNextEnabled()? 'disabled' : ''}">
-                <a class="page-link" th:href="@{'/faj_adatlista/pageNumber=' + ${fajLap.paging.pageNumber + 1}}">Next</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-
-<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-</body>
+    </body>
 </html>

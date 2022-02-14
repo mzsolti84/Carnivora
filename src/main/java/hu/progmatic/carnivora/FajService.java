@@ -1,14 +1,13 @@
 package hu.progmatic.carnivora;
 
-import hu.progmatic.carnivora.page.Paged;
-import hu.progmatic.carnivora.page.Paging;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 import java.util.List;
 
 import static hu.progmatic.databaseinit.InitSpeciesFromFileFactory.kategoriaSwitch;
@@ -123,11 +122,6 @@ public class FajService {
         return fajRepository.getById(id);
     }
 
-    public Paged<FajDto> getPage(int pageNumber, int size) {
-        PageRequest request = PageRequest.of(pageNumber - 1, size);
-        Page<FajDto> postPage = fajRepository.findAll(request).map(Faj -> DtoBuilderFromFaj(Faj));
 
-        return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
-    }
 
 }
