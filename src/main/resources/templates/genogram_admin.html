@@ -370,13 +370,15 @@
             </div>
         </td>
         <td style="width: 40%;">
-            <button id="zoomToFit">Teljes gráf megjelenítése</button>
+            <button id="zoomToFit">Teljes diagram megjelenítése</button>
             <button id="centerRoot">Fókusz az első ősön</button>
             <br><br>
-            <button id="SaveButton" onclick="save()">JSON generálás</button>
-            <button onclick="">Mentés adatbázisba</button>
+            <button id="SaveButton" onclick="save()">JSON generálása</button>
+            <form th:action="@{'/saveToDatabase'}" method="post">
+                <input type="submit" class="btn btn-primary" value="Mentés adatbázisba"/>
+            </form>
             <br><br>
-            <button id="LoadButton" onclick="load()">JSON betöltése diagramba</button>
+            <button id="LoadButton" onclick="load()">JSON megjelenítése diagramként</button>
             <br>
             <br>
             Épített leszármazotti modell JSON formátumban:
