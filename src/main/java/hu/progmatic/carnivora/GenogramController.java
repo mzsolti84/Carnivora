@@ -38,20 +38,35 @@ public class GenogramController {
     }
      */
 
+    @GetMapping("/save_json_to_database")
+    public String ToDatabase(Model model) {
+        model.addAttribute("jsonForGenogram", new KladForGsonDto());
+        return "genogram_admin";
+    }
+
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     @PostMapping("/save_json_to_database")
     public String saveToDatabase(
+            @ModelAttribute("jsonForGenogram") @Valid KladForGsonDto jsonForGenogram,
+            BindingResult bindingResult,
             Model model) {
-        String submittedString = (String) model.getAttribute("jsonForGenogram");
-        model.addAttribute("jsonForGenogram","a submit gomb eléri a save_json_to_database PostMappinget");
+        if (!bindingResult.hasErrors()) {
+            String submittedString =  jsonForGenogram.getJsonCode();
+            //model.addAttribute("jsonForGenogram", new KladForGsonDto());
+            return "genogram_admin";
+        }
         return "genogram_admin";
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("jsonForGenogram")
-    String getJsonForGenogram() {
-        return kladForGsonService.getJsonForGenogram();
+    KladForGsonDto getJsonForGenogram() {
+        return KladForGsonDto.builder()
+                .jsonCode(kladForGsonService.getJsonForGenogram())
+                .build();
+
     }
+
 }
