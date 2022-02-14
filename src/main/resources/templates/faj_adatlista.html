@@ -11,12 +11,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Fajok</title>
-   <script>
-       $(document).ready(function () {
-    $('#paginCarnivora').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-    });
-   </script>
+
 </head>
 
 <body style="background-color:Black;">
@@ -32,7 +27,6 @@
             <th scope="col">Leírás</th>
             <th scope="col">Term.védelmi státusz</th>
             <th scope="col">Tűréshatár</th>
-            <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
 
@@ -70,5 +64,12 @@
         </tr>
         </tbody>
     </table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#paginCarnivora').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
     </body>
 </html>
