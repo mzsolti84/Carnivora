@@ -3,13 +3,9 @@ package hu.progmatic.carnivora;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.Node;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Transactional
@@ -17,14 +13,24 @@ public class KladForJsonService {
     @Autowired
     KladRepository kladRepository;
 
+    /// BACKEND -> JSON -> GENOGRAM irány ------------------------------------------------------------------------------
+
+    // INNER CLASS -----------------------------------------------------------------------------------------------------
+
+    private class DataForGson {
+        String classLenneDeNemLehetAz = "TreeModel";
+        List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
+    }
+
+    // PUBLIC MAIN METÓDUS ----------------------------------------------------------------------------------------------------
+
     public String getJsonForGenogram() {
         Gson gson = new Gson();
 
-        return "{ \"class\": \"TreeModel\",\n" +
-                "\"nodeDataArray\": " +
-                gson.toJson(getAllKladForJsonDto()) +
-                "}";
+        return gson.toJson(new DataForGson()).replace("classLenneDeNemLehetAz", "class");
     }
+
+    // CLASS PRIVATE SEGÉDMETÓDUSOK
 
     private List<KladForJsonDto> getAllKladForJsonDto() {
         return getAllKlad().stream()
@@ -78,4 +84,8 @@ public class KladForJsonService {
     private String capitalizeFirstLetter(String input) {
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
+
+    /// GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok ------------------------------------------------
+
+
 }

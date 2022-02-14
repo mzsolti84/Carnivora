@@ -223,7 +223,7 @@
                                 },
                                 new go.Binding("text", "name").makeTwoWay()),
                             $(go.TextBlock, textStyle(),
-                                {row: 1, column: 0},
+                                {row: 1, column: 0, editable: true},
                                 new go.Binding("text", "latinNev", function (v) {
                                     return v;
                                 })),
@@ -264,7 +264,7 @@
                                     myDiagram.startTransaction("vacate");
                                     // update the key, name, and comments
                                     myDiagram.model.setDataProperty(thisemp, "name", "(Üres)");
-                                    myDiagram.model.setDataProperty(thisemp, "comments", "(Üres)");
+                                    myDiagram.model.setDataProperty(thisemp, "latinNev", "(Üres)");
                                     myDiagram.commitTransaction("vacate");
                                 }
                             }
@@ -362,26 +362,33 @@
 
         window.addEventListener('DOMContentLoaded', init);
     </script>
-
-    <div id="sample">
-        <div id="myDiagramDiv" style="background-color: #34343C; border: solid 1.5px black; border-radius: 10px; height: 745px;"></div>        <p>
+    <table style="width: 100%; text-align: center">
+        <td style="width: 60%;">
+            <div id="myDiagramDiv"
+                 style="background-color: #34343C; border: solid 1.5px black; border-radius: 10px; height: 745px;">
+            </div>
+        </td>
+        <td style="width: 40%;">
             <button id="zoomToFit">Teljes gráf megjelenítése</button>
             <button id="centerRoot">Fókusz az első ősön</button>
-        </p>
-
+            <br><br>
+            <button id="SaveButton" onclick="save()">JSON generálás</button>
+            <button onclick="">Mentés adatbázisba</button>
+            <br><br>
+            <button id="LoadButton" onclick="load()">JSON betöltése diagramba</button>
+            <br>
+            <br>
+            Épített leszármazotti modell JSON formátumban:
+            <br><br>
+            <textarea th:text="${jsonForGenogram}" id="mySavedModel" style="width:100%; height:500px; resize: vertical">{"class": "TreeModel","nodeDataArray":[{"key":1,"name":"placeHolder","latinNev":"placeHolderusz"}]}</textarea>
+            <br><br>
+            <button type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
+        </td>
+    </table>
+    <div id="sample">
         <div>
             <div id="myInspector">
             </div>
-        </div>
-        <div>
-            <div>
-                <button id="SaveButton" onclick="save()">Ment</button>
-                <button onclick="load()">Betölt</button>
-                <br>
-                <br>
-                Épített leszármazotti modell JSON formátumban:
-            </div>
-            <textarea th:text="${jsonForGenogram}" id="mySavedModel" style="width:100%; height:270px;">{"class": "TreeModel","nodeDataArray":[{"key":1,"name":"placeHolder","latinNev":"placeHolderusz"}]}</textarea>
         </div>
     </div>
 </div>
@@ -389,7 +396,6 @@
 <br>
 <div>
 
-        <button type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
 
 </div>
 </body>

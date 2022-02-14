@@ -141,10 +141,6 @@ public class CarnivoraController {
         return fajService.getAllFajDto();
     }
 
-    @ModelAttribute("allFajDtoSearch")
-    List<FajDto> allFajDtoSearch() {
-        return fajService.getAllFajDto();
-    }
 
     @ModelAttribute("formFajDto")
     public FajDto formFajDto() {
