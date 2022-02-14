@@ -117,8 +117,8 @@
             <td th:text="${fajDto.latinNev}">fajDto.latinNev</td>
             <td th:text="${fajDto.szuloNev}">fajDto.osNev</td>
             <td th:text="${#strings.abbreviate(fajDto.leiras,80)}">fajDto.leiras</td>
-            <td th:text="${#strings.abbreviate(fajDto.getStatusz,12)}">fajDto.statusz</td>
-            <td th:text="${fajDto.turesHatar}">fajDto.turesHatar</td>
+            <td th:text="${#strings.abbreviate(fajDto.getStatusz.getDisplayName(),12)}">fajDto.statusz</td>
+            <td th:text="${fajDto.turesHatar.getDisplayName()}">fajDto.turesHatar</td>
             <td>
                 <div class="row">
                     <div class="col">

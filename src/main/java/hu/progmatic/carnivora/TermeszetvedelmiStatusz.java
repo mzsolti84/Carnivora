@@ -23,10 +23,4 @@ public enum TermeszetvedelmiStatusz {
         return displayName;
     }
 
-    public static TermeszetvedelmiStatusz getFromString(String text) {
-        return Arrays
-                .stream(TermeszetvedelmiStatusz.values())
-                .filter(statusz -> statusz.displayName.equalsIgnoreCase(text))
-                .findFirst().orElse(null);
-    }
 }

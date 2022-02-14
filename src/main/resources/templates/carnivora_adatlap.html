@@ -78,13 +78,13 @@
         <tr>
             <td>
                 <p>Besorolás:</p>
-                <p th:text="*{statusz}" style="font-size:130%;">formFaj.statusz</p>
+                <p th:text="*{statusz.getDisplayName()}" style="font-size:130%;">formFaj.statusz</p>
             </td>
         </tr>
         <tr>
             <td>
                 <p>Tűréshatár (életmód):</p>
-                <p th:text="*{turesHatar}" style="font-size:130%;">formFaj.turesHatar</p>
+                <p th:text="*{turesHatar.getDisplayName()}" style="font-size:130%;">formFaj.turesHatar</p>
             </td>
         </tr>
         </tbody>

@@ -18,8 +18,8 @@ public class FajDto {
     private String leiras;
     private String nev;
     private String latinNev;
-    private String statusz;
-    private String turesHatar;
+    private TermeszetvedelmiStatusz statusz;
+    private Tureshatar turesHatar;
     private String fotoURL;
     private String wikiURL;
 
