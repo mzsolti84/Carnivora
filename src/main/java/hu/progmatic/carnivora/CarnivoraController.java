@@ -21,8 +21,6 @@ public class CarnivoraController {
     private FajService fajService;
     @Autowired
     private KladService kladService;
-    @Autowired
-    private KladForJsonService kladForJsonService;
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
@@ -31,14 +29,12 @@ public class CarnivoraController {
         return "kezdolap";
     }
 
-
     @GetMapping("/faj_adatszerk/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         FajDto formFajDto = fajService.getFajDtoByFajId(id);
         model.addAttribute("formFajDto", formFajDto);
         return "faj_adatszerk";
     }
-
 
     @GetMapping("/carnivora/{id}/adatlap")
     public String adatlapKiir(@PathVariable Integer id, Model model) {
@@ -62,16 +58,6 @@ public class CarnivoraController {
         return "about";
     }
 
-    @RequestMapping("/genogramadmin")
-    public String genogram() {
-        return "genogram_admin";
-    }
-
-    @RequestMapping("/genogram")
-    public String genogram_noAdmin() {
-        return "genogram";
-    }
-
     @RequestMapping("/faj_adatlista")
     public String faj_adatlista() {
         return "faj_adatlista";
@@ -82,9 +68,7 @@ public class CarnivoraController {
         return "faj_adatszerk";
     }
 
-
     // POST MAPPINGEK --------------------------------------------------------------------------------
-
 
     @PostMapping("/faj_adatszerk/{id}")
     public String update(
@@ -100,7 +84,6 @@ public class CarnivoraController {
         }
         return "faj_adatlista";
     }
-
 
     @PostMapping("/carnivora/")
     public String create(
@@ -137,11 +120,6 @@ public class CarnivoraController {
     @ModelAttribute("allKlad")
     List<SzuloKladDto> allKlad() {
         return kladService.findAllParentKlad();
-    }
-
-    @ModelAttribute("jsonForGenogram")
-    String getJsonForGenogram() {
-        return kladForJsonService.getJsonForGenogram();
     }
 
 }

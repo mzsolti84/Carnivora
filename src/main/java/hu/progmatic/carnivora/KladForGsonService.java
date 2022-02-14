@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class KladForJsonService {
+public class KladForGsonService {
     @Autowired
     KladRepository kladRepository;
 
