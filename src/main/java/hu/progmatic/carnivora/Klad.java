@@ -23,6 +23,7 @@ public class Klad {
     @Column(unique = true)
     private String latinNev;
 
+    @Lob
     private String leiras;
 
     @ManyToOne
