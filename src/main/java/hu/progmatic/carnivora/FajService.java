@@ -74,8 +74,6 @@ public class FajService {
                 .build();
     }
 
-
-
     public FajDto getFajDtoByFajId(Integer id) {
         return buildFajDtoByFajId(id);
     }
