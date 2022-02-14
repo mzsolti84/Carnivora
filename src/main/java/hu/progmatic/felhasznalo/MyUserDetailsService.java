@@ -17,7 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
   @Override
   public UserDetails loadUserByUsername(String username) {
-    Optional<Felhasznalo> felhasznalo = felhasznaloRepository.findByNev(username);
+    Optional<Felhasznalo> felhasznalo = felhasznaloRepository.findByFelhasznaloNev(username);
     if (felhasznalo.isEmpty()) {
       throw new UsernameNotFoundException(username);
     }

@@ -12,14 +12,16 @@ public class MyUserDetails implements UserDetails {
 
   private final Long felhasznaloId;
   private final String jelszo;
-  private final String nev;
+  private final String felhasznaloNev;
   private final UserType role;
+  private boolean engedelyezve;
 
   public MyUserDetails(Felhasznalo felhasznalo) {
     jelszo = felhasznalo.getJelszo();
-    nev = felhasznalo.getNev();
+    felhasznaloNev = felhasznalo.getFelhasznaloNev();
     role = felhasznalo.getRole();
     felhasznaloId = felhasznalo.getId();
+    engedelyezve = felhasznalo.isEngedelyezve();
   }
 
   @Override
@@ -34,7 +36,7 @@ public class MyUserDetails implements UserDetails {
 
   @Override
   public String getUsername() {
-    return nev;
+    return felhasznaloNev;
   }
 
   @Override
@@ -54,7 +56,7 @@ public class MyUserDetails implements UserDetails {
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return engedelyezve;
   }
 
   public UserType getRole() {

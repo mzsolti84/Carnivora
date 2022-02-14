@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface FelhasznaloRepository extends JpaRepository<Felhasznalo, Long> {
-  Optional<Felhasznalo> findByNev(String nev);
+  Optional<Felhasznalo> findByFelhasznaloNev(String nev);
+  Optional<Felhasznalo> findByEmail(String email);
 }

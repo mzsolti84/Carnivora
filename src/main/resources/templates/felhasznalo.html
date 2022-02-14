@@ -20,6 +20,10 @@
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Felhasználónév</th>
+        <th scope="col">Vezetéknév</th>
+        <th scope="col">Keresztnév</th>
+        <th scope="col">Email</th>
+        <th scope="col">Engedélyezett</th>
         <th scope="col">Role</th>
         <th scope="col"></th>
     </tr>
@@ -27,7 +31,11 @@
     <tbody>
     <tr th:each="felhasznalo : ${allFelhasznalo}">
         <th scope="row" th:text="${felhasznalo.id}">1</th>
-        <td th:text="${felhasznalo.nev}">Minta név</td>
+        <td th:text="${felhasznalo.felhasznaloNev}">Minta Felhasználónév</td>
+        <td th:text="${felhasznalo.vezetekNev}">Minta vezetéknév</td>
+        <td th:text="${felhasznalo.keresztNev}">Minta keresztnév</td>
+        <td th:text="${felhasznalo.email}">Minta email</td>
+        <td th:text="${felhasznalo.engedelyezve}">false</td>
         <td th:text="${felhasznalo.role}">ADMIN</td>
         <td>
             <form th:if="${hasUserWriteRole}"
@@ -40,7 +48,7 @@
 </table>
 
 <hr>
-<h3 th:if="${hasUserWriteRole}">Új felhasználó létrehozása</h3>
+<!--<h3 th:if="${hasUserWriteRole}">Új felhasználó létrehozása</h3>
 <form th:if="${hasUserWriteRole}"
       th:action="@{/felhasznalo}" method="post" th:object="${ujFelhasznaloCommand}">
     <div class="form-row">
@@ -54,7 +62,7 @@
                    class="form-control"
                    name="nev"
                    placeholder="Felhasználónév"
-                   th:field="*{nev}"/>
+                   th:field="*{getFelhasznaloNev}"/>
         </label>
         <label>
             <input type="password"
@@ -70,7 +78,12 @@
         </label>
         <input class="btn btn-primary" type="submit" value="Hozzáad"/>
     </div>
-</form>
+</form>-->
 <h3 th:text="'Bejelntkezett felhasználó id: ' + ${userId}">Felhasználó id: 2</h3>
+
+<form th:action="@{/logout}" method="post">
+    <input class="btn btn-primary" type="submit" value="Kijelentkezés"/>
+</form>
+
 </body>
 </html>
