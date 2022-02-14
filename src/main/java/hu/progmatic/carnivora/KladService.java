@@ -82,4 +82,20 @@ public class KladService implements InitializingBean {
                 .nev(klad.getNev())
                 .build();
     }
+
+    public KladDto buildKladDtoFromKlad(Klad klad) {
+        return KladDto.builder()
+                .id(klad.getId())
+                .nev(klad.getNev())
+                .latinNev(klad.getLatinNev())
+                .leiras(klad.getLeiras())
+                .szuloId(klad.getSzulo() == null ? 0 : klad.getSzulo().getId())
+                .szuloNev(klad.getSzulo() == null ? "Eukarióták" : klad.getSzulo().getNev())
+                .build();
+    }
+
+    public KladDto getKladDtoById(Integer id) {
+        Klad klad = kladRepository.getById(id);
+        return buildKladDtoFromKlad(klad);
+    }
 }

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static hu.progmatic.databaseinit.InitSpeciesFromFileFactory.kategoriaSwitch;
+
 @Service
 @Transactional
 public class FajService {
@@ -37,8 +39,23 @@ public class FajService {
                 .leiras(faj.getLeiras())
                 .nev(faj.getNev())
                 .latinNev(faj.getLatinNev())
-                .statusz(faj.getStatusz())
-                .turesHatar(faj.getTuresHatar())
+                .statusz(faj.getStatusz().getDisplayName())
+                .turesHatar(faj.getTuresHatar().getDisplayName())
+                .fotoURL(faj.getFotoURL())
+                .wikiURL(faj.getWikiURL())
+                .szuloNev(faj.getKlad().getNev())
+                .szuloId(faj.getKlad().getId())
+                .build();
+    }
+
+    private FajDto DtoBuilderFromFajWithSwitch(Faj faj) {
+        return FajDto.builder()
+                .id(faj.getId())
+                .leiras(faj.getLeiras())
+                .nev(faj.getNev())
+                .latinNev(faj.getLatinNev())
+                .statusz(faj.getStatusz().getDisplayName())
+                .turesHatar(faj.getTuresHatar().getDisplayName())
                 .fotoURL(faj.getFotoURL())
                 .wikiURL(faj.getWikiURL())
                 .szuloNev(faj.getKlad().getNev())
@@ -61,8 +78,8 @@ public class FajService {
                 .nev(fajDto.getNev())
                 .leiras(fajDto.getLeiras())
                 .latinNev(fajDto.getLatinNev())
-                .statusz(fajDto.getStatusz())
-                .turesHatar(fajDto.getTuresHatar())
+                .statusz(TermeszetvedelmiStatusz.getFromString(fajDto.getStatusz()))
+                .turesHatar(Tureshatar.getFromString(fajDto.getTuresHatar()))
                 .fotoURL(fajDto.getFotoURL())
                 .wikiURL(fajDto.getWikiURL())
                 .klad(getKladFromFajDto(fajDto))

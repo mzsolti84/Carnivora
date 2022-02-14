@@ -10,18 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FajDto {
-
+public class KladDto {
     private Integer id;
-    private String leiras;
     private String nev;
     private String latinNev;
-    private String statusz;
-    private String turesHatar;
-    private String fotoURL;
-    private String wikiURL;
-
-    private String szuloNev;
+    private String leiras;
     private Integer szuloId;
-
+    private String szuloNev;
 }

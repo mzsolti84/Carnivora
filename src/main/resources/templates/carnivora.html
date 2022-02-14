@@ -36,25 +36,26 @@
         display: table;
         table-layout: fixed;
     }
+    th.fixNumber {
+        width: 40pt;
+    }
 </style>
     <script>
-        function myFunction2() {
-            var myText = document.getElementById("searchText").value;
-        }
-
         //Táblázat szűrés js
         const myFindFunction = () => {
             const columns = [
                 { name: 'Id', index: 0, isFilter: true },
                 { name: 'Név', index: 1, isFilter: true },
                 { name: 'Latin név', index: 2, isFilter: true },
-                { name: 'Klád', index: 3, isFilter: true }
+                { name: 'Klád', index: 3, isFilter: true },
+                { name: 'Leírás', index: 4, isFilter: true }
             ]
 
             const filterColumns = columns.filter(c => c.isFilter).map(c => c.index)
             const trs = document.querySelectorAll(`#myTable tr:not(.header)`)
             const filter = document.querySelector('#mySearchInput').value
-            const regex = new RegExp(encodeURI(filter), 'i')
+            const regex = new RegExp(filter, 'i')
+            console.log(regex)
             const isFoundInTds = td => regex.test(td.innerHTML)
             const isFound = childrenArr => childrenArr.some(isFoundInTds)
             const setTrStyleDisplay = ({ style, children }) => {
@@ -84,7 +85,7 @@
             <input class="form-control me-2 bg-dark text-white"
                    id="mySearchInput"
                    onkeyup="myFindFunction()"
-                   type="search" placeholder="név"
+                   type="search" placeholder="#, név, latin név, klád vagy leírás részlet"
                    aria-label="Search">
         </form>
     </div>
@@ -93,9 +94,9 @@
 
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
     <table class="table table-dark table-striped table-responsive">
-        <thead style="text-align: center">
+        <thead style="font-size: 11pt; text-align: center;">
         <tr>
-            <th scope="col">Id</th>
+            <th scope="col" class="fixNumber">#</th>
             <th scope="col">Név</th>
             <th scope="col">Latin név</th>
             <th scope="col">Klád</th>
@@ -111,7 +112,7 @@
                id="myTable">
         <tbody style="font-size: 10pt; text-align:center">
         <tr th:each="fajDto : ${allFajDto}">
-            <th scope="row" th:text="${fajDto.id}">fajDto.id</th>
+            <th scope="row" class="fixNumber" th:text="${fajDto.id}">fajDto.id</th>
             <td th:text="${fajDto.nev}">fajDto.nev</td>
             <td th:text="${fajDto.latinNev}">fajDto.latinNev</td>
             <td th:text="${fajDto.szuloNev}">fajDto.osNev</td>

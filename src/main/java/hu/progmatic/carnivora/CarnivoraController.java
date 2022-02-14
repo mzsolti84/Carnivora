@@ -45,13 +45,6 @@ public class CarnivoraController {
         return "carnivora_adatlap";
     }
 
-    @GetMapping("/carnivora/{nevReszlet}")
-    public String kereses(@PathVariable String nevReszlet, Model model) {
-        List<FajDto> formFajDtoLista = fajService.getFajDtoByFajNevReszlet(nevReszlet);
-        model.addAttribute("AllFajDto", formFajDtoLista);
-        return "carnivora";
-    }
-
     @RequestMapping("/kozosos")
     public String kozosOS() {
         return "kozos_os";
@@ -133,10 +126,6 @@ public class CarnivoraController {
         return fajService.getAllFajDto();
     }
 
-    @ModelAttribute("allFajDtoSearch")
-    List<FajDto> allFajDtoSearch() {
-        return fajService.getAllFajDto();
-    }
 
     @ModelAttribute("formFajDto")
     public FajDto formFajDto() {
