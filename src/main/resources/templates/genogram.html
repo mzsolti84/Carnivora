@@ -115,29 +115,6 @@
                 });
             };
 
-            // when a node is double-clicked, add a child to it
-            function nodeDoubleClick(e, obj) {
-                console.log(e);
-                console.log(obj);
-                var clicked = obj.part;
-                if (clicked !== null) {
-
-                    // Ezzel lehet kivenni az objektum adatait
-                    // window.alert(JSON.stringify(obj.ob));
-
-
-                    //var thisemp = clicked.data;
-                    //myDiagram.startTransaction("add employee");
-                    //var newemp = {
-                    //    name: "(üres)",
-                    //    comments: "(üres)",
-                    //    parent: thisemp.key
-                    //};
-                    //myDiagram.model.addNodeData(newemp);
-                    //myDiagram.commitTransaction("add employee");
-                }
-            }
-
             // this is used to determine feedback during drags
             //function mayWorkFor(node1, node2) {
             //    if (!(node1 instanceof go.Node)) return false;  // must be a Node
@@ -207,6 +184,24 @@
                         )  // end Table Panel
                     ) // end Horizontal Panel
                 );  // end Node
+
+            // the context menu allows users to make a position vacant,
+            // remove a role and reassign the subtree, or remove a department
+            myDiagram.nodeTemplate.contextMenu =
+                $("ContextMenu",
+                    $("ContextMenuButton",
+                        $(go.TextBlock, "Elem adatlapjának megnyitása"),
+                        {
+                            click: (e) => {
+                                const key = e.diagram.selection.first().key
+                                console.log(key)
+                                window.open(`http://localhost:8084/klad_adatlap/${key}/adatlap`, "_self");
+
+                            }
+                        }
+                    )
+                );
+
 
             // define the Link template
             myDiagram.linkTemplate =
