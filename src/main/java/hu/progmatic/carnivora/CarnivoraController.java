@@ -141,7 +141,6 @@ public class CarnivoraController {
         return fajService.getAllFajDto();
     }
 
-
     @ModelAttribute("formFajDto")
     public FajDto formFajDto() {
         return new FajDto();
