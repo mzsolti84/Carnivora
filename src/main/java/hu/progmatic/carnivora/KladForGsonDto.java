@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class KladForJsonDto {
+public class KladForGsonDto {
     private Integer key;
     private String name;
     private String latinNev;
