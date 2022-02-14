@@ -16,43 +16,44 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  private final MyUserDetailsService myUserDetailsService;
+    private final MyUserDetailsService myUserDetailsService;
 
-  public WebSecurityConfig(MyUserDetailsService myUserDetailsService) {
-    this.myUserDetailsService = myUserDetailsService;
-  }
+    public WebSecurityConfig(MyUserDetailsService myUserDetailsService) {
+        this.myUserDetailsService = myUserDetailsService;
+    }
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
-        .csrf().disable()
-        .authorizeRequests()
-        .antMatchers("/**").authenticated()
-        .and()
-        .formLogin()
-        .successForwardUrl("/")
-        .loginPage("/login")
-        .permitAll()
-        .and()
-        .logout()
-        .deleteCookies("JSESSIONID")
-        .permitAll()
-        .and()
-        .headers()
-        .frameOptions()
-        .sameOrigin()
-    ;
-  }
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/about").permitAll()
+                .antMatchers("/**").authenticated()
+                .and()
+                .formLogin()
+                .successForwardUrl("/")
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+                .and()
+                .headers()
+                .frameOptions()
+                .sameOrigin()
+        ;
+    }
 
-  @Override
-  protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-    auth
-        .userDetailsService(myUserDetailsService)
-        .passwordEncoder(encoder());
-  }
+    @Override
+    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(myUserDetailsService)
+                .passwordEncoder(encoder());
+    }
 
-  @Bean
-  public PasswordEncoder encoder() {
-    return new BCryptPasswordEncoder();
-  }
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
 }

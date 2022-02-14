@@ -132,4 +132,9 @@ public class FelhasznaloService implements InitializingBean {
     private MyUserDetails getMyUserDetails() {
         return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
+
+    public String getFelhasznaloNev() {
+        MyUserDetails userPrincipal = getMyUserDetails();
+        return userPrincipal.getUsername();
+    }
 }

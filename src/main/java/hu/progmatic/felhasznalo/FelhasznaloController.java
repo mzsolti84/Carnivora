@@ -85,6 +85,11 @@ public class FelhasznaloController {
     return felhasznaloService.getFelhasznaloId();
   }
 
+  @ModelAttribute("userName")
+  public String userName() {
+    return felhasznaloService.getFelhasznaloNev();
+  }
+
   @ModelAttribute("allRole")
   public List<String> allRole() {
     return Arrays.stream(UserType.values())
