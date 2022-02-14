@@ -370,22 +370,23 @@
             </div>
         </td>
         <td style="width: 40%;">
-            <button id="zoomToFit">Teljes diagram megjelenítése</button>
-            <button id="centerRoot">Fókusz az első ősön</button>
-            <br><br>
-            <button id="SaveButton" onclick="save()">JSON generálása</button>
-            <form th:action="@{'/saveToDatabase'}" method="post">
+            <form th:object="${jsonForGenogram}" th:action="@{/save_json_to_database}" method="post">
+                <button type="button" id="zoomToFit">Teljes diagram megjelenítése</button>
+                <button type="button" id="centerRoot">Fókusz az első ősön</button>
+                <br><br>
+                <button id="SaveButton" onclick="save()">JSON generálása</button>
                 <input type="submit" class="btn btn-primary" value="Mentés adatbázisba"/>
+                <br><br>
+                <button type="button" id="LoadButton" onclick="load()">JSON megjelenítése diagramként</button>
+                <br>
+                <br>
+                Épített leszármazotti modell JSON formátumban:
+                <br><br>
+                <textarea th:text="${jsonForGenogram}" id="mySavedModel"
+                          style="width:100%; height:500px; resize: vertical">{"class": "TreeModel","nodeDataArray":[{"key":1,"name":"placeHolder","latinNev":"placeHolderusz"}]}</textarea>
+                <br><br>
+                <button type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
             </form>
-            <br><br>
-            <button id="LoadButton" onclick="load()">JSON megjelenítése diagramként</button>
-            <br>
-            <br>
-            Épített leszármazotti modell JSON formátumban:
-            <br><br>
-            <textarea th:text="${jsonForGenogram}" id="mySavedModel" style="width:100%; height:500px; resize: vertical">{"class": "TreeModel","nodeDataArray":[{"key":1,"name":"placeHolder","latinNev":"placeHolderusz"}]}</textarea>
-            <br><br>
-            <button type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
         </td>
     </table>
 

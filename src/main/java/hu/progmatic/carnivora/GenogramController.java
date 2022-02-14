@@ -2,9 +2,12 @@ package hu.progmatic.carnivora;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class GenogramController {
@@ -37,22 +40,13 @@ public class GenogramController {
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
-    /*
-    @PostMapping("/faj_adatszerk/{id}")
-    public String update(
-            @PathVariable Integer id,
-            @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
-            BindingResult bindingResult,
+    @PostMapping("/save_json_to_database")
+    public String saveToDatabase(
             Model model) {
-        if (!bindingResult.hasErrors()) {
-            //FajDto fajDto = fajService.getById(id);
-            fajService.save(formFajDto);
-            model.addAttribute("allFajDto", allFajDto());
-            model.addAttribute("formFajDto", formFajDto());
-        }
-        return "faj_adatlista";
+        String submittedString = (String) model.getAttribute("jsonForGenogram");
+        model.addAttribute("jsonForGenogram","a submit gomb eléri a save_json_to_database PostMappinget");
+        return "genogram_admin";
     }
-     */
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
