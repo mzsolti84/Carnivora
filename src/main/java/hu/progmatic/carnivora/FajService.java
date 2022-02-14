@@ -126,6 +126,7 @@ public class FajService {
     public Paged<FajDto> getPage(int pageNumber, int size) {
         PageRequest request = PageRequest.of(pageNumber - 1, size);
         Page<FajDto> postPage = fajRepository.findAll(request).map(Faj -> DtoBuilderFromFaj(Faj));
+
         return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
     }
 
