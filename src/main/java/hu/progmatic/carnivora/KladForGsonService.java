@@ -19,7 +19,7 @@ public class KladForGsonService {
 
     private class DataForGson {
         String classLenneDeNemLehetAz = "TreeModel";
-        List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
+        List<KladForGsonDto> nodeDataArray = getAllKladForJsonDto();
     }
 
     // PUBLIC MAIN METÓDUS ----------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ public class KladForGsonService {
 
     // CLASS PRIVATE SEGÉDMETÓDUSOK
 
-    private List<KladForJsonDto> getAllKladForJsonDto() {
+    private List<KladForGsonDto> getAllKladForJsonDto() {
         return getAllKlad().stream()
                 .map(klad -> buildKladForJsonDto(klad))
                 .toList();
@@ -42,7 +42,7 @@ public class KladForGsonService {
         return kladRepository.findAll();
     }
 
-    private KladForJsonDto buildKladForJsonDto(Klad klad) {
+    private KladForGsonDto buildKladForJsonDto(Klad klad) {
 
         if (isOrphan(klad)) {
             return buildKladForJsonDtoOrphan(klad);
@@ -63,8 +63,8 @@ public class KladForGsonService {
         return exception != null;
     }
 
-    private KladForJsonDto buildKladForJsonDtoOrphan(Klad klad) {
-        return KladForJsonDto.builder()
+    private KladForGsonDto buildKladForJsonDtoOrphan(Klad klad) {
+        return KladForGsonDto.builder()
                 .key(klad.getId())
                 .name(capitalizeFirstLetter(klad.getNev()))
                 .latinNev(capitalizeFirstLetter(klad.getLatinNev()))
@@ -72,8 +72,8 @@ public class KladForGsonService {
                 .build();
     }
 
-    private KladForJsonDto buildKladForJsonDtoWithAncestor(Klad klad) {
-        return KladForJsonDto.builder()
+    private KladForGsonDto buildKladForJsonDtoWithAncestor(Klad klad) {
+        return KladForGsonDto.builder()
                 .key(klad.getId())
                 .name(capitalizeFirstLetter(klad.getNev()))
                 .latinNev(capitalizeFirstLetter(klad.getLatinNev()))
