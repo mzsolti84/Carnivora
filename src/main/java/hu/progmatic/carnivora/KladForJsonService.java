@@ -17,7 +17,7 @@ public class KladForJsonService {
 
     // INNER CLASS -----------------------------------------------------------------------------------------------------
 
-    private class SourceDataForGsonDto {
+    private class DataForGson {
         String classLenneDeNemLehetAz = "TreeModel";
         List<KladForJsonDto> nodeDataArray = getAllKladForJsonDto();
     }
@@ -27,7 +27,7 @@ public class KladForJsonService {
     public String getJsonForGenogram() {
         Gson gson = new Gson();
 
-        return gson.toJson(new SourceDataForGsonDto()).replace("classLenneDeNemLehetAz", "class");
+        return gson.toJson(new DataForGson()).replace("classLenneDeNemLehetAz", "class");
     }
 
     // CLASS PRIVATE SEGÉDMETÓDUSOK
