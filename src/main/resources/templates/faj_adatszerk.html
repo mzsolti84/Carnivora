@@ -149,17 +149,17 @@
                                 <select class="form-select bg-dark text-white"
                                         th:field="*{statusz}"
                                         th:classappend="${#fields.hasErrors('statusz')} ? 'is-invalid' : 'is-valid'">
-                                    <option th:value="'KIHALT'" th:text="'Kihalt'"></option>
-                                    <option th:value="'VADON_KIHALT'" th:text="'Vadon kihalt'"></option>
-                                    <option th:value="'FENYEGETETT'" th:text="'Fenyegetett'"></option>
-                                    <option th:value="'SULYOSAN_VESZELYEZTETETT'"
+                                    <option th:value="'Kihalt'" th:text="'Kihalt'"></option>
+                                    <option th:value="'Vadon kihalt'" th:text="'Vadon kihalt'"></option>
+                                    <option th:value="'Fenyegetett'" th:text="'Fenyegetett'"></option>
+                                    <option th:value="'Súlyosan veszélyeztetett'"
                                             th:text="'Súlyosan veszélyeztetett'"></option>
-                                    <option th:value="'VESZELYEZTETETT'" th:text="'Veszélyeztetett'"></option>
-                                    <option th:value="'SEBEZHETO'" th:text="'Sebezhető'"></option>
-                                    <option th:value="'MERSEKELTEN_FENYEGETETT'"
+                                    <option th:value="'Veszélyeztetett'" th:text="'Veszélyeztetett'"></option>
+                                    <option th:value="'Sebezhető'" th:text="'Sebezhető'"></option>
+                                    <option th:value="'Mérsékelten fenyegetett'"
                                             th:text="'Mérsékelten fenyegetett'"></option>
-                                    <option th:value="'NEM_FENYEGETETT'" th:text="'Nem fenyegetett'"></option>
-                                    <option th:value="'HAZIASITOTT'" th:text="'Háziasított'"></option>
+                                    <option th:value="'Nem fenyegetett'" th:text="'Nem fenyegetett'"></option>
+                                    <option th:value="'Háziasított'" th:text="'Háziasított'"></option>
                                 </select>
                                 <div class="invalid-feedback"
                                      th:if="${#fields.hasErrors('statusz')}"
@@ -175,8 +175,8 @@
                                 <select class="form-select bg-dark text-white"
                                         th:field="*{turesHatar}"
                                         th:classappend="${#fields.hasErrors('turesHatar')} ? 'is-invalid' : 'is-valid'">
-                                    <option th:value="'SPECIALISTA'" th:text="'Specialista'"></option>
-                                    <option th:value="'GENERALISTA'" th:text="'Generalista'"></option>
+                                    <option th:value="'Specialista'" th:text="'Specialista'"></option>
+                                    <option th:value="'Generalista'" th:text="'Generalista'"></option>
                                 </select>
                                 <div class="invalid-feedback"
                                      th:if="${#fields.hasErrors('turesHatar')}"
