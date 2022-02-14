@@ -2,6 +2,7 @@ package hu.progmatic.carnivora;
 
 import lombok.*;
 
+import javax.lang.model.element.Name;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 

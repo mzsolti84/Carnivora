@@ -1,10 +1,17 @@
 package hu.progmatic.carnivora;
 
+import hu.progmatic.carnivora.page.Paged;
+import hu.progmatic.carnivora.page.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
+import static hu.progmatic.databaseinit.InitSpeciesFromFileFactory.kategoriaSwitch;
 
 @Service
 @Transactional
@@ -28,13 +35,32 @@ public class FajService {
 
     public FajDto buildFajDtoByFajNev(String nev) {
         Faj faj = fajRepository.getByNev(nev);
+        return DtoBuilderFromFaj(faj);
+    }
+
+    private FajDto DtoBuilderFromFaj(Faj faj) {
         return FajDto.builder()
                 .id(faj.getId())
                 .leiras(faj.getLeiras())
                 .nev(faj.getNev())
                 .latinNev(faj.getLatinNev())
-                .statusz(faj.getStatusz())
-                .turesHatar(faj.getTuresHatar())
+                .statusz(faj.getStatusz().getDisplayName())
+                .turesHatar(faj.getTuresHatar().getDisplayName())
+                .fotoURL(faj.getFotoURL())
+                .wikiURL(faj.getWikiURL())
+                .szuloNev(faj.getKlad().getNev())
+                .szuloId(faj.getKlad().getId())
+                .build();
+    }
+
+    private FajDto DtoBuilderFromFajWithSwitch(Faj faj) {
+        return FajDto.builder()
+                .id(faj.getId())
+                .leiras(faj.getLeiras())
+                .nev(faj.getNev())
+                .latinNev(faj.getLatinNev())
+                .statusz(faj.getStatusz().getDisplayName())
+                .turesHatar(faj.getTuresHatar().getDisplayName())
                 .fotoURL(faj.getFotoURL())
                 .wikiURL(faj.getWikiURL())
                 .szuloNev(faj.getKlad().getNev())
@@ -44,18 +70,7 @@ public class FajService {
 
     public FajDto buildFajDtoByFajId(Integer id) {
         Faj faj = fajRepository.getById(id);
-        return FajDto.builder()
-                .id(faj.getId())
-                .leiras(faj.getLeiras())
-                .nev(faj.getNev())
-                .latinNev(faj.getLatinNev())
-                .statusz(faj.getStatusz())
-                .turesHatar(faj.getTuresHatar())
-                .fotoURL(faj.getFotoURL())
-                .wikiURL(faj.getWikiURL())
-                .szuloNev(faj.getKlad().getNev())
-                .szuloId(faj.getKlad().getId())
-                .build();
+        return DtoBuilderFromFaj(faj);
     }
 
     private Klad getKladFromFajDto(FajDto fajDto) {
@@ -68,8 +83,8 @@ public class FajService {
                 .nev(fajDto.getNev())
                 .leiras(fajDto.getLeiras())
                 .latinNev(fajDto.getLatinNev())
-                .statusz(fajDto.getStatusz())
-                .turesHatar(fajDto.getTuresHatar())
+                .statusz(TermeszetvedelmiStatusz.getFromString(fajDto.getStatusz()))
+                .turesHatar(Tureshatar.getFromString(fajDto.getTuresHatar()))
                 .fotoURL(fajDto.getFotoURL())
                 .wikiURL(fajDto.getWikiURL())
                 .klad(getKladFromFajDto(fajDto))
@@ -107,4 +122,11 @@ public class FajService {
     public Faj getById(Integer id) {
         return fajRepository.getById(id);
     }
+
+    public Paged<FajDto> getPage(int pageNumber, int size) {
+        PageRequest request = PageRequest.of(pageNumber - 1, size);
+        Page<FajDto> postPage = fajRepository.findAll(request).map(Faj -> DtoBuilderFromFaj(Faj));
+        return new Paged<>(postPage, Paging.of(postPage.getTotalPages(), pageNumber, size));
+    }
+
 }
