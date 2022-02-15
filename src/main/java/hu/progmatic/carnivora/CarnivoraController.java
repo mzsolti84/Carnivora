@@ -24,10 +24,10 @@ public class CarnivoraController {
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
-    @RequestMapping("/")
+    /*@RequestMapping("/")
     public String belepes() {
         return "kezdolap";
-    }
+    }*/
 
     @GetMapping("/faj_adatszerk/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
