@@ -85,7 +85,8 @@
     </div>
 </form>-->
 <div style="text-align: center">
-<h3 th:text="'Bejelntkezett felhasználó id: ' + ${userId}">Felhasználó id: 2</h3>
+<h3 th:text="'Bejelentkezett felhasználó id és username: ' + ${userId}+ ',
+ ' + ${userName}">Felhasználó id: 2</h3>
 
 <form th:action="@{/logout}" method="post">
     <input class="btn btn-lg btn-outline-warning" type="submit" value="Kijelentkezés"/>
