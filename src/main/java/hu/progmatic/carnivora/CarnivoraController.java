@@ -85,7 +85,7 @@ public class CarnivoraController {
         return "faj_adatlista";
     }
 
-    @PostMapping("/carnivora/")
+    @PostMapping("/faj_adatszerk")
     public String create(
             @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
             BindingResult bindingResult,
@@ -95,14 +95,14 @@ public class CarnivoraController {
             model.addAttribute("allFajDto", allFajDto());
             model.addAttribute("formFajDto", formFajDto());
         }
-        return "carnivora";
+        return "faj_adatlista";
     }
 
-    @PostMapping("/carnivora/delete/{id}")
+    @PostMapping("/faj_adatlista/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
         fajService.deleteById(id);
         model.addAttribute("allFajDto", allFajDto());
-        return "carnivora";
+        return "faj_adatlista";
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------

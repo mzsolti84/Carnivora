@@ -43,6 +43,18 @@
 </head>
 
 <body style="background-color:Black;">
+<p class="text-center fs-3 text-white"
+   style="opacity: 0.75;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Faj adatbázis karbantartó</p>
+
+<nav class="navbar navbar-dark bg-dark">
+    <form class="container-fluid center-content-start">
+        <a href="/" class="btn btn-primary me-2" role="button">Kezdőlap</a>
+        <a href="/faj_adatszerk" class="btn btn-danger" role="button" >Új faj</a>
+    </form>
+</nav>
+<hr>
+
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
     <table id="example" class="table table-dark table-striped table-responsive">
         <thead>
@@ -83,7 +95,7 @@
             <td>
                 <div class="row">
                     <div class="col">
-                        <form th:action="@{'/carnivora/delete/{id}'(id=${fajDto.id})}" method="post">
+                        <form th:action="@{'/faj_adatlista/delete/{id}'(id=${fajDto.id})}" method="post">
                             <input type="submit" class="btn btn-danger" value="Eltávolít"/>
                         </form>
                     </div>
