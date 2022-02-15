@@ -35,8 +35,13 @@
                     <form th:action="@{'/faj_adatszerk/{id}'(id=${formFajDto.id})}"
                           method="post" th:object="${formFajDto}">
                         <fieldset>
-                            <legend class="container-fluid text-center d-none d-sm-block">MÓDOSÍTÁS
+                            <legend th:if="${formFajDto.id != null}"
+                                    class="container-fluid text-center d-none d-sm-block">MÓDOSÍTÁS
                             </legend>
+                            <legend th:if="${formFajDto.id == null}"
+                                    class="container-fluid text-center d-none d-sm-block">ÚJ FAJ RÖGZÍTÉS
+                            </legend>
+
                             <div class="container-fluid">
                                 <label class="form-label">Id</label>
                                 <input type="text"
@@ -44,18 +49,6 @@
                                        placeholder="Id"
                                        readonly
                                        th:field="*{id}"
-                                />
-                            </div>
-
-                            <br>
-
-                            <div class="container-fluid">
-                                <label class="form-label">Ős Id</label>
-                                <input type="text"
-                                       disabled
-                                       class="form-control bg-dark text-white"
-                                       placeholder="Ős Id"
-                                       th:field="*{szuloId}"
                                 />
                             </div>
 
@@ -202,7 +195,7 @@
 
 <hr>
 
-<div class="container border border-secondary">
+<div class="container">
     <div class="text-center">
         <form th:action="@{/faj_adatlista}" method="get">
             <button style=" background-color: black" type="submit" class="btn-dark">Vissza</button>
