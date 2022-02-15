@@ -46,7 +46,8 @@ public class GenogramController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            model.addAttribute("jsonForGenogram", json);
+            kladForGsonService.updateRepository(json);
+            model.addAttribute("jsonForGenogram", getJsonForGenogram());
             return "genogram_admin";
         }
         return "genogram_admin";
