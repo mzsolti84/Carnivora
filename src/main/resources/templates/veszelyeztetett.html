@@ -13,7 +13,7 @@
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"
           crossorigin="anonymous">
 
-    <title>Fajok</title>
+    <title>Veszélyeztetett Fajok</title>
 
     <style>
         .form-control {
@@ -39,10 +39,25 @@
             border-color: gray; !important;
         }
     </style>
-
 </head>
 
 <body style="background-color:Black;">
+<div class="custom-select" style="width:200px;">
+    <select>
+        <option value="0">Természetvédelmi státusz:</option>
+        <option value="1">Kihalt</option>
+        <option value="2">Vadon kihalt</option>
+        <option value="3">Fenyegetett</option>
+        <option value="4">Súlyosan veszélyeztetett</option>
+        <option value="5">Veszélyeztetett</option>
+        <option value="6">Sebezhető</option>
+        <option value="7">Mérsékelten fenyegetett</option>
+        <option value="8">Nem fenyegetett</option>
+        <option value="9">Háziasított</option>
+
+    </select>
+</div>
+
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
     <table id="example" class="table table-dark table-striped table-responsive">
         <thead>
@@ -50,14 +65,10 @@
             <th scope="col">Id</th>
             <th scope="col">Név</th>
             <th scope="col">Latin név</th>
-            <th scope="col">Ős Id</th>
             <th scope="col">Ős Név</th>
             <th scope="col">Leírás</th>
             <th scope="col">Term.védelmi státusz</th>
             <th scope="col">Tűréshatár</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-
         </tr>
         </thead>
         <tbody style="font-size: 10pt">
@@ -65,30 +76,10 @@
             <th scope="row" th:text="${fajDto.id}">fajDto.id</th>
             <td th:text="${fajDto.nev}">fajDto.nev</td>
             <td th:text="${fajDto.latinNev}">fajDto.latinNev</td>
-            <td th:text="${fajDto.szuloId}">fajDto.osId</td>
             <td th:text="${fajDto.szuloNev}">fajDto.osNev</td>
             <td th:text="${#strings.abbreviate(fajDto.leiras,100)}">fajDto.leiras</td>
             <td th:text="${#strings.abbreviate(fajDto.getStatusz.getDisplayName(),20)}">fajDto.statusz</td>
             <td th:text="${fajDto.turesHatar.getDisplayName()}">fajDto.turesHatar</td>
-            <td>
-
-                <div class="row">
-                    <div class="col">
-                        <form th:action="@{'/faj_adatszerk/{id}'(id=${fajDto.id})}" method="get">
-                            <input type="submit" class="btn btn-danger" value="Módosít"/>
-                        </form>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="row">
-                    <div class="col">
-                        <form th:action="@{'/carnivora/delete/{id}'(id=${fajDto.id})}" method="post">
-                            <input type="submit" class="btn btn-danger" value="Eltávolít"/>
-                        </form>
-                    </div>
-                </div>
-            </td>
         </tr>
         </tbody>
     </table>
@@ -99,7 +90,15 @@
 <script>
     $(document).ready(
         function() {
-        $('#example').DataTable();
-    } );
+            $('#example').DataTable();
+        } );
 </script>
+<div class="container">
+    <div class="text-center">
+        <form th:action="@{/}" method="get">
+            <button style=" background-color: black" type="submit" class="btn-dark">Vissza</button>
+        </form>
+    </div>
+</div>
+</body>
 </html>

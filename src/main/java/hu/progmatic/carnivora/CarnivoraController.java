@@ -68,6 +68,9 @@ public class CarnivoraController {
         return "faj_adatszerk";
     }
 
+    @RequestMapping("/veszelyeztetett")
+    public String veszelyeztetett(){ return "veszelyeztetett";}
+
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     @PostMapping("/faj_adatszerk/{id}")
