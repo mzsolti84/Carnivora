@@ -21,7 +21,7 @@ public class KladForGsonService {
 
     private Gson gson = new Gson();
 
-    /// PUBLIC MAIN METÓDUSOK ------------------------------------------------------------------------------------------
+    /// PUBLIC METÓDUSOK ------------------------------------------------------------------------------------------
 
     public JsonForGenogramDto getJsonForGenogram() {
         return JsonForGenogramDto.builder()
