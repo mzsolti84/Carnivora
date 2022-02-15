@@ -29,7 +29,7 @@ public class KladForGsonService {
                 .build();
     }
 
-    public void updateRepository(JsonForGenogramDto jsonForGenogramDto) {
+    public void updateKladRepository(JsonForGenogramDto jsonForGenogramDto) {
         List<Klad> allKlad = getAllKlad();
         DataForGson dataForGson = getDataForGsonFromJson(jsonForGenogramDto);
 
