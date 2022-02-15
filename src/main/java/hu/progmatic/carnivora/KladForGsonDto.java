@@ -11,4 +11,6 @@ public class KladForGsonDto {
     private String name;
     private String latinNev;
     private Integer parent;
+    @Builder.Default
+    private String nodeType ="klad";
 }
