@@ -1,6 +1,7 @@
 package hu.progmatic.carnivora;
 
 
+import hu.progmatic.carnivora.kepkezeles.KepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -10,7 +11,6 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
-import static hu.progmatic.databaseinit.InitSpeciesFromFileFactory.kategoriaSwitch;
 
 @Service
 @Transactional
@@ -21,6 +21,9 @@ public class FajService {
 
     @Autowired
     private KladRepository kladRepository;
+
+    @Autowired
+    KepRepository kepRepository;
 
     public void saveAll(List<Faj> fajok) {
         fajRepository.saveAll(fajok);
@@ -45,7 +48,7 @@ public class FajService {
                 .latinNev(faj.getLatinNev())
                 .statusz(faj.getStatusz())
                 .turesHatar(faj.getTuresHatar())
-                .fotoURL(faj.getFotoURL())
+                .fotoURL(getURLFromKepMegnevezes(faj.getFotoURL()))
                 .wikiURL(faj.getWikiURL())
                 .szuloNev(faj.getKlad().getNev())
                 .szuloId(faj.getKlad().getId())
@@ -107,6 +110,12 @@ public class FajService {
         return fajRepository.getById(id);
     }
 
-
+    public String getURLFromKepMegnevezes(String megnevezes) {
+        if (kepRepository.getByMegnevezes(megnevezes) != null) {
+            Integer id = kepRepository.getByMegnevezes(megnevezes).getId();
+            return "http://localhost:8084/kepkezeles/" + id;
+        }
+        return megnevezes;
+    }
 
 }
