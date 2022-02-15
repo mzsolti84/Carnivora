@@ -40,7 +40,6 @@ public class KladForGsonService {
     }
 
     /// BACKEND -> JSON -> GENOGRAM irány ------------------------------------------------------------------------------
-
     // CLASS PRIVATE SEGÉDMETÓDUSOK ------------------------------------------------------------------------------------
 
     private List<KladForGsonDto> getAllKladForJsonDto() {
@@ -97,7 +96,6 @@ public class KladForGsonService {
     }
 
     /// GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok -----------------------------------------------
-
     // CLASS PRIVATE SEGÉDMETÓDUSOK ------------------------------------------------------------------------------------
 
     private DataForGson getDataForGsonFromJson(JsonForGenogramDto json) {
