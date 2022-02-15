@@ -10,29 +10,37 @@ import java.util.List;
 @Service
 @Transactional
 public class KladForGsonService {
+
     @Autowired
-    KladRepository kladRepository;
-
-    /// BACKEND -> JSON -> GENOGRAM irány ------------------------------------------------------------------------------
-
-    // INNER CLASS -----------------------------------------------------------------------------------------------------
+    private KladRepository kladRepository;
 
     private class DataForGson {
         String classLenneDeNemLehetAz = "TreeModel";
         List<KladForGsonDto> nodeDataArray = getAllKladForJsonDto();
     }
 
-    // PUBLIC MAIN METÓDUS ----------------------------------------------------------------------------------------------------
+    private Gson gson = new Gson();
+
+    /// PUBLIC METÓDUSOK ------------------------------------------------------------------------------------------
 
     public JsonForGenogramDto getJsonForGenogram() {
-        Gson gson = new Gson();
-
         return JsonForGenogramDto.builder()
                 .json(gson.toJson(new DataForGson()).replace("classLenneDeNemLehetAz", "class"))
                 .build();
     }
 
-    // CLASS PRIVATE SEGÉDMETÓDUSOK
+    public void updateKladRepository(JsonForGenogramDto jsonForGenogramDto) {
+        List<Klad> allKlad = getAllKlad();
+        DataForGson dataForGson = getDataForGsonFromJson(jsonForGenogramDto);
+
+        allKlad.stream()
+                .forEach(klad -> klad.setNev(dataForGson.nodeDataArray.stream()
+                        .filter(kladForGsonDto -> kladForGsonDto.getKey() == klad.getId())
+                        .toList().get(0).getName()));
+    }
+
+    /// BACKEND -> JSON -> GENOGRAM irány ------------------------------------------------------------------------------
+    // CLASS PRIVATE SEGÉDMETÓDUSOK ------------------------------------------------------------------------------------
 
     private List<KladForGsonDto> getAllKladForJsonDto() {
         return getAllKlad().stream()
@@ -87,7 +95,11 @@ public class KladForGsonService {
         return input.substring(0, 1).toUpperCase() + input.substring(1);
     }
 
-    /// GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok ------------------------------------------------
+    /// GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok -----------------------------------------------
+    // CLASS PRIVATE SEGÉDMETÓDUSOK ------------------------------------------------------------------------------------
 
+    private DataForGson getDataForGsonFromJson(JsonForGenogramDto json) {
+        return gson.fromJson(json.getJson().replace("class", "classLenneDeNemLehetAz"), DataForGson.class);
+    }
 
 }

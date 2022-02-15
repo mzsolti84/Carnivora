@@ -223,7 +223,7 @@
                                 },
                                 new go.Binding("text", "name").makeTwoWay()),
                             $(go.TextBlock, textStyle(),
-                                {row: 1, column: 0, editable: true},
+                                {row: 1, column: 0, editable: false},
                                 new go.Binding("text", "latinNev", function (v) {
                                     return v;
                                 })),
