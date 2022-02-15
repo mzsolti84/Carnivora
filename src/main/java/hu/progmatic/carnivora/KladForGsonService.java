@@ -24,10 +24,12 @@ public class KladForGsonService {
 
     // PUBLIC MAIN METÓDUS ----------------------------------------------------------------------------------------------------
 
-    public String getJsonForGenogram() {
+    public JsonForGenogramDto getJsonForGenogram() {
         Gson gson = new Gson();
 
-        return gson.toJson(new DataForGson()).replace("classLenneDeNemLehetAz", "class");
+        return JsonForGenogramDto.builder()
+                .json(gson.toJson(new DataForGson()).replace("classLenneDeNemLehetAz", "class"))
+                .build();
     }
 
     // CLASS PRIVATE SEGÉDMETÓDUSOK
