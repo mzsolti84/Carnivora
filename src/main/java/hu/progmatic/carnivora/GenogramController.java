@@ -17,7 +17,7 @@ public class GenogramController {
     @Autowired
     private KladForGsonService kladForGsonService;
 
-    // GET MAPPINGEK --------------------------------------------------------------------------------
+    // REQUEST MAPPINGEK --------------------------------------------------------------------------------
 
     @RequestMapping("/genogramadmin")
     public String genogramAdmin() {
@@ -38,22 +38,16 @@ public class GenogramController {
     }
      */
 
-    @GetMapping("/save_json_to_database")
-    public String ToDatabase(Model model) {
-        model.addAttribute("jsonForGenogram", new KladForGsonDto());
-        return "genogram_admin";
-    }
-
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     @PostMapping("/save_json_to_database")
     public String saveToDatabase(
-            @ModelAttribute("jsonForGenogram") @Valid KladForGsonDto jsonForGenogram,
+            @ModelAttribute("jsonForGenogram") @Valid JsonForGenogramDto json,
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            String submittedString =  jsonForGenogram.getJsonCode();
-            //model.addAttribute("jsonForGenogram", new KladForGsonDto());
+            String submittedString = json.getJson();
+            model.addAttribute("jsonForGenogram", json);
             return "genogram_admin";
         }
         return "genogram_admin";
@@ -62,11 +56,8 @@ public class GenogramController {
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
 
     @ModelAttribute("jsonForGenogram")
-    KladForGsonDto getJsonForGenogram() {
-        return KladForGsonDto.builder()
-                .jsonCode(kladForGsonService.getJsonForGenogram())
-                .build();
-
+    JsonForGenogramDto getJsonForGenogram() {
+        return kladForGsonService.getJsonForGenogram();
     }
 
 }

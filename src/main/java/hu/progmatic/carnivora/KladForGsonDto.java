@@ -11,5 +11,4 @@ public class KladForGsonDto {
     private String name;
     private String latinNev;
     private Integer parent;
-    String jsonCode;
 }
