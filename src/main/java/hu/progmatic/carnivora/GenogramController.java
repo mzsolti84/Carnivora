@@ -46,7 +46,6 @@ public class GenogramController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            String submittedString = json.getJson();
             model.addAttribute("jsonForGenogram", json);
             return "genogram_admin";
         }
