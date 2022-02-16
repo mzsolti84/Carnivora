@@ -21,7 +21,6 @@ public class KladService implements InitializingBean {
     @Autowired
     private FajService fajService;
 
-
     @Override
     public void afterPropertiesSet() {
         if (kladRepository.count() == 0) {
