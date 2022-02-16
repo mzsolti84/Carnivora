@@ -98,4 +98,9 @@ public class KladService implements InitializingBean {
         Klad klad = kladRepository.getById(id);
         return buildKladDtoFromKlad(klad);
     }
+
+    public List<FajDto> getFajDtoListFromKladId(Integer id) {
+        //Attila
+        return List.of();
+    }
 }
