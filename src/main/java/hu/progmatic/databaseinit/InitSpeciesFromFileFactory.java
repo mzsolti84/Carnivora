@@ -9,6 +9,7 @@ import hu.progmatic.carnivora.Klad;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -23,9 +24,9 @@ public class InitSpeciesFromFileFactory {
 
     public InitSpeciesFromFileFactory(String kladFileName, String speciesFileName) {
         this.klads = new InitKladFromFileFactory(kladFileName).getKlads();
-        String fileWholeName = GetWholePathOfResource.getWholePath(speciesFileName);
         this.fajok = new ArrayList<>();
-        try (CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(fileWholeName), StandardCharsets.UTF_8))) {
+        InputStream inputStream = GetWholePathOfResource.getWholePath(speciesFileName);
+        try (CSVReader csv = new CSVReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             csv.readNext();
             String[] line;
             while ((line = csv.readNext()) != null) {
