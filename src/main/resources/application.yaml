@@ -70,3 +70,25 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
+---
+    spring:
+      config:
+        activate:
+          on-profile: eles
+      datasource:
+        url: jdbc:mysql://adatbazis_eles:3306/carnivora
+        username: progmatic
+        password: progmatic
+        hikari:
+          maximum-pool-size: 20
+      jpa:
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        open-in-view: true
+        hibernate:
+          ddl-auto: update
+        show-sql: true
+    server:
+      port: 80
+      tomcat:
+        threads:
+          max: 5
