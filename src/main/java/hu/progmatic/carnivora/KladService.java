@@ -56,22 +56,6 @@ public class KladService implements InitializingBean {
         return noChildrens.stream().map(this::buildKladWithChildrenDto).toList();
     }
 
-    public String getJsonFromKladEntityList(List<Klad> allKlad) {
-        return """
-                { "class": "TreeModel",\\n
-                  "nodeDataArray": [\\n
-                """
-                +
-                String.join(",\\n", allKlad.stream()
-                        .map(kladEntity -> new Gson().toJson(kladEntity))
-                        .toList())
-                +
-                """
-                        \\n
-                        ]}
-                        """;
-    }
-
     public List<SzuloKladDto> findAllParentKlad() {
         return kladRepository.findAllWithNoChild().stream()
                 .map(this::kladToParentKladDto)
