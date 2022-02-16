@@ -16,9 +16,9 @@ public class InitKladFromFileFactory {
     private final List<Klad> klads;
 
     public InitKladFromFileFactory(String fileName) {
-        String fileWholeName = GetWholePathOfResource.getWholePath(fileName);
         this.klads = new ArrayList<>();
-        try (CSVReader csv = new CSVReader(new InputStreamReader(new FileInputStream(fileWholeName), StandardCharsets.UTF_8))) {
+        InputStream inputStream = GetWholePathOfResource.getWholePath(fileName);
+        try (CSVReader csv = new CSVReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             csv.readNext();
             String[] line;
             while ((line = csv.readNext()) != null) {
