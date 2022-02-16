@@ -24,7 +24,9 @@ public class KezdolapController {
 
     @ModelAttribute("loggedUserName")
     public String loggedUserName() {
+        if (felhasznaloService.getFelhasznaloNev() != null)
         return felhasznaloService.getFelhasznaloNev();
+        else return "";
     }
 
 }
