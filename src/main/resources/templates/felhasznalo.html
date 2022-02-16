@@ -85,12 +85,23 @@
     </div>
 </form>-->
 <div style="text-align: center">
-<h3 th:text="'Bejelentkezett felhasználó id és username: ' + ${userId}+ ',
- ' + ${userName}">Felhasználó id: 2</h3>
+<h3 th:text="'bejelentkezett felhasználó id és username: ' + ${userid}+ ',
+ ' + ${username}">felhasználó id: 2</h3>
 
 <form th:action="@{/logout}" method="post">
     <input class="btn btn-lg btn-outline-warning" type="submit" value="Kijelentkezés"/>
 </form>
+    <hr>
+
+    <div class="container">
+        <div class="text-center">
+            <form th:action="@{/}" method="get">
+                <button type="submit" class="btn btn-lg btn-outline-info">Kezdőlap</button>
+            </form>
+            <br>
+        </div>
+    </div>
+
 </div>>
 
 </body>
