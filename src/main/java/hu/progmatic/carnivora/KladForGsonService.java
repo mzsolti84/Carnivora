@@ -35,7 +35,7 @@ public class KladForGsonService {
         DataForGson dataForGson = getDataForGsonFromJson(jsonForGenogramDto);
 
         allKlad.forEach(klad -> klad.setNev(dataForGson.nodeDataArray.stream()
-                .filter(kladForGsonDto -> kladForGsonDto.getKey() == klad.getId())
+                .filter(kladForGsonDto -> kladForGsonDto.getKey().equals(klad.getId()))
                 .toList().get(0).getName()));
     }
 
