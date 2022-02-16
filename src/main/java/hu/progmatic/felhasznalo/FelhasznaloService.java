@@ -137,8 +137,11 @@ public class FelhasznaloService implements InitializingBean {
     }
 
     public String getFelhasznaloNev() {
-        MyUserDetails userPrincipal = getMyUserDetails();
-        return userPrincipal.getUsername();
+        if (isAnonymusUser()) { return "Vendég"; }
+        else {
+            MyUserDetails userPrincipal = getMyUserDetails();
+            return userPrincipal.getUsername();
+        }
     }
 
     public boolean isAnonymusUser() {
