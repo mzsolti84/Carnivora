@@ -1,6 +1,7 @@
 package hu.progmatic.felhasznalo;
 
 import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,23 +13,13 @@ import javax.mail.internet.MimeMessage;
 import java.sql.SQLOutput;
 
 @Service
-@Log
+@Log4j2
 public class EmailSenderService {
 
     @Autowired
     private JavaMailSender mailSender;
 
     public void emailKuldes(String to, String subject, String body) {
-        /*SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("carnivora.project@gmail.com");
-        message.setTo(to);
-        message.setText(body);
-        message.setSubject(subject);
-
-        mailSender.send(message);
-
-        System.out.println("Mail Sent Successfully");*/
-
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper =
@@ -38,9 +29,9 @@ public class EmailSenderService {
             helper.setSubject(subject);
             helper.setFrom("carnivora.project@gmail.com");
             mailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            log.warning("Email küldési hiba!");
-            throw new IllegalStateException("Email küldési hiba!");
+        } catch (Exception e) {
+            log.warn("Email küldési hiba! " + e.getMessage());
+            throw new FelhasznaloLetrehozasException("Email küldési hiba! Sikertelen regisztráció! Próbálkozzon később!");
         }
     }
 

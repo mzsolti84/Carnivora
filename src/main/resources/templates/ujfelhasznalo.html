@@ -18,7 +18,7 @@
         crossorigin="anonymous"></script>
 
 <h1>Regisztráció</h1>
-
+<h2 th:text="${emailKuldesHiba}" th:hidden="${emailKuldesHiba == null}"></h2>
 <form
         th:action="@{'/ujfelhasznalo/letrehozas/'}"
         method="post" th:object="${ujFelhasznaloCommand}" class="row">

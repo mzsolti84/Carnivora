@@ -26,5 +26,4 @@ public class MegerositoToken {
     @ManyToOne
     Felhasznalo felhasznalo;
 
-    private LocalDateTime lejaratDatuma;
 }

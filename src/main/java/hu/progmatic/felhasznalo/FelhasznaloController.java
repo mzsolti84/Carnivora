@@ -108,9 +108,20 @@ public class FelhasznaloController {
               e.getMessage()));
     }
     if (!bindingResult.hasErrors()){
-      felhasznaloService.add(command);
-      return "kezdolap";
+      try{
+        felhasznaloService.add(command);
+        return "kezdolap";
+      }catch (FelhasznaloLetrehozasException e){
+        model.addAttribute("emailKuldesHiba", e.getMessage());
+        return "ujfelhasznalo";
+      }
     }
     return "ujfelhasznalo";
   }
+
+  @ModelAttribute("emailKuldesHiba")
+  public String emailKuldesHiba() {
+    return null;
+  }
+
 }

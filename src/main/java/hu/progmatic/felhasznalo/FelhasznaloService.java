@@ -38,16 +38,6 @@ public class FelhasznaloService implements InitializingBean {
         return felhasznaloRepository.findAll();
     }
 
-    private void initFelhasznalo(InitFelhasznalo initFelhasznalo) {
-        Felhasznalo felhasznalo = Felhasznalo.builder()
-                .felhasznaloNev(initFelhasznalo.getFelhasznaloNev())
-                .jelszo(encoder.encode(initFelhasznalo.getJelszo()))
-                .role(initFelhasznalo.getRole())
-                .engedelyezve(initFelhasznalo.isEngedelyezve())
-                .build();
-        felhasznaloRepository.save(felhasznalo);
-    }
-
     public void ujFelhasznaloValidalas(UjFelhasznaloCommand command) {
         if (felhasznaloRepository.findByFelhasznaloNev(command.getFelhasznaloNev()).isPresent()) {
             throw new FelhasznaloLetrehozasException("Ilyen névvel már létezik felhasználó!");
@@ -68,7 +58,6 @@ public class FelhasznaloService implements InitializingBean {
         String token = UUID.randomUUID().toString();
         MegerositoToken megerositoToken = MegerositoToken.builder()
                 .felhasznalo(felhasznalo)
-                .lejaratDatuma(LocalDateTime.now().plusMinutes(20))
                 .token(token)
                 .build();
         megerositoTokenRepository.save(megerositoToken);
@@ -113,9 +102,6 @@ public class FelhasznaloService implements InitializingBean {
                     .build();
             felhasznaloRepository.save(admin);
             felhasznaloRepository.save(user);
-            //add(new UjFelhasznaloCommand("admin", "adminpass", UserType.ADMIN));
-            //add(new UjFelhasznaloCommand("user", "user", UserType.USER));
-            //add(new UjFelhasznaloCommand("guest", "guest", UserType.GUEST));
         }
     }
 
