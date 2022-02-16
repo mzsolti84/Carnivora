@@ -125,8 +125,11 @@ public class FelhasznaloService implements InitializingBean {
     }
 
     public Long getFelhasznaloId() {
-        MyUserDetails userPrincipal = getMyUserDetails();
-        return userPrincipal.getFelhasznaloId();
+        if (isAnonymusUser()) { return null; }
+        else {
+            MyUserDetails userPrincipal = getMyUserDetails();
+            return userPrincipal.getFelhasznaloId();
+        }
     }
 
     private MyUserDetails getMyUserDetails() {
@@ -136,5 +139,9 @@ public class FelhasznaloService implements InitializingBean {
     public String getFelhasznaloNev() {
         MyUserDetails userPrincipal = getMyUserDetails();
         return userPrincipal.getUsername();
+    }
+
+    public boolean isAnonymusUser() {
+        return SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser");
     }
 }

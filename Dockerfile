@@ -2,7 +2,7 @@ FROM openjdk:17.0.2-slim
 
 RUN apt-get update && apt-get install curl -y
 
-ADD target/kozos-projekt-0.0.1-SNAPSHOT.jar /usr/src/app.jar
+ADD target/carnivora-projekt-0.0.1-SNAPSHOT.jar /usr/src/app.jar
 ENV PROFILES=${PROFILES}
 
 EXPOSE 8080:8080
