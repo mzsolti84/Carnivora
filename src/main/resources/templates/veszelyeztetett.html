@@ -20,43 +20,76 @@
             background: black;
             color: white;
         }
+
         .form-select {
             background: black;
             color: white;
         }
+
         .page-item.active .page-link {
             background-color: black !important;
-            border: 1px solid white; !important;
+            border: 1px solid white;
+        !important;
         }
+
         .page-link {
             color: white !important;
             background: black !important;
-            border-color: gray; !important;
+            border-color: gray;
+        !important;
         }
+
         .a.page-link {
             color: white !important;
             background: gray !important;
-            border-color: gray; !important;
+            border-color: gray;
+        !important;
         }
+        .dropbtn {
+            background-color: #242424;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #242424;
+        }
+
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #242424;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: whitesmoke;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown a:hover {background-color: #ddd;}
+
+        .show {display: block;}
     </style>
 </head>
 
-<body style="background-color:Black;">
-<div class="custom-select" style="width:200px;">
-    <select>
-        <option value="0">Természetvédelmi státusz:</option>
-        <option value="1">Kihalt</option>
-        <option value="2">Vadon kihalt</option>
-        <option value="3">Fenyegetett</option>
-        <option value="4">Súlyosan veszélyeztetett</option>
-        <option value="5">Veszélyeztetett</option>
-        <option value="6">Sebezhető</option>
-        <option value="7">Mérsékelten fenyegetett</option>
-        <option value="8">Nem fenyegetett</option>
-        <option value="9">Háziasított</option>
+<body style="background-color:Black">
 
-    </select>
-</div>
+
 
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
     <table id="example" class="table table-dark table-striped table-responsive">
@@ -89,9 +122,10 @@
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(
-        function() {
+        function () {
             $('#example').DataTable();
-        } );
+        });
+
 </script>
 <div class="container">
     <div class="text-center">

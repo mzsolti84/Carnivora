@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -100,7 +102,13 @@ public class KladService implements InitializingBean {
     }
 
     public List<FajDto> getFajDtoListFromKladId(Integer id) {
-        //Attila
-        return List.of();
+        List<FajDto> fajok = fajService.getAllFajDto();
+        List <FajDto> kladFaj = new ArrayList<>();
+        for (FajDto faj : fajok) {
+            if(Objects.equals(faj.getSzuloId(), id)){
+                kladFaj.add(faj);
+            }
+        }
+        return kladFaj;
     }
 }
