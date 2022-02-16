@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/kozos
+    url: jdbc:mysql://localhost:3306/carnivora
     username: progmatic
     password: progmatic
   jpa:
