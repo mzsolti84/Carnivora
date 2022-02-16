@@ -43,6 +43,11 @@ public class CarnivoraController {
         return "carnivora_adatlap";
     }
 
+    @RequestMapping("/kezdolap")
+    public String kezdolap(){
+        return "/kezdolap";
+    }
+
     @RequestMapping("/kozosos")
     public String kozosOS() {
         return "kozos_os";
