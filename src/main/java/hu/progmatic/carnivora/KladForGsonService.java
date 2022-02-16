@@ -1,6 +1,7 @@
 package hu.progmatic.carnivora;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,22 +11,22 @@ import java.util.List;
 @Service
 @Transactional
 public class KladForGsonService {
+    private final Gson gson = new Gson();
 
     @Autowired
     private KladRepository kladRepository;
 
     private class DataForGson {
+        // a genogram Json inputnak szüksége van a classLenneDeNemLehetAz változóra
+        @SuppressWarnings("unused")
+        @SerializedName("class")
         String classLenneDeNemLehetAz = "TreeModel";
         List<KladForGsonDto> nodeDataArray = getAllKladForJsonDto();
     }
 
-    private Gson gson = new Gson();
-
-    /// PUBLIC METÓDUSOK ------------------------------------------------------------------------------------------
-
     public JsonForGenogramDto getJsonForGenogram() {
         return JsonForGenogramDto.builder()
-                .json(gson.toJson(new DataForGson()).replace("classLenneDeNemLehetAz", "class"))
+                .json(gson.toJson(new DataForGson()))
                 .build();
     }
 
@@ -40,7 +41,6 @@ public class KladForGsonService {
     }
 
     /// BACKEND -> JSON -> GENOGRAM irány ------------------------------------------------------------------------------
-    // CLASS PRIVATE SEGÉDMETÓDUSOK ------------------------------------------------------------------------------------
 
     private List<KladForGsonDto> getAllKladForJsonDto() {
         return getAllKlad().stream()
@@ -53,7 +53,6 @@ public class KladForGsonService {
     }
 
     private KladForGsonDto buildKladForJsonDto(Klad klad) {
-
         if (isOrphan(klad)) {
             return buildKladForJsonDtoOrphan(klad);
         } else {
@@ -62,15 +61,7 @@ public class KladForGsonService {
     }
 
     private boolean isOrphan(Klad klad) {
-        Exception exception = null;
-
-        try {
-            klad.getSzulo().getId();
-        } catch (Exception e) {
-            exception = e;
-        }
-
-        return exception != null;
+        return klad.getSzulo() == null;
     }
 
     private KladForGsonDto buildKladForJsonDtoOrphan(Klad klad) {
@@ -96,10 +87,9 @@ public class KladForGsonService {
     }
 
     /// GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok -----------------------------------------------
-    // CLASS PRIVATE SEGÉDMETÓDUSOK ------------------------------------------------------------------------------------
 
     private DataForGson getDataForGsonFromJson(JsonForGenogramDto json) {
-        return gson.fromJson(json.getJson().replace("class", "classLenneDeNemLehetAz"), DataForGson.class);
+        return gson.fromJson(json.getJson(), DataForGson.class);
     }
 
 }
