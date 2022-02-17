@@ -44,7 +44,7 @@ public class CarnivoraController {
     }
 
     @RequestMapping("/kezdolap")
-    public String kezdolap(){
+    public String kezdolap() {
         return "/kezdolap";
     }
 
@@ -74,7 +74,9 @@ public class CarnivoraController {
     }
 
     @RequestMapping("/veszelyeztetett")
-    public String veszelyeztetett(){ return "veszelyeztetett";}
+    public String veszelyeztetett() {
+        return "veszelyeztetett";
+    }
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
@@ -133,6 +135,13 @@ public class CarnivoraController {
     @ModelAttribute("allSpecies")
     List<FajDto> allSpecies() {
         return fajService.getAllFajDto();
+    }
+
+    @ModelAttribute("kozosOsDto")
+    KozosOsDto kozosOsDto() {
+        return KozosOsDto.builder()
+                .fajDtoList(fajService.getAllFajDto())
+                .build();
     }
 
 }

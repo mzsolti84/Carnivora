@@ -23,39 +23,26 @@
 
 <div class="container mt-5">
     <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
-          th:object="${allSpecies}" th:action="@{'/carnivora/kozosos/a'}" method="get">
+          th:object="${kozosOsDto}" th:action="@{'/carnivora/kozososkereses'}" method="get">
         <div class="col">
             Egyik faj
             <select class="form-select " style="width:auto">
-                <option th:each="faj : ${allSpecies}" th:text="${faj.nev}" th:value="${faj.id}">egyik faj placeholder</option>
+                <option th:each="faj : *{fajDtoList}" th:text="${faj.nev}" th:value="${faj.id}">egyik faj placeholder</option>
             </select>
         </div>
         <div class="col">
             Másik faj
             <select class="form-select" style="width:auto">
-                <option th:each="faj : ${allSpecies}" th:text="${faj.nev}" th:value="${faj.id}">másik faj placeholder</option>
+                <option th:each="faj : *{fajDtoList}" th:text="${faj.nev}" th:value="${faj.id}">másik faj placeholder</option>
             </select>
         </div>
-        <div class="col">
-            <!--<a type="button" class="btn btn-primary text-center" th:href="@{'/carnivoraProject/carnivora/{id}/adatlap'(id=*{species1.id})}">Kezdőlap</a>-->
-        </div>
-        <div class="col">
-            <!--<form th:action="@{'/carnivoraProject/carnivora/{id}/adatlap'(id=*{species1.id})}" method="get">
-                <input type="submit" class="btn btn-success" value="Betölt"/>
-            </form>-->
-
-            <!--<a type="button" class="btn btn-primary text-center" th:action="@{'/carnivoraProject/kozosos/{id}'(id=*{species1.id})}"
-               method="post">Kezdőlap</a>-->
-        </div>
-        <hr/>
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">Közös ős keresés</button>
         </div>
     </form>
 </div>
 <div class="text-center mt-2">
-    <a type="button" class="btn btn-primary text-center" th:href="@{'/carnivora/carnivora'}">Kezdőlap</a>
+    <a type="button" class="btn btn-primary text-center" th:href="@{'/kezdolap'}">Vissza a kezdőlapra</a>
 </div>
-
 </body>
 </html>
