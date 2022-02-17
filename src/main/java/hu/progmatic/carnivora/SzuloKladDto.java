@@ -13,5 +13,6 @@ public class SzuloKladDto {
 
     private Integer id;
     private String nev;
+    private Integer kepId;
 
 }

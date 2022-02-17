@@ -17,4 +17,6 @@ public class KladDto {
     private String leiras;
     private Integer szuloId;
     private String szuloNev;
+
+    private Integer kepId;
 }

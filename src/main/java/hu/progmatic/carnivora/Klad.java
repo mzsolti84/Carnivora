@@ -17,17 +17,15 @@ public class Klad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     private String nev;
-
     @Column(unique = true)
     private String latinNev;
-
     @Lob
     private String leiras;
-
     @ManyToOne
     private Klad szulo;
+
+    private Integer kepId;
 
     @Builder.Default
     @OneToMany(mappedBy = "szulo", cascade = CascadeType.ALL)
