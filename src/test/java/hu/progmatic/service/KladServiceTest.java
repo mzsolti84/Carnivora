@@ -67,22 +67,30 @@ class KladServiceTest {
     @Test
     @DisplayName("Két Faj legközelebbi közös Klád ősének latin nevét megkeresi")
     void findFirstCommonKladAncestorTest() {
-        KladDto dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk"));
+        KladDto dto = getFirstCommonKladAncestorDto(getFajByNev("Fossza"), getFajByNev("Falanuk"));
         assertEquals("Eupleridae", dto.getLatinNev());
 
-        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Falanuk"), fajService.getByNev("Fossza"));
+        dto = getFirstCommonKladAncestorDto(getFajByNev("Falanuk"), getFajByNev("Fossza"));
         assertEquals("Eupleridae", dto.getLatinNev());
 
-        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Házimacska"));
+        dto = getFirstCommonKladAncestorDto(getFajByNev("Európai nyérc"), getFajByNev("Házimacska"));
         assertEquals("Carnivora", dto.getLatinNev());
 
-        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Házimacska"), fajService.getByNev("Európai nyérc"));
+        dto = getFirstCommonKladAncestorDto(getFajByNev("Házimacska"), getFajByNev("Európai nyérc"));
         assertEquals("Carnivora", dto.getLatinNev());
 
-        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Kinkaju"), fajService.getByNev("Európai nyérc"));
+        dto = getFirstCommonKladAncestorDto(getFajByNev("Kinkaju"), getFajByNev("Európai nyérc"));
         assertEquals("Caniformia", dto.getLatinNev());
 
-        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Kinkaju"));
+        dto = getFirstCommonKladAncestorDto(getFajByNev("Európai nyérc"), getFajByNev("Kinkaju"));
         assertEquals("Caniformia", dto.getLatinNev());
+    }
+
+    private KladDto getFirstCommonKladAncestorDto(Faj faj1, Faj faj2) {
+        return kladService.getFirstCommonKladAncestorOfFaj(faj1, faj2);
+    }
+
+    private Faj getFajByNev(String nev) {
+        return fajService.getByNev(nev);
     }
 }
