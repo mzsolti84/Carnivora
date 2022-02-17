@@ -1,6 +1,7 @@
 package hu.progmatic.service;
 
 import hu.progmatic.carnivora.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -63,6 +64,7 @@ class KladServiceTest {
     }
 
     @Test
+    @DisplayName("Két Faj legközelebbi közös Klád ősének latin nevét megkeresi")
     void findFirstCommonKladAncestor() {
         KladDto dto = kladService.buildKladDtoFromKlad(
                 kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk")));
