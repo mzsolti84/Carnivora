@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 public class UjFelhasznaloCommand {
   @NotEmpty(message = "A felhasználnév megadása kötelező!")
   private String felhasznaloNev;
-  @NotEmpty(message = "A keresztnén megadása kötelező!")
+  @NotEmpty(message = "A keresztnév megadása kötelező!")
   private String keresztNev;
   @NotEmpty(message = "A vezetéknév megadása kötelező!")
   private String vezetekNev;
