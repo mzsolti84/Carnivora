@@ -44,7 +44,7 @@ public class KladService implements InitializingBean {
         List<Klad> output = new ArrayList<>();
         Klad ancestor = faj.getKlad();
 
-        output.add(ancestor);
+        output.add(ancestor); // enélkül az első Klád szülőt kihagyná a kimeneti listából
 
         while (ancestor.getSzulo() != null) {
             output.add(ancestor.getSzulo());
