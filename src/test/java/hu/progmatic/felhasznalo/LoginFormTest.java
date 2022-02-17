@@ -29,7 +29,7 @@ class LoginFormTest {
   @DisplayName("Jogosultság nélkül átirányít a login oldalra")
   void root() throws Exception {
     mockMvc.perform(
-            MockMvcRequestBuilders.get("/")
+            MockMvcRequestBuilders.get("/kezdolap")
         )
         .andExpect(MockMvcResultMatchers.status().is3xxRedirection())
         .andExpect(MockMvcResultMatchers.redirectedUrlPattern("**/login"));
