@@ -64,34 +64,25 @@ class KladServiceTest {
         );
     }
 
-    /*
     @Test
-    @Disabled
     @DisplayName("Két Faj legközelebbi közös Klád ősének latin nevét megkeresi")
     void findFirstCommonKladAncestorTest() {
-        KladDto dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk")));
+        KladDto dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk"));
         assertEquals("Eupleridae", dto.getLatinNev());
 
-        dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Falanuk"), fajService.getByNev("Fossza")));
+        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Falanuk"), fajService.getByNev("Fossza"));
         assertEquals("Eupleridae", dto.getLatinNev());
 
-        dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Házimacska")));
+        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Házimacska"));
         assertEquals("Carnivora", dto.getLatinNev());
 
-        dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Házimacska"), fajService.getByNev("Európai nyérc")));
+        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Házimacska"), fajService.getByNev("Európai nyérc"));
         assertEquals("Carnivora", dto.getLatinNev());
 
-        dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Kinkaju"), fajService.getByNev("Európai nyérc")));
+        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Kinkaju"), fajService.getByNev("Európai nyérc"));
         assertEquals("Caniformia", dto.getLatinNev());
 
-        dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Kinkaju")));
+        dto = kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Kinkaju"));
         assertEquals("Caniformia", dto.getLatinNev());
     }
-     */
 }
