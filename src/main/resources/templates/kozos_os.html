@@ -26,14 +26,14 @@
           th:object="${kozosOsDto}" th:action="@{'/kozososkereses'}" method="post">
         <div class="col">
             Egyik faj
-            <select style="width:auto" class="form-select " th:field="*{valasztas1}">
-                <option th:each="faj : *{fajDtoList}" th:selected="${faj.id == kozosOsDto.valasztas1}" th:text="${faj.nev}" th:value="${faj.id}">valasztas1 placeholder</option>
+            <select style="width:auto" class="form-select " th:field="*{valasztottFaj1}">
+                <option th:each="faj : *{fajDtoList}" th:selected="${faj.id == kozosOsDto.valasztottFaj1}" th:text="${faj.nev}" th:value="${faj.id}">valasztas1 placeholder</option>
             </select>
         </div>
         <div class="col">
             Másik faj
-            <select style="width:auto" class="form-select" th:field="*{valasztas2}">
-                <option th:each="faj : *{fajDtoList}" th:selected="${faj.id == kozosOsDto.valasztas2}" th:text="${faj.nev}" th:value="${faj.id}">valasztas2 placeholder</option>
+            <select style="width:auto" class="form-select" th:field="*{valasztottFaj2}">
+                <option th:each="faj : *{fajDtoList}" th:selected="${faj.id == kozosOsDto.valasztottFaj2}" th:text="${faj.nev}" th:value="${faj.id}">valasztas2 placeholder</option>
             </select>
         </div>
         <div class="col-auto">

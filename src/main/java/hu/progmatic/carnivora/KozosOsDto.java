@@ -14,8 +14,8 @@ import java.util.List;
 @Setter
 public class KozosOsDto {
     @Builder.Default
-    List<FajDto> fajDtoList = new ArrayList<>();
-    Integer valasztas1;
-    Integer valasztas2;
-    KladDto kozosOs;
+    private List<FajDto> fajDtoList = new ArrayList<>();
+    private Integer valasztottFaj1;
+    private Integer valasztottFaj2;
+    private KladDto kozosOs;
 }

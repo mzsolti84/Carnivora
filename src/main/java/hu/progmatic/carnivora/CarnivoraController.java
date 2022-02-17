@@ -82,7 +82,7 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            kozosOsDto.setKozosOs(kladService.getFirstCommonKladAncestorOfFaj(fajService.getById(kozosOsDto.valasztas1), fajService.getById(kozosOsDto.valasztas2)));
+            kozosOsDto.setKozosOs(kladService.getFirstCommonKladAncestorOfFaj(fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2())));
         }
         return "kozos_os";
     }
@@ -149,8 +149,8 @@ public class CarnivoraController {
     KozosOsDto kozosOsDto() {
         return KozosOsDto.builder()
                 .fajDtoList(fajService.getAllFajDto())
-                .valasztas1(fajService.getByNev("Falanuk").getId())
-                .valasztas2(fajService.getByNev("Falanuk").getId())
+                .valasztottFaj1(fajService.getByNev("Falanuk").getId())
+                .valasztottFaj2(fajService.getByNev("Falanuk").getId())
                 .kozosOs(new KladDto())
                 .build();
     }
