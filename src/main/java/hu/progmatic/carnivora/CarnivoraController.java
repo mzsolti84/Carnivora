@@ -82,9 +82,8 @@ public class CarnivoraController {
             Model model) {
         if (!bindingResult.hasErrors()) {
             kozosOsDto.setKozosOs(kladService.getFirstCommonKladAncestorOfFaj(fajService.getById(kozosOsDto.valasztas1), fajService.getById(kozosOsDto.valasztas2)));
-            model.addAttribute("kozosOsDto", kozosOsDto);
         }
-        return "/kozosos";
+        return "kozos_os";
     }
 
 

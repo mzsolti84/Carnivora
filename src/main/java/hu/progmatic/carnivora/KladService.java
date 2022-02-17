@@ -65,7 +65,6 @@ public class KladService implements InitializingBean {
                 .latinNev(entity.getLatinNev())
                 .leiras(entity.getLeiras())
                 .szulo(entity.getSzulo().getNev())
-                .kep(entity.getKep())
                 .leszarmazott(
                         entity.getLeszarmazottak().stream()
                                 .map(this::buildKladWithChildrenDto)
@@ -89,7 +88,6 @@ public class KladService implements InitializingBean {
         return SzuloKladDto.builder()
                 .id(klad.getId())
                 .nev(klad.getNev())
-                .kep(klad.getKep())
                 .build();
     }
 
@@ -101,7 +99,6 @@ public class KladService implements InitializingBean {
                 .leiras(klad.getLeiras())
                 .szuloId(klad.getSzulo() == null ? 0 : klad.getSzulo().getId())
                 .szuloNev(klad.getSzulo() == null ? "Eukarióták" : klad.getSzulo().getNev())
-                .kep(klad.getKep())
                 .build();
     }
 
