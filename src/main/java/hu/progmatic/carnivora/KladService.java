@@ -30,19 +30,34 @@ public class KladService implements InitializingBean {
     }
 
     public Klad getFirstCommonKladAncestorOfFaj(Faj faj1, Faj faj2) {
-        Klad ancestor1 = faj1.getKlad();
+        List<Klad> faj1Bloodline = getBloodLineOfFaj(faj1);
+        List<Klad> faj2Bloodline = getBloodLineOfFaj(faj2);
+
+        for (Klad klad1 : faj1Bloodline) {
+            for (Klad klad2 : faj2Bloodline) {
+                if (klad1.getId().equals(klad2.getId())) {
+                    return klad1;
+                }
+            }
+        }
+
+        /*Klad ancestor1 = faj1.getKlad();
         Klad ancestor2 = faj2.getKlad();
 
         while (ancestor1.getId() != ancestor2.getId()) {
             ancestor1 = ancestor1.getSzulo();
             ancestor2 = ancestor2.getSzulo();
         }
-        return ancestor1;
+        return ancestor1;*/
+
+        return null;
     }
 
     public List<Klad> getBloodLineOfFaj(Faj faj) {
         List<Klad> output = new ArrayList<>();
         Klad ancestor = faj.getKlad();
+
+        output.add(ancestor);
 
         while (ancestor.getSzulo() != null) {
             output.add(ancestor.getSzulo());
