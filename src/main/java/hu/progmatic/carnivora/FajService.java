@@ -118,4 +118,8 @@ public class FajService {
         return megnevezes;
     }
 
+    public Faj getByNev(String nev) {
+        return fajRepository.getByNev(nev);
+    }
+
 }

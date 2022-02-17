@@ -43,44 +43,50 @@
     </table>
     <br>
 
-    <table class="table table-dark table-striped">
+    <table class="table table-dark table-striped" >
         <tbody>
         <tr>
-            <td>
+            <td colspan="2">
                 <p>id:</p>
                 <p style="font-size:130%;" th:text="*{id}">.id</p>
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 <p>Magyar név:</p>
                 <p style="font-size:130%;" th:text="*{nev}">.nev</p>
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 <p>Latin név:</p>
                 <p style="font-size:130%;" th:text="*{latinNev}">.latinNev</p>
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 <p>Leírás:</p>
                 <p style="font-size:130%; text-align: justify-all" th:text="*{leiras}">.leiras</p>
             </td>
         </tr>
         <tr>
-            <td>
+            <td colspan="2">
                 <p>Ős domén:</p>
                 <p th:text="*{szuloNev}" style="font-size:130%;">.szuloNev</p>
             </td>
         </tr>
         <tr>
-            <td>
-                <p>Fajlista:</p>
-                <tr th:each="faj : ${filteredFajList}">
-                <td style="font-size:100%;" th:text="${faj.nev}">.faj.nev</td>
-        </tr>
+            <td colspan="2">
+            <p>Fajlista:</p>
+        <tr th:each="fajDto : ${filteredFajList}">
+
+            <td style="font-size:130%;text-align:right;width: 50%"  th:text="${fajDto.nev}">.faj.nev</td>
+
+            <td style="text-align:left;width: 50%">
+            <form th:action="@{'/carnivora/{id}/adatlap'(id=${fajDto.id})}" method="get">
+                <button type="submit" class="btn-dark" value="Adatlap">Adatlap</button>
+            </form>
+            </td>
         </td>
         </tr>
 
@@ -93,7 +99,8 @@
 <div class="container">
     <div class="text-center">
         <form>
-            <button style=" background-color: black" type="button" class="btn-dark" onclick="history.back()">Vissza</button>
+            <button style=" background-color: black" type="button" class="btn-dark" onclick="history.back()">Vissza
+            </button>
         </form>
     </div>
 </div>
