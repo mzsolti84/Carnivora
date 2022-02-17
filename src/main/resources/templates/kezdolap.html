@@ -18,13 +18,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let myDropdownBtn = document.getElementById("dropdownMenuLinkReg");
-            let myDropdownBtnAdm = document.getElementById("dropdownMenuLinkAdm");
             // Create a dropdown instance
             let myDropdownReg = new bootstrap.Dropdown(document.getElementById("dropdownMenuLinkReg"));
-            let myDropdownAdm = new bootstrap.Dropdown(document.getElementById("dropdownMenuLinkAdm"));
             myDropdownBtn.addEventListener("click", function () {
                 myDropdownReg.toggle();
             });
+
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            let myDropdownBtnAdm = document.getElementById("dropdownMenuLinkAdm");
+            // Create a dropdown instance
+            let myDropdownAdm = new bootstrap.Dropdown(document.getElementById("dropdownMenuLinkAdm"));
             myDropdownBtnAdm.addEventListener("click", function () {
                 myDropdownAdm.toggle();
             });
@@ -42,14 +46,21 @@
             background-color: black;
 
         }
+        .bs-example{
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <p class="text-center fs-1 text-white"
+    <div class="text-center fs-1 text-white"
        style="opacity: 0.75;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Carnivora Project
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Carnivora Project </div>
+    <div th:if="${isAnonymusUser == true}"
+         class="text-center fs-6 text-white" style="opacity: 0.75;" th:text="${loggedUserName} + ' felhasználó (Bővebb funkciókért jeletkezz be!)'">Valami</div>
+    <div th:if="${isAnonymusUser == false}"
+         class="text-center fs-6 text-white" style="opacity: 0.75;" th:text="${loggedUserName} + ' felhasználó'">Valami</div>
 
     <div class="row">
         <div class="col-md-12 text-right"
@@ -70,7 +81,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkReg">
                     <a class="dropdown-item btn-outline-info" href="/ujfelhasznalo">Új felhasználó</a>
-                    <a class="dropdown-item btn-outline-info" href="#">Belépés meglevő fiókkal</a>
+                    <a class="dropdown-item btn-outline-info" href="/login">Belépés meglevő fiókkal</a>
                 </div>
             </div>
 
@@ -87,7 +98,7 @@
     </div>
     <br>
 
-    <div class="row">
+    <div class="row" th:if="${isAnonymusUser == false}">
         <div class="col-md-12 text-right"
              style="opacity: 0.5">
             <a href="/veszelyeztetett" role="button" class="btn btn-lg btn-outline-light">Veszélyeztetett fajok</a>
@@ -95,7 +106,7 @@
     </div>
     <br>
 
-    <div class="row">
+    <div class="row" th:if="${isAnonymusUser == false}">
         <div class="col-md-12 text-right"
              style="opacity: 0.75">
             <a href="/genogram" role="button" class="btn btn-lg btn-outline-light">Klád genogram</a>
@@ -103,7 +114,7 @@
     </div>
     <br>
 
-    <div class="row">
+    <div class="row" th:if="${isAnonymusUser == false}">
         <div class="col-md-12 text-right"
              style="opacity: 0.5">
             <a href="/kozososkereses" role="button" class="btn btn-lg btn-outline-light">Közös ős kereső</a>
@@ -114,7 +125,7 @@
     <br>
 
     <div class="btn-group dropend"
-    style="opacity: 0.6">
+    style="opacity: 0.6" th:if="${loggedHasUserWriteRole == true}">
         <a class="btn btn-lg btn-outline-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLinkAdm"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Adminisztrációs felület
@@ -128,14 +139,17 @@
 
 </div>
 
-<!--
-<div class="d-flex align-items-end flex-column bd-highlight mb-3">
-<div class="fs-6 text-white mt-auto p-2 bd-highlight"
-     th:if="${loggedUserName != null}"
-     th:text="'Felhasználó: ' + ${loggedUserName}">
-    Valami
+<div class="bs-example" th:if="${isAnonymusUser == false}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-end text-right"
+            style="opacity: 0.75">
+        <a href="/logout" role="button" class="btn btn-outline-light btn-sm">Kijelentkezés</a>
+    </div>
 </div>
-</div> -->
+</div>
+</div>
+
 
 </body>
 </html>
