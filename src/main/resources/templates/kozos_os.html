@@ -23,17 +23,17 @@
 
 <div class="container mt-5">
     <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
-          th:object="${kozosOsDto}" th:action="@{'/carnivora/kozososkereses'}" method="get">
+          th:object="${kozosOsDto}" th:action="@{'/carnivora/kozososkereses'}" method="post">
         <div class="col">
             Egyik faj
-            <select class="form-select " style="width:auto">
-                <option th:each="faj : *{fajDtoList}" th:text="${faj.nev}" th:value="${faj.id}">egyik faj placeholder</option>
+            <select style="width:auto" class="form-select " th:field="*{valasztas1}">
+                <option th:each="faj : *{fajDtoList}" th:selected="${faj.id == kozosOsDto.valasztas1}" th:text="${faj.nev}" th:value="${faj.id}">valasztas1 placeholder</option>
             </select>
         </div>
         <div class="col">
             Másik faj
-            <select class="form-select" style="width:auto">
-                <option th:each="faj : *{fajDtoList}" th:text="${faj.nev}" th:value="${faj.id}">másik faj placeholder</option>
+            <select style="width:auto" class="form-select" th:field="*{valasztas2}">
+                <option th:each="faj : *{fajDtoList}" th:selected="${faj.id == kozosOsDto.valasztas2}" th:text="${faj.nev}" th:value="${faj.id}">valasztas2 placeholder</option>
             </select>
         </div>
         <div class="col-auto">

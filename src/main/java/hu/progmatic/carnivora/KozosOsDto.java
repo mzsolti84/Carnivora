@@ -13,7 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 public class KozosOsDto {
-
     @Builder.Default
     List<FajDto> fajDtoList = new ArrayList<>();
     Integer valasztas1;

@@ -141,6 +141,8 @@ public class CarnivoraController {
     KozosOsDto kozosOsDto() {
         return KozosOsDto.builder()
                 .fajDtoList(fajService.getAllFajDto())
+                .valasztas1(fajService.getByNev("Falanuk").getId())
+                .valasztas2(fajService.getByNev("Falanuk").getId())
                 .build();
     }
 
