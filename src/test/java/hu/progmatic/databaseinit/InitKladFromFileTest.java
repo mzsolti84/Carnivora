@@ -9,18 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class InitKladFromFileTest {
-
-    @Test
-    void fileException() {
-        String exception = null;
-        try {
-            new InitKladFromFileFactory("error.csv");
-        } catch (CsvURISyntaxException e) {
-            exception = e.getMessage();
-        }
-        assertNotNull(exception);
-    }
-
+    
     @Test
     void iniFileAlrendMacskaTest() {
         InitKladFromFileFactory initKlad = new InitKladFromFileFactory("klad.csv");

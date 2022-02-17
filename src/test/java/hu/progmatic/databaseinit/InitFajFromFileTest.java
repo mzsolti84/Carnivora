@@ -13,17 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InitFajFromFileTest {
 
-    @Test
-    void fileException() {
-        String exception = null;
-        try {
-            new InitSpeciesFromFileFactory("klad.csv", "error.csv");
-        } catch (CsvURISyntaxException e) {
-            exception = e.getMessage();
-        }
-        assertNotNull(exception);
-    }
-
     @Nested
     class speciesTest {
 
