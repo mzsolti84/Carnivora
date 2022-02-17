@@ -71,7 +71,23 @@ class KladServiceTest {
         assertEquals("Eupleridae", dto.getLatinNev());
 
         dto = kladService.buildKladDtoFromKlad(
+                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Falanuk"), fajService.getByNev("Fossza")));
+        assertEquals("Eupleridae", dto.getLatinNev());
+
+        dto = kladService.buildKladDtoFromKlad(
                 kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Házimacska")));
         assertEquals("Carnivora", dto.getLatinNev());
+
+        dto = kladService.buildKladDtoFromKlad(
+                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Házimacska"), fajService.getByNev("Európai nyérc")));
+        assertEquals("Carnivora", dto.getLatinNev());
+
+        dto = kladService.buildKladDtoFromKlad(
+                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Kinkaju"), fajService.getByNev("Európai nyérc")));
+        assertEquals("Caniformia", dto.getLatinNev());
+
+        dto = kladService.buildKladDtoFromKlad(
+                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Kinkaju")));
+        assertEquals("Caniformia", dto.getLatinNev());
     }
 }

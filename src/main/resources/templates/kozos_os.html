@@ -11,34 +11,29 @@
 
     <title>Közös ös</title>
 </head>
+
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <style>
-    body {
-        background: black
-    }
+    body {background: black}
 </style>
 <h2 class="text-center mt-3">Legközelebbi közös ős kereső</h2>
 
 <div class="container mt-5">
     <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
-          th:action="@{'/carnivora/kozosos/a'}"
-          method="get" th:object="${kozosOs}">
+          th:object="${allSpecies}" th:action="@{'/carnivora/kozosos/a'}" method="get">
         <div class="col">
-            <label for="inputSpecies1">Egyik faj</label>
-            <select class="form-select " style="width:auto;" th:field="*{species1}">
-                <option th:each="fajok : ${allSpecies}" th:text="${fajok.nev}" th:value="${fajok.id}">
-
-                </option>
+            Egyik faj
+            <select class="form-select " style="width:auto">
+                <option th:each="faj : ${allSpecies}" th:text="${faj.nev}" th:value="${faj.id}">egyik faj placeholder</option>
             </select>
         </div>
         <div class="col">
-            <label for="inputSpecies2">Másik faj</label>
-            <select class="form-select" style="width:auto;" th:field="*{species2}">
-                <option th:each="fajok : ${allSpecies}" th:text="${fajok.nev}" th:value="${fajok.id}"
-                        th:disabled="${fajok.nev == 'Falanuk'}"></option>
+            Másik faj
+            <select class="form-select" style="width:auto">
+                <option th:each="faj : ${allSpecies}" th:text="${faj.nev}" th:value="${faj.id}">másik faj placeholder</option>
             </select>
         </div>
         <div class="col">
@@ -56,57 +51,11 @@
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">Közös ős keresés</button>
         </div>
-
     </form>
 </div>
 <div class="text-center mt-2">
     <a type="button" class="btn btn-primary text-center" th:href="@{'/carnivora/carnivora'}">Kezdőlap</a>
 </div>
-
-<div th:if="${formBevitelUtan}">
-    <div class="container-fluid" style="background-color: black; color: lightgrey;">
-        <table class="table table-dark table-striped">
-            <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">SzülőkategóriaID</th>
-                <th scope="col">Név</th>
-                <th scope="col">Latin név</th>
-                <th scope="col">Leírás</th>
-                <th scope="col">Veszelyeztetett besorolás</th>
-                <th scope="col">Specialista?</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="fajok : ${megtalaltOs}">
-                <th scope="row" th:text="${fajok.id}">1</th>
-                <td th:text="${fajok.szuloKategoriaID}">1</td>
-                <td th:text="${fajok.nev}">Név</td>
-                <td th:text="${fajok.latinNev}">LatinNév</td>
-                <td th:text="${fajok.leiras}">100</td>
-                <td th:text="${fajok.veszelyeztetettBesorolas}">100</td>
-                <td th:text="${fajok.isSpecialista}">100</td>
-                <td>
-                    <div class="row">
-                        <div class="col">
-                            <form th:action="@{'/carnivora/carnivora/{id}/adatlap'(id=${fajok.id})}"
-                                  method="get">
-                                <input type="submit" class="btn btn-success" value="Betölt"/>
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-
-</div>
-
 
 </body>
 </html>

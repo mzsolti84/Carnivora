@@ -30,19 +30,21 @@ public class KladService implements InitializingBean {
     }
 
     public Klad getFirstCommonKladAncestorOfFaj(Faj faj1, Faj faj2) {
-        Klad ancestor1 = faj1.getKlad();
-        Klad ancestor2 = faj2.getKlad();
-
-        while (ancestor1.getId() != ancestor2.getId()) {
-            ancestor1 = ancestor1.getSzulo();
-            ancestor2 = ancestor2.getSzulo();
+        for (Klad faj1klad : getBloodLineOfFaj(faj1)) {
+            for (Klad faj2klad : getBloodLineOfFaj(faj2)) {
+                if (faj1klad.getId().equals(faj2klad.getId())) {
+                    return faj1klad;
+                }
+            }
         }
-        return ancestor1;
+        return null;
     }
 
     public List<Klad> getBloodLineOfFaj(Faj faj) {
         List<Klad> output = new ArrayList<>();
         Klad ancestor = faj.getKlad();
+
+        output.add(ancestor); // enélkül az első Klád szülőt kihagyná a kimeneti listából
 
         while (ancestor.getSzulo() != null) {
             output.add(ancestor.getSzulo());
