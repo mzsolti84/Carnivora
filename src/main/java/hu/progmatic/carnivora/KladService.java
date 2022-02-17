@@ -4,7 +4,6 @@ import hu.progmatic.databaseinit.InitSpeciesFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.google.gson.Gson;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -28,6 +27,28 @@ public class KladService implements InitializingBean {
             kladRepository.saveAll(init.getKlads());
             fajService.saveAll(init.getSpecies());
         }
+    }
+
+    public Klad getFirstCommonKladAncestorOfFaj(Faj faj1, Faj faj2) {
+        Klad ancestor1 = faj1.getKlad();
+        Klad ancestor2 = faj2.getKlad();
+
+        while (ancestor1.getId() != ancestor2.getId()) {
+            ancestor1 = ancestor1.getSzulo();
+            ancestor2 = ancestor2.getSzulo();
+        }
+        return ancestor1;
+    }
+
+    public List<Klad> getBloodLineOfFaj(Faj faj) {
+        List<Klad> output = new ArrayList<>();
+        Klad ancestor = faj.getKlad();
+
+        while (ancestor.getSzulo() != null) {
+            output.add(ancestor.getSzulo());
+            ancestor = ancestor.getSzulo();
+        }
+        return output;
     }
 
     public KladWithChildrenDto getKladDtoByName(String name) {
@@ -86,9 +107,9 @@ public class KladService implements InitializingBean {
 
     public List<FajDto> getFajDtoListFromKladId(Integer id) {
         List<FajDto> fajok = fajService.getAllFajDto();
-        List <FajDto> kladFaj = new ArrayList<>();
+        List<FajDto> kladFaj = new ArrayList<>();
         for (FajDto faj : fajok) {
-            if(Objects.equals(faj.getSzuloId(), id)){
+            if (Objects.equals(faj.getSzuloId(), id)) {
                 kladFaj.add(faj);
             }
         }

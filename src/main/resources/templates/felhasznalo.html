@@ -20,9 +20,11 @@
 <p class="text-center fs-3 text-white"
    style="opacity: 0.75;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Felhasználók karbantartása</p>
+<h5 class="text-center text-white" style="opacity: 0.75;"
+    th:text="'Bejelentkezett felhasználó (username és id): ' + ${userName} + ' (' + ${userId} + ')'">Felhasználó id: 2</h5>
 
 <table class="table table-dark table-striped" th:if="${hasUserReadRole}">
-    <thead>
+    <thead style="font-size:10pt; text-align: center">
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Felhasználónév</th>
@@ -30,13 +32,13 @@
         <th scope="col">Keresztnév</th>
         <th scope="col">Email</th>
         <th scope="col">Engedélyezett</th>
-        <th scope="col">Regisztracio datuma</th>
-        <th scope="col">Ativálás datuma</th>
+        <th scope="col">Regisztracio dátuma</th>
+        <th scope="col">Ativálás dátuma</th>
         <th scope="col">Role</th>
         <th scope="col"></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody style="font-size:10pt;  text-align: center">
     <tr th:each="felhasznalo : ${allFelhasznalo}">
         <th scope="row" th:text="${felhasznalo.id}">1</th>
         <td th:text="${felhasznalo.felhasznaloNev}">Minta Felhasználónév</td>
@@ -52,7 +54,7 @@
 
                 <label th:text="${felhasznalo.role}" style="float:left"></label>
                 <label style="float:right">
-                    <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Jogosultsag"/>
+                    <input type="submit" class="btn btn-danger btn-sm" th:href="@{/felhasznalo}" value="Jogosultság"/>
                 </label>
             </form>
         </td>
@@ -70,14 +72,14 @@
                     <input th:field="*{felhasznaloId}" th:value="${felhasznalo.id}">
                 </label>
                 <label style="float:right">
-                    <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Jóváhagy"/>
+                    <input type="submit" class="btn btn-danger btn-sm" th:href="@{/felhasznalo}" value="Jóváhagy"/>
                 </label>
             </form>
         </td>
         <td>
             <form th:if="${hasUserWriteRole}"
                   th:action="@{'/felhasznalo/delete/{id}'(id=${felhasznalo.id})}" method="post">
-                <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Törlés"/>
+                <input type="submit" class="btn btn-danger btn-sm" th:href="@{/felhasznalo}" value="Törlés"/>
             </form>
         </td>
         <!--<td th:if="${hasUserWriteRole && (!isModosit || felhasznalo.id != jogosultsag.felhasznaloId)}">
@@ -129,17 +131,22 @@
     </div>
 </form>-->
 <div style="text-align: center">
-    <h3 th:text="'Bejelentkezett felhasználó id és username: ' + ${userId}+ ',
- ' + ${userName}">Felhasználó id: 2</h3>
 
     <form th:action="@{/logout}" method="post">
         <input class="btn btn-lg btn-outline-warning" type="submit" value="Kijelentkezés"/>
     </form>
-</div>
+    <hr>
 
-<form th:action="@{'/kezdolap'}" method="get">
-    <button >Kezdőlap</button>
-</form>
+    <div class="container">
+        <div class="text-center">
+            <form th:action="@{/}" method="get">
+                <button type="submit" class="btn btn-lg btn-outline-info">Kezdőlap</button>
+            </form>
+            <br>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
