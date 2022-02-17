@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -39,4 +40,8 @@ public class Felhasznalo {
   @Enumerated(EnumType.STRING)
   @Builder.Default
   private UserType role = UserType.USER;
+
+  private LocalDateTime regisztracioIdeje;
+
+  private LocalDateTime megerositesIdeje;
 }

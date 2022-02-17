@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <!-- Required meta tags -->
@@ -29,6 +30,8 @@
         <th scope="col">Keresztnév</th>
         <th scope="col">Email</th>
         <th scope="col">Engedélyezett</th>
+        <th scope="col">Regisztracio datuma</th>
+        <th scope="col">Ativálás datuma</th>
         <th scope="col">Role</th>
         <th scope="col"></th>
     </tr>
@@ -41,13 +44,54 @@
         <td th:text="${felhasznalo.keresztNev}">Minta keresztnév</td>
         <td th:text="${felhasznalo.email}">Minta email</td>
         <td th:text="${felhasznalo.engedelyezve}">false</td>
-        <td th:text="${felhasznalo.role}">ADMIN</td>
+        <td th:text="${felhasznalo.regisztracioIdeje}">Dátum</td>
+        <td th:text="${felhasznalo.megerositesIdeje}">Dátum</td>
+        <td th:if="${hasUserWriteRole && (!isModosit || felhasznalo.id != jogosultsag.felhasznaloId)}">
+            <form
+                    th:action="@{'/felhasznalo/modosit/{id}'(id=${felhasznalo.id})}" method="get">
+
+                <label th:text="${felhasznalo.role}" style="float:left"></label>
+                <label style="float:right">
+                    <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Jogosultsag"/>
+                </label>
+            </form>
+        </td>
+        <td th:if="${hasUserWriteRole && (isModosit && felhasznalo.id == jogosultsag.felhasznaloId)}">
+            <form th:action="@{'/felhasznalo/modosit'}" method="post"
+                  th:object="${jogosultsag}">
+                <label style="float:left">
+                    <select th:field="*{jog}" class="form-select">
+                        <option
+                                th:each="roleOption : ${allRole}" th:value="${roleOption}"
+                                th:text="${roleOption}"></option>
+                    </select>
+                </label>
+                <label th:hidden="true" style="float:right">
+                    <input th:field="*{felhasznaloId}" th:value="${felhasznalo.id}">
+                </label>
+                <label style="float:right">
+                    <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Jóváhagy"/>
+                </label>
+            </form>
+        </td>
         <td>
             <form th:if="${hasUserWriteRole}"
                   th:action="@{'/felhasznalo/delete/{id}'(id=${felhasznalo.id})}" method="post">
                 <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Törlés"/>
             </form>
         </td>
+        <!--<td th:if="${hasUserWriteRole && (!isModosit || felhasznalo.id != jogosultsag.felhasznaloId)}">
+            <form
+                    th:action="@{'/felhasznalo/modosit/{id}'(id=${felhasznalo.id})}" method="get">
+                <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Jogosultsag"/>
+            </form>
+        </td>-->
+        <!--<td th:if="${hasUserWriteRole && (isModosit && felhasznalo.id == jogosultsag.felhasznaloId)}">
+            <form
+                    th:action="@{'/felhasznalo/modosit/{id}'(id=${felhasznalo.id})}" method="post">
+                <input type="submit" class="btn btn-danger" th:href="@{/felhasznalo}" value="Jóváhagy"/>
+            </form>
+        </td>-->
     </tr>
     </tbody>
 </table>
@@ -85,13 +129,17 @@
     </div>
 </form>-->
 <div style="text-align: center">
-<h3 th:text="'Bejelentkezett felhasználó id és username: ' + ${userId}+ ',
+    <h3 th:text="'Bejelentkezett felhasználó id és username: ' + ${userId}+ ',
  ' + ${userName}">Felhasználó id: 2</h3>
 
-<form th:action="@{/logout}" method="post">
-    <input class="btn btn-lg btn-outline-warning" type="submit" value="Kijelentkezés"/>
+    <form th:action="@{/logout}" method="post">
+        <input class="btn btn-lg btn-outline-warning" type="submit" value="Kijelentkezés"/>
+    </form>
+</div>
+
+<form th:action="@{'/kezdolap'}" method="get">
+    <button >Kezdőlap</button>
 </form>
-</div>>
 
 </body>
 </html>

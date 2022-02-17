@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.security.RolesAllowed;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -18,6 +19,7 @@ import java.util.*;
 @Transactional
 public class FelhasznaloService implements InitializingBean {
 
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final FelhasznaloRepository felhasznaloRepository;
     private final PasswordEncoder encoder;
     private final MegerositoTokenRepository megerositoTokenRepository;
@@ -34,8 +36,8 @@ public class FelhasznaloService implements InitializingBean {
     }
 
     @RolesAllowed(UserType.Roles.USER_READ_ROLE)
-    public List<Felhasznalo> findAll() {
-        return felhasznaloRepository.findAll();
+    public List<FelhasznaloDto> findAll() {
+        return felhasznaloRepository.findAll().stream().map(this::felhasznaloDtoBulder).toList();
     }
 
     public void ujFelhasznaloValidalas(UjFelhasznaloCommand command) {
@@ -54,6 +56,7 @@ public class FelhasznaloService implements InitializingBean {
                 .keresztNev(command.getKeresztNev())
                 .vezetekNev(command.getVezetekNev())
                 .role(UserType.USER)
+                .regisztracioIdeje(LocalDateTime.now())
                 .build();
         String token = UUID.randomUUID().toString();
         MegerositoToken megerositoToken = MegerositoToken.builder()
@@ -90,6 +93,8 @@ public class FelhasznaloService implements InitializingBean {
                     .email("carnivora.project@gmail.com")
                     .engedelyezve(true)
                     .role(UserType.ADMIN)
+                    .regisztracioIdeje(LocalDateTime.now())
+                    .megerositesIdeje(LocalDateTime.now())
                     .build();
             Felhasznalo user = Felhasznalo.builder()
                     .felhasznaloNev("user")
@@ -97,8 +102,10 @@ public class FelhasznaloService implements InitializingBean {
                     .keresztNev("user")
                     .vezetekNev("user")
                     .email("carnivora.project@gmail.com")
-                    .engedelyezve(false)
+                    .engedelyezve(true)
                     .role(UserType.USER)
+                    .regisztracioIdeje(LocalDateTime.now())
+                    .megerositesIdeje(LocalDateTime.now())
                     .build();
             felhasznaloRepository.save(admin);
             felhasznaloRepository.save(user);
@@ -122,6 +129,21 @@ public class FelhasznaloService implements InitializingBean {
         return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    private FelhasznaloDto felhasznaloDtoBulder(Felhasznalo felhasznalo){
+        return FelhasznaloDto.builder()
+                .id(felhasznalo.getId())
+                .felhasznaloNev(felhasznalo.getFelhasznaloNev())
+                .vezetekNev(felhasznalo.getVezetekNev())
+                .keresztNev(felhasznalo.getKeresztNev())
+                .email(felhasznalo.getEmail())
+                .engedelyezve(felhasznalo.isEngedelyezve() ? "Igen" : "Nem")
+                .regisztracioIdeje(dateTimeFormatter.format(felhasznalo.getRegisztracioIdeje()))
+                .megerositesIdeje(felhasznalo.getMegerositesIdeje() == null ?
+                        "Még nem hitelesített" : dateTimeFormatter.format(felhasznalo.getMegerositesIdeje()))
+                .role(felhasznalo.getRole())
+                .build();
+    }
+
     public String getFelhasznaloNev() {
         if (isAnonymusUser()) { return "Vendég"; }
         else {
@@ -132,5 +154,14 @@ public class FelhasznaloService implements InitializingBean {
 
     public boolean isAnonymusUser() {
         return SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser");
+    }
+
+    public FelhasznaloDto findById(Long id) {
+        return felhasznaloDtoBulder(felhasznaloRepository.getById(id));
+    }
+
+    public void modositJogosultsag(Jogosultsag jogosultsag) {
+        Felhasznalo felhasznalo = felhasznaloRepository.findById(jogosultsag.getFelhasznaloId()).orElseThrow();
+        felhasznalo.setRole(UserType.valueOf(jogosultsag.getJog()));
     }
 }

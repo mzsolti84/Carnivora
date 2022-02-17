@@ -21,6 +21,7 @@ public class MegerositoTokenService {
         MegerositoToken megerositoToken = megerositoTokenRepository.findByToken(token).orElseThrow(() -> new NemLetezoTokenException("Nemlétező token!"));
         Felhasznalo felhasznalo = felhasznaloRepository.getById(megerositoToken.getFelhasznalo().getId());
         felhasznalo.setEngedelyezve(true);
+        felhasznalo.setMegerositesIdeje(LocalDateTime.now());
         megerositoTokenRepository.delete(megerositoToken);
 
     }
