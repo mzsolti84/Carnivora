@@ -65,11 +65,11 @@ class KladServiceTest {
     @Test
     void findFirstCommonKladAncestor() {
         KladDto dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk")));
+                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk")));
         assertEquals("Eupleridae", dto.getLatinNev());
 
         dto = kladService.buildKladDtoFromKlad(
-                kladService.getFirstCommonAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Házimacska")));
+                kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Házimacska")));
         assertEquals("Carnivora", dto.getLatinNev());
     }
 }

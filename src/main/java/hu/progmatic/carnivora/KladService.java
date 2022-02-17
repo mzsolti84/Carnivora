@@ -4,7 +4,6 @@ import hu.progmatic.databaseinit.InitSpeciesFromFileFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.google.gson.Gson;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class KladService implements InitializingBean {
         }
     }
 
-    public Klad getFirstCommonAncestorOfFaj(Faj faj1, Faj faj2) {
+    public Klad getFirstCommonKladAncestorOfFaj(Faj faj1, Faj faj2) {
         Klad ancestor1 = faj1.getKlad();
         Klad ancestor2 = faj2.getKlad();
 
