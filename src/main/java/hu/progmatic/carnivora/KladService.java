@@ -29,11 +29,11 @@ public class KladService implements InitializingBean {
         }
     }
 
-    public Klad getFirstCommonKladAncestorOfFaj(Faj faj1, Faj faj2) {
+    public KladDto getFirstCommonKladAncestorOfFaj(Faj faj1, Faj faj2) {
         for (Klad faj1klad : getBloodLineOfFaj(faj1)) {
             for (Klad faj2klad : getBloodLineOfFaj(faj2)) {
                 if (faj1klad.getId().equals(faj2klad.getId())) {
-                    return faj1klad;
+                    return buildKladDtoFromKlad(faj1klad);
                 }
             }
         }
@@ -65,6 +65,7 @@ public class KladService implements InitializingBean {
                 .latinNev(entity.getLatinNev())
                 .leiras(entity.getLeiras())
                 .szulo(entity.getSzulo().getNev())
+                .kep(entity.getKep())
                 .leszarmazott(
                         entity.getLeszarmazottak().stream()
                                 .map(this::buildKladWithChildrenDto)
@@ -88,6 +89,7 @@ public class KladService implements InitializingBean {
         return SzuloKladDto.builder()
                 .id(klad.getId())
                 .nev(klad.getNev())
+                .kep(klad.getKep())
                 .build();
     }
 
@@ -99,6 +101,7 @@ public class KladService implements InitializingBean {
                 .leiras(klad.getLeiras())
                 .szuloId(klad.getSzulo() == null ? 0 : klad.getSzulo().getId())
                 .szuloNev(klad.getSzulo() == null ? "Eukarióták" : klad.getSzulo().getNev())
+                .kep(klad.getKep())
                 .build();
     }
 

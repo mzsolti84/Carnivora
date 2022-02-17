@@ -24,11 +24,6 @@ public class CarnivoraController {
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
-    /*@RequestMapping("/")
-    public String belepes() {
-        return "kezdolap";
-    }*/
-
     @GetMapping("/faj_adatszerk/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         FajDto formFajDto = fajService.getFajDtoByFajId(id);
@@ -86,7 +81,8 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            model.addAttribute("allFajDto", allFajDto());
+            kozosOsDto.setKozosOs(kladService.getFirstCommonKladAncestorOfFaj(fajService.getById(kozosOsDto.valasztas1), fajService.getById(kozosOsDto.valasztas2)));
+            model.addAttribute("kozosOsDto", kozosOsDto);
         }
         return "/kozosos";
     }
