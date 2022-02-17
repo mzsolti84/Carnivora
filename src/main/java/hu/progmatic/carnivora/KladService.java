@@ -30,6 +30,28 @@ public class KladService implements InitializingBean {
         }
     }
 
+    public Klad getFirstCommonAncestorOfFaj(Faj faj1, Faj faj2) {
+        Klad ancestor1 = faj1.getKlad();
+        Klad ancestor2 = faj2.getKlad();
+
+        while (ancestor1.getId() != ancestor2.getId()) {
+            ancestor1 = ancestor1.getSzulo();
+            ancestor2 = ancestor2.getSzulo();
+        }
+        return ancestor1;
+    }
+
+    public List<Klad> getBloodLineOfFaj(Faj faj) {
+        List<Klad> output = new ArrayList<>();
+        Klad ancestor = faj.getKlad();
+
+        while (ancestor.getSzulo() != null) {
+            output.add(ancestor.getSzulo());
+            ancestor = ancestor.getSzulo();
+        }
+        return output;
+    }
+
     public KladWithChildrenDto getKladDtoByName(String name) {
         Klad entity = kladRepository.findByNevEquals(name);
 
@@ -86,9 +108,9 @@ public class KladService implements InitializingBean {
 
     public List<FajDto> getFajDtoListFromKladId(Integer id) {
         List<FajDto> fajok = fajService.getAllFajDto();
-        List <FajDto> kladFaj = new ArrayList<>();
+        List<FajDto> kladFaj = new ArrayList<>();
         for (FajDto faj : fajok) {
-            if(Objects.equals(faj.getSzuloId(), id)){
+            if (Objects.equals(faj.getSzuloId(), id)) {
                 kladFaj.add(faj);
             }
         }

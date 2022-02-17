@@ -1,7 +1,6 @@
 package hu.progmatic.service;
 
-import hu.progmatic.carnivora.KladService;
-import hu.progmatic.carnivora.KladWithChildrenDto;
+import hu.progmatic.carnivora.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,16 +8,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class KladServiceTest {
 
     @Autowired
-    private KladService service;
+    private KladService kladService;
+    @Autowired
+    private FajService fajService;
 
     @Test
     void iniTeszt() {
-        KladWithChildrenDto motherKlad = service.getKladDtoByName("macskaalkatúak alrendje");
+        KladWithChildrenDto motherKlad = kladService.getKladDtoByName("macskaalkatúak alrendje");
 
         assertThat(motherKlad.getLeszarmazott())
                 .extracting(KladWithChildrenDto::getNev)
@@ -33,7 +35,7 @@ class KladServiceTest {
 
     @Test
     void noChildTest() {
-        List<KladWithChildrenDto> dtoNoCildList = service.findAllWithNoChild();
+        List<KladWithChildrenDto> dtoNoCildList = kladService.findAllWithNoChild();
         assertThat(dtoNoCildList).extracting(KladWithChildrenDto::getNev).containsExactlyInAnyOrder(
                 "madagaszkári cibetmacskafélék családja",
                 "macskaformák alcsaládja",
@@ -58,5 +60,16 @@ class KladServiceTest {
                 "valódi fókafélék családja"
 
         );
+    }
+
+    @Test
+    void findFirstCommonKladAncestor() {
+        KladDto dto = kladService.buildKladDtoFromKlad(
+                kladService.getFirstCommonAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk")));
+        assertEquals("Eupleridae", dto.getLatinNev());
+
+        dto = kladService.buildKladDtoFromKlad(
+                kladService.getFirstCommonAncestorOfFaj(fajService.getByNev("Európai nyérc"), fajService.getByNev("Házimacska")));
+        assertEquals("Carnivora", dto.getLatinNev());
     }
 }
