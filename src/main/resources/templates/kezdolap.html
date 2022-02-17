@@ -58,9 +58,9 @@
        style="opacity: 0.75;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Carnivora Project </div>
     <div th:if="${isAnonymusUser == true}"
-         class="text-center fs-6 text-white" style="opacity: 0.75;" th:text="${loggedUserName} + ' felhasználó (Bővebb funkciókért jeletkezz be!)'">Valami</div>
+         class="text-center fs-6 text-white" style="opacity: 0.75;" th:text="${loggedKeresztNev} + ' felhasználó (Bővebb funkciókért jeletkezz be!)'">Valami</div>
     <div th:if="${isAnonymusUser == false}"
-         class="text-center fs-6 text-white" style="opacity: 0.75;" th:text="${loggedUserName} + ' felhasználó'">Valami</div>
+         class="text-center fs-6 text-white" style="opacity: 0.75;" th:text="'Üdv ' + ${loggedKeresztNev} + '!'">Valami</div>
 
     <div class="row">
         <div class="col-md-12 text-right"

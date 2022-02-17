@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -48,7 +49,6 @@ public class CarnivoraController {
         return "kozos_os";
     }
 
-
     @RequestMapping("/carnivora")
     public String fajAdatbazis() {
         return "carnivora";
@@ -82,11 +82,12 @@ public class CarnivoraController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            kozosOsDto.setKozosOs(kladService.getFirstCommonKladAncestorOfFaj(fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2())));
+            KladDto updateDomain = kladService.getFirstCommonKladAncestorOfFaj(
+                    fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2()));
+            kozosOsDto.setKozosOs(updateDomain);
         }
         return "kozos_os";
     }
-
 
     @PostMapping("/faj_adatszerk/{id}")
     public String update(

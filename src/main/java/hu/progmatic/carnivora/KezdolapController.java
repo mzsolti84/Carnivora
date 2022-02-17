@@ -28,6 +28,11 @@ public class KezdolapController {
         return felhasznaloService.getFelhasznaloNev();
     }
 
+    @ModelAttribute("loggedKeresztNev")
+    public String loggedKeresztNev() {
+        return felhasznaloService.getKeresztNev();
+    }
+
     @ModelAttribute("isAnonymusUser")
     public Boolean isAnonymusUser() {
         return felhasznaloService.isAnonymusUser();

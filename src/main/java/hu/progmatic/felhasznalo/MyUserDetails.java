@@ -13,12 +13,14 @@ public class MyUserDetails implements UserDetails {
   private final Long felhasznaloId;
   private final String jelszo;
   private final String felhasznaloNev;
+  private final String keresztNev;
   private final UserType role;
   private boolean engedelyezve;
 
   public MyUserDetails(Felhasznalo felhasznalo) {
     jelszo = felhasznalo.getJelszo();
     felhasznaloNev = felhasznalo.getFelhasznaloNev();
+    keresztNev = felhasznalo.getKeresztNev();
     role = felhasznalo.getRole();
     felhasznaloId = felhasznalo.getId();
     engedelyezve = felhasznalo.isEngedelyezve();
@@ -65,5 +67,9 @@ public class MyUserDetails implements UserDetails {
 
   public Long getFelhasznaloId() {
     return felhasznaloId;
+  }
+
+  public String getKeresztNev() {
+    return keresztNev;
   }
 }
