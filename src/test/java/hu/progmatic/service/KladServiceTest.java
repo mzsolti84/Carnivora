@@ -65,7 +65,7 @@ class KladServiceTest {
 
     @Test
     @DisplayName("Két Faj legközelebbi közös Klád ősének latin nevét megkeresi")
-    void findFirstCommonKladAncestor() {
+    void findFirstCommonKladAncestorTest() {
         KladDto dto = kladService.buildKladDtoFromKlad(
                 kladService.getFirstCommonKladAncestorOfFaj(fajService.getByNev("Fossza"), fajService.getByNev("Falanuk")));
         assertEquals("Eupleridae", dto.getLatinNev());
