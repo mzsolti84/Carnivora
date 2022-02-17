@@ -80,6 +80,18 @@ public class CarnivoraController {
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
+    @PostMapping("/kozososkereses")
+    public String kozosOsKereses(
+            @ModelAttribute("kozosOsDto") @Valid KozosOsDto kozosOsDto,
+            BindingResult bindingResult,
+            Model model) {
+        if (!bindingResult.hasErrors()) {
+            model.addAttribute("allFajDto", allFajDto());
+        }
+        return "/kozosos";
+    }
+
+
     @PostMapping("/faj_adatszerk/{id}")
     public String update(
             @PathVariable Integer id,
@@ -143,6 +155,7 @@ public class CarnivoraController {
                 .fajDtoList(fajService.getAllFajDto())
                 .valasztas1(fajService.getByNev("Falanuk").getId())
                 .valasztas2(fajService.getByNev("Falanuk").getId())
+                .kozosOs(new KladDto())
                 .build();
     }
 

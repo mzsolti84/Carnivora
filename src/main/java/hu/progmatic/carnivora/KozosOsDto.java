@@ -17,4 +17,5 @@ public class KozosOsDto {
     List<FajDto> fajDtoList = new ArrayList<>();
     Integer valasztas1;
     Integer valasztas2;
+    KladDto kozosOs;
 }
