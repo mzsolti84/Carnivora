@@ -43,10 +43,11 @@ public class CarnivoraController {
         return "/kezdolap";
     }
 
-    @RequestMapping("/kozosos")
+    @RequestMapping("/kozososkereses")
     public String kozosOS() {
         return "kozos_os";
     }
+
 
     @RequestMapping("/carnivora")
     public String fajAdatbazis() {
