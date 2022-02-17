@@ -130,4 +130,9 @@ public class CarnivoraController {
         return kladService.findAllParentKlad();
     }
 
+    @ModelAttribute("allSpecies")
+    List<FajDto> allSpecies() {
+        return fajService.getAllFajDto();
+    }
+
 }
