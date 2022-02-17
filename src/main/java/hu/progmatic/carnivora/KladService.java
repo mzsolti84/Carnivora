@@ -40,16 +40,6 @@ public class KladService implements InitializingBean {
                 }
             }
         }
-
-        /*Klad ancestor1 = faj1.getKlad();
-        Klad ancestor2 = faj2.getKlad();
-
-        while (ancestor1.getId() != ancestor2.getId()) {
-            ancestor1 = ancestor1.getSzulo();
-            ancestor2 = ancestor2.getSzulo();
-        }
-        return ancestor1;*/
-
         return null;
     }
 
