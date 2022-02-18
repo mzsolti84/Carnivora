@@ -76,7 +76,7 @@ spring:
   config:
     activate:
       on-profile: eles
-  serverUrl: "http://164.92.204.250/"
+  serverUrl: "http://164.92.204.250"
   mail:
     host: email_dev
     port: 25
