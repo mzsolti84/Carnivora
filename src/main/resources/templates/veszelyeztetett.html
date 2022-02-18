@@ -88,9 +88,8 @@
 </head>
 
 <body style="background-color:Black">
-
-
-
+<br>
+<br>
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
     <table id="example" class="table table-dark table-striped table-responsive">
         <thead>
@@ -122,6 +121,7 @@
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
 <script src="https://cdn.datatables.net/searchpanes/1.4.0/js/dataTables.searchPanes.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
 
 <script>
  /*   $(document).ready(
@@ -130,15 +130,16 @@
        });*/
  $(document).ready(function() {
      $('#example').DataTable({
-         dom: 'Plfrtip',
-         columnDefs: [
-             {
-                 searchPanes: {
-                     controls: false
-                 },
-                 targets: [1]
+         language: {
+             searchPanes: {
+                 clearMessage: 'Obliterate Selections',
+                 collapse: {0: 'Search Options', _: 'Search Options (%d)'}
              }
-         ]
+         },
+         buttons: [
+             'searchPanes'
+         ],
+         dom: 'Bfrtip'
      });
  });
 </script>
