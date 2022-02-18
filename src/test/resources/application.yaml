@@ -11,6 +11,7 @@ spring:
   output:
     ansi:
       enabled: always
+  serverUrl: "http://localhost:8084"
   mail:
     host: localhost
     port: 1025
