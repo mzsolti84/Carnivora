@@ -29,12 +29,11 @@
 
 <h2 style="opacity: 0.8" class="text-center fs-1 text-white">Legközelebbi közös ős kereső</h2>
 
-<div class="container mt-5" style="opacity: 0.8">
+<div class="container mt-5" style="opacity: 0.9; width: 50%; text-align: center">
     <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
           th:object="${kozosOsDto}" th:action="@{'/kozososkereses'}" method="post">
-
         <div class="col">
-            <label> Első faj:
+            <label>Egyik faj:
                 <select style="width:auto" class="form-select bg-dark text-white"
                         th:field="*{valasztottFaj1}">
                     <option th:each="faj : *{fajDtoList}"
@@ -43,9 +42,7 @@
                     </option>
                 </select>
             </label>
-        </div>
-        <div class="col">
-            <label> Másik faj:
+            <label>Másik faj:
                 <select style="width:auto" class="form-select bg-dark text-white" th:field="*{valasztottFaj2}">
                     <option th:each="faj : *{fajDtoList}"
                             th:selected="${faj.id == kozosOsDto.valasztottFaj2}"
@@ -54,28 +51,277 @@
                 </select>
             </label>
         </div>
-
         <div class="col-auto">
             <button type="submit" class="btn btn-primary mb-3">Közös ős keresés</button>
         </div>
-
-
         <div class="col d-flex justify-content-center">
-            <div style="opacity: 0.75"
-                 th:text="'Közös domén: ' + *{kozosOs.nev}" class="alert alert-info"> </div>
-
+            <div th:if="*{kozosOs.nev == null}" style="display: none" th:text="'Közös domén: ' + *{kozosOs.nev}" class="alert alert-info"></div>
+            <div th:if="*{kozosOs.nev != null}" style="opacity: 0.8" th:text="'Közös domén: ' + *{kozosOs.nev}" class="alert alert-info"></div>
         </div>
     </form>
 </div>
+<script src="../genogram/go.js"></script>
+<div class="p-4 w-full">
+
+    <link rel="stylesheet" href="../extensions/DataInspector.css"/>
+    <script src="../extensions/DataInspector.js"></script>
+
+    <script id="code">
+        function init() {
+            var $ = go.GraphObject.make;  // for conciseness in defining templates
+
+            myDiagram =
+                $(go.Diagram, "myDiagramDiv", // must be the ID or reference to div
+                    {
+                        maxSelectionCount: 1, // users can select only one part at a time
+                        "clickCreatingTool.insertPart": function (loc) {  // scroll to the new node
+                            var node = go.ClickCreatingTool.prototype.insertPart.call(this, loc);
+                            if (node !== null) {
+                                this.diagram.select(node);
+                                this.diagram.commandHandler.scrollToPart(node);
+                                this.diagram.commandHandler.editTextBlock(node.findObject("NAMETB"));
+                            }
+                            return node;
+                        },
+                        layout:
+                            $(go.TreeLayout,
+                                {
+                                    treeStyle: go.TreeLayout.StyleAlternating,
+                                    arrangement: go.TreeLayout.ArrangementHorizontal,
+                                    // properties for most of the tree:
+                                    angle: 270,
+                                    layerSpacing: 50,
+                                    // properties for the "last parents":
+                                    alternateAngle: 270,
+                                    alternateLayerSpacing: 50,
+                                    alternateAlignment: go.TreeLayout.AlignmentBus,
+                                    alternateNodeSpacing: 20
+                                }),
+                        "undoManager.isEnabled": false // enable undo & redo
+                    });
+
+            // when the document is modified, add a "*" to the title and enable the "Save" button
+            myDiagram.addDiagramListener("Modified", function (e) {
+                var button = document.getElementById("SaveButton");
+                if (button) button.disabled = !myDiagram.isModified;
+                var idx = document.title.indexOf("*");
+                if (myDiagram.isModified) {
+                    if (idx < 0) document.title += "*";
+                } else {
+                    if (idx >= 0) document.title = document.title.substr(0, idx);
+                }
+            });
+
+            myDiagram.addDiagramListener("ObjectDoubleClicked", (e) => {
+                const key = e.diagram.selection.first().key
+                console.log(key)
+                window.open(`http://localhost:8084/klad_adatlap/${key}/adatlap`, "_self");
+
+            })
+
+            // manage boss info manually when a node or link is deleted from the diagram
+            myDiagram.addDiagramListener("SelectionDeleting", function (e) {
+                var part = e.subject.first(); // e.subject is the myDiagram.selection collection,
+                // so we'll get the first since we know we only have one selection
+                myDiagram.startTransaction("clear boss");
+                if (part instanceof go.Node) {
+                    var it = part.findTreeChildrenNodes(); // find all child nodes
+                    while (it.next()) { // now iterate through them and clear out the boss information
+                        var child = it.value;
+                        var bossText = child.findObject("boss"); // since the boss TextBlock is named, we can access it by name
+                        if (bossText === null) return;
+                        bossText.text = "";
+                    }
+                } else if (part instanceof go.Link) {
+                    var child = part.toNode;
+                    var bossText = child.findObject("boss"); // since the boss TextBlock is named, we can access it by name
+                    if (bossText === null) return;
+                    bossText.text = "";
+                }
+                myDiagram.commitTransaction("clear boss");
+            });
+
+            var levelColors = ["#AC193D", "#2672EC", "#8C0095", "#5133AB",
+                "#008299", "#D24726", "#008A00", "#094AB2"];
+
+            // override TreeLayout.commitNodes to also modify the background brush based on the tree depth level
+            myDiagram.layout.commitNodes = function () {
+                go.TreeLayout.prototype.commitNodes.call(myDiagram.layout);  // do the standard behavior
+                // then go through all of the vertexes and set their corresponding node's Shape.fill
+                // to a brush dependent on the TreeVertex.level value
+                myDiagram.layout.network.vertexes.each(function (v) {
+                    if (v.node) {
+                        var level = v.level % (levelColors.length);
+                        var color = levelColors[level];
+                        var shape = v.node.findObject("SHAPE");
+                        if (shape) shape.stroke = $(go.Brush, "Linear", {
+                            0: color,
+                            1: go.Brush.lightenBy(color, 0.05),
+                            start: go.Spot.Left,
+                            end: go.Spot.Right
+                        });
+                    }
+                });
+            };
+
+            // this is used to determine feedback during drags
+            //function mayWorkFor(node1, node2) {
+            //    if (!(node1 instanceof go.Node)) return false;  // must be a Node
+            //    if (node1 === node2) return false;  // cannot work for yourself
+            //    if (node2.isInTreeOf(node1)) return false;  // cannot work for someone who works for you
+            //    return true;
+            //}
+
+            // This function provides a common style for most of the TextBlocks.
+            // Some of these values may be overridden in a particular TextBlock.
+            function textStyle() {
+                return {font: "9pt  Segoe UI,sans-serif", stroke: "white"};
+            }
+
+            // This converter is used by the Picture.
+            function findHeadShot(latinNev) {
+                return "../genogram/images/" + latinNev + ".jpg"
+            }
+
+            // define the Node template
+            myDiagram.nodeTemplate =
+                $(go.Node, "Auto",
+                    // {doubleClick: nodeDoubleClick},
+                    // for sorting, have the Node.text be the data.name
+                    new go.Binding("text", "name"),
+                    // bind the Part.layerName to control the Node's layer depending on whether it isSelected
+                    new go.Binding("layerName", "isSelected", function (sel) {
+                        return sel ? "Foreground" : "";
+                    }).ofObject(),
+                    // define the node's outer shape
+                    $(go.Shape, "RoundedRectangle",
+                        {
+                            name: "SHAPE", fill: "#333333", stroke: 'white', strokeWidth: 2.5,
+                            // set the port properties:
+                            portId: "", fromLinkable: false, toLinkable: false
+                        }),
+                    $(go.Panel, "Horizontal",
+                        $(go.Picture,
+                            {
+                                name: "Picture",
+                                desiredSize: new go.Size(100, 100),
+                                margin: 1.5,
+                            },
+                            new go.Binding("source", "latinNev", findHeadShot)),
+                        // define the panel where the text will appear
+                        $(go.Panel, "Table",
+                            {
+                                minSize: new go.Size(150, NaN),
+                                maxSize: new go.Size(150, NaN),
+                                margin: new go.Margin(0, 0, 0, 0),
+                                defaultAlignment: go.Spot.Left
+                            },
+                            $(go.RowColumnDefinition, {column: 1, width: 4}),
+                            $(go.TextBlock, textStyle(),  // the name
+                                {
+                                    row: 0, column: 0, columnSpan: 5,
+                                    font: "12pt Segoe UI,sans-serif",
+                                    editable: false, isMultiline: true,
+                                    minSize: new go.Size(10, 16)
+                                },
+                                new go.Binding("text", "name").makeTwoWay()),
+                            $(go.TextBlock, textStyle(),
+                                {row: 1, column: 0},
+                                new go.Binding("text", "latinNev", function (v) {
+                                    return v;
+                                }))
+                        )  // end Table Panel
+                    ) // end Horizontal Panel
+                );  // end Node
+
+            // the context menu allows users to make a position vacant,
+            // remove a role and reassign the subtree, or remove a department
+            myDiagram.nodeTemplate.contextMenu =
+                $("ContextMenu",
+                    $("ContextMenuButton",
+                        $(go.TextBlock, "Elem adatlapjának megnyitása"),
+                        {
+                            click: (e) => {
+                                const key = e.diagram.selection.first().key
+                                console.log(key)
+                                window.open(`http://localhost:8084/klad_adatlap/${key}/adatlap`, "_self");
+
+                            }
+                        }
+                    )
+                );
 
 
-<br>
-<div class="container">
-    <div class="text-center">
-        <form th:action="@{/}" method="get">
-            <button type="submit" class="btn btn-lg btn-outline-info">Kezdőlap</button>
-        </form>
-        <br>
+            // define the Link template
+            myDiagram.linkTemplate =
+                $(go.Link, go.Link.Orthogonal,
+                    {corner: 10, relinkableFrom: true, relinkableTo: true},
+                    $(go.Shape, {strokeWidth: 1.5, stroke: "#F5F5F5"}));  // the link shape
+
+            // read in the JSON-format data from the "mySavedModel" element
+            load();
+
+
+            // support editing the properties of the selected person in HTML
+            if (window.Inspector) myInspector = new Inspector("myInspector", myDiagram,
+                {
+                    properties: {
+                        "key": {readOnly: true},
+                        "comments": {}
+                    }
+                });
+
+            // Setup zoom to fit button
+            document.getElementById('zoomToFit').addEventListener('click', function () {
+                myDiagram.commandHandler.zoomToFit();
+            });
+
+            document.getElementById('centerRoot').addEventListener('click', function () {
+                myDiagram.scale = 1;
+                myDiagram.commandHandler.scrollToPart(myDiagram.findNodeForKey(1));
+            });
+
+        } // end init
+
+        // Show the diagram's model in JSON format
+        function save() {
+            document.getElementById("mySavedModel").value = myDiagram.model.toJson();
+            myDiagram.isModified = false;
+        }
+
+        function load() {
+            myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+            // make sure new data keys are unique positive integers
+            var lastkey = 1;
+            myDiagram.model.makeUniqueKeyFunction = function (model, data) {
+                var k = data.key || lastkey;
+                while (model.findNodeDataForKey(k)) k++;
+                data.key = lastkey = k;
+                return k;
+            };
+        }
+
+        function backToIndex() {
+            window.open('/', "_self");
+        }
+
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+    <p style="text-align: center">
+        <button id="zoomToFit">Teljes gráf megjelenítése</button>
+        <button id="centerRoot">Fókusz az első ősön</button>
+        <button type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
+    </p>
+    <div id="sample">
+        <div id="myDiagramDiv"
+             style="background-color: black; border: solid 1.5px black; border-radius: 10px; height: 450px"></div>
+        <div>
+            <textarea
+                    th:text="${jsonForGenogram.json}"
+                    id="mySavedModel"
+                    style="display: none">{"class": "TreeModel","nodeDataArray":[{"key":1,"name":"placeHolder","latinNev":"placeHolderusz"}]}
+            </textarea>
+        </div>
     </div>
 </div>
 </body>
