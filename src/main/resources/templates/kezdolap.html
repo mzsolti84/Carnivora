@@ -62,6 +62,11 @@
     <div th:if="${isAnonymusUser == false}"
          class="text-center fs-5 text-white" style="opacity: 0.75;" th:text="'Üdv ' + ${loggedKeresztNev} + '!'">Valami</div>
 
+    <div class="col-md-12 d-flex justify-content-center text-right"
+         style="opacity: 0.75" th:if="${isAnonymusUser == false}">
+        <a href="/logout" role="button" class="btn btn-outline-light btn-sm">Kijelentkezés</a>
+    </div>
+
     <div class="row">
         <div class="col-md-12 text-right"
              style="opacity: 0.5">
@@ -137,17 +142,6 @@
         </div>
     </div>
 
-</div>
-
-<div class="bs-example" th:if="${isAnonymusUser == false}">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-end text-right"
-            style="opacity: 0.75">
-        <a href="/logout" role="button" class="btn btn-outline-light btn-sm">Kijelentkezés</a>
-    </div>
-</div>
-</div>
 </div>
 
 

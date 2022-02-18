@@ -13,8 +13,41 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <title>Fajok</title>
-<style>
-    table {
+
+        <style>
+            .form-control {
+                background: black;
+                color: white;
+            }
+
+            .form-select {
+                background: black;
+                color: white;
+            }
+
+            .page-item.active .page-link {
+                background-color: black !important;
+                border: 1px solid white;
+            !important;
+            }
+
+            .page-link {
+                color: white !important;
+                background: black !important;
+                border-color: gray;
+            !important;
+            }
+
+            .a.page-link {
+                color: white !important;
+                background: gray !important;
+                border-color: gray;
+            !important;
+            }
+        </style>
+
+    <!-- <style>
+   table {
         display: flex;
         flex-flow: column;
         width: 100%;
@@ -40,7 +73,7 @@
         width: 40pt;
     }
 </style>
-    <script>
+     <script>
         //Táblázat szűrés js
         const myFindFunction = () => {
             const columns = [
@@ -66,7 +99,7 @@
 
             trs.forEach(setTrStyleDisplay)
         }
-    </script>
+    </script> -->
 </head>
 
 <body style="background-color:Black;">
@@ -74,26 +107,16 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
+<link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"
+      crossorigin="anonymous">
+
 <p class="text-center fs-3 text-white"
    style="opacity: 0.75;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Keresés a faj adatbázisban</p>
 
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand">Kereső</a>
-        <form class="d-flex">
-            <input class="form-control me-2 bg-dark text-white"
-                   id="mySearchInput"
-                   onkeyup="myFindFunction()"
-                   type="search" placeholder="#, név, latin név, klád vagy leírás részlet"
-                   aria-label="Search">
-        </form>
-    </div>
-</nav>
-<br>
 
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
-    <table class="table table-dark table-striped table-responsive">
+    <table class="table table-dark table-striped table-responsive" id="carnivora">
         <thead style="font-size: 11pt; text-align: center;">
         <tr>
             <th scope="col" class="fixNumber">#</th>
@@ -106,18 +129,15 @@
             <th scope="col"></th>
         </tr>
         </thead>
-    </table>
 
-        <table class="table table-dark table-striped table-responsive"
-               id="myTable">
         <tbody style="font-size: 10pt; text-align:center">
         <tr th:each="fajDto : ${allFajDto}">
             <th scope="row" class="fixNumber" th:text="${fajDto.id}">fajDto.id</th>
             <td th:text="${fajDto.nev}">fajDto.nev</td>
             <td th:text="${fajDto.latinNev}">fajDto.latinNev</td>
             <td th:text="${fajDto.szuloNev}">fajDto.osNev</td>
-            <td th:text="${#strings.abbreviate(fajDto.leiras,80)}">fajDto.leiras</td>
-            <td th:text="${#strings.abbreviate(fajDto.getStatusz.getDisplayName(),12)}">fajDto.statusz</td>
+            <td th:text="${#strings.abbreviate(fajDto.leiras,120)}">fajDto.leiras</td>
+            <td th:text="${#strings.abbreviate(fajDto.getStatusz.getDisplayName(),25)}">fajDto.statusz</td>
             <td th:text="${fajDto.turesHatar.getDisplayName()}">fajDto.turesHatar</td>
             <td>
                 <div class="row">
@@ -139,10 +159,24 @@
 <div class="container">
     <div class="text-center">
         <form th:action="@{/}" method="get">
-            <button style=" background-color: black" type="submit" class="btn-dark">Főoldal</button>
+            <button type="submit" class="btn btn-lg btn-outline-info">Kezdőlap</button>
         </form>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            $('#carnivora').DataTable( {
+                language: {
+                    url: 'https://raw.githubusercontent.com/mzsolti84/Carnivora/dev/src/main/resources/databaseinit/datatables_hu.json'
+                }
+            } );
+        });
+</script>
 
 </body>
 </html>

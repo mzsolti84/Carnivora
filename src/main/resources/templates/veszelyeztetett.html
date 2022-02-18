@@ -48,6 +48,7 @@
             border-color: gray;
         !important;
         }
+
         .dropbtn {
             background-color: #242424;
             color: white;
@@ -95,7 +96,7 @@
 <br>
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
     <table id="example" class="table table-dark table-striped table-responsive">
-        <thead>
+        <thead style="text-align: center">
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Név</th>
@@ -106,14 +107,14 @@
             <th scope="col">Tűréshatár</th>
         </tr>
         </thead>
-        <tbody style="font-size: 10pt">
+        <tbody style="font-size: 10pt; text-align: center">
         <tr th:each="fajDto : ${allFajDto}">
             <th scope="row" th:text="${fajDto.id}">fajDto.id</th>
             <td th:text="${fajDto.nev}">fajDto.nev</td>
             <td th:text="${fajDto.latinNev}">fajDto.latinNev</td>
             <td th:text="${fajDto.szuloNev}">fajDto.osNev</td>
-            <td th:text="${#strings.abbreviate(fajDto.leiras,100)}">fajDto.leiras</td>
-            <td th:text="${#strings.abbreviate(fajDto.getStatusz.getDisplayName(),20)}">fajDto.statusz</td>
+            <td th:text="${#strings.abbreviate(fajDto.leiras,150)}">fajDto.leiras</td>
+            <td th:text="${#strings.abbreviate(fajDto.getStatusz.getDisplayName(),30)}">fajDto.statusz</td>
             <td th:text="${fajDto.turesHatar.getDisplayName()}">fajDto.turesHatar</td>
         </tr>
         </tbody>
@@ -134,12 +135,13 @@
  $(document).ready(function() {
      $('#example').DataTable({
          language: {
+             url: 'https://raw.githubusercontent.com/mzsolti84/Carnivora/dev/src/main/resources/databaseinit/datatables_hu.json'
+         },
              searchPanes: {
                  clearMessage: 'Obliterate Selections',
                  collapse: {0: 'Szűrő', _: 'Szűrő'}
              },
 
-         },
          buttons: [
              'searchPanes'
          ],
@@ -150,7 +152,7 @@
 <div class="container">
     <div class="text-center">
         <form th:action="@{/}" method="get">
-            <button style=" background-color: black" type="submit" class="btn-dark">Vissza</button>
+            <button type="submit" class="btn btn-lg btn-outline-info">Kezdőlap</button>
         </form>
     </div>
 </div>
