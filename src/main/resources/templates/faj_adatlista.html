@@ -56,8 +56,8 @@
 
 <nav class="navbar navbar-dark bg-dark">
     <form class="container-fluid center-content-start">
-        <a href="/" class="btn btn-primary me-2" role="button">Kezdőlap</a>
-        <a href="/faj_adatszerk" class="btn btn-danger" role="button">Új faj</a>
+        <a href="/" class="btn btn-success" role="button">Kezdőlap</a>
+        <a href="/faj_adatszerk" class="btn btn-success" role="button">Új faj</a>
     </form>
 </nav>
 <hr>
@@ -92,7 +92,7 @@
                 <div class="row">
                     <div class="col">
                         <form th:action="@{'/faj_adatszerk/{id}'(id=${fajDto.id})}" method="get">
-                            <input type="submit" class="btn btn-danger" value="Módosít"/>
+                            <input type="submit" class="btn btn-warning" value="Módosít"/>
                         </form>
                     </div>
                 </div>
