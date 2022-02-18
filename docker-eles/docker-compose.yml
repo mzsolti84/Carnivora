@@ -25,6 +25,7 @@ services:
     container_name: email_dev
     ports:
       - "1025:1025"
+      - "1080:1080"
     restart: always
   app_eles:
     container_name: kozos-project-eles
