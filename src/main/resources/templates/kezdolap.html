@@ -46,7 +46,8 @@
             background-color: black;
 
         }
-        .bs-example{
+
+        .bs-example {
             margin: 20px;
         }
     </style>
@@ -54,25 +55,24 @@
 <body>
 
 <div class="container">
-    <div class="text-center fs-1 text-white"
-       style="opacity: 0.75;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Carnivora Project</div>
-    <div th:if="${isAnonymusUser == true}"
-         class="text-center fs-5 text-white" style="opacity: 0.75;"
-         th:text="${loggedKeresztNev} + ' felhasználó (Bővebb funkciókért jeletkezz be!)'">Valami
-    </div>
     <div th:if="${isAnonymusUser == false}"
-         class="text-center fs-5 text-white" style="opacity: 0.75;" th:text="'Üdv ' + ${loggedKeresztNev} + '!'">Valami
+         class="fs-6 text-white" style="text-align: right; opacity: 0.8;" th:text="'Bejelentkezett felhasználó: ' + ${loggedKeresztNev}">userName placeholder
     </div>
-
-    <div class="col-md-12 d-flex justify-content-center text-right"
-         style="opacity: 0.75" th:if="${isAnonymusUser == false}">
-        <a href="/logout" role="button" class="btn btn-outline-light btn-sm">Kijelentkezés</a>
+    <div style="text-align: right; opacity: 0.8" th:if="${isAnonymusUser == false}">
+        <a href="/logout" role="button" class="btn btn-warning btn-sm">Kijelentkezés</a>
+    </div>
+    <div class="text-center fs-1 text-white"
+         style="opacity: 0.8;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Carnivora Project
+    </div>
+    <div th:if="${isAnonymusUser == true}"
+         class="text-center fs-5 text-white" style="opacity: 0.8;"
+         th:text="${loggedKeresztNev} + ' felhasználó (Bővebb funkciókért jeletkezz be!)'">Valami
     </div>
 
     <div class="row">
         <div class="col-md-12 text-right"
-             style="opacity: 0.5">
+             style="opacity: 0.8">
             <a href="/about" role="button" class="btn btn-lg btn-outline-info">Projekt bemutatása</a>
         </div>
     </div>
@@ -80,7 +80,7 @@
 
     <div class="row">
         <div class="col-md-12 text-right"
-             style="opacity: 0.6">
+             style="opacity: 0.8">
 
             <div class="btn-group dropend">
                 <a class="btn btn-lg btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownMenuLinkReg"
@@ -100,7 +100,7 @@
 
     <div class="row">
         <div class="col-md-12 text-right"
-             style="opacity: 0.75">
+             style="opacity: 0.8">
             <a href="/carnivora" role="button" class="btn btn-lg btn-outline-light">Faj adatbázis és kereső</a>
         </div>
     </div>
@@ -108,15 +108,15 @@
 
     <div class="row" th:if="${isAnonymusUser == false}">
         <div class="col-md-12 text-right"
-             style="opacity: 0.5">
-            <a href="#" role="button" class="btn btn-lg btn-outline-light">Veszélyeztetett fajok</a>
+             style="opacity: 0.8">
+            <a href="#" role="button" class="btn btn-lg btn-outline-light disabled">Veszélyeztetett fajok</a>
         </div>
     </div>
     <br>
 
     <div class="row" th:if="${isAnonymusUser == false}">
         <div class="col-md-12 text-right"
-             style="opacity: 0.75">
+             style="opacity: 0.8">
             <a href="/genogram" role="button" class="btn btn-lg btn-outline-light">Klád genogram</a>
         </div>
     </div>
@@ -124,7 +124,7 @@
 
     <div class="row" th:if="${isAnonymusUser == false}">
         <div class="col-md-12 text-right"
-             style="opacity: 0.75">
+             style="opacity: 0.8">
             <a href="/kozososkereses" role="button" class="btn btn-lg btn-outline-light">Közös ős kereső</a>
         </div>
     </div>
@@ -133,7 +133,7 @@
     <br>
 
     <div class="btn-group dropend"
-    style="opacity: 0.6" th:if="${loggedHasUserWriteRole == true}">
+         style="opacity: 0.8" th:if="${loggedHasUserWriteRole == true}">
         <a class="btn btn-lg btn-outline-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLinkAdm"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Adminisztrációs felület
