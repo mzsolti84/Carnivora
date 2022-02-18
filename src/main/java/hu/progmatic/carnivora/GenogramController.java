@@ -1,6 +1,7 @@
 package hu.progmatic.carnivora;
 
 
+import hu.progmatic.felhasznalo.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class GenogramController {
 
     // REQUEST MAPPINGEK --------------------------------------------------------------------------------
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @RequestMapping("/genogramadmin")
     public String genogramAdmin() {
         return "genogram_admin";
@@ -41,6 +43,7 @@ public class GenogramController {
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/save_json_to_database")
     public String saveToDatabase(
             @ModelAttribute("jsonForGenogram") @Valid JsonForGenogramDto json,
