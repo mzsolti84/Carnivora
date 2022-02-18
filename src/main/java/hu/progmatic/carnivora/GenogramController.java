@@ -32,15 +32,6 @@ public class GenogramController {
         return "genogram";
     }
 
-    /*
-    @GetMapping("/faj_adatszerk/{id}")
-    public String szerkeszt(@PathVariable Integer id, Model model) {
-        FajDto formFajDto = fajService.getFajDtoByFajId(id);
-        model.addAttribute("formFajDto", formFajDto);
-        return "faj_adatszerk";
-    }
-     */
-
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
     @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
