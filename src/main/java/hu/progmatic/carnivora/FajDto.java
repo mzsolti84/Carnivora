@@ -26,4 +26,6 @@ public class FajDto {
     private String szuloNev;
     private Integer szuloId;
 
+    private Integer kepId;
+
 }

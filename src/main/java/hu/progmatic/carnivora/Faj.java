@@ -34,6 +34,8 @@ public class Faj {
     private String fotoURL;
     private String wikiURL;
 
+    private Integer kepId;
+
     @ManyToOne
     Klad klad;
 }

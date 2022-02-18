@@ -18,6 +18,7 @@ public class KladWithChildrenDto implements Serializable {
     private String latinNev;
     private String leiras;
     private String szulo;
+    private Integer kepId;
     private List<KladWithChildrenDto> leszarmazott;
 
 }

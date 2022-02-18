@@ -88,8 +88,8 @@ public class FelhasznaloService implements InitializingBean {
             Felhasznalo admin = Felhasznalo.builder()
                     .felhasznaloNev("admin")
                     .jelszo(encoder.encode("adminpass"))
-                    .keresztNev("admin")
-                    .vezetekNev("admin")
+                    .keresztNev("Admin")
+                    .vezetekNev("Admin")
                     .email("carnivora.project@gmail.com")
                     .engedelyezve(true)
                     .role(UserType.ADMIN)
@@ -99,8 +99,8 @@ public class FelhasznaloService implements InitializingBean {
             Felhasznalo user = Felhasznalo.builder()
                     .felhasznaloNev("user")
                     .jelszo(encoder.encode("userpass"))
-                    .keresztNev("user")
-                    .vezetekNev("user")
+                    .keresztNev("Diana")
+                    .vezetekNev("User")
                     .email("carnivora.project@gmail.com")
                     .engedelyezve(true)
                     .role(UserType.USER)
@@ -149,6 +149,14 @@ public class FelhasznaloService implements InitializingBean {
         else {
             MyUserDetails userPrincipal = getMyUserDetails();
             return userPrincipal.getUsername();
+        }
+    }
+
+    public String getKeresztNev() {
+        if (isAnonymusUser()) { return "Vendég"; }
+        else {
+            MyUserDetails userPrincipal = getMyUserDetails();
+            return userPrincipal.getKeresztNev();
         }
     }
 

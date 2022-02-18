@@ -63,7 +63,7 @@
 <hr>
 
 <div class="container-fluid" style="background-color: black; color: lightgrey;">
-    <table id="example" class="table table-dark table-striped table-responsive">
+    <table id="carnivora" class="table table-dark table-striped table-responsive">
         <thead style="text-align: center">
         <tr>
             <th scope="col">#</th>
@@ -78,7 +78,7 @@
 
         </tr>
         </thead>
-        <tbody style="font-size: 10pt">
+        <tbody style="font-size: 10pt; text-align: center">
         <tr th:each="fajDto : ${allFajDto}">
             <th scope="row" th:text="${fajDto.id}">fajDto.id</th>
             <td th:text="${fajDto.nev}">fajDto.nev</td>
@@ -116,7 +116,11 @@
 <script>
     $(document).ready(
         function () {
-            $('#example').DataTable();
+            $('#carnivora').DataTable( {
+                language: {
+                    url: 'https://raw.githubusercontent.com/mzsolti84/Carnivora/dev/src/main/resources/databaseinit/datatables_hu.json'
+                }
+            } );
         });
 </script>
 </body>

@@ -1,6 +1,7 @@
 package hu.progmatic.carnivora;
 
 import hu.progmatic.felhasznalo.FelhasznaloService;
+import hu.progmatic.felhasznalo.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,9 +25,23 @@ public class KezdolapController {
 
     @ModelAttribute("loggedUserName")
     public String loggedUserName() {
-        if (felhasznaloService.getFelhasznaloNev() != null)
         return felhasznaloService.getFelhasznaloNev();
-        else return "";
     }
 
+    @ModelAttribute("loggedKeresztNev")
+    public String loggedKeresztNev() {
+        return felhasznaloService.getKeresztNev();
+    }
+
+    @ModelAttribute("isAnonymusUser")
+    public Boolean isAnonymusUser() {
+        return felhasznaloService.isAnonymusUser();
+    }
+
+    @ModelAttribute("loggedHasUserWriteRole")
+    public boolean loggedHasUserWriteRole() {
+        if (!felhasznaloService.isAnonymusUser())
+            return felhasznaloService.hasRole(UserType.Roles.USER_WRITE_ROLE);
+        else return false;
+    }
 }
