@@ -113,6 +113,7 @@ public class FelhasznaloService implements InitializingBean {
     }
 
     public boolean hasRole(String role) {
+        if (isAnonymusUser()) { return false; }
         MyUserDetails userPrincipal = getMyUserDetails();
         return userPrincipal.getRole().hasRole(role);
     }
