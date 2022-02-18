@@ -23,6 +23,8 @@ public class CarnivoraController {
     private FajService fajService;
     @Autowired
     private KladService kladService;
+    @Autowired
+    private KladForGsonService kladForGsonService;
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
@@ -163,6 +165,11 @@ public class CarnivoraController {
                 .valasztottFaj2(fajService.getByNev("Falanuk").getId())
                 .kozosOs(new KladDto())
                 .build();
+    }
+
+    @ModelAttribute("jsonForGenogram")
+    JsonForGenogramDto getJsonForGenogram() {
+        return kladForGsonService.getJsonForGenogram();
     }
 
 }
