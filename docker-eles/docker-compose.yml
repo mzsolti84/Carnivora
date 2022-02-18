@@ -24,8 +24,8 @@ services:
     image: maildev/maildev
     container_name: email_dev
     ports:
-      - "1025:1025"
-      - "1080:1080"
+      - "1025:25"
+      - "1080:80"
     restart: always
   app_eles:
     container_name: kozos-project-eles
