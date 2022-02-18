@@ -24,11 +24,13 @@ public class FelhasznaloController {
         return "ujfelhasznalo";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @GetMapping("/felhasznalo")
     public String lista() {
         return "felhasznalo";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/felhasznalo")
     public String add(@ModelAttribute UjFelhasznaloCommand command, Model model) {
         model.addAttribute("ujFelhasznaloError", null);
@@ -46,6 +48,7 @@ public class FelhasznaloController {
         model.addAttribute("allFelhasznalo", populateTypes());
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/felhasznalo/delete/{id}")
     public String delete(@PathVariable Long id, Model model) {
         felhasznaloService.delete(id);
@@ -142,6 +145,7 @@ public class FelhasznaloController {
         return Arrays.stream(UserType.values()).toList();
     }*/
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @GetMapping("/felhasznalo/modosit/{id}")
     public String kijelol(@PathVariable("id") Long id, Model model) {
         FelhasznaloDto felhasznaloDto = felhasznaloService.findById(id);
@@ -153,6 +157,7 @@ public class FelhasznaloController {
         return "felhasznalo";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/felhasznalo/modosit")
     public String modosit(@ModelAttribute("jogosultsag") Jogosultsag jogosultsag,
                           Model model) {

@@ -1,6 +1,7 @@
 package hu.progmatic.carnivora;
 
 
+import hu.progmatic.felhasznalo.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class CarnivoraController {
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @GetMapping("/faj_adatszerk/{id}")
     public String szerkeszt(@PathVariable Integer id, Model model) {
         FajDto formFajDto = fajService.getFajDtoByFajId(id);
@@ -44,6 +46,7 @@ public class CarnivoraController {
         return "/kezdolap";
     }
 
+    @RolesAllowed(UserType.Roles.USER_READ_ROLE)
     @RequestMapping("/kozososkereses")
     public String kozosOS() {
         return "kozos_os";
@@ -59,11 +62,13 @@ public class CarnivoraController {
         return "about";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @RequestMapping("/faj_adatlista")
     public String faj_adatlista() {
         return "faj_adatlista";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @RequestMapping("/faj_adatszerk")
     public String faj_adatszerk() {
         return "faj_adatszerk";
@@ -76,6 +81,7 @@ public class CarnivoraController {
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
+    @RolesAllowed(UserType.Roles.USER_READ_ROLE)
     @PostMapping("/kozososkereses")
     public String kozosOsKereses(
             @ModelAttribute("kozosOsDto") @Valid KozosOsDto kozosOsDto,
@@ -89,6 +95,7 @@ public class CarnivoraController {
         return "kozos_os";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/faj_adatszerk/{id}")
     public String update(
             @PathVariable Integer id,
@@ -104,6 +111,7 @@ public class CarnivoraController {
         return "faj_adatlista";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/faj_adatszerk")
     public String create(
             @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
@@ -117,6 +125,7 @@ public class CarnivoraController {
         return "faj_adatlista";
     }
 
+    @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/faj_adatlista/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
         fajService.deleteById(id);
