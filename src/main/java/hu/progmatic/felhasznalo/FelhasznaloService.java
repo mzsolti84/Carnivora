@@ -4,6 +4,7 @@ import hu.progmatic.felhasznalo.token.MegerositoToken;
 import hu.progmatic.felhasznalo.token.MegerositoTokenRepository;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import java.util.*;
 @Transactional
 public class FelhasznaloService implements InitializingBean {
 
+    @Value("${spring.serverUrl}")
+    private String serverUrl = "http://localhost:8084";
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final FelhasznaloRepository felhasznaloRepository;
     private final PasswordEncoder encoder;
@@ -65,7 +68,7 @@ public class FelhasznaloService implements InitializingBean {
                 .build();
         megerositoTokenRepository.save(megerositoToken);
         felhasznaloRepository.save(felhasznalo);
-        String link = "http://localhost:8084/felhasznalo/confirm?token=" + token;
+        String link = serverUrl + "/felhasznalo/confirm?token=" + token;
         emailSenderService.emailKuldes(felhasznalo.getEmail(),
                 "Regisztrációt megerősítő email",
                 EmailSenderService.emailBodyBuilder(felhasznalo.getFelhasznaloNev(), link));

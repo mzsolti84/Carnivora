@@ -20,6 +20,12 @@ services:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 20s
       retries: 10
+  email_dev:
+    image: maildev/maildev
+    container_name: email_dev
+    ports:
+      - "1025:1025"
+    restart: always
   app_eles:
     container_name: kozos-project-eles
     build: ..
