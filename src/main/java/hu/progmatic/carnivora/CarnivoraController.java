@@ -50,7 +50,7 @@ public class CarnivoraController {
 
     @RolesAllowed(UserType.Roles.USER_READ_ROLE)
     @RequestMapping("/kozososkereses")
-    public String kozosOS() {
+    public String kozosOs() {
         return "kozos_os";
     }
 
