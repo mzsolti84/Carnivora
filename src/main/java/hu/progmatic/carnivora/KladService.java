@@ -59,17 +59,18 @@ public class KladService implements InitializingBean {
         Klad faj2Ancestor = faj2.getKlad();
 
         output.add(NodeForBloodLineDto.builder()
-                .key(faj1Ancestor.getId())
-                .name(faj1Ancestor.getNev())
-                .latinNev(faj1Ancestor.getLatinNev())
-                .parent(faj1Ancestor.getSzulo().getId())
-                .build()); // enélkül az első Klád szülőt kihagyná a kimeneti listából
+                .key(faj1.getId())
+                .name(faj1.getNev())
+                .latinNev(faj1.getLatinNev())
+                .parent(faj1Ancestor.getId())
+                .build());
+
         output.add(NodeForBloodLineDto.builder()
-                .key(faj2Ancestor.getId())
-                .name(faj2Ancestor.getNev())
-                .latinNev(faj2Ancestor.getLatinNev())
-                .parent(faj2Ancestor.getSzulo().getId())
-                .build()); // enélkül az első Klád szülőt kihagyná a kimeneti listából
+                .key(faj2.getId())
+                .name(faj2.getNev())
+                .latinNev(faj2.getLatinNev())
+                .parent(faj2Ancestor.getId())
+                .build());
 
         while (faj1Ancestor.getSzulo() != null) {
             output.add(NodeForBloodLineDto.builder()
