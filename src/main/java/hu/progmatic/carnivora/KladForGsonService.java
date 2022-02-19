@@ -2,6 +2,7 @@ package hu.progmatic.carnivora;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public class KladForGsonService {
 
     @Autowired
     private KladRepository kladRepository;
+    @Autowired
+    private KladService kladService;
 
     private class DataForGson {
         // a genogram Json inputnak szüksége van a classLenneDeNemLehetAz változóra
@@ -23,6 +26,17 @@ public class KladForGsonService {
         String classLenneDeNemLehetAz = "TreeModel";
         List<KladForGsonDto> nodeDataArray = getAllKladForJsonDto();
     }
+    private class KozosOsBloodLineDataForGson {
+        // a genogram Json inputnak szüksége van a classLenneDeNemLehetAz változóra
+        @SuppressWarnings("unused")
+        @SerializedName("class")
+        String classLenneDeNemLehetAz = "TreeModel";
+        List<NodeForBloodLineDto> nodeDataArray;
+
+        public KozosOsBloodLineDataForGson(List<NodeForBloodLineDto> nodeDataArray) {
+            this.nodeDataArray = nodeDataArray;
+        }
+    }
 
     public JsonForGenogramDto getJsonForGenogram() {
         return JsonForGenogramDto.builder()
@@ -30,9 +44,15 @@ public class KladForGsonService {
                 .build();
     }
 
+    public JsonForGenogramDto getJsonForKozosOs(Faj faj1, Faj faj2) {
+        return JsonForGenogramDto.builder()
+                .json(gson.toJson(new KozosOsBloodLineDataForGson(kladService.getBloodLineDtoForKozosOs(faj1, faj2))))
+                .build();
+    }
+
     public void updateKladRepository(JsonForGenogramDto jsonForGenogramDto) {
         List<Klad> allKlad = getAllKlad();
-        DataForGson dataForGson = getDataForGsonFromJson(jsonForGenogramDto);
+        KozosOsBloodLineDataForGson dataForGson = getDataForGsonFromJson(jsonForGenogramDto);
 
         allKlad.forEach(klad -> klad.setNev(dataForGson.nodeDataArray.stream()
                 .filter(kladForGsonDto -> kladForGsonDto.getKey().equals(klad.getId()))
@@ -87,8 +107,8 @@ public class KladForGsonService {
 
     /// GENOGRAM -> GSON -> BACKEND irányba dolgozó metódusok, osztályok -----------------------------------------------
 
-    private DataForGson getDataForGsonFromJson(JsonForGenogramDto json) {
-        return gson.fromJson(json.getJson(), DataForGson.class);
+    private KozosOsBloodLineDataForGson getDataForGsonFromJson(JsonForGenogramDto json) {
+        return gson.fromJson(json.getJson(), KozosOsBloodLineDataForGson.class);
     }
 
 }

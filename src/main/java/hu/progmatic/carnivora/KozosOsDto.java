@@ -18,4 +18,5 @@ public class KozosOsDto {
     private Integer valasztottFaj1;
     private Integer valasztottFaj2;
     private KladDto kozosOs;
+    private String json;
 }

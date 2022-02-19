@@ -93,6 +93,8 @@ public class CarnivoraController {
             KladDto updateDomain = kladService.getFirstCommonKladAncestorOfFaj(
                     fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2()));
             kozosOsDto.setKozosOs(updateDomain);
+
+            kozosOsDto.setJson(kladForGsonService.getJsonForKozosOs(fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2())).getJson());
         }
         return "kozos_os";
     }
@@ -171,5 +173,4 @@ public class CarnivoraController {
     JsonForGenogramDto getJsonForGenogram() {
         return kladForGsonService.getJsonForGenogram();
     }
-
 }

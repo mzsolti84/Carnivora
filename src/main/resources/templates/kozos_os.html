@@ -27,39 +27,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 
-<h2 style="opacity: 0.8" class="text-center fs-1 text-white">Legközelebbi közös ős kereső</h2>
-
-<div class="container mt-5" style="opacity: 0.9; width: 50%; text-align: center">
-    <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
-          th:object="${kozosOsDto}" th:action="@{'/kozososkereses'}" method="post">
-        <div class="col">
-            <label>Egyik faj:
-                <select style="width:auto" class="form-select bg-dark text-white"
-                        th:field="*{valasztottFaj1}">
-                    <option th:each="faj : *{fajDtoList}"
-                            th:selected="${faj.id == kozosOsDto.valasztottFaj1}"
-                            th:text="${faj.nev}" th:value="${faj.id}">valasztas1 placeholder
-                    </option>
-                </select>
-            </label>
-            <label>Másik faj:
-                <select style="width:auto" class="form-select bg-dark text-white" th:field="*{valasztottFaj2}">
-                    <option th:each="faj : *{fajDtoList}"
-                            th:selected="${faj.id == kozosOsDto.valasztottFaj2}"
-                            th:text="${faj.nev}" th:value="${faj.id}">valasztas2 placeholder
-                    </option>
-                </select>
-            </label>
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary mb-3">Keresés indítása</button>
-        </div>
-        <div class="col d-flex justify-content-center">
-            <div th:if="*{kozosOs.nev == null}" style="display: none" th:text="'Közös domén: ' + *{kozosOs.nev}" class="alert alert-info"></div>
-            <div th:if="*{kozosOs.nev != null}" style="opacity: 0.8" th:text="'Közös domén: ' + *{kozosOs.nev}" class="alert alert-info"></div>
-        </div>
-    </form>
-</div>
 <script src="../genogram/go.js"></script>
 <div class="p-4 w-full">
 
@@ -281,6 +248,8 @@
                 myDiagram.commandHandler.scrollToPart(myDiagram.findNodeForKey(1));
             });
 
+            myDiagram.commandHandler.zoomToFit();
+
         } // end init
 
         // Show the diagram's model in JSON format
@@ -307,24 +276,70 @@
 
         window.addEventListener('DOMContentLoaded', init);
     </script>
-    <p style="text-align: center">
-        <button id="zoomToFit">Teljes gráf megjelenítése</button>
-        <button id="centerRoot">Fókusz az első ősön</button>
-        <button type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
-    </p>
-    <div id="sample">
-        <div id="myDiagramDiv"
-             style="background-color: black; border: solid 1.5px black; border-radius: 10px; height: 450px; opacity: 0.9">
 
-        </div>
-        <div>
+    <table style="width: 100%">
+        <td style="width: 30%">
+            <h2 style="opacity: 0.8" class="text-center fs-2 text-white">Legközelebbi közös ős kereső</h2>
+
+            <div class="container mt-5" style="opacity: 0.9; width: 80%; text-align: center">
+                <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
+                      th:object="${kozosOsDto}" th:action="@{'/kozososkereses'}" method="post">
+                    <div class="col">
+                        <label>Egyik faj:
+                            <select style="width:auto" class="form-select bg-dark text-white"
+                                    th:field="*{valasztottFaj1}">
+                                <option th:each="faj : *{fajDtoList}"
+                                        th:selected="${faj.id == kozosOsDto.valasztottFaj1}"
+                                        th:text="${faj.nev}" th:value="${faj.id}">valasztas1 placeholder
+                                </option>
+                            </select>
+                        </label>
+                        <label>Másik faj:
+                            <select style="width:auto" class="form-select bg-dark text-white"
+                                    th:field="*{valasztottFaj2}">
+                                <option th:each="faj : *{fajDtoList}"
+                                        th:selected="${faj.id == kozosOsDto.valasztottFaj2}"
+                                        th:text="${faj.nev}" th:value="${faj.id}">valasztas2 placeholder
+                                </option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Keresés indítása</button>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <div th:if="*{kozosOs.nev == null}" style="display: none"
+                             th:text="'Közös domén: ' + *{kozosOs.nev}" class="alert alert-warning"></div>
+                        <div th:if="*{kozosOs.nev != null}" style="opacity: 1"
+                             th:text="'Közös domén: ' + *{kozosOs.nev}" class="alert alert-warning"></div>
+                    </div>
+                </form>
+            </div>
+            <br>
+            <p style="text-align: center">
+                <button class="btn btn-primary mb-3" id="zoomToFit">Teljes gráf megjelenítése</button><br>
+                <button class="btn btn-primary mb-3" id="centerRoot">Fókusz az első ősön</button><br>
+                <button class="btn btn-primary mb-3" type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
+            </p>
+        </td>
+        <td style="width: 70%">
+            <div id="sample">
+                <div id="myDiagramDiv"
+                     style="background-color: black; border: solid 1px lightgrey; border-radius: 10px; height: 700px; opacity: 0.9">
+
+                </div>
+                <div>
             <textarea
-                    th:text="${jsonForGenogram.json}"
-                    id="mySavedModel"
-                    style="display: none">{"class": "TreeModel","nodeDataArray":[{"key":1,"name":"placeHolder","latinNev":"placeHolderusz"}]}
+                    style="display: none; width: 500px; height: 300px" th:text="${kozosOsDto.json}"
+                    id="mySavedModel">{"class": "TreeModel","nodeDataArray":[{"key":1,"name":"placeHolder","latinNev":"placeHolderusz"}]}
             </textarea>
-        </div>
-    </div>
+                </div>
+            </div>
+
+        </td>
+    </table>
+
+
 </div>
 </body>
 </html>

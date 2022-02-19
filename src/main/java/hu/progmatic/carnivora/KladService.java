@@ -53,6 +53,46 @@ public class KladService implements InitializingBean {
         return output;
     }
 
+    public List<NodeForBloodLineDto> getBloodLineDtoForKozosOs(Faj faj1, Faj faj2) {
+        List<NodeForBloodLineDto> output = new ArrayList<>();
+        Klad faj1Ancestor = faj1.getKlad();
+        Klad faj2Ancestor = faj2.getKlad();
+
+        output.add(NodeForBloodLineDto.builder()
+                .key(faj1Ancestor.getId())
+                .name(faj1Ancestor.getNev())
+                .latinNev(faj1Ancestor.getLatinNev())
+                .parent(faj1Ancestor.getSzulo().getId())
+                .build()); // enélkül az első Klád szülőt kihagyná a kimeneti listából
+        output.add(NodeForBloodLineDto.builder()
+                .key(faj2Ancestor.getId())
+                .name(faj2Ancestor.getNev())
+                .latinNev(faj2Ancestor.getLatinNev())
+                .parent(faj2Ancestor.getSzulo().getId())
+                .build()); // enélkül az első Klád szülőt kihagyná a kimeneti listából
+
+        while (faj1Ancestor.getSzulo() != null) {
+            output.add(NodeForBloodLineDto.builder()
+                    .key(faj1Ancestor.getId())
+                    .name(faj1Ancestor.getNev())
+                    .latinNev(faj1Ancestor.getLatinNev())
+                    .parent(faj1Ancestor.getSzulo().getId())
+                    .build());
+            faj1Ancestor = faj1Ancestor.getSzulo();
+        }
+        //itt azért áll meg két szülővel előbb, hogy ne legyen két utolsó node begyűjtve a listába
+        while (faj2Ancestor.getSzulo().getSzulo() != null) {
+            output.add(NodeForBloodLineDto.builder()
+                    .key(faj2Ancestor.getId())
+                    .name(faj2Ancestor.getNev())
+                    .latinNev(faj2Ancestor.getLatinNev())
+                    .parent(faj2Ancestor.getSzulo().getId())
+                    .build());
+            faj2Ancestor = faj2Ancestor.getSzulo();
+        }
+        return output;
+    }
+
     public KladWithChildrenDto getKladDtoByName(String name) {
         Klad entity = kladRepository.findByNevEquals(name);
 
