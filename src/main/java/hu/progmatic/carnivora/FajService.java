@@ -48,7 +48,7 @@ public class FajService {
                 .latinNev(faj.getLatinNev())
                 .statusz(faj.getStatusz())
                 .turesHatar(faj.getTuresHatar())
-                .fotoURL(getURLFromKepMegnevezes(faj.getLatinNev(), "http://localhost:8084"))
+                .fotoURL(getURLFromKepMegnevezes(faj.getLatinNev(), "http://164.92.204.250"))
                 .kepId(faj.getKepId())
                 .wikiURL(faj.getWikiURL())
                 .szuloNev(faj.getKlad().getNev())
