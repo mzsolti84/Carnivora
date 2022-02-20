@@ -28,6 +28,7 @@ spring:
   #  default-encoding: UTF-8
   #  protocol: smtp
   #  test-connection: false
+  serverUrl : "http://localhost:8084"
   mail:
     host: localhost
     port: 1025
@@ -71,24 +72,30 @@ spring:
       ddl-auto: create-drop
     show-sql: true
 ---
-    spring:
-      config:
-        activate:
-          on-profile: eles
-      datasource:
-        url: jdbc:mysql://adatbazis_eles:3306/carnivora
-        username: progmatic
-        password: progmatic
-        hikari:
-          maximum-pool-size: 20
-      jpa:
-        database-platform: org.hibernate.dialect.MySQL8Dialect
-        open-in-view: true
-        hibernate:
-          ddl-auto: update
-        show-sql: true
-    server:
-      port: 80
-      tomcat:
-        threads:
-          max: 5
+spring:
+  config:
+    activate:
+      on-profile: eles
+  serverUrl: "http://164.92.204.250"
+  mail:
+    host: email_dev
+    port: 25
+    username: hello
+    password: hello
+  datasource:
+    url: jdbc:mysql://adatbazis_eles:3306/carnivora
+    username: progmatic
+    password: progmatic
+    hikari:
+      maximum-pool-size: 20
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  port: 80
+  tomcat:
+    threads:
+      max: 5
