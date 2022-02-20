@@ -1,11 +1,13 @@
 package hu.progmatic.carnivora.kepkezeles;
 
+import hu.progmatic.felhasznalo.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -16,11 +18,13 @@ public class KepController {
   @Autowired
   KepService service;
 
+  @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
   @RequestMapping("/kepkezeles")
   public String kepkezeles(Model model) {
     return "kep/kep";
   }
 
+  @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
   @PostMapping("/kepkezeles")
   public String submit(
       @ModelAttribute("kepFeltoltesCommand") @Valid KepFeltoltesCommand kepFeltoltesCommand,
@@ -33,6 +37,7 @@ public class KepController {
     return "kep/kep";
   }
 
+  @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
   @PostMapping("/kepkezeles/delete/{kepId}")
   public String delete(
       @PathVariable Integer kepId

@@ -1,6 +1,7 @@
 package hu.progmatic.appconfig;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,7 +14,7 @@ public class ExceptionController {
 
   @ExceptionHandler(value = MultipartException.class)
   public String handleFileUploadException(MultipartException exception, Model model) {
-    setTitle(model, "A megengedettnél nagyobb fájlt próbáltál feltölteni");
+    setTitle(model, "A megengedettnél nagyobb fájlt próbáltál feltölteni!");
     setDetails(model, exception.getMessage());
     log.info("File feltöltés hiba: " + exception.getMessage());
     return "hibaOldal";
@@ -21,14 +22,21 @@ public class ExceptionController {
 
   @ExceptionHandler(value = Exception.class)
   public String handleException(Exception exception, Model model) {
-    log.error("Hiba a kérés feldolgozása közben", exception);
+    log.error("Hiba a kérés feldolgozása közben!", exception);
     setDetails(model, exception.getMessage());
+    return "hibaOldal";
+  }
+
+  @ExceptionHandler(value = AccessDeniedException.class)
+  public String handleAccessDeniedException(AccessDeniedException exception, Model model) {
+    log.error("Rossz helyre tévedtél!", exception);
+    setDetails(model, "Rossz helyre tévedtél!");
     return "hibaOldal";
   }
 
   @ModelAttribute("errorPageTitle")
   String errorPageTitle() {
-    return "Hiba történt a kérés feldolgozása közben";
+    return "Hiba történt a kérés feldolgozása közben!";
   }
 
   @ModelAttribute("errorPageDetails")

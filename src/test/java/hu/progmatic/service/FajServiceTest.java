@@ -182,4 +182,11 @@ class FajServiceTest {
         }
     }
 
+    @Test
+    @DisplayName("Kép neve jól jelenik meg")
+    void pictureName() {
+        String st = "Canis lupus sp";
+        assertEquals("Canis_lupus_sp", fajService.replaceSpaceInMegnevezes(st, false));
+    }
+
 }

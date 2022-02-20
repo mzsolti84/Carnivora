@@ -27,7 +27,7 @@ public class HttpErrorController implements ErrorController {
       } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
         setTitle(model, "A kérés feldolgozása közben váratlan hiba történt!");
       } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-        setTitle(model, "Tiltott helyre tévedtél!");
+        setTitle(model, "Tiltott helyre tévedtél");
       }
     }
     return "hibaOldal";

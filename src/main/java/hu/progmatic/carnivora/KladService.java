@@ -27,6 +27,13 @@ public class KladService implements InitializingBean {
             kladRepository.saveAll(init.getKlads());
             fajService.saveAll(init.getSpecies());
         }
+        updateAllPictures();
+    }
+
+    private void updateAllPictures() {
+        List<Faj> species = fajService.findAll();
+        species.forEach(faj -> faj.setKepId(fajService.getPicureId(faj.getLatinNev())));
+        fajService.saveAll(species);
     }
 
     public KladDto getFirstCommonKladAncestorOfFaj(Faj faj1, Faj faj2) {

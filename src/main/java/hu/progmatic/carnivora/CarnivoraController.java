@@ -156,6 +156,9 @@ public class CarnivoraController {
 
     @ModelAttribute("allSpecies")
     List<FajDto> allSpecies() {
+        for (FajDto faj : fajService.getAllFajDto()) {
+            System.out.println(faj.getNev() + faj.getKepId());
+        }
         return fajService.getAllFajDto();
     }
 

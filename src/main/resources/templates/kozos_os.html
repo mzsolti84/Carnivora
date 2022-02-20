@@ -285,8 +285,8 @@
                 <form class="row g-3 border border-primary rounded card bg-dark text-white border-white"
                       th:object="${kozosOsDto}" th:action="@{'/kozososkereses'}" method="post">
                     <div class="col">
-                        <label>Egyik faj:
-                            <select style="width:auto" class="form-select bg-dark text-white"
+                        <label style="text-align: center">Egyik faj:
+                            <select style="width:auto; text-align: center; max-width: 90%" class="form-select bg-dark text-white"
                                     th:field="*{valasztottFaj1}">
                                 <option th:each="faj : *{fajDtoList}"
                                         th:selected="${faj.id == kozosOsDto.valasztottFaj1}"
@@ -294,8 +294,8 @@
                                 </option>
                             </select>
                         </label>
-                        <label>Másik faj:
-                            <select style="width:auto" class="form-select bg-dark text-white"
+                        <label style="text-align: center">Másik faj:
+                            <select style="width:auto; text-align: center; max-width: 90%" class="form-select bg-dark text-white"
                                     th:field="*{valasztottFaj2}">
                                 <option th:each="faj : *{fajDtoList}"
                                         th:selected="${faj.id == kozosOsDto.valasztottFaj2}"

@@ -48,7 +48,8 @@ public class FajService {
                 .latinNev(faj.getLatinNev())
                 .statusz(faj.getStatusz())
                 .turesHatar(faj.getTuresHatar())
-                .fotoURL(getURLFromKepMegnevezes(faj.getFotoURL()))
+                .fotoURL(getURLFromKepMegnevezes(faj.getLatinNev(), "http://localhost:8084"))
+                .kepId(faj.getKepId())
                 .wikiURL(faj.getWikiURL())
                 .szuloNev(faj.getKlad().getNev())
                 .szuloId(faj.getKlad().getId())
@@ -73,6 +74,7 @@ public class FajService {
                 .statusz(fajDto.getStatusz())
                 .turesHatar(fajDto.getTuresHatar())
                 .fotoURL(fajDto.getFotoURL())
+                .kepId(fajDto.getKepId())
                 .wikiURL(fajDto.getWikiURL())
                 .klad(getKladFromFajDto(fajDto))
                 .build();
@@ -110,16 +112,33 @@ public class FajService {
         return fajRepository.getById(id);
     }
 
-    public String getURLFromKepMegnevezes(String megnevezes) {
-        if (kepRepository.getByMegnevezes(megnevezes) != null) {
-            Integer id = kepRepository.getByMegnevezes(megnevezes).getId();
-            return "http://localhost:8084/kepkezeles/" + id;
+    public String replaceSpaceInMegnevezes(String input, Boolean reverse) {
+        if (!reverse) {
+            return input.replaceAll(" ", "_");
+        } else {
+            return input.replaceAll("_", " ");
         }
-        return megnevezes;
+    }
+
+    public String getURLFromKepMegnevezes(String latinMegnevezes, String host) {
+        Integer id = getPicureId(latinMegnevezes);
+            return host + "/kepkezeles/" + id;
     }
 
     public Faj getByNev(String nev) {
         return fajRepository.getByNev(nev);
     }
 
+
+    public Integer getPicureId(String latinMegnevezes) {
+        String kepNev = replaceSpaceInMegnevezes(latinMegnevezes, false);
+        if (kepRepository.getByMegnevezesIgnoreCase(kepNev) != null) {
+            return kepRepository.getByMegnevezesIgnoreCase(kepNev).getId();
+        }
+        return 0;
+    }
+
+    public List<Faj> findAll() {
+        return fajRepository.findAll();
+    }
 }

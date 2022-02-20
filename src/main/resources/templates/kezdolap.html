@@ -56,7 +56,12 @@
 
 <div class="container">
     <div th:if="${isAnonymusUser == false}"
-         class="fs-6 text-white" style="text-align: right; opacity: 0.8;" th:text="'Bejelentkezett felhasználó: ' + ${loggedKeresztNev}">userName placeholder
+         class="fs-6 text-white" style="text-align: right; opacity: 0.8;"
+         th:text="'Bejelentkezett felhasználó: ' + ${loggedKeresztNev}">userName placeholder
+    </div>
+    <div th:if="${isAnonymusUser == true}"
+         class="fs-6 text-white" style="text-align: right; opacity: 0.8;"
+         th:text="${loggedKeresztNev} + ' felhasználó (Bővebb funkciókért jeletkezz be!)'">userName placeholder
     </div>
     <div style="text-align: right; opacity: 0.8" th:if="${isAnonymusUser == false}">
         <a href="/logout" role="button" class="btn btn-warning btn-sm">Kijelentkezés</a>
@@ -65,10 +70,7 @@
          style="opacity: 0.8;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Carnivora Project
     </div>
-    <div th:if="${isAnonymusUser == true}"
-         class="text-center fs-5 text-white" style="opacity: 0.8;"
-         th:text="${loggedKeresztNev} + ' felhasználó (Bővebb funkciókért jeletkezz be!)'">Valami
-    </div>
+
 
     <div class="row">
         <div class="col-md-12 text-right"
@@ -142,6 +144,7 @@
             <a class="dropdown-item btn-outline-info" href="/felhasznalo">Felhasználók</a>
             <a class="dropdown-item btn-outline-info" href="/faj_adatlista">Faj adatbázis</a>
             <a class="dropdown-item btn-outline-info" href="/genogramadmin">Genogram</a>
+            <a class="dropdown-item btn-outline-info" href="/kepkezeles">Faj képek</a>
         </div>
     </div>
 
