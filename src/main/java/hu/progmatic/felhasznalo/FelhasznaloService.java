@@ -20,7 +20,7 @@ import java.util.*;
 @Transactional
 public class FelhasznaloService implements InitializingBean {
 
-    @Value("${spring.serverUrl}")
+    @Value("164.92.204.250")
     private String serverUrl = "http://localhost:8084";
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private final FelhasznaloRepository felhasznaloRepository;
