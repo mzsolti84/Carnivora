@@ -26,6 +26,7 @@ public class GsonService {
         String classLenneDeNemLehetAz = "TreeModel";
         List<GsonKladDto> nodeDataArray = getAllKladForJsonDto();
     }
+
     private class KozosOsBloodLineDataForGson {
         // a genogram Json inputnak szüksége van a classLenneDeNemLehetAz változóra
         @SuppressWarnings("unused")
