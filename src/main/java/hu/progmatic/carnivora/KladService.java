@@ -96,6 +96,7 @@ public class KladService implements InitializingBean {
                     .build());
             faj2Ancestor = faj2Ancestor.getSzulo();
         }
+
         return output;
     }
 
