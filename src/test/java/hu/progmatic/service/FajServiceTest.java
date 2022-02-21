@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -187,6 +189,37 @@ class FajServiceTest {
     void pictureName() {
         String st = "Canis lupus sp";
         assertEquals("Canis_lupus_sp", fajService.replaceSpaceInMegnevezes(st, false));
+    }
+
+    @Test
+    @DisplayName("Az alkalmazás indításakor léteznek fajok")
+    void getAllFajDto() {
+        List<FajDto> fajLista = fajService.getAllFajDto();
+        assertNotNull(fajLista);
+        assertNotNull(fajLista.get(0).getLatinNev());
+
+        assertThat(fajLista)
+                .extracting(FajDto::getNev)
+                .containsAnyElementsOf(List.of("Házimacska", "Szürkefarkas"));
+    }
+
+    @Test
+    @DisplayName("Create függvény működik")
+    void create_function() {
+        FajDto data = FajDto.builder()
+                .id(null)
+                .nev("Tyúk")
+                .latinNev("Tyukusz Udvarikusz")
+                .leiras("Tyúúúúk")
+                .statusz(TermeszetvedelmiStatusz.HAZIASITOTT)
+                .szuloId(kladRepository.findByNevEquals("macskaalkatúak alrendje").getId())
+                .build();
+        fajService.create(data);
+
+        Faj faj = fajService.getByNev("Tyúk");
+        assertNotNull(faj);
+        assertEquals("Tyukusz Udvarikusz", faj.getLatinNev());
+        assertEquals("Háziasított", faj.getStatusz().getDisplayName());
     }
 
 }
