@@ -2,7 +2,6 @@ package hu.progmatic.carnivora;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class KladForGsonService {
+public class GsonService {
     private final Gson gson = new Gson();
 
     @Autowired
@@ -25,7 +24,7 @@ public class KladForGsonService {
         @SuppressWarnings("unused")
         @SerializedName("class")
         String classLenneDeNemLehetAz = "TreeModel";
-        List<KladForGsonDto> nodeDataArray = getAllKladForJsonDto();
+        List<GsonKladDto> nodeDataArray = getAllKladForJsonDto();
     }
     private class KozosOsBloodLineDataForGson {
         // a genogram Json inputnak szüksége van a classLenneDeNemLehetAz változóra
@@ -62,7 +61,7 @@ public class KladForGsonService {
 
     /// BACKEND -> JSON -> GENOGRAM irány ------------------------------------------------------------------------------
 
-    private List<KladForGsonDto> getAllKladForJsonDto() {
+    private List<GsonKladDto> getAllKladForJsonDto() {
         return getAllKlad().stream()
                 .map(klad -> buildKladForJsonDto(klad))
                 .toList();
@@ -72,7 +71,7 @@ public class KladForGsonService {
         return kladRepository.findAll();
     }
 
-    private KladForGsonDto buildKladForJsonDto(Klad klad) {
+    private GsonKladDto buildKladForJsonDto(Klad klad) {
         if (isOrphan(klad)) {
             return buildKladForJsonDtoOrphan(klad);
         } else {
@@ -84,8 +83,8 @@ public class KladForGsonService {
         return klad.getSzulo() == null;
     }
 
-    private KladForGsonDto buildKladForJsonDtoOrphan(Klad klad) {
-        return KladForGsonDto.builder()
+    private GsonKladDto buildKladForJsonDtoOrphan(Klad klad) {
+        return GsonKladDto.builder()
                 .key(klad.getId())
                 .name(capitalizeFirstLetter(klad.getNev()))
                 .latinNev(capitalizeFirstLetter(klad.getLatinNev()))
@@ -93,8 +92,8 @@ public class KladForGsonService {
                 .build();
     }
 
-    private KladForGsonDto buildKladForJsonDtoWithAncestor(Klad klad) {
-        return KladForGsonDto.builder()
+    private GsonKladDto buildKladForJsonDtoWithAncestor(Klad klad) {
+        return GsonKladDto.builder()
                 .key(klad.getId())
                 .name(capitalizeFirstLetter(klad.getNev()))
                 .latinNev(capitalizeFirstLetter(klad.getLatinNev()))

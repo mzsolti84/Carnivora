@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class KladForGsonDto {
+public class GsonKladDto {
     private Integer key;
     private String name;
     private String latinNev;

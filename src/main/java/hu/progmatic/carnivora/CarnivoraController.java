@@ -24,7 +24,7 @@ public class CarnivoraController {
     @Autowired
     private KladService kladService;
     @Autowired
-    private KladForGsonService kladForGsonService;
+    private GsonService gsonService;
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
@@ -46,12 +46,6 @@ public class CarnivoraController {
     @RequestMapping("/kezdolap")
     public String kezdolap() {
         return "/kezdolap";
-    }
-
-    @RolesAllowed(UserType.Roles.USER_READ_ROLE)
-    @RequestMapping("/kozososkereses")
-    public String kozosOs() {
-        return "kozos_os";
     }
 
     @RequestMapping("/carnivora")
@@ -83,21 +77,6 @@ public class CarnivoraController {
 
     // POST MAPPINGEK --------------------------------------------------------------------------------
 
-    @RolesAllowed(UserType.Roles.USER_READ_ROLE)
-    @PostMapping("/kozososkereses")
-    public String kozosOsKereses(
-            @ModelAttribute("kozosOsDto") @Valid KozosOsDto kozosOsDto,
-            BindingResult bindingResult,
-            Model model) {
-        if (!bindingResult.hasErrors()) {
-            KladDto updateDomain = kladService.getFirstCommonKladAncestorOfFaj(
-                    fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2()));
-            kozosOsDto.setKozosOs(updateDomain);
-
-            kozosOsDto.setJson(kladForGsonService.getJsonForKozosOs(fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2())).getJson());
-        }
-        return "kozos_os";
-    }
 
     @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     @PostMapping("/faj_adatszerk/{id}")
@@ -162,18 +141,8 @@ public class CarnivoraController {
         return fajService.getAllFajDto();
     }
 
-    @ModelAttribute("kozosOsDto")
-    KozosOsDto kozosOsDto() {
-        return KozosOsDto.builder()
-                .fajDtoList(fajService.getAllFajDto())
-                .valasztottFaj1(fajService.getByNev("Falanuk").getId())
-                .valasztottFaj2(fajService.getByNev("Falanuk").getId())
-                .kozosOs(new KladDto())
-                .build();
-    }
-
     @ModelAttribute("jsonForGenogram")
     JsonForGenogramDto getJsonForGenogram() {
-        return kladForGsonService.getJsonForGenogram();
+        return gsonService.getJsonForGenogram();
     }
 }
