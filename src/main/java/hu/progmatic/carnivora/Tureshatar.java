@@ -16,10 +16,4 @@ public enum Tureshatar {
         return displayName;
     }
 
-    public static Tureshatar getFromString(String text) {
-        return Arrays
-                .stream(Tureshatar.values())
-                .filter(tureshatar -> tureshatar.displayName.equalsIgnoreCase(text))
-                .findFirst().orElse(null);
-    }
 }
