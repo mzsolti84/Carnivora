@@ -86,7 +86,7 @@ public class KladService implements InitializingBean {
                     .build());
             faj1Ancestor = faj1Ancestor.getSzulo();
         }
-        //itt azért áll meg két szülővel előbb, hogy ne legyen két utolsó node begyűjtve a listába
+
         while (faj2Ancestor.getSzulo() != null) {
             output.add(NodeForBloodLineDto.builder()
                     .key(faj2Ancestor.getId())
