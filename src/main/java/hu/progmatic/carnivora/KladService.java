@@ -167,4 +167,8 @@ public class KladService implements InitializingBean {
         }
         return kladFaj;
     }
+
+    public boolean isExistsInRepositoryById (Integer id) {
+        return kladRepository.existsById(id);
+    }
 }

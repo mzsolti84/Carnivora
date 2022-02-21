@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
@@ -33,8 +31,6 @@ public class KozosOsController {
         return "kozos_os";
     }
 
-    // POST MAPPINGEK --------------------------------------------------------------------------------
-
     @RolesAllowed(UserType.Roles.USER_READ_ROLE)
     @PostMapping("/kozososkereses")
     public String kozosOsKereses(
@@ -50,6 +46,14 @@ public class KozosOsController {
             kozosOsDto.setJson(gsonService.getJsonForKozosOs(fajService.getById(kozosOsDto.getValasztottFaj1()), fajService.getById(kozosOsDto.getValasztottFaj2())).getJson());
         }
         return "kozos_os";
+    }
+
+    @GetMapping("/kozososadatlap/{id}")
+    public String kozosOsAdatlapMeghivas(@PathVariable Integer id, Model model) {
+        if (kladService.isExistsInRepositoryById(id)) {
+            return "redirect:/klad_adatlap/"+id+"/adatlap";
+        }
+        return "redirect:/carnivora/"+id+"/adatlap";
     }
 
     // MODEL ATTRIBUTEOK -----------------------------------------------------------------------------
