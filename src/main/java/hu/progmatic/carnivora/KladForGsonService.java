@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -31,9 +32,9 @@ public class KladForGsonService {
         @SuppressWarnings("unused")
         @SerializedName("class")
         String classLenneDeNemLehetAz = "TreeModel";
-        List<NodeForBloodLineDto> nodeDataArray;
+        Set<NodeForBloodLineDto> nodeDataArray;
 
-        public KozosOsBloodLineDataForGson(List<NodeForBloodLineDto> nodeDataArray) {
+        public KozosOsBloodLineDataForGson(Set<NodeForBloodLineDto> nodeDataArray) {
             this.nodeDataArray = nodeDataArray;
         }
     }

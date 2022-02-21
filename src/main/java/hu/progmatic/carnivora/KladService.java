@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @Transactional
@@ -60,8 +58,8 @@ public class KladService implements InitializingBean {
         return output;
     }
 
-    public List<NodeForBloodLineDto> getBloodLineDtoForKozosOs(Faj faj1, Faj faj2) {
-        List<NodeForBloodLineDto> output = new ArrayList<>();
+    public Set<NodeForBloodLineDto> getBloodLineDtoForKozosOs(Faj faj1, Faj faj2) {
+        Set<NodeForBloodLineDto> output = new HashSet<>();
         Klad faj1Ancestor = faj1.getKlad();
         Klad faj2Ancestor = faj2.getKlad();
 
@@ -89,7 +87,7 @@ public class KladService implements InitializingBean {
             faj1Ancestor = faj1Ancestor.getSzulo();
         }
         //itt azért áll meg két szülővel előbb, hogy ne legyen két utolsó node begyűjtve a listába
-        while (faj2Ancestor.getSzulo().getSzulo() != null) {
+        while (faj2Ancestor.getSzulo() != null) {
             output.add(NodeForBloodLineDto.builder()
                     .key(faj2Ancestor.getId())
                     .name(faj2Ancestor.getNev())
