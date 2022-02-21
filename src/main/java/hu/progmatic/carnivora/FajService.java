@@ -11,6 +11,8 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
+import static hu.progmatic.CarnivoraApplication.projectHostName;
+
 
 @Service
 @Transactional
@@ -48,7 +50,7 @@ public class FajService {
                 .latinNev(faj.getLatinNev())
                 .statusz(faj.getStatusz())
                 .turesHatar(faj.getTuresHatar())
-                .fotoURL(getURLFromKepMegnevezes(faj.getLatinNev(), "http://164.92.204.250"))
+                .fotoURL(getURLFromKepMegnevezes(faj.getLatinNev(), projectHostName))
                 .kepId(faj.getKepId())
                 .wikiURL(faj.getWikiURL())
                 .szuloNev(faj.getKlad().getNev())

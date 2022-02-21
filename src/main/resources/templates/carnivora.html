@@ -56,32 +56,6 @@
         </style>
 
     <!-- <style>
-   table {
-        display: flex;
-        flex-flow: column;
-        width: 100%;
-    }
-
-    tbody {
-        height: 350px;
-        overflow-y: scroll;
-        display:block;
-    }
-
-    th {
-        position: sticky;
-        top: 0;
-    }
-
-    tr {
-        width: 100%;
-        display: table;
-        table-layout: fixed;
-    }
-    th.fixNumber {
-        width: 40pt;
-    }
-</style>
      <script>
         //Táblázat szűrés js
         const myFindFunction = () => {
@@ -127,7 +101,7 @@
 <div class="container-fluid" style="color: lightgrey; opacity: 0.9">
     <table class="table table-dark table-striped table-responsive" id="carnivora">
         <thead style="font-size: 11pt; text-align: center;">
-        <tr>
+        <tr class="align-middle">
             <th scope="col" class="fixNumber">#</th>
             <th scope="col">Név</th>
             <th scope="col">Latin név</th>
@@ -140,7 +114,7 @@
         </thead>
 
         <tbody style="font-size: 10pt; text-align:center">
-        <tr th:each="fajDto : ${allFajDto}">
+        <tr class="align-middle" th:each="fajDto : ${allFajDto}">
             <th scope="row" class="fixNumber" th:text="${fajDto.id}">fajDto.id</th>
             <td th:text="${fajDto.nev}">fajDto.nev</td>
             <td th:text="${fajDto.latinNev}">fajDto.latinNev</td>

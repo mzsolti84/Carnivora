@@ -43,9 +43,16 @@
         .accordion-button {
             color: #242424;
         }
+        #myDIV {
+            height:100px;
+        }
+        .bluediv {
+            width:120px;
+            padding: 10px;
+        }
     </style>
 </head>
-<body>
+<body th:object="${statisztika}">
 <p class="text-center fs-1 text-white"
    style="opacity: 0.5;
     text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;">Projekt célja és alapfogalmak</p>
@@ -156,10 +163,29 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingEight">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                Készítők/Kapcsolat
+                Adatbázis Statisztikák
             </button>
         </h2>
         <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExample">
+            <div class="accordion-body">Az adatbázisban jelenleg:
+                <div id="myDIV">
+                    <div class="bluediv"
+                         th:text="'- ' + *{kladDb} + ' db klád, - ' + *{fajDb} + ' db faj és - ' + *{kepDb} + ' db kép szerepel.'">
+                        See this blue element with different padding values.
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingNine">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                Készítők/Kapcsolat
+            </button>
+        </h2>
+        <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <p>A webalkamazás készítői:<br>
                 Csákány Róbert (csakanyrobertzsombor@gmail.com)<br>

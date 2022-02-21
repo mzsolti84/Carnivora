@@ -25,6 +25,8 @@ public class CarnivoraController {
     private KladService kladService;
     @Autowired
     private GsonService gsonService;
+    @Autowired
+    private StatisztikaService statisztikaService;
 
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
@@ -135,14 +137,23 @@ public class CarnivoraController {
 
     @ModelAttribute("allSpecies")
     List<FajDto> allSpecies() {
-        for (FajDto faj : fajService.getAllFajDto()) {
-            System.out.println(faj.getNev() + faj.getKepId());
-        }
         return fajService.getAllFajDto();
     }
 
     @ModelAttribute("jsonForGenogram")
     JsonForGenogramDto getJsonForGenogram() {
         return gsonService.getJsonForGenogram();
+    }
+
+    @ModelAttribute("statisztika")
+    StatisztikaDto statisztika() {
+        if (statisztikaService.getStatistic() != null) {
+        return statisztikaService.getStatistic(); }
+        else
+            return StatisztikaDto.builder()
+                    .fajDb(0)
+                    .kladDb(0)
+                    .kepDb(0)
+                    .build();
     }
 }
