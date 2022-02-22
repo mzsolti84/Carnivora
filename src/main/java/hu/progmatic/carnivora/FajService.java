@@ -5,11 +5,13 @@ import hu.progmatic.carnivora.kepkezeles.KepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
 import java.util.List;
+
 
 
 @Service
@@ -24,6 +26,9 @@ public class FajService {
 
     @Autowired
     KepRepository kepRepository;
+
+    @Value("${spring.serverUrl}")
+    public String projectHostName;
 
     public void saveAll(List<Faj> fajok) {
         fajRepository.saveAll(fajok);
@@ -48,7 +53,7 @@ public class FajService {
                 .latinNev(faj.getLatinNev())
                 .statusz(faj.getStatusz())
                 .turesHatar(faj.getTuresHatar())
-                .fotoURL(getURLFromKepMegnevezes(faj.getLatinNev(), "http://164.92.204.250"))
+                .fotoURL(getURLFromKepMegnevezes(faj.getLatinNev(), projectHostName))
                 .kepId(faj.getKepId())
                 .wikiURL(faj.getWikiURL())
                 .szuloNev(faj.getKlad().getNev())

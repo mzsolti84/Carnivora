@@ -17,7 +17,7 @@ public class GenogramController {
     // AUTOWIRED-ek  --------------------------------------------------------------------------------
 
     @Autowired
-    private KladForGsonService kladForGsonService;
+    private GsonService gsonService;
 
     // REQUEST MAPPINGEK --------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ public class GenogramController {
             BindingResult bindingResult,
             Model model) {
         if (!bindingResult.hasErrors()) {
-            kladForGsonService.updateKladRepository(json);
+            gsonService.updateKladRepository(json);
             model.addAttribute("jsonForGenogram", getJsonForGenogram());
             return "genogram_admin";
         }
@@ -52,7 +52,7 @@ public class GenogramController {
 
     @ModelAttribute("jsonForGenogram")
     JsonForGenogramDto getJsonForGenogram() {
-        return kladForGsonService.getJsonForGenogram();
+        return gsonService.getJsonForGenogram();
     }
 
 }

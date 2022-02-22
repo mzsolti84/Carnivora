@@ -98,9 +98,18 @@
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit" value="Feltöltés"/>
                         </div>
+                        <br>
                     </form>
-
             </div>
+
+            <br>
+            <div class="container">
+                <div class="text-center">
+                    <form th:action="@{/}" method="get">
+                        <button type="submit" class="btn btn-lg btn-outline-info">Kezdőlap</button>
+                    </form>
+                </div>
+                </div>
         </td>
 
             <td style="width: 70%">
@@ -139,66 +148,6 @@
             </td>
         </tr>
     </table>
-
-    <!--
-<hr>
-<h3 style="text-align: center;">Új kép feltöltése</h3>
-<div class="container d-flex justify-content-center">
-    <div class="row">
-<form
-        th:action="@{'/kepkezeles'}"
-        method="post" th:object="${kepFeltoltesCommand}" class="border info"
-        enctype="multipart/form-data"
-        style="text-align: center; opacity: 0.8; max-width: 80%;">
-
-    <div class="form-group">
-        <label>Kép neve <br>(szóköz használata nem megengedett):
-            <input type="text"
-                   pattern="[^' ']+"
-                   class="form-control bg-dark text-white"
-                   placeholder="megnevezés"
-                   th:field="*{megnevezes}"
-                   th:classappend="${#fields.hasErrors('megnevezes')} ? 'is-invalid' : 'is-valid'"/>
-            <div class="invalid-feedback"
-                 th:if="${#fields.hasErrors('megnevezes')}"
-                 th:errors="*{megnevezes}">
-                hibaüzenet
-            </div>
-
-        </label>
-    </div>
-    <br>
-    <div class="form-group">
-        <label>
-            <input type="file"
-                   class="form-control-file"
-                   th:field="*{kepFile}"
-                   th:classappend="${#fields.hasErrors('kepFile')} ? 'is-invalid' : 'is-valid'">
-            <div class="invalid-feedback"
-                 th:if="${#fields.hasErrors('kepFile')}"
-                 th:errors="*{kepFile}">
-                hibaüzenet
-            </div>
-        </label>
-    </div>
-    <br>
-
-    <div class="form-group">
-        <input class="btn btn-primary" type="submit" value="Feltöltés"/>
-    </div>
-</form>
-
-    </div>
-    </div>
-
-<br>
-<div class="container">
-    <div class="text-center">
-        <form th:action="@{/}" method="get">
-            <button type="submit" class="btn btn-lg btn-outline-info">Kezdőlap</button>
-        </form>
-    </div>
-</div> -->
 
 </div>
 

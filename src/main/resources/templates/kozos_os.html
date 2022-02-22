@@ -82,7 +82,7 @@
             myDiagram.addDiagramListener("ObjectDoubleClicked", (e) => {
                 const key = e.diagram.selection.first().key
                 console.log(key)
-                window.open(`http://localhost:8084/klad_adatlap/${key}/adatlap`, "_self");
+                window.open(`http://localhost:8084/kozososadatlap/${key}`, "_self");
 
             })
 
@@ -318,7 +318,6 @@
             <br>
             <p style="text-align: center">
                 <button class="btn btn-primary mb-3" id="zoomToFit">Teljes gráf megjelenítése</button><br>
-                <button class="btn btn-primary mb-3" id="centerRoot">Fókusz az első ősön</button><br>
                 <button class="btn btn-primary mb-3" type="button" id="backToIndex" onclick="backToIndex()">Vissza a kezdőlapra</button>
             </p>
         </td>
