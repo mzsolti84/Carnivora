@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
-import static hu.progmatic.CarnivoraApplication.projectHostName;
 
 
 @Service
@@ -26,6 +25,8 @@ public class FajService {
 
     @Autowired
     KepRepository kepRepository;
+
+    public final String projectHostName ="http://localhost:8084";
 
     public void saveAll(List<Faj> fajok) {
         fajRepository.saveAll(fajok);
