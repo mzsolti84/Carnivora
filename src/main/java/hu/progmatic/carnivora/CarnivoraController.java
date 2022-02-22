@@ -60,7 +60,7 @@ public class CarnivoraController {
 
     @RequestMapping("/about")
     public String about() {
-        KepMent.kepMentes();
+
         return "about";
     }
 
