@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class JDBCUtil {
     //JDBC and database properties.
     private static final String DB_DRIVER =
-            "com.mysql.cj.jdbc.Drive";
+            "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL =
             "jdbc:mysql://localhost:3306/carnivora";
     private static final String DB_USERNAME = "progmatic";
