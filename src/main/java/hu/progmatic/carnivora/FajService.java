@@ -127,7 +127,11 @@ public class FajService {
 
     public String getURLFromKepMegnevezes(String latinMegnevezes, String host) {
         Integer id = getPicureId(latinMegnevezes);
+        if (id != null) {
             return host + "/kepkezeles/" + id;
+        } else {
+            return "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Carnivora_Diversity.jpg/800px-Carnivora_Diversity.jpg";
+        }
     }
 
     public Faj getByNev(String nev) {
@@ -136,11 +140,11 @@ public class FajService {
 
 
     public Integer getPicureId(String latinMegnevezes) {
-        String kepNev = replaceSpaceInMegnevezes(latinMegnevezes, false);
-        if (kepRepository.getByMegnevezesIgnoreCase(kepNev) != null) {
-            return kepRepository.getByMegnevezesIgnoreCase(kepNev).getId();
+        String name = replaceSpaceInMegnevezes(latinMegnevezes, false);
+        if (kepRepository.getByMegnevezesIgnoreCase(name) != null) {
+            return kepRepository.getByMegnevezesIgnoreCase(name).getId();
         }
-        return 0;
+        return null;
     }
 
     public List<Faj> findAll() {
