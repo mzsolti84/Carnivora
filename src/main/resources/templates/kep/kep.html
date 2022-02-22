@@ -138,7 +138,7 @@
                         <td class="kepek" th:text="${kep.megnevezes}">Kép neve</td>
                         <td class="kepek" th:text="${kep.meret}">120 KB</td>
                         <td class="kepek">
-                            <img src="../../images/kassza/images.png" height="100"
+                            <img src="../../images/kassza/images.png" height="80"
                                  th:src="@{'/kepkezeles/{kepId}'(kepId=${kep.id})}">
                         </td>
                         <td class="kepek">
@@ -167,6 +167,7 @@
     $(document).ready(
         function () {
             $('#kepek').DataTable( {
+                "pageLength": 6,
                 language: {
                     url: 'https://raw.githubusercontent.com/mzsolti84/Carnivora/dev/src/main/resources/databaseinit/datatables_hu.json'
                 }
