@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
@@ -88,13 +89,19 @@ public class CarnivoraController {
             @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
             BindingResult bindingResult,
             Model model) {
+        try {
+            fajService.latinNevValidacio(formFajDto.getLatinNev(), id);
+        }catch (NemUniqueLatinNevException e){
+            bindingResult.addError(new FieldError("formFajDto", "latinNev", e.getMessage()));
+        }
         if (!bindingResult.hasErrors()) {
             //FajDto fajDto = fajService.getById(id);
             fajService.save(formFajDto);
             model.addAttribute("allFajDto", allFajDto());
             model.addAttribute("formFajDto", formFajDto());
+            return "faj_adatlista";
         }
-        return "faj_adatlista";
+        return "/faj_adatszerk";
     }
 
     @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
@@ -103,12 +110,18 @@ public class CarnivoraController {
             @ModelAttribute("formFajDto") @Valid FajDto formFajDto,
             BindingResult bindingResult,
             Model model) {
+        try {
+            fajService.latinNevValidacio(formFajDto.getLatinNev());
+        }catch (NemUniqueLatinNevException e){
+            bindingResult.addError(new FieldError("formFajDto", "latinNev", e.getMessage()));
+        }
         if (!bindingResult.hasErrors()) {
             fajService.create(formFajDto);
             model.addAttribute("allFajDto", allFajDto());
             model.addAttribute("formFajDto", formFajDto());
+            return "faj_adatlista";
         }
-        return "faj_adatlista";
+        return "faj_adatszerk";
     }
 
     @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)

@@ -99,6 +99,20 @@ public class FajService {
         return fajRepository.save(faj);
     }
 
+    public void latinNevValidacio(String latinNev){
+        Faj faj = fajRepository.getFajByLatinNev(latinNev);
+        if (faj != null){
+            throw new NemUniqueLatinNevException("Ilyen latin név már szerepel az adatbázisban!");
+        }
+    }
+
+    public void latinNevValidacio(String latinNev, Integer id){
+        Faj faj = fajRepository.getFajByLatinNev(latinNev);
+        if (faj != null && !faj.getId().equals(id)){
+            throw new NemUniqueLatinNevException("Ilyen latin név már szerepel az adatbázisban!");
+        }
+    }
+
     public boolean existsById(Integer id) {
         return fajRepository.existsById(id);
     }
