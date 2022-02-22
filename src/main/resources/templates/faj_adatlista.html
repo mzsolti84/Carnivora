@@ -16,6 +16,15 @@
     <title>Fajok</title>
 
     <style>
+        body {
+            background-image: url('https://raw.githubusercontent.com/mzsolti84/Carnivora/master/src/main/resources/picture4help/carte_geographique.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: black;
+
+        }
+
         .form-control {
             background: black;
             color: white;
@@ -54,15 +63,14 @@
    style="opacity: 0.75;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Faj adatbázis karbantartó</p>
 
-<nav class="navbar navbar-dark bg-dark">
-    <form class="container-fluid center-content-start">
-        <a href="/" class="btn btn-success" role="button">Kezdőlap</a>
-        <a href="/faj_adatszerk" class="btn btn-success" role="button">Új faj</a>
+<nav class="navbar navbar-dark bg-dark justify-content-center" style="opacity: 0.9">
+    <form class="justify-content-center">
+        <a href="/faj_adatszerk" class="btn btn-success" role="button">Új faj felvitele</a>
     </form>
 </nav>
 <hr>
 
-<div class="container-fluid" style="background-color: black; color: lightgrey;">
+<div class="container-fluid" style="background-color: black; color: lightgrey; opacity: 0.9">
     <table id="carnivora" class="table table-dark table-striped table-responsive">
         <thead style="text-align: center">
         <tr class="align-middle">
@@ -110,6 +118,18 @@
         </tbody>
     </table>
 </div>
+
+<br>
+
+
+<div class="container">
+    <div class="text-center">
+        <form th:action="@{/}" method="get">
+            <button type="submit" class="btn btn-lg btn-info">Kezdőlap</button>
+        </form>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>

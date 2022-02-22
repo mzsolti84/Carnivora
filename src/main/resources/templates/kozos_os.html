@@ -145,9 +145,14 @@
                 return {font: "9pt  Segoe UI,sans-serif", stroke: "white"};
             }
 
+            function replaceSpaceIn(input) {
+                    return input.replaceAll(" ", "_");
+            }
+
             // This converter is used by the Picture.
             function findHeadShot(latinNev) {
                 return "../genogram/images/" + latinNev + ".jpg"
+                // return ""
             }
 
             // define the Node template
