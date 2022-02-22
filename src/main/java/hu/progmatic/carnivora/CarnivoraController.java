@@ -28,6 +28,7 @@ public class CarnivoraController {
     @Autowired
     private StatisztikaService statisztikaService;
 
+
     // GET MAPPINGEK --------------------------------------------------------------------------------
 
     @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
