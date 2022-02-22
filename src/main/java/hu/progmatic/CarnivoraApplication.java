@@ -6,12 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CarnivoraApplication {
 
-    /**
-     Ha saját gépről futtatjuk, akkor "http://localhost:8084",
-     ha szerverről akkor "http://164.92.204.250"!
-     */
-
-
     public static void main(String[] args) {
         SpringApplication.run(CarnivoraApplication.class, args);
     }

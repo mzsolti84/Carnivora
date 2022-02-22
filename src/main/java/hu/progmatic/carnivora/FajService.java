@@ -5,6 +5,7 @@ import hu.progmatic.carnivora.kepkezeles.KepRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,7 +27,8 @@ public class FajService {
     @Autowired
     KepRepository kepRepository;
 
-    public final String projectHostName = "http://localhost:8084";
+    @Value("${spring.serverUrl}")
+    public String projectHostName;
 
     public void saveAll(List<Faj> fajok) {
         fajRepository.saveAll(fajok);
