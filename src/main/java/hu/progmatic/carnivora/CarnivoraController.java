@@ -1,6 +1,7 @@
 package hu.progmatic.carnivora;
 
 
+import hu.progmatic.carnivora.kepkezeles.ment.KepMent;
 import hu.progmatic.felhasznalo.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -59,6 +60,7 @@ public class CarnivoraController {
 
     @RequestMapping("/about")
     public String about() {
+        KepMent.kepMentes();
         return "about";
     }
 
