@@ -26,7 +26,7 @@ public class FajService {
     @Autowired
     KepRepository kepRepository;
 
-    public final String projectHostName ="http://localhost:8084";
+    public final String projectHostName = "http://localhost:8084";
 
     public void saveAll(List<Faj> fajok) {
         fajRepository.saveAll(fajok);
