@@ -60,7 +60,6 @@ public class CarnivoraController {
 
     @RequestMapping("/about")
     public String about() {
-
         return "about";
     }
 

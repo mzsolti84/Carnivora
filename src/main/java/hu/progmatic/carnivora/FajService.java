@@ -164,4 +164,5 @@ public class FajService {
     public List<Faj> findAll() {
         return fajRepository.findAll();
     }
+
 }

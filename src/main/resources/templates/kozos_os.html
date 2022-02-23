@@ -80,11 +80,11 @@
             });
 
             myDiagram.addDiagramListener("ObjectDoubleClicked", (e) => {
-                const key = e.diagram.selection.first().key
-                console.log(key)
+                const key = e.diagram.selection.first().key;
+                console.log(key);
                 window.open(`/kozososadatlap/${key}`, "_self");
 
-            })
+            });
 
             // manage boss info manually when a node or link is deleted from the diagram
             myDiagram.addDiagramListener("SelectionDeleting", function (e) {

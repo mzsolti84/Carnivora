@@ -17,21 +17,21 @@ public class ExceptionController {
     setTitle(model, "A megengedettnél nagyobb fájlt próbáltál feltölteni!");
     setDetails(model, exception.getMessage());
     log.info("File feltöltés hiba: " + exception.getMessage());
-    return "hibaOldal";
+    return "hiba_oldal";
   }
 
   @ExceptionHandler(value = Exception.class)
   public String handleException(Exception exception, Model model) {
     log.error("Hiba a kérés feldolgozása közben!", exception);
     setDetails(model, exception.getMessage());
-    return "hibaOldal";
+    return "hiba_oldal";
   }
 
   @ExceptionHandler(value = AccessDeniedException.class)
   public String handleAccessDeniedException(AccessDeniedException exception, Model model) {
     log.error("Rossz helyre tévedtél!", exception);
     setDetails(model, "Rossz helyre tévedtél!");
-    return "hibaOldal";
+    return "hiba_oldal";
   }
 
   @ModelAttribute("errorPageTitle")

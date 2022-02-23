@@ -30,7 +30,7 @@ public class HttpErrorController implements ErrorController {
         setTitle(model, "Tiltott helyre tévedtél");
       }
     }
-    return "hibaOldal";
+    return "hiba_oldal";
   }
 
   @ModelAttribute("errorPageTitle")

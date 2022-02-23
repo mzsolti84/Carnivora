@@ -13,9 +13,7 @@ public class KepMent {
         Connection conn = null;
         PreparedStatement preparedStatement = null;
 
-        List<Integer> lista = List.of(67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
-                81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94,
-                101, 102, 133, 134);
+        List<Integer> lista = List.of(103, 104, 105, 106, 107, 108, 109, 110, 111, 133);
 
         for (Integer list : lista) {
             String query = "select * from kep " +
