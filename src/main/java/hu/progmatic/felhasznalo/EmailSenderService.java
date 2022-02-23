@@ -40,6 +40,8 @@ public class EmailSenderService {
         body += String.format("<p>Kedves %s!</p>", felhasznalo);
         body += "<p>Az alábbi linken tudod megerősíteni a regisztrációt.<p>";
         body += String.format("<a href=\"%s\">Megerősítő link</a>", link);
+        body += "<p>Üdvözlettel<p>";
+        body += "<p>Carnivora csapat<p>";
         return body;
     }
 }

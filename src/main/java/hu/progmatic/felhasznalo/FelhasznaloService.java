@@ -40,7 +40,7 @@ public class FelhasznaloService implements InitializingBean {
 
     @RolesAllowed(UserType.Roles.USER_READ_ROLE)
     public List<FelhasznaloDto> findAll() {
-        return felhasznaloRepository.findAll().stream().map(this::felhasznaloDtoBulder).toList();
+        return felhasznaloRepository.findAll().stream().map(this::felhasznaloDtoBuilder).toList();
     }
 
     public void ujFelhasznaloValidalas(UjFelhasznaloCommand command) {
@@ -66,6 +66,7 @@ public class FelhasznaloService implements InitializingBean {
                 .felhasznalo(felhasznalo)
                 .token(token)
                 .build();
+        felhasznalo.setToken(megerositoToken);
         megerositoTokenRepository.save(megerositoToken);
         felhasznaloRepository.save(felhasznalo);
         String link = serverUrl + "/felhasznalo/confirm?token=" + token;
@@ -77,6 +78,9 @@ public class FelhasznaloService implements InitializingBean {
 
     @RolesAllowed(UserType.Roles.USER_WRITE_ROLE)
     public void delete(Long id) {
+        Felhasznalo felhasznalo = felhasznaloRepository.getById(id);
+        MegerositoToken token = felhasznalo.getToken();
+        megerositoTokenRepository.delete(token);
         felhasznaloRepository.deleteById(id);
     }
 
@@ -133,7 +137,7 @@ public class FelhasznaloService implements InitializingBean {
         return (MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
-    private FelhasznaloDto felhasznaloDtoBulder(Felhasznalo felhasznalo){
+    private FelhasznaloDto felhasznaloDtoBuilder(Felhasznalo felhasznalo){
         return FelhasznaloDto.builder()
                 .id(felhasznalo.getId())
                 .felhasznaloNev(felhasznalo.getFelhasznaloNev())
@@ -169,7 +173,7 @@ public class FelhasznaloService implements InitializingBean {
     }
 
     public FelhasznaloDto findById(Long id) {
-        return felhasznaloDtoBulder(felhasznaloRepository.getById(id));
+        return felhasznaloDtoBuilder(felhasznaloRepository.getById(id));
     }
 
     public void modositJogosultsag(Jogosultsag jogosultsag) {
