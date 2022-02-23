@@ -1,5 +1,6 @@
 package hu.progmatic.felhasznalo;
 
+import hu.progmatic.felhasznalo.token.MegerositoToken;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,4 +45,8 @@ public class Felhasznalo {
   private LocalDateTime regisztracioIdeje;
 
   private LocalDateTime megerositesIdeje;
+
+  @OneToOne (cascade = CascadeType.ALL)
+  private MegerositoToken token;
+
 }

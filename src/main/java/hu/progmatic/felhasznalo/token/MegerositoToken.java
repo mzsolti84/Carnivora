@@ -23,7 +23,8 @@ public class MegerositoToken {
     @Column(nullable = false)
     String token;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn
     Felhasznalo felhasznalo;
 
 }
