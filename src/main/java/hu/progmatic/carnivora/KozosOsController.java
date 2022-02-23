@@ -49,7 +49,7 @@ public class KozosOsController {
     }
 
     @GetMapping("/kozososadatlap/{id}")
-    public String kozosOsAdatlapMeghivas(@PathVariable Integer id, Model model) {
+    public String kozosOsAdatlapMeghivas(@PathVariable Integer id) {
         if (kladService.isExistsInRepositoryById(id)) {
             return "redirect:/klad_adatlap/"+id+"/adatlap";
         }

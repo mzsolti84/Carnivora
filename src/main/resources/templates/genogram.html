@@ -76,7 +76,7 @@
             myDiagram.addDiagramListener("ObjectDoubleClicked", (e) => {
                 const key = e.diagram.selection.first().key
                 console.log(key)
-                window.open(`http://localhost:8084/klad_adatlap/${key}/adatlap`, "_self");
+                window.open(`/klad_adatlap/${key}/adatlap`, "_self");
 
             })
 
