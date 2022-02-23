@@ -99,6 +99,20 @@ public class FajService {
         return fajRepository.save(faj);
     }
 
+    public void latinNevValidacio(String latinNev){
+        Faj faj = fajRepository.getFajByLatinNev(latinNev);
+        if (faj != null){
+            throw new NemUniqueLatinNevException("Ilyen latin név már szerepel az adatbázisban!");
+        }
+    }
+
+    public void latinNevValidacio(String latinNev, Integer id){
+        Faj faj = fajRepository.getFajByLatinNev(latinNev);
+        if (faj != null && !faj.getId().equals(id)){
+            throw new NemUniqueLatinNevException("Ilyen latin név már szerepel az adatbázisban!");
+        }
+    }
+
     public boolean existsById(Integer id) {
         return fajRepository.existsById(id);
     }
@@ -127,7 +141,11 @@ public class FajService {
 
     public String getURLFromKepMegnevezes(String latinMegnevezes, String host) {
         Integer id = getPicureId(latinMegnevezes);
+        if (id != null) {
             return host + "/kepkezeles/" + id;
+        } else {
+            return "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Carnivora_Diversity.jpg/800px-Carnivora_Diversity.jpg";
+        }
     }
 
     public Faj getByNev(String nev) {
@@ -136,11 +154,11 @@ public class FajService {
 
 
     public Integer getPicureId(String latinMegnevezes) {
-        String kepNev = replaceSpaceInMegnevezes(latinMegnevezes, false);
-        if (kepRepository.getByMegnevezesIgnoreCase(kepNev) != null) {
-            return kepRepository.getByMegnevezesIgnoreCase(kepNev).getId();
+        String name = replaceSpaceInMegnevezes(latinMegnevezes, false);
+        if (kepRepository.getByMegnevezesIgnoreCase(name) != null) {
+            return kepRepository.getByMegnevezesIgnoreCase(name).getId();
         }
-        return 0;
+        return null;
     }
 
     public List<Faj> findAll() {

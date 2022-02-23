@@ -13,6 +13,16 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        body {
+            background-image: url('https://raw.githubusercontent.com/mzsolti84/Carnivora/master/src/main/resources/picture4help/carte_geographique.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-color: black;
+        }
+    </style>
+
 </head>
 <body th:object="${formKladDto}" class="text-white border-white" style="background-color:black">
 
@@ -100,9 +110,14 @@
 <div class="container">
     <div class="text-center">
         <form>
-            <button type="submit" class="btn btn-lg btn-outline-info" onclick="history.back()">Vissza</button>
+            <button type="button" class="btn btn-lg btn-warning" onclick="history.back()">Vissza</button>
+        </form>
+        <br>
+        <form th:action="@{/}" method="get">
+            <button type="submit" class="btn btn-lg btn-info">Kezdőlap</button>
         </form>
     </div>
+</div>
 </div>
 </body>
 </html>

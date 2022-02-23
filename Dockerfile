@@ -6,4 +6,4 @@ ADD target/carnivora-projekt-0.0.1-SNAPSHOT.jar /usr/src/app.jar
 ENV PROFILES=${PROFILES}
 
 EXPOSE 8080:8080
-CMD java -Dspring.profiles.active=${PROFILES} -Xmx64m -Xss512k -XX:+UseSerialGC -Djava.security.egd=file:/dev/./urandom -Dspring.output.ansi.enabled=ALWAYS -jar /usr/src/app.jar
+CMD java -Dspring.profiles.active=${PROFILES} -Xmx96m -Xss896k -XX:+UseSerialGC -Djava.security.egd=file:/dev/./urandom -Dspring.output.ansi.enabled=ALWAYS -jar /usr/src/app.jar

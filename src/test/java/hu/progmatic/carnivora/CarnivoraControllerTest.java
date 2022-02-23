@@ -85,16 +85,15 @@ class CarnivoraControllerTest {
         }
 
         @Test
-        @DisplayName("Faj szerkesztés sikeres")
+        @DisplayName("Faj szerkesztés sikertelen")
         void fajSzerkesztes() throws Exception {
             mockMvc.perform(post("/faj_adatszerk/15"))
                     .andDo(print())
                     .andExpect(status().isOk())
-                    .andExpect(content().string(containsString("Faj adatbázis karbantartó")));
+                    .andExpect(content().string(containsString("MÓDOSÍTÁS")));
         }
 
         @Test
-        @Disabled
         @DisplayName("Új faj elküldésekor megjelennek a hibaüzenetek")
         void UjfajHiba() throws Exception {
             mockMvc.perform(

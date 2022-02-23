@@ -10,7 +10,17 @@
     <!-- Copyright 1998-2021 by Northwoods Software Corporation. -->
     <title>CARNIVORA - Kladeogramm</title></head>
 
-<body>
+<style>
+    body {
+        background-image: url('https://raw.githubusercontent.com/mzsolti84/Carnivora/master/src/main/resources/picture4help/mainpage_wallpaper.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        background-color: black;
+    }
+</style>
+
+<body style="opacity: 0.9">
 <script src="../genogram/go.js"></script>
 <div class="p-4 w-full">
 
@@ -265,7 +275,7 @@
     </p>
     <div id="sample">
         <div id="myDiagramDiv"
-             style="background-color: black; border: solid 1.5px black; border-radius: 10px; height: 680px;"></div>
+             style="background-color: black; border: solid 1.5px black; border-radius: 10px; height: 750px; max-height: 800px"></div>
         <div>
             <textarea
                     th:text="${jsonForGenogram.json}"
