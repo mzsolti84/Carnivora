@@ -32,7 +32,7 @@ public class KozosOsController {
     }
 
     @RolesAllowed(UserType.Roles.USER_READ_ROLE)
-    @PostMapping("/kozososkereses")
+    @GetMapping("/kozososkereses")
     public String kozosOsKereses(
             @ModelAttribute("kozosOsDto") @Valid KozosOsDto kozosOsDto,
             BindingResult bindingResult,
