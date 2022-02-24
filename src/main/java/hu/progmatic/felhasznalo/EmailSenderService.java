@@ -38,10 +38,10 @@ public class EmailSenderService {
     public static String emailBodyBuilder(String felhasznalo, String link) {
         String body = "";
         body += String.format("<p>Kedves %s!</p>", felhasznalo);
-        body += "<p>Az alábbi linken tudod megerősíteni a regisztrációt.<p>";
+        body += "<p>Az alábbi linken tudod megerősíteni a regisztrációt.</p>";
         body += String.format("<a href=\"%s\">Megerősítő link</a>", link);
-        body += "<p>Üdvözlettel<p>";
-        body += "<p>Carnivora csapat<p>";
+        body += "<p>Üdvözlettel:<br>";
+        body += "Carnivora csapat</p>";
         return body;
     }
 }
