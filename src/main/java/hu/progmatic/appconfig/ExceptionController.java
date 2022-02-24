@@ -14,7 +14,7 @@ public class ExceptionController {
 
   @ExceptionHandler(value = MultipartException.class)
   public String handleFileUploadException(MultipartException exception, Model model) {
-    setTitle(model, "A megengedettnél nagyobb fájlt próbáltál feltölteni!");
+    setTitle(model, "A megengedettnél nagyobb fájlt próbáltál feltölteni");
     setDetails(model, exception.getMessage());
     log.info("File feltöltés hiba: " + exception.getMessage());
     return "hiba_oldal";
@@ -23,6 +23,7 @@ public class ExceptionController {
   @ExceptionHandler(value = Exception.class)
   public String handleException(Exception exception, Model model) {
     log.error("Hiba a kérés feldolgozása közben!", exception);
+    setTitle(model, "Hiba a kérés feldolgozása közben");
     setDetails(model, exception.getMessage());
     return "hiba_oldal";
   }
@@ -30,19 +31,11 @@ public class ExceptionController {
   @ExceptionHandler(value = AccessDeniedException.class)
   public String handleAccessDeniedException(AccessDeniedException exception, Model model) {
     log.error("Rossz helyre tévedtél!", exception);
+    setTitle(model, "Rossz helyre tévedtél");
     setDetails(model, "Rossz helyre tévedtél!");
     return "hiba_oldal";
   }
 
-  @ModelAttribute("errorPageTitle")
-  String errorPageTitle() {
-    return "Hiba történt a kérés feldolgozása közben!";
-  }
-
-  @ModelAttribute("errorPageDetails")
-  String errorPageDetails() {
-    return "";
-  }
 
   private void setDetails(Model model, String details) {
     model.addAttribute("errorPageDetails", details);
