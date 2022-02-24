@@ -83,8 +83,8 @@ spring:
       on-profile: eles
   serverUrl: "http://164.92.204.250"
   mail:
-    host: localhost
-    port: 1025
+    host: email_dev
+    port: 25
     username: hello
     password: hello
   datasource:
