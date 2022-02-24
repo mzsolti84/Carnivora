@@ -19,38 +19,38 @@ spring:
       enabled: true
       max-file-size: 400KB
       max-request-size: 12MB
-  #mail:
-  #  host: smtp.gmail.com
-  #  port: 587
-  #  username: carnivora.project@gmail.com
-  #  password: azqiaivcrupiyrvs
-  #  properties:
-  #    mail:
-  #      smtp:
-  #        auth: true
-  #        starttls:
-  #          enable: true
-  #  default-encoding: UTF-8
-  #  protocol: smtp
-  #  test-connection: false
-  serverUrl : "http://localhost:8084"
   mail:
-    host: localhost
-    port: 1025
-    username: hello
-    password: hello
-
+    host: smtp.gmail.com
+    port: 587
+    username: carnivora.project@gmail.com
+    password: azqiaivcrupiyrvs
     properties:
       mail:
         smtp:
-          ssl:
-            trust: "*"
           auth: true
           starttls:
             enable: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000
+    default-encoding: UTF-8
+    protocol: smtp
+    test-connection: false
+  serverUrl : "http://localhost:8084"
+  #mail:
+  #  host: localhost
+  #  port: 1025
+  #  username: hello
+  #  password: hello
+#
+ #   properties:
+ #     mail:
+ #       smtp:
+ #         ssl:
+ #           trust: "*"
+ #         auth: true
+ #         starttls:
+ #           enable: true
+ #         connectiontimeout: 5000
+ #         timeout: 3000
+ #         writetimeout: 5000
 
 output:
     ansi:
