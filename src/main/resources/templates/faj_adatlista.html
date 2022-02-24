@@ -12,7 +12,8 @@
 
     <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet"
           crossorigin="anonymous">
-    <link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css"   rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"
+          crossorigin="anonymous">
 
     <title>Fajok</title>
 
@@ -55,12 +56,17 @@
             border-color: gray;
         !important;
         }
+
         .dataTables_wrapper .dataTables_length,
         .dataTables_wrapper .dataTables_filter,
         .dataTables_wrapper .dataTables_info,
         .dataTables_wrapper .dataTables_processing,
         .dataTables_wrapper .dataTables_paginate {
             color: #ffffff;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter input {
+            color: #dddddd;
         }
     </style>
 
@@ -144,11 +150,11 @@
 <script>
     $(document).ready(
         function () {
-            $('#carnivora').DataTable( {
+            $('#carnivora').DataTable({
                 language: {
                     url: 'https://raw.githubusercontent.com/mzsolti84/Carnivora/dev/src/main/resources/databaseinit/datatables_hu.json'
                 }
-            } );
+            });
         });
 </script>
 </body>
