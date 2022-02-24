@@ -82,11 +82,6 @@ spring:
     activate:
       on-profile: eles
   serverUrl: "http://164.92.204.250"
-  mail:
-    host: email_dev
-    port: 25
-    username: hello
-    password: hello
   datasource:
     url: jdbc:mysql://adatbazis_eles:3306/carnivora
     username: progmatic
